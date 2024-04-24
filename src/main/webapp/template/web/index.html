@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="header__navbar-cover">
+                <div class="grid">
+                    <nav class="header__navbar">
+                        <ul class="header__navbar-list">
+                            <li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
+                                <a href="" class="header__navbar-item--link">
+                                    <i class="fa-solid fa-user header__navbar-icon"></i>
+                                    Đăng nhập
+                                </a>
+                                
+                            
+                            </li>
+                            <li class="header__navbar-item header__navbar-item--strong">
+                                <a href="" class="header__navbar-item--link">
+                                    <i class="fa-solid fa-cart-shopping header__navbar-icon"></i>
+                                    Giỏ hàng
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="header-with-search">
+                <div class="header-logo">
+                    <img class="header-logo-img" src="./assets/imgs/high-logo-D022924D47-seeklogo.com.png" alt="">
+                </div>
+                <div class="header-categories">
+                    <ul class="header-cate-list">
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">SẢN PHẨM
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">NAM
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">NỮ
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">SALEOFF
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </div>
+                <div class="header-search">
+                    <div class="header-search-input-wrap">
+                        <input type="text" class="header-search-input" placeholder="Tìm kiếm">
+                            
+                        
+                        <!-- search history -->
+
+
+                        <div class="header-search-history">
+                            <h3 class="header-search-history-heading">Lịch sử tìm kiếm</h3>
+                            <ul class="header-search-history-list">
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="header-search-btn"><i class="header-search-btn-icon fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <div class="header-slider">
+                <div class="header-slider-inner">
+                    <div class="header-slider-btn header-slider-btn-left">
+                        <i class="header-slider-icon fa-solid fa-chevron-left"></i>
+                    </div>
+                    <div class="header-slider-list-wrap">
+                        <div class="header-slider-list">
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 10 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 9 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 8 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 7 ngày</h4></div>
+                        </div>
+                    </div>
+                    
+                    <div class="header-slider-btn header-slider-btn-right">
+                        <i class="header-slider-icon fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="app__container">
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="grid__column-3">
+                        <div class="app__sidebar-category">
+                            <div class="sidebar-category-nav">
+                                <ul class="sidebar-category-nav-list">
+                                    <li class="sidebar-category-nav-item">
+                                        <a href="#" class="sidebar-category-nav-link active">TẤT CẢ</a>
+                                    </li>
+                                    <li class="sidebar-category-nav-item">
+                                        <a href="#" class="sidebar-category-nav-link">NAM</a>
+                                    </li>
+                                    <li class="sidebar-category-nav-item">
+                                        <a href="#" class="sidebar-category-nav-link">NỮ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sidebar-category-menu">
+                                <div class="sidebar-category-item">
+                                    <div class="sidebar-category-heading">GIÁ<i class="sidebar-category-icon fa-solid fa-chevron-down"></i></div>
+                                    <div class="sidbar-category-sub-item-wrapper">
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">Dưới 200.000</a>
+                                        </div>
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">200.000 đến 400.000</a>
+                                        </div>
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">Từ 400.000 trở lên</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sidebar-category-item">
+                                    <div class="sidebar-category-heading">ÁO<i class="sidebar-category-icon fa-solid fa-chevron-down"></i></div>
+                                    <div class="sidbar-category-sub-item-wrapper">
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">Áo thun cổ tròn</a>
+                                        </div>
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">Áo thun cổ tròn</a>
+                                        </div>
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">Áo thun cổ tròn</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sidebar-category-item">
+                                    <div href="#" class="sidebar-category-heading">QUẦN<i class="sidebar-category-icon fa-solid fa-chevron-down"></i></div>
+                                    <div class="sidbar-category-sub-item-wrapper">
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">Áo thun cổ tròn</a>
+                                        </div>
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">Áo thun cổ tròn</a>
+                                        </div>
+                                        <div class="sidebar-category-sub-item">
+                                            <a href="#" class="sidebar-category-sub-link">Áo thun cổ tròn</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sidebar-category-item">
+                                    <div class="sidebar-category-heading">PHỤ KIỆN</div>
+                                </div>
+                                <div class="sidebar-category-item">
+                                    <div class="sidebar-category-heading">MŨ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid__column-9">
+                        <div class="home-slider-container">
+                            <i class="home-slider-btn home-slider-btn-left fa-solid fa-angle-left"></i>
+                            <div class="home-img-slider">
+                                <div class="home-img-slider-wrap"> <img src="./assets/imgs/slide2.jpg" alt="" class="home-img-slider__item"></div>
+                                <div class="home-img-slider-wrap"> <img src="./assets/imgs/slide1.jpg" alt="" class="home-img-slider__item"></div>
+                                <div class="home-img-slider-wrap"> <img src="./assets/imgs/Thuong_hieu_thoi_trang_nu_cao_cap_Hnoss_d2650b4e51.jpg" alt="" class="home-img-slider__item"></div>
+                            </div>
+                            <i class="home-slider-btn- home-slider-btn-right fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="home-product">
+                            <div class="grid__row">
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/22-9d8Vmf_800x800.png);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lenin-0033a-QuLisl_800x800.jpg);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/22-9d8Vmf_800x800.png);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lenin-0033a-QuLisl_800x800.jpg);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/22-9d8Vmf_800x800.png);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="grid__column-3-3">
+                                    <!-- product item -->
+                                    <div class="product-item">
+                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lenin-0033a-QuLisl_800x800.jpg);">
+                                            <div class="product-item-action">
+                                                <a href="" class="product-item-buy__btn-link">
+                                                    <div class="product-item-buy__btn">
+
+                                                        Mua ngay
+                                                    </div>
+                                                </a>
+                                                 <div class="product-item-like__btn product-item-like__btn--liked">
+                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                     <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                        <span class="product-item__price-old">255.000vnđ</span>
+                                        <span class="product-item__price-current">100.000vnđ</span>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <ul class="pagination home-product__pagination">
+                            <li class="pagination-item ">
+                                <a href="" class="pagination-item__link">
+                                    <i class="pagination-item__icon fa-solid fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            <li class="pagination-item pagination-item--active">
+                                <a href="" class="pagination-item__link">1</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="" class="pagination-item__link">2</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="" class="pagination-item__link">3</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="" class="pagination-item__link">4</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="" class="pagination-item__link">...</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="" class="pagination-item__link">10</a>
+                            </li>
+                            <li class="pagination-item">
+                                <a href="" class="pagination-item__link">
+                                    <i class="pagination-item__icon fa-solid fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Sản phẩm</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Nam</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Nữ</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Saleoff</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Hỗ trợ</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Bảo mật thông tin</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Chính sách chung</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Liên hệ</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Email góp ý</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Hotline: 0388074177</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Social</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link-icon">
+                                    <i class="footer__icon fa-brands fa-square-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link-icon">
+                                    <i class="footer__icon fa-brands fa-square-instagram"></i>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal layout -->
+       <!-- <div class="modal">
+            <div class="modal__overlay">
+
+            </div>
+            <div class="modal__body">
+                <div class="modal__inner">
+                    
+
+                    <div class="auth-form">
+                        <div class="auth-form__container">
+                            <div class="auth-form__header">
+                                <h2 class="auth-form__heading">
+                                    Đăng kí
+                                </h2>
+                                <div class="auth-form__form">
+                                    <div class="auth-form__group">
+                                        <input type="text" class="auth-form__input" placeholder="Nhập tên của bạn">
+                                        <input type="text" class="auth-form__input" placeholder="Email">
+                                    </div>
+                                    <div class="auth-form__group">
+                                        <input type="text" class="auth-form__input" placeholder="Nhập mật khẩu">
+                                    </div>
+                                    <div class="auth-form__group">
+                                        <input type="text" class="auth-form__input" placeholder="Nhập lại mật khẩu">
+                                    </div>
+                                </div>
+    
+                                <div class="auth-form__switch">
+                                    <a href="" class="auth-form__swith-link">Đăng nhập</a>
+                                </div>
+                                <div class="auth-form-btn__wrapper">
+                                    <button class="btn">Đăng kí</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                       
+
+
+
+
+
+
+                    <div class="auth-form">
+                        <div class="auth-form__container">
+                            <div class="auth-form__header">
+                                <h2 class="auth-form__heading">
+                                    Đăng nhập
+                                </h2>
+                                <div class="auth-form__form">
+
+                                    <div class="auth-form__group">
+                                        <input type="text" class="auth-form__input" placeholder="Nhập email">
+                                    </div>
+                                    <div class="auth-form__group">
+                                        <input type="text" class="auth-form__input" placeholder="Nhập mật khẩu">
+                                    </div>
+                                </div>
+    
+                                <div class="auth-form__switch">
+                                    <a href="" class="auth-form__swith-link">Đăng kí</a>
+                                </div>
+                                <div class="auth-form-btn__wrapper">
+                                    <button class="btn">Đăng nhập</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  -->
+    </div>
+   
+    <script src="/assets/scripts/index.js"></script>
+</body>
+
+</html> 
