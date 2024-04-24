@@ -13,6 +13,6 @@ public class SystemConstant {
 	public static final int USER_PHONENUMBER_ERORR = 3;
 	  
 
-	
+	// Thanh Huy dau dat
 	
 }
