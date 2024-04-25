@@ -166,6 +166,43 @@ panel_heading_infor.addEventListener("click", () => {
 
 
 
+	
+    var sizeButtons = productSelectionContainer.querySelectorAll('.product__size-item-btn')
+    
+    //console.log(sizeButtons)
+    var buttons = document.querySelectorAll('.product__size-item-btn');
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+       
+            document.querySelector('.product__size-current').textContent = this.value;
+
+     
+            buttons.forEach(function(btn) {
+                btn.classList.remove('selected-size');
+            });
+
+            this.classList.add('selected-size');
+        });
+    }); 
+
+    //xử lý nút màu sắc
+
+
+    var colorButtons = document.querySelectorAll('.product__color-item');
+    colorButtons.forEach(function(button){
+        button.addEventListener('click',function(){
+            colorButtons.forEach(function(btn){
+                btn.classList.remove('selected-color');
+            });
+            this.classList.add('selected-color');
+        })
+
+    })
+
+
+
+
 
 
 
