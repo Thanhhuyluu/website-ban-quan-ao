@@ -10,7 +10,9 @@
 <title>High</title>
 </head>
 <body>
-
+	<c:set var="productDetail" value="${requestScope.productDetail }"  />
+	<c:set var="product" value="${requestScope.product }"  />
+	<c:set var="imgList" value="${requestScope.imgList }"  />
 	<div class="grid">
 		<div class="app__heading">
 			<ul class="app__heading-list">
@@ -23,7 +25,7 @@
 			<div class="grid__row">
 				<div class="grid__column-7">
 					<div class="product-item-img"
-						style="background-image: url(<c:url value='/template/web/assets/imgs/quan1.png'/>);"></div>
+						style="background-image: url(<c:url value='/template/web/assets/imgs/${product.getImg() }'/>);"></div>
 
 					<div class="product-item-imgs-container">
 						<div class="product-item-imgs-btn-wrap">
@@ -31,21 +33,21 @@
 								class="product-item-imgs-btn product-item-imgs-btn-left fa-solid fa-chevron-left"></i>
 						</div>
 						<div class="product-item-imgs-list">
+						
+						
 							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
+								style="background-image: url(<c:url value="/template/web/assets//imgs/${product.getImg() }"/>);"></div>
+							
+							<c:forEach items="${imgList}" var="img">
+							
+							
+							
 							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/leninn_gangster_tee.png"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-
+								style="background-image: url(<c:url value="/template/web/assets//imgs/${img.getImg() }"/>);"></div>
+							
+							
+							</c:forEach>
+						
 						</div>
 
 						<div class="product-item-imgs-btn-wrap">
@@ -56,12 +58,11 @@
 					</div>
 				</div>
 				<form class="grid__column-5">
-					<h4 class="product__heading-title">Áo thun Lenin hoạ tiết bắt
-						mắt</h4>
+					<h4 class="product__heading-title">${product.getTitle() }</h4>
 					<h6 class="product__detail">
 						Mã sản phẩm: <strong>AV00207</strong>
 					</h6>
-					<h5 class="product__price">620.000 VND</h5>
+					<h5 class="product__price">${product.getPrice() }</h5>
 					<div class="product__divider"></div>
 					<div class="product__color">
 						<div class="product__color-item product__color-1"></div>
@@ -78,24 +79,13 @@
 									class="product__size-icon fa-solid fa-chevron-down"></i>
 								<div class="product__select-container">
 									<div class="product__select-row">
+									<c:forEach items = "${productDetail }" var="detail">
+									
 										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
+											<input type="button" class="product__size-item-btn" value="${detail.getSize() }">
 										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
+										
+									</c:forEach>
 									</div>
 								</div>
 							</div>

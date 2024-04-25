@@ -67,13 +67,21 @@
     display: flex  ;
     justify-content: left;
     align-items: center;
+
+    
 }
+
 .product__color-item{
     width: 30px;
     height: 30px;
     margin-right: 12px;
-    background-color: #000;
+    background-color: #be5252;
+    outline: none;
+    border: none;
 }
+
+
+
 .product__color-1{
     background-color:#424d61 ;
 }
@@ -188,9 +196,8 @@
     border: 1px solid #ccc ;
     cursor: pointer;
 }
-.product__item-size.select-size{
-    background-color: #000;
-    color: white;
+.product__size-item-btn.selected-size{
+    border: 2px solid var(--text-color);
 }
 
 /* .product__item-size:hover{

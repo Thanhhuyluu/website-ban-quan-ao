@@ -10,26 +10,29 @@ import java.util.List;
 
 import model.ProductDetail;
 
-public class ProductDetailDAO implements DAOInterface<ProductDetail>{
-	
+public class ProductDetailDAO implements DAOInterface<ProductDetail> {
+	private static ProductDetailDAO productDetailDao;
+
 	public static ProductDetailDAO getInstance() {
-		return new ProductDetailDAO();
+		if (productDetailDao == null) {
+			productDetailDao = new ProductDetailDAO();
+		}
+		return productDetailDao;
 	}
-	
+
 	@Override
 	public int insert(ProductDetail t) {
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "INSERT INTO `product_details`(`product_id`, `size`, `quantity`, `created_at`, `color`, `img`)"
+			String sql = "INSERT INTO `product_details`(`product_id`, `size`, `quantity`, `created_at`, `color`)"
 					+ " VALUES (?,?,?,?,?,?)";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, t.getProductId());
-			pst.setInt(2, t.getSize());
+			pst.setString(2, t.getSize());
 			pst.setInt(3, t.getQuantity());
 			pst.setDate(4, t.getCreatedAt());
-			pst.setInt(5, t.getColor());
-			pst.setString(6, t.getImg());
+			pst.setString(5, t.getColor());
 			pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
@@ -45,15 +48,14 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail>{
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "UPDATE `product_details` SET `product_id`= ? ,`size`= ? ,`quantity`= ? ,`created_at`= ? ,`color`= ? ,`img`=? WHERE `id` = ?";
+			String sql = "UPDATE `product_details` SET `product_id`= ? ,`size`= ? ,`quantity`= ? ,`created_at`= ? ,`color`= ?  WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, t.getProductId());
-			pst.setInt(2, t.getSize());
+			pst.setString(2, t.getSize());
 			pst.setInt(3, t.getQuantity());
 			pst.setDate(4, t.getCreatedAt());
-			pst.setInt(5, t.getColor());
-			pst.setString(6, t.getImg());
-			pst.setInt(7, t.getId());
+			pst.setString(5, t.getColor());
+			pst.setInt(6, t.getId());
 			pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
@@ -69,12 +71,11 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail>{
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql ="DELETE FROM `product_details`"
-					+ " WHERE `id` = ?";
+			String sql = "DELETE FROM `product_details`" + " WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, id);
 			pst.executeUpdate();
-			
+
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
@@ -92,22 +93,21 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail>{
 			String sql = "SELECT * FROM `product_details`";
 			PreparedStatement pst = c.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery(sql);
-			while(rs.next()) {
+			while (rs.next()) {
 				int id = rs.getInt("id");
 				int productId = rs.getInt("product_id");
-				int size = rs.getInt("size");
+				String size = rs.getString("size");
 				int quantity = rs.getInt("quantity");
 				Date createdAt = rs.getDate("created_at");
-				int color = rs.getInt("color");
-				String img = rs.getString("img");
-				ProductDetail pd = new ProductDetail(id, productId, size, quantity, createdAt, color, img);
+				String color = rs.getString("color");
+				ProductDetail pd = new ProductDetail(id, productId, size, quantity, createdAt, color);
 				ketqua.add(pd);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return ketqua;
 	}
 
@@ -118,18 +118,17 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail>{
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product_details` WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1,id);
+			pst.setInt(1, id);
 			ResultSet rs = pst.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int Id = rs.getInt("id");
 				int productId = rs.getInt("product_id");
-				int size = rs.getInt("size");
+				String size = rs.getString("size");
 				int quantity = rs.getInt("quantity");
 				Date createdAt = rs.getDate("created_at");
-				int color = rs.getInt("color");
-				String img = rs.getString("img");
-				ketqua = new ProductDetail(Id, productId, size, quantity, createdAt, color, img);
-				
+				String color = rs.getString("color");
+				ketqua = new ProductDetail(Id, productId, size, quantity, createdAt, color);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,5 +141,31 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public List<ProductDetail> selectByProductId(int pId) {
+		List<ProductDetail> ketqua = new ArrayList<ProductDetail>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `product_details` WHERE `product_id` = ?";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1, pId);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int productId = rs.getInt("product_id");
+				String size = rs.getString("size");
+				int quantity = rs.getInt("quantity");
+				Date createdAt = rs.getDate("created_at");
+				String color = rs.getString("color");
+				ProductDetail pd = new ProductDetail(id, productId, size, quantity, createdAt, color);
+				ketqua.add(pd);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ketqua;
+	}
+	
 
 }

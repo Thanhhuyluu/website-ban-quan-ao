@@ -3,14 +3,15 @@ package model;
 import java.sql.Date;
 
 public class ProductDetail {
-	private int id, productId, size, quantity;
+	private int id, productId;
+	String size;
+	int quantity;
 	private Date createdAt;
-	private int color;
-	private String img;
+	private String color;
 	public ProductDetail() {
 		super();
 	}
-	public ProductDetail(int id, int productId, int size, int quantity, Date createdAt, int color, String img) {
+	public ProductDetail(int id, int productId, String size, int quantity, Date createdAt, String color) {
 		super();
 		this.id = id;
 		this.productId = productId;
@@ -18,16 +19,14 @@ public class ProductDetail {
 		this.quantity = quantity;
 		this.createdAt = createdAt;
 		this.color = color;
-		this.img = img;
 	}
-	public ProductDetail(int productId, int size, int quantity, Date createdAt, int color, String img) {
+	public ProductDetail(int productId, String size, int quantity, Date createdAt, String color) {
 		super();
 		this.productId = productId;
 		this.size = size;
 		this.quantity = quantity;
 		this.createdAt = createdAt;
 		this.color = color;
-		this.img = img;
 	}
 	public int getId() {
 		return id;
@@ -41,10 +40,10 @@ public class ProductDetail {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 	public int getQuantity() {
@@ -59,22 +58,17 @@ public class ProductDetail {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	public int getColor() {
+	public String getColor() {
 		return color;
 	}
-	public void setColor(int color) {
+	public void setColor(String color) {
 		this.color = color;
 	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
-	}
+
 	@Override
 	public String toString() {
 		return "ProductDetail [id=" + id + ", productId=" + productId + ", size=" + size + ", quantity=" + quantity
-				+ ", createdAt=" + createdAt + ", color=" + color + ", img=" + img + "]";
+				+ ", createdAt=" + createdAt + ", color=" + color + "]";
 	}
 	
 	

@@ -153,11 +153,11 @@ panel_heading_infor.addEventListener("click", () => {
 
 
 
-
+    //sử lý size button click
     const productSelectBtn = document.querySelector('.product__select-btn');
     
     const productSelectionContainer = document.querySelector('.product__select-container');
-    
+    const currentSize = document.querySelector('.product__size-current');
 
     productSelectBtn.onclick = function(){
         productSelectionContainer.classList.toggle('active');
@@ -166,7 +166,25 @@ panel_heading_infor.addEventListener("click", () => {
 
 
 
+	
+    var sizeButtons = productSelectionContainer.querySelectorAll('.product__size-item-btn')
+    
+    //console.log(sizeButtons)
+    var buttons = document.querySelectorAll('.product__size-item-btn');
 
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+       
+            document.querySelector('.product__size-current').textContent = this.value;
+
+     
+            buttons.forEach(function(btn) {
+                btn.classList.remove('selected-size');
+            });
+
+            this.classList.add('selected-size');
+        });
+    }); 
 
 
 
