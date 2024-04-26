@@ -269,4 +269,41 @@ public class ProductDAO implements DAOInterface<Product> {
 		return ketqua;
 	}
 	
+	
+	public List<Product> selectRelatedProductsByBrand(int bId, int pId) {
+		List<Product> ketqua = new ArrayList<Product>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `product` where brand_id = ? AND id != ? LIMIT 16 ";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1,bId);
+			pst.setInt(2, pId);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int categoryId = rs.getInt("category_id");
+				int brandId = rs.getInt("brand_id");
+				int supplierId = rs.getInt("supplier_id");
+				String title = rs.getString("title");
+				int price = rs.getInt("price");
+				int discount = rs.getInt("discount");
+				String img = rs.getString("img");
+				String description = rs.getString("description");
+				Date createdAt = rs.getDate("created_at");
+				Date updatedAt = rs.getDate("updated_at");
+				boolean deleted = rs.getBoolean("deleted");
+				int gender = rs.getInt("gender");
+				int likes  = rs.getInt("likes");
+				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				
+				ketqua.add(p);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ketqua;
+	}
+	
 }

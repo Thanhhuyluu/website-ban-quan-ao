@@ -77,14 +77,20 @@
     margin-right: 12px;
     outline: none;
     border: none;
+    cursor: pointer;
 }
+
 
 
 
 .product__color-item.selected-color{
     border: 1px solid black;
 }
-
+.product__color-item.not-available{
+	
+    filter: blur(1px);
+	
+}
 
 
 

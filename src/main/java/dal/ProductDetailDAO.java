@@ -92,7 +92,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product_details`";
 			PreparedStatement pst = c.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery(sql);
+			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				int productId = rs.getInt("product_id");
@@ -166,6 +166,71 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 
 		return ketqua;
 	}
-	
+	public ProductDetail selectByColorAndSize(String pColor, String pSize) {
+		ProductDetail ketqua = null;
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `product_details` WHERE `color` = ? AND `size` = ? ";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, pColor);
+			pst.setString(2, pSize);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				int Id = rs.getInt("id");
+				int productId = rs.getInt("product_id");
+				String size = rs.getString("size");
+				int quantity = rs.getInt("quantity");
+				Date createdAt = rs.getDate("created_at");
+				String color = rs.getString("color");
+				ketqua = new ProductDetail(Id, productId, size, quantity, createdAt, color);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+	public List<String> selectDistinctSizeByColor(String pColor) {
+		List<String> ketqua = new ArrayList<String>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT DISTINCT `size` FROM `product_details` WHERE `color` = ? ";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, pColor);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				
+				String size = rs.getString("size");
+				
+				ketqua.add(size);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ketqua;
+	}
+	public List<String> selectDistinctColorBySize(String pSize) {
+		List<String> ketqua = new ArrayList<String>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT DISTINCT `color` FROM `product_details` WHERE `size` = ? ";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, pSize);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				
+				String size = rs.getString("color");
+				
+				ketqua.add(size);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ketqua;
+	}
 
 }
