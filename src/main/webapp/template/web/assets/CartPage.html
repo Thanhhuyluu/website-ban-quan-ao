@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/cart_page.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome-free-6.5.2-web/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css">
+    <title>cart page</title>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="header__navbar-cover">
+                <div class="grid">
+                    <nav class="header__navbar">
+                        <ul class="header__navbar-list">
+                            <li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
+                                <a href="" class="header__navbar-item--link">
+                                    <i class="fa-solid fa-user header__navbar-icon"></i>
+                                    Đăng nhập
+                                </a>
+                                
+                            
+                            </li>
+                            <li class="header__navbar-item header__navbar-item--strong">
+                                <a href="" class="header__navbar-item--link">
+                                    <i class="fa-solid fa-cart-shopping header__navbar-icon"></i>
+                                    Giỏ hàng
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="header-with-search">
+                <div class="header-logo">
+                    <img class="header-logo-img" src="./assets/imgs/high-logo-D022924D47-seeklogo.com.png" alt="">
+                </div>
+                <div class="header-categories">
+                    <ul class="header-cate-list">
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">SẢN PHẨM
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                            <div class="header-cate-dropbox">
+                                <div class="grid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-3">
+                                            <a href="#" class="header-cate-dropbox-with-img">
+                                                <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/nam.jpg');">
+                                                    <div class="cate-dropbox-img-blur"></div>
+                                                </div>
+                                                
+                                                <h2 class="cate-dropbox-heading">Nam</h2>
+                                            </a>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <a href="#" class="header-cate-dropbox-with-img">
+                                                <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/nu.jpg');">
+                                                    <div class="cate-dropbox-img-blur"></div>
+                                                </div>
+                                                
+                                                <h2 class="cate-dropbox-heading">Nữ</h2>
+                                            </a>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <a href="#" class="header-cate-dropbox-with-img">
+                                                <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/phukien.jpg');">
+                                                    <div class="cate-dropbox-img-blur"></div>
+                                                </div>
+                                                
+                                                <h2 class="cate-dropbox-heading">Phụ kiện</h2>
+                                            </a>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <a href="#" class="header-cate-dropbox-with-img">
+                                                <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/saleoff.jpg');">
+                                                    <div class="cate-dropbox-img-blur"></div>
+                                                </div>
+                                                
+                                                <h2 class="cate-dropbox-heading">SaleOff</h2>
+                                            </a>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">NAM
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                            <div class="header-cate-dropbox">
+                                <div class="grid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">NỮ
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                            <div class="header-cate-dropbox">
+                                <div class="grid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">SALEOFF
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                            <div class="header-cate-dropbox">
+                                <div class="grid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                </div>
+                <div class="header-search">
+                    <div class="header-search-input-wrap">
+                        <input type="text" class="header-search-input" placeholder="Tìm kiếm">
+                            
+                        
+                        <!-- search history -->
+
+
+                        <div class="header-search-history">
+                            <h3 class="header-search-history-heading">Lịch sử tìm kiếm</h3>
+                            <ul class="header-search-history-list">
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="header-search-btn"><i class="header-search-btn-icon fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <div class="header-slider">
+                <div class="header-slider-inner">
+                    <div class="header-slider-btn header-slider-btn-left">
+                        <i class="header-slider-icon fa-solid fa-chevron-left"></i>
+                    </div>
+                    <div class="header-slider-list-wrap">
+                        <div class="header-slider-list">
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 10 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 9 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 8 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 7 ngày</h4></div>
+                        </div>
+                    </div>
+                    
+                    <div class="header-slider-btn header-slider-btn-right">
+                        <i class="header-slider-icon fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="app__container">
+            <div class="main__cart">
+                <div class="grid">
+                    <div class="grid__row">
+                        <div class="grid__column-6-6">
+                            <ul class="cart__list">
+                                <li class="cart__item">
+                                    <div class="cart__item-product-infor">
+                                        <div class="cart__item-product-img" style="background-image: url(/imgs/leninn-tan-basic-tanktop.jpg);"></div>
+                                        <div class="cart__item-product-des">
+                                            <h2 class="cart__item-product-title">Áo thun leninn họa tiết bắt mắt</h2>
+                                            <span class="cart__item-product-old-price">250.000 vnđ</span>
+                                            <span class="cart__item-product-current-price">129.000 vnd</span>
+
+                                            <div class="cart__item-product-selection">
+                                                <div class="product__size">
+                                                    <h5 class="product__size-title">SIZE</h5>
+                                                    <div class="product__size-btn product__select-btn">
+                                                        <span class="product__size-current">M</span>
+                                                        <i class="product__size-icon fa-solid fa-chevron-down"></i>
+                                                        <div class="product__select-container">
+                                                            <div class="product__select-row">
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn selected-size" value="M">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="B">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="a">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="d">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="e">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="M">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="product__count">
+                                                    <h5 class="product__count-title">SỐ LƯỢNG</h5>
+                                                    <div class="product-count-container">
+            
+                                                        <div class="product-count-btn product-count-btn-dec">-</div>
+                                                        <input type="text" class="product-count-input" value"1">
+                                                        <div class="product-count-btn product-count-btn-inc">+</div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart__item-product-action">
+                                        <h1 class="cart__item-product-main-price">250.000 vnđ</h1>
+                                        <span class="cart__item-product-quantity-status">Còn hàng</span>
+                                        <div class="cart__item-product-like-btn liked">
+                                            <i class="filled-heart fa-solid fa-heart"></i>
+                                            <i class="empty-heart fa-regular fa-heart"></i>
+                                        </div>
+                                        <div class="cart__item-product-remove-btn">
+
+                                            <i class="fa-solid fa-trash"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cart__item">
+                                    <div class="cart__item-product-infor">
+                                        <div class="cart__item-product-img" style="background-image: url(/imgs/leninn-tan-basic-tanktop.jpg);"></div>
+                                        <div class="cart__item-product-des">
+                                            <h2 class="cart__item-product-title">Áo thun leninn họa tiết bắt mắt</h2>
+                                            <span class="cart__item-product-old-price">250.000 vnđ</span>
+                                            <span class="cart__item-product-current-price">129.000 vnd</span>
+
+                                            <div class="cart__item-product-selection">
+                                                <div class="product__size">
+                                                    <h5 class="product__size-title">SIZE</h5>
+                                                    <div class="product__size-btn product__select-btn">
+                                                        <span class="product__size-current">M</span>
+                                                        <i class="product__size-icon fa-solid fa-chevron-down"></i>
+                                                        <div class="product__select-container">
+                                                            <div class="product__select-row">
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn selected-size" value="M">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="B">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="a">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="d">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="e">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="M">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="product__count">
+                                                    <h5 class="product__count-title">SỐ LƯỢNG</h5>
+                                                    <div class="product-count-container">
+            
+                                                        <div class="product-count-btn product-count-btn-dec">-</div>
+                                                        <input type="text" class="product-count-input" value"1">
+                                                        <div class="product-count-btn product-count-btn-inc">+</div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart__item-product-action">
+                                        <h1 class="cart__item-product-main-price">250.000 vnđ</h1>
+                                        <span class="cart__item-product-quantity-status">Còn hàng</span>
+                                        <div class="cart__item-product-like-btn liked">
+                                            <i class="filled-heart fa-solid fa-heart"></i>
+                                            <i class="empty-heart fa-regular fa-heart"></i>
+                                        </div>
+                                        <div class="cart__item-product-remove-btn">
+
+                                            <i class="fa-solid fa-trash"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cart__item">
+                                    <div class="cart__item-product-infor">
+                                        <div class="cart__item-product-img" style="background-image: url(/imgs/leninn-tan-basic-tanktop.jpg);"></div>
+                                        <div class="cart__item-product-des">
+                                            <h2 class="cart__item-product-title">Áo thun leninn họa tiết bắt mắt</h2>
+                                            <span class="cart__item-product-old-price">250.000 vnđ</span>
+                                            <span class="cart__item-product-current-price">129.000 vnd</span>
+
+                                            <div class="cart__item-product-selection">
+                                                <div class="product__size">
+                                                    <h5 class="product__size-title">SIZE</h5>
+                                                    <div class="product__size-btn product__select-btn">
+                                                        <span class="product__size-current">M</span>
+                                                        <i class="product__size-icon fa-solid fa-chevron-down"></i>
+                                                        <div class="product__select-container">
+                                                            <div class="product__select-row">
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn selected-size" value="M">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="B">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="a">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="d">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="e">
+                                                                </div>
+                                                                <div class="product__select__column-3">
+                                                                    <input type="button" class="product__size-item-btn" value="M">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="product__count">
+                                                    <h5 class="product__count-title">SỐ LƯỢNG</h5>
+                                                    <div class="product-count-container">
+            
+                                                        <div class="product-count-btn product-count-btn-dec">-</div>
+                                                        <input type="text" class="product-count-input" value"1">
+                                                        <div class="product-count-btn product-count-btn-inc">+</div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart__item-product-action">
+                                        <h1 class="cart__item-product-main-price">250.000 vnđ</h1>
+                                        <span class="cart__item-product-quantity-status">Còn hàng</span>
+                                        <div class="cart__item-product-like-btn liked">
+                                            <i class="filled-heart fa-solid fa-heart"></i>
+                                            <i class="empty-heart fa-regular fa-heart"></i>
+                                        </div>
+                                        <div class="cart__item-product-remove-btn">
+
+                                            <i class="fa-solid fa-trash"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="grid__column-3-3">
+                            <div class="payment__container">
+                                <h1 class="payment-heading">Đơn hàng</h1>
+                                <div class="paymet-item-infor-row">
+                                    <h3 class="payment-item-heading">Đơn hàng</h3>
+                                    <h3 class="payment-item-des">620.000 vnđ</h3>
+                                </div>
+                                <div class="paymet-item-infor-row">
+                                    <h3 class="payment-item-heading">Giảm</h3>
+                                    <h3 class="payment-item-des">0 vnđ</h3>
+                                </div>
+                                <div class="paymet-item-infor-row">
+                                    <h3 class="payment-item-heading">Tạm tính</h3>
+                                    <h3 class="payment-item-des">620.000 vnđ</h3>
+                                </div>
+                                <div class="payment-submit-button">
+                                    Tiếp tục thanh toán
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                </div>
+            </div>
+            
+        </div>
+        <div class="footer">
+                
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Sản phẩm</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Nam</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Nữ</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Saleoff</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Hỗ trợ</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Bảo mật thông tin</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Chính sách chung</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Liên hệ</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Email góp ý</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Hotline: 0388074177</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Social</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link-icon">
+                                    <i class="footer__icon fa-brands fa-square-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link-icon">
+                                    <i class="footer__icon fa-brands fa-square-instagram"></i>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="./scripts/cart_page.js"></script>
+</html>
