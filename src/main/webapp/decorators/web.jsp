@@ -83,13 +83,7 @@
                             </div>
                         </div>
                     </form>
-                       
-					
-
-
-
-
-					
+          		
                     <form action="<c:url value="dang-nhap?action=login"/>" method="post" class="auth-form  ${requestScope.isExistAccount== null && requestScope.isInvalidEmail== null && requestScope.isInvalidPhoneNumber== null && requestScope.sInvalidPassword== null? "active":"" }" id="auth-form-login">
                         <div class="auth-form__container">
                             <div class="auth-form__header">

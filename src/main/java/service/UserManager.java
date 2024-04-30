@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constant.SystemConstant;
-import dal.UserDAO;
+import dao.UserDAO;
 import model.User;
 
 public class UserManager {
