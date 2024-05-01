@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/base.css">
+        <link rel="stylesheet" href="./css/product_page.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="./assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="app">
+            <header class="header">
+                <div class="header__navbar-cover">
+                    <div class="grid">
+                        <nav class="header__navbar">
+                            <ul class="header__navbar-list">
+                                <li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
+                                    <a href="" class="header__navbar-item--link">
+                                        <i class="fa-solid fa-user header__navbar-icon"></i>
+                                        Đăng nhập
+                                    </a>
+                                    
+                                
+                                </li>
+                                <li class="header__navbar-item header__navbar-item--strong">
+                                    <a href="" class="header__navbar-item--link">
+                                        <i class="fa-solid fa-cart-shopping header__navbar-icon"></i>
+                                        Giỏ hàng
+                                    </a>
+                                    
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="header-with-search">
+                    <div class="header-logo">
+                        <img class="header-logo-img" src="./assets/imgs/high-logo-D022924D47-seeklogo.com.png" alt="">
+                    </div>
+                    <div class="header-categories">
+                        <ul class="header-cate-list">
+                            <li class="header-cate-item">
+                                <a href="" class="header-cate-link">SẢN PHẨM
+                                    <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                                </a>
+                                <div class="header-cate-dropbox">
+                                    <div class="grid">
+                                        <div class="grid__row">
+                                            <div class="grid__column-3">
+                                                <a href="#" class="header-cate-dropbox-with-img">
+                                                    <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/nam.jpg');">
+                                                        <div class="cate-dropbox-img-blur"></div>
+                                                    </div>
+                                                    
+                                                    <h2 class="cate-dropbox-heading">Nam</h2>
+                                                </a>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <a href="#" class="header-cate-dropbox-with-img">
+                                                    <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/nu.jpg');">
+                                                        <div class="cate-dropbox-img-blur"></div>
+                                                    </div>
+                                                    
+                                                    <h2 class="cate-dropbox-heading">Nữ</h2>
+                                                </a>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <a href="#" class="header-cate-dropbox-with-img">
+                                                    <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/phukien.jpg');">
+                                                        <div class="cate-dropbox-img-blur"></div>
+                                                    </div>
+                                                    
+                                                    <h2 class="cate-dropbox-heading">Phụ kiện</h2>
+                                                </a>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <a href="#" class="header-cate-dropbox-with-img">
+                                                    <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/saleoff.jpg');">
+                                                        <div class="cate-dropbox-img-blur"></div>
+                                                    </div>
+                                                    
+                                                    <h2 class="cate-dropbox-heading">SaleOff</h2>
+                                                </a>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="header-cate-item">
+                                <a href="" class="header-cate-link">NAM
+                                    <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                                </a>
+                                <div class="header-cate-dropbox">
+                                    <div class="grid">
+                                        <div class="grid__row">
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </li>
+                            <li class="header-cate-item">
+                                <a href="" class="header-cate-link">NỮ
+                                    <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                                </a>
+                                <div class="header-cate-dropbox">
+                                    <div class="grid">
+                                        <div class="grid__row">
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="header-cate-item">
+                                <a href="" class="header-cate-link">SALEOFF
+                                    <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                                </a>
+                                <div class="header-cate-dropbox">
+                                    <div class="grid">
+                                        <div class="grid__row">
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="grid__column-3">
+                                                <ul class="header-cate-dropbox-list">
+                                                    <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                    <li class="header-cate-dropbox-item">
+                                                        <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="header-search">
+                        <div class="header-search-input-wrap">
+                            <input type="text" class="header-search-input" placeholder="Tìm kiếm">
+                                
+                            
+                            <!-- search history -->
+    
+    
+                            <div class="header-search-history">
+                                <h3 class="header-search-history-heading">Lịch sử tìm kiếm</h3>
+                                <ul class="header-search-history-list">
+                                    <li class="header-search-history-item">
+                                        <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                    </li>
+                                    <li class="header-search-history-item">
+                                        <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                    </li>
+                                    <li class="header-search-history-item">
+                                        <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="header-search-btn"><i class="header-search-btn-icon fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+                <div class="header-slider">
+                    <div class="header-slider-inner">
+                        <div class="header-slider-btn header-slider-btn-left">
+                            <i class="header-slider-icon fa-solid fa-chevron-left"></i>
+                        </div>
+                        <div class="header-slider-list-wrap">
+                            <div class="header-slider-list">
+                                <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 10 ngày</h4></div>
+                                <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 9 ngày</h4></div>
+                                <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 8 ngày</h4></div>
+                                <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 7 ngày</h4></div>
+                            </div>
+                        </div>
+                        
+                        <div class="header-slider-btn header-slider-btn-right">
+                            <i class="header-slider-icon fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="app__container">
+                <div class="grid">
+                    <div class="app__heading">
+                        <ul class="app__heading-list">
+                            <li class="app__heading-item">Áo</li>
+                            <li class="app__heading-separate"></li>
+                            <li class="app__heading-item">Áo thun Lenin hoạ tiết bắt mắt</li>
+                        </ul>
+                    </div>
+                    <div class="app__body">
+                        <div class="grid__row">
+                            <div class="grid__column-7">
+                                <div class="product-item-img" style="background-image: url(./assets/imgs/22-9d8Vmf_800x800.png);"></div>
+
+                                <div class="product-item-imgs-container">
+                                    <div class="product-item-imgs-btn-wrap">
+                                        <i class="product-item-imgs-btn product-item-imgs-btn-left fa-solid fa-chevron-left"></i>
+                                    </div>
+                                    <div class="product-item-imgs-list">
+                                        <div class="product-item-imgs-item" style="background-image: url(/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg);"></div>
+                                        <div class="product-item-imgs-item" style="background-image: url(/assets//imgs/lenin-0033a-QuLisl_800x800.jpg);"></div>
+                                        <div class="product-item-imgs-item" style="background-image: url(/assets//imgs/22-9d8Vmf_800x800.png);"></div>
+                                        <div class="product-item-imgs-item" style="background-image: url(/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg);"></div>
+                                        <div class="product-item-imgs-item" style="background-image: url(/assets//imgs/lenin-0033a-QuLisl_800x800.jpg);"></div>
+                                        <div class="product-item-imgs-item" style="background-image: url(/assets//imgs/22-9d8Vmf_800x800.png);"></div>
+                                    </div>
+                                    <div class="product-item-imgs-btn-wrap">
+                                        <i class="product-item-imgs-btn product-item-imgs-btn-right fa-solid fa-chevron-right"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <form class="grid__column-5">
+                                <h4 class="product__heading-title">Áo thun Lenin hoạ tiết bắt mắt</h4>
+                                <h6 class="product__detail">
+                                    Mã sản phẩm: 
+                                    <strong>AV00207</strong>
+                                </h6>
+                                <h5 class="product__price">620.000 VND</h5>
+                                <div class="product__divider">
+                                </div>
+                                <div class="product__color">
+                                    <input type="button" class="product__color-item"/>
+                                    <input type="button" class="product__color-item "/>
+                                    <input type="button" class="product__color-item "/>
+                                </div>
+                                <div class="product__divider"></div>
+
+                                <div class="product__select">
+                                    <div class="product__size">
+                                        <h5 class="product__size-title">SIZE</h5>
+                                        <div class="product__size-btn product__select-btn">
+                                            <span class="product__size-current">M</span>
+                                            <i class="product__size-icon fa-solid fa-chevron-down"></i>
+                                            <div class="product__select-container">
+                                                <div class="product__select-row">
+                                                    <div class="product__select__column-3">
+                                                        <input type="button" class="product__size-item-btn selected-size" value="M">
+                                                    </div>
+                                                    <div class="product__select__column-3">
+                                                        <input type="button" class="product__size-item-btn" value="B">
+                                                    </div>
+                                                    <div class="product__select__column-3">
+                                                        <input type="button" class="product__size-item-btn" value="a">
+                                                    </div>
+                                                    <div class="product__select__column-3">
+                                                        <input type="button" class="product__size-item-btn" value="d">
+                                                    </div>
+                                                    <div class="product__select__column-3">
+                                                        <input type="button" class="product__size-item-btn" value="e">
+                                                    </div>
+                                                    <div class="product__select__column-3">
+                                                        <input type="button" class="product__size-item-btn" value="M">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="product__count">
+                                        <h5 class="product__count-title">SỐ LƯỢNG</h5>
+                                        <div class="product-count-container">
+
+                                            <div class="product-count-btn product-count-btn-dec">-</div>
+                                            <input type="text" class="product-count-input" value"1">
+                                            <div class="product-count-btn product-count-btn-inc">+</div>
+                                            
+                                        </div>
+                                        <span class="product-current-quantity-wrapper">Hiện còn <span class="product-current-quantity">3</span> sản phẩm trong kho</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="product__select">
+                                    
+                                </div>
+                                <div class="product__add-cart">
+                                    <button class="product__add-cart-btn">THÊM VÀO GIỎ HÀNG</button>
+                                    <div class="product__cart-icon-heart">
+                                        <i class="icon-heart-empty fa-solid fa-heart active-hearted"></i>
+                                        <i class="icon-heart-full fa-solid fa-heart"></i>
+                                    </div>
+                                </div>
+                                <div class="product__payment">THANH TOÁN</div>
+                                <div class="panel-group">
+                                    <div class="panel-item ">
+                                        <div class="panel-item__heading js-panel-item__heading-infor "> THÔNG TIN SẢN PHẨM
+                                            <i class="product__size-icon fa-solid fa-chevron-down"></i>
+                                        </div>
+                                        <div class="product__divider "></div>
+                                        <div class="panel-item__sub js-panel-item__sub ">
+                                            <div class="panel-item__sub-text">Gender: Unisex</div>
+                                            <div class="panel-item__sub-text">Size run: 35 – 46</div>
+                                            <div class="panel-item__sub-text">Upper: Canvas</div>
+                                            <div class="panel-item__sub-text">Outsole: Rubber</div>
+                                            <div class="panel-item__sub-img" style="background-image: url(/assets/imgs/Ananas_SizeChart.jpg);"></div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-item">
+                                        <div class="panel-item__heading js-panel-exchange">
+                                            QUY ĐỔI SẢN PHẨM
+                                            <i class="product__size-icon fa-solid fa-chevron-down"></i>
+                                        </div>
+                                        <div class="product__divider"></div>
+                                        <div class="panel-item__sub js-exchange-sub ">
+                                            <h6 class="">
+                                                <ul>
+                                                    <li class="panel-text">Chỉ đổi hàng 1 lần duy nhất, mong bạn cân nhắc kĩ trước khi quyết định.</li>
+                                                    <li class="panel-text">Thời hạn đổi sản phẩm khi mua trực tiếp tại cửa hàng là 07 ngày, kể từ ngày mua. Đổi sản phẩm khi mua online là 14 ngày, kể từ ngày nhận hàng.</li>
+                                                    <li class="panel-text">Sản phẩm đổi phải kèm hóa đơn. Bắt buộc phải còn nguyên tem, hộp, nhãn mác.</li>
+                                                    <li class="panel-text">Sản phẩm đổi không có dấu hiệu đã qua sử dụng, không giặt tẩy, bám bẩn, biến dạng.</li>
+                                                    <li class="panel-text">Ananas chỉ ưu tiên hỗ trợ đổi size. Trong trường hợp sản phẩm hết size cần đổi, bạn có thể đổi sang 01 sản phẩm khác:
+                                                        - Nếu sản phẩm muốn đổi ngang giá trị hoặc có giá trị cao hơn, bạn sẽ cần bù khoảng chênh lệch tại thời điểm đổi (nếu có).
+                                                        - Nếu bạn mong muốn đổi sản phẩm có giá trị</li>
+                                                    <li class="panel-text">Trong trường hợp sản phẩm - size bạn muốn đổi không còn hàng trong hệ thống. Vui lòng chọn sản phẩm khác.</li>
+                                                    <li class="panel-text">Không hoàn trả bằng tiền mặt dù bất cứ trong trường hợp nào. Mong bạn thông cảm.</li>
+                                                </ul>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="panel-item">
+                                        <div class="panel-item__heading js-panel-guarantee">
+                                            BẢO HÀNH THẾ NÀO
+                                            <i class="product__size-icon fa-solid fa-chevron-down"></i>
+                                        </div>
+                                        <div class="product__divider"></div>
+                                        <div class="panel-item__sub js-guarantee-sub">
+                                            <h6>
+                                                <p class="guarantee-text">Mỗi đôi giày Ananas trước khi xuất xưởng đều trải qua nhiều khâu kiểm tra. Tuy vậy, trong quá trình sử dụng, nếu nhận thấy các lỗi: gãy đế, hở đế, đứt chỉ may,...trong thời gian 6 tháng từ ngày mua hàng, mong bạn sớm gửi sản phẩm về Ananas nhằm giúp chúng tôi có cơ hội phục vụ bạn tốt hơn. Vui lòng gửi sản phẩm về bất kỳ cửa hàng Ananas nào, hoặc gửi đến trung tâm bảo hành Ananas ngay trong trung tâm TP.HCM trong giờ hành chính:</p>
+                                                <p class="guarantee-text">Địa chỉ: 5C Tân Cảng, P.25, Q.Bình Thạnh , TP. Hồ Chí Minh.
+                                                   <br> Hotline: 028 2211 0067</p>
+                                            </h6>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="container-later">
+                    <div class="product__divider divider-full"></div>  
+                        <div class="container__footer">
+                            <div class="grid">
+                                <div class="container__footer-heading">SẢN PHẨM LIÊN QUAN</div>
+                                <div class="grid__row">
+                                    <!-- <div class="grid__column-2"></div> -->
+                                    <div class="container__footer-parents">
+                                        <div class="container__footer-slider">
+                                            <div class="container__footer-list-item">
+                                                <div class="grid__column-3">
+                                                    <div class="product-item">
+                                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                                            <div class="product-item-action">
+                                                                <a href="" class="product-item-buy__btn-link">
+                                                                    <div class="product-item-buy__btn">
+                                                                        Mua ngay
+                                                                    </div>
+                                                                </a>
+                                                                <div class="product-item-like__btn product-item-like__btn--liked">
+                                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                                    <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                                        <span class="product-item__price-old">255.000vnđ</span>
+                                                        <span class="product-item__price-current">100.000vnđ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-3">
+                                                    <div class="product-item">
+                                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                                            <div class="product-item-action">
+                                                                <a href="" class="product-item-buy__btn-link">
+                                                                    <div class="product-item-buy__btn">
+    
+                                                                        Mua ngay
+                                                                    </div>
+                                                                </a>
+                                                                <div class="product-item-like__btn product-item-like__btn--liked">
+                                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                                    <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                                        <span class="product-item__price-old">255.000vnđ</span>
+                                                        <span class="product-item__price-current">100.000vnđ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-3">
+                                                    <div class="product-item">
+                                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                                            <div class="product-item-action">
+                                                                <a href="" class="product-item-buy__btn-link">
+                                                                    <div class="product-item-buy__btn">
+                                                                        Mua ngay
+                                                                    </div>
+                                                                </a>
+                                                                <div class="product-item-like__btn product-item-like__btn--liked">
+                                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                                    <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                                        <span class="product-item__price-old">255.000vnđ</span>
+                                                        <span class="product-item__price-current">100.000vnđ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-3">
+                                                    <div class="product-item">
+                                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                                            <div class="product-item-action">
+                                                                <a href="" class="product-item-buy__btn-link">
+                                                                    <div class="product-item-buy__btn">
+    
+                                                                        Mua ngay
+                                                                    </div>
+                                                                </a>
+                                                                <div class="product-item-like__btn product-item-like__btn--liked">
+                                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                                    <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                                        <span class="product-item__price-old">255.000vnđ</span>
+                                                        <span class="product-item__price-current">100.000vnđ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-3">
+                                                    <div class="product-item">
+                                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                                            <div class="product-item-action">
+                                                                <a href="" class="product-item-buy__btn-link">
+                                                                    <div class="product-item-buy__btn">
+    
+                                                                        Mua ngay
+                                                                    </div>
+                                                                </a>
+                                                                <div class="product-item-like__btn product-item-like__btn--liked">
+                                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                                    <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                                        <span class="product-item__price-old">255.000vnđ</span>
+                                                        <span class="product-item__price-current">100.000vnđ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-3">
+                                                    <div class="product-item">
+                                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                                            <div class="product-item-action">
+                                                                <a href="" class="product-item-buy__btn-link">
+                                                                    <div class="product-item-buy__btn">
+    
+                                                                        Mua ngay
+                                                                    </div>
+                                                                </a>
+                                                                <div class="product-item-like__btn product-item-like__btn--liked">
+                                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                                    <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                                        <span class="product-item__price-old">255.000vnđ</span>
+                                                        <span class="product-item__price-current">100.000vnđ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-3">
+                                                    <div class="product-item">
+                                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                                            <div class="product-item-action">
+                                                                <a href="" class="product-item-buy__btn-link">
+                                                                    <div class="product-item-buy__btn">
+                                                                        Mua ngay
+                                                                    </div>
+                                                                </a>
+                                                                <div class="product-item-like__btn product-item-like__btn--liked">
+                                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                                    <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                                        <span class="product-item__price-old">255.000vnđ</span>
+                                                        <span class="product-item__price-current">100.000vnđ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-3">
+                                                    <div class="product-item">
+                                                        <div class="product-item__img" style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+                                                            <div class="product-item-action">
+                                                                <a href="" class="product-item-buy__btn-link">
+                                                                    <div class="product-item-buy__btn">
+    
+                                                                        Mua ngay
+                                                                    </div>
+                                                                </a>
+                                                                <div class="product-item-like__btn product-item-like__btn--liked">
+                                                                    <i class="product-item-like-icon-fill fa-solid fa-heart"></i>
+                                                                    <i class="product-item-like-icon-empty fa-regular fa-heart"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="product-item__name">Áo lenin họa tiết bắt mắt nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành tinh cũng không sao sánh bằng được</h4>
+                                                        <span class="product-item__price-old">255.000vnđ</span>
+                                                        <span class="product-item__price-current">100.000vnđ</span>
+                                                    </div>
+                                                </div>
+                                               
+                                            
+                                                
+                                            </div>
+                                        <div class="container__footer-icon-list">
+                                            <div class="container__footer-icon-item container__footer-icon-left"> <i class="fa-solid fa-chevron-left"></i></div>
+                                            <div class="container__footer-icon-item container__footer-icon-right"> <i class="fa-solid fa-chevron-right"></i></div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                                    
+                                    <!-- <div class="grid__column-2"></div>  -->
+    
+                                   
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                
+                <div class="grid">
+                    <div class="grid__row">
+                        <div class="grid__column-3">
+                            <h3 class="footer__heading">Sản phẩm</h3>
+                            <ul class="footer__list">
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link">Nam</a>
+                                </li>
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link">Nữ</a>
+                                </li>
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link">Saleoff</a>
+                                </li>
+                            </ul>
+    
+                        </div>
+                        <div class="grid__column-3">
+                            <h3 class="footer__heading">Hỗ trợ</h3>
+                            <ul class="footer__list">
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link">Bảo mật thông tin</a>
+                                </li>
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link">Chính sách chung</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="grid__column-3">
+                            <h3 class="footer__heading">Liên hệ</h3>
+                            <ul class="footer__list">
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link">Email góp ý</a>
+                                </li>
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link">Hotline: 0388074177</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid__column-3">
+                            <h3 class="footer__heading">Social</h3>
+                            <ul class="footer__list">
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link-icon">
+                                        <i class="footer__icon fa-brands fa-square-facebook"></i>
+                                    </a>
+                                </li>
+                                <li class="footer__item">
+                                    <a href="#" class="footer__link-icon">
+                                        <i class="footer__icon fa-brands fa-square-instagram"></i>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script src="./scripts/index.js"></script>
+        <script src="./scripts/product_page.js"></script>
+    </body>
+</html>
+
+

@@ -48,9 +48,9 @@
                 </div>
             </div>
             <div class="header-with-search">
-                <div class="header-logo">
+                <a href="trang-chu" class="header-logo">
                     <img class="header-logo-img" src="<c:url value = 'template/web/assets/imgs/high-logo-D022924D47-seeklogo.com.png'/>" alt="">
-                </div>
+                </a>
                 <div class="header-categories">
                     <ul class="header-cate-list">
                         <li class="header-cate-item">

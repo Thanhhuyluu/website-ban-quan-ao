@@ -7,28 +7,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.OrderDetail;
+import model.Image;
 
-public class OrderDetailDAO implements DAOInterface<OrderDetail> {
-	private static OrderDetailDAO orderDetailDao;
-	public static OrderDetailDAO getInstance() {
-		if(orderDetailDao == null) {
-			orderDetailDao = new OrderDetailDAO();
+public class ImageDAO implements DAOInterface<Image>{
+	private static ImageDAO imgDao;
+	public static ImageDAO getInstance() {
+		if(imgDao== null) {
+			imgDao = new ImageDAO();
 		}
-		return orderDetailDao;
+		return imgDao;
 	}
-
 	@Override
-	public int insert(OrderDetail t) {
+	public int insert(Image t) {
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "INSERT INTO `order_details`(`order_id`, `product_details_id`, `price`, `num`) VALUES ( ? , ? , ? , ?)";
+			String sql = "INSERT INTO `image`(`product_id`,`img`) "
+					+ "VALUES (?, ?)";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getOrderId());
-			pst.setInt(2, t.getProductDetailId());
-			pst.setInt(3, t.getPrice());
-			pst.setInt(4, t.getNum());
+			pst.setInt(1, t.getProductId());
+			pst.setString(2, t.getImg());
 			pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
@@ -40,17 +38,15 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 	}
 
 	@Override
-	public int update(OrderDetail t) {
+	public int update(Image t) {
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "UPDATE `order_details` SET `order_id`= ? ,`product_details_id`= ? ,`price`= ? ,`num`= ? WHERE `id` = ?";
+			String sql = "UPDATE `image` SET `product_id`= ? ,`img`=? WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getOrderId());
-			pst.setInt(2, t.getProductDetailId());
-			pst.setInt(3, t.getPrice());
-			pst.setInt(4, t.getNum());
-			pst.setInt(5, t.getId());
+			pst.setInt(1, t.getProductId());
+			pst.setString(2, t.getImg());
+			pst.setInt(3, t.getId());
 			pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
@@ -62,14 +58,14 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 	}
 
 	@Override
-	public int delete(OrderDetail orderDetail) {
+	public int delete(Image img) {
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql ="DELETE FROM `order_details`"
+			String sql ="DELETE FROM `image`"
 					+ " WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, orderDetail.getId());
+			pst.setInt(1, img.getId());
 			pst.executeUpdate();
 			
 			System.out.println("Số lệnh đã thêm: " + ketqua);
@@ -82,21 +78,19 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 	}
 
 	@Override
-	public List<OrderDetail> selectAll() {
-		List<OrderDetail> ketqua = new ArrayList<OrderDetail>();
+	public List<Image> selectAll() {
+		List<Image> ketqua = new ArrayList<Image>();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT * FROM `order_details` ";
+			String sql = "SELECT * FROM `image`";
 			PreparedStatement pst = c.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery(sql);
+			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
-				int orderId = rs.getInt("order_id");
-				int productDetailId = rs.getInt("product_details_id");
-				int price = rs.getInt("price");
-				int num = rs.getInt("num");
-				OrderDetail od = new OrderDetail(id, orderId, productDetailId, price, num);
-				ketqua.add(od);
+				int productId = rs.getInt("product_id");
+				String img = rs.getString("img");
+				Image i = new Image(id, productId, img);
+				ketqua.add(i);
 			}
 			
 		} catch (Exception e) {
@@ -107,23 +101,19 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 	}
 
 	@Override
-	public OrderDetail selectById(int id) {
-		OrderDetail ketqua = null;
+	public Image selectById(int id) {
+		Image ketqua = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT * FROM `supplier` WHERE `id` = ?";
+			String sql = "SELECT * FROM `image` WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1,id);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int Id = rs.getInt("id");
-				int orderId = rs.getInt("order_id");
-				int productDetailId = rs.getInt("product_details_id");
-				int price = rs.getInt("price");
-				int num = rs.getInt("num");
-				ketqua = new OrderDetail(Id, orderId, productDetailId, price, num);
-				
-				
+				int productId = rs.getInt("product_id");
+				String img = rs.getString("img");
+				ketqua = new Image(Id, productId,img);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,11 +122,30 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 	}
 
 	@Override
-	public ArrayList<OrderDetail> selectByCondition(String condition) {
+	public ArrayList<Image> selectByCondition(String condition) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
+	public List<Image> selectByProductId(int pId) {
+		List<Image> ketqua = new ArrayList<Image>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `image` WHERE `product_id` = ? ";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1, pId);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int productId = rs.getInt("product_id");
+				String img = rs.getString("img");
+				Image i = new Image(id, productId, img);
+				ketqua.add(i);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ketqua;
+	}
 }

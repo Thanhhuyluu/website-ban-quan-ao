@@ -20,7 +20,7 @@ panel_exchange.addEventListener("click", () => {
         panel_exchange.style.color = '#000'
     }
 })    
-
+/*
 const panel_guarantee = document.querySelector(".js-panel-guarantee")
 const panel_guarantee_sub = document.querySelector(".js-guarantee-sub")
 panel_guarantee.addEventListener('click', () => {
@@ -34,7 +34,7 @@ panel_guarantee.addEventListener('click', () => {
         panel_guarantee.style.color = '#000'
     }
 
-})
+})*/
 
 panel_heading_infor.addEventListener("click", () => {
     if(panel_sub_infor.style.display !==  'block'){
@@ -98,12 +98,12 @@ panel_heading_infor.addEventListener("click", () => {
     const handleChange = ()=> {
         if( currentItem == lengthItem -4){
             currentItem = 0
-            let widthItem = item.clientWidth
+            //let widthItem = item.clientWidth
             listItemSliderContainer.style.transform = `translateX( 0px)`
         }
         else{
             currentItem +=4
-            let widthItem = item.clientWidth
+            //let widthItem = item.clientWidth
             listItemSliderContainer.style.transform = `translateX(${300 * currentItem* -1  }px)`
         }
     }
@@ -115,12 +115,12 @@ panel_heading_infor.addEventListener("click", () => {
     icon_left.addEventListener('click',() => {
         if( currentItem == 0){
             currentItem = lengthItem -4
-            let widthItem = item.clientWidth
+           // let widthItem = item.clientWidth
             listItemSliderContainer.style.transform = `translateX(${300 * currentItem* -1  }px)`
         }
         else{
             currentItem -= 4
-            let widthItem = item.clientWidth
+           // let widthItem = item.clientWidth
             listItemSliderContainer.style.transform = `translateX(${300 * currentItem* -1  }px)`
         }
     })
@@ -153,16 +153,44 @@ panel_heading_infor.addEventListener("click", () => {
 
 
 
-
+    //sử lý size button click
     const productSelectBtn = document.querySelector('.product__select-btn');
     
     const productSelectionContainer = document.querySelector('.product__select-container');
-    
+    const currentSize = document.querySelector('.product__size-current');
 
     productSelectBtn.onclick = function(){
         productSelectionContainer.classList.toggle('active');
     }
 
+
+
+
+	
+    var sizeButtons = productSelectionContainer.querySelectorAll('.product__size-item-btn')
+    
+    //console.log(sizeButtons)
+    var buttons = document.querySelectorAll('.product__size-item-btn');
+
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+       
+            document.querySelector('.product__size-current').textContent = this.value;
+
+     
+            buttons.forEach(function(btn) {
+                btn.classList.remove('selected-size');
+            });
+
+            this.classList.add('selected-size');
+        });
+    }); 
+
+    //xử lý nút màu sắc
+
+
+   
 
 
 
@@ -180,8 +208,12 @@ panel_heading_infor.addEventListener("click", () => {
     const currentQuantity = document.querySelector('.product-current-quantity').textContent;
     
     window.addEventListener('DOMContentLoaded', () => {
-       
+       if(parseInt(currentQuantity)> 0){
+		   
         inputElement.value = 1;
+	   }else {
+		   inputElement.value = 0;
+	   }
     });
     // Thêm sự kiện khi nhấn nút "-"
     decreaseBtn.addEventListener('click', () => {
