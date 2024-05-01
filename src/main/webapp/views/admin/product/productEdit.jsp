@@ -14,8 +14,8 @@
             <div class="mb-3">
                 <label for="category_id" class="form-label">Loại sản phẩm</label>
                 <select class="form-select" name="category_id">
-                    <option value="1" <c:if test="${product.gender == 1}"> selected</c:if> >Nam</option>
-                    <option value="2" <c:if test="${product.gender == 2}"> selected</c:if>>Nữ</option>
+                    <option value="1" <c:if test="${product.category_id == 1}"> selected</c:if> >Nam</option>
+                    <option value="2" <c:if test="${product.category_id == 2}"> selected</c:if>>Nữ</option>
                 </select>
             </div>
             <div class="mb-3">
