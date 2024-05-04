@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/base.css'/>" type="text/css">
 	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/main.css'/>" type="text/css">
 	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/product_page.css'/>" type="text/css">
+	
+	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/cart_page.css'/>" type="text/css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
@@ -132,6 +134,7 @@
 
 <script src="<c:url value='/template/web/assets/scripts/FormValidate.js'/>"></script>
 <script src="<c:url value='/template/web/assets/scripts/product_page.js'/>"></script>
+<script src="<c:url value='/template/web/assets/scripts/cart_page.js'/>"></script>
 <script>
         Validator({
             form: '#auth-form-login',

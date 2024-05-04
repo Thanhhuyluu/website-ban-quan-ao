@@ -37,7 +37,7 @@
                             </c:if>
                             
                             <li class="header__navbar-item header__navbar-item--strong">
-                                <a href="" class="header__navbar-item--link">
+                                <a href="gio-hang?action=show" class="header__navbar-item--link">
                                     <i class="fa-solid fa-cart-shopping header__navbar-icon"></i>
                                     Giỏ hàng
                                 </a>

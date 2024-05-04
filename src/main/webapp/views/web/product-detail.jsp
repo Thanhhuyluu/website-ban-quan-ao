@@ -10,6 +10,8 @@
 <title>High</title>
 </head>
 <body>
+	<c:set var="productDetail" value="${requestScope.productDetail }" />
+	<c:set var="formattedPrice" value="${requestScope.formattedPrice }" />
 	<c:set var="relatedProducts" value="${requestScope.relatedProducts }" />
 	<c:set var="availableSizes" value="${requestScope.availableSizes }" />
 	<c:set var="product" value="${requestScope.product }"/>
@@ -70,7 +72,7 @@
 					<h6 class="product__detail">
 						Mã sản phẩm: <strong>AV00207</strong>
 					</h6>
-					<h5 class="product__price">${product.getPrice() }</h5>
+					<h5 class="product__price">${formattedPrice} vnđ</h5>
 					<div class="product__divider"></div>
 					<div class="product__color">
 					
@@ -146,14 +148,19 @@
 						</div>
 
 					</div>
-					<div class="product__select"></div>
-					<div class="product__add-cart">
-						<button class="product__add-cart-btn">THÊM VÀO GIỎ HÀNG</button>
+					<div action="gio-hang" class="product__select"></div>
+					<form id="add-to-cart-form" class="product__add-cart">
+						<button class="product__add-cart-btn" onclick="addToCart()">THÊM VÀO GIỎ HÀNG</button>
+						<input id="add-cart-action" type="hidden" name="action" value="add"/>
+						<input id="productDetail-id" type="hidden" name="productDetailId" value="${productDetail.getId() }"/>
+						<input id="buy-quantity" type="hidden" name="buyQuantity" value=""/>
+						
+						
 						<div class="product__cart-icon-heart">
 							<i class="icon-heart-empty fa-solid fa-heart active-hearted"></i>
 							<i class="icon-heart-full fa-solid fa-heart"></i>
 						</div>
-					</div>
+					</form>
 					<div class="product__payment">THANH TOÁN</div>
 					<div class="panel-group">
 						<div class="panel-item ">
@@ -330,8 +337,20 @@
                 document.getElementById('colorSenderForm').submit(); 
             });
         });  
-
-
-	</script>
-</body>
+    	
+    	const addToCartForm = document.getElementById('add-to-cart-form');
+    	const currentQuatityToBuy = document.querySelector('.product-count-input');
+    	function addToCart(){
+    		var addToCartQuantityInput = document.getElementById('buy-quantity');
+    		addToCartQuantityInput.value= currentQuatityToBuy.value;
+    		addToCartForm.action = "gio-hang";
+    		addToCartForm.submit();
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	</script>
 </html>

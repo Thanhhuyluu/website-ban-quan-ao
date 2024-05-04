@@ -1,6 +1,7 @@
 package controller.web;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,10 @@ public class ProductDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String proId = request.getParameter("proId");
+		if( request.getAttribute("proId")!= null) {
+			proId = (String)request.getAttribute("proId");
+			
+		}
 		if (proId != null) {
 			int pId = Integer.parseInt(proId);
 			String selectedSize = request.getParameter("selectedSize");
@@ -49,7 +54,7 @@ public class ProductDetailController extends HttpServlet {
 			List<ProductDetail> PDlist = ProductDetailDAO.getInstance().selectByProductId(pId);
 			List<String> sizeList = ProductDetailManager.getInstance().getDistinctSize(PDlist);
 			List<String> colorList = ProductDetailManager.getInstance().getDistinctColor(PDlist);
-
+			
 			if ((selectedColor == "" && colorList.size() > 0) || (selectedColor == null && colorList.size() > 0)) {
 				selectedColor = colorList.get(0);
 			}
@@ -64,14 +69,26 @@ public class ProductDetailController extends HttpServlet {
 			for (String color : colorList) {
 				colorMap.put(color, availableColors.contains(color));
 			}
-
+			
 			int productCurrentQuantity = ProductDetailManager.getInstance().getCurrentProductQuantity(PDlist,
 					selectedColor, selectedSize);
 
 			Product product = ProductDAO.getInstance().selectById(pId);
+			ProductDetail productDetail = ProductDetailManager.getInstance().getProductDetailByProductIdAndSizeAndColor(pId, selectedSize, selectedColor, PDlist);
+			double price = product.getPrice();
+		    double discount = product.getDiscount();
+
+		     
+		    double discountPrice = price - (price * discount / 100);
+		    DecimalFormat formatter = new DecimalFormat("#,###");
+	        String formattedPrice = formatter.format(discountPrice);
+		       
+		   
+			
+		    
 			List<Image> proImgList = ImageDAO.getInstance().selectByProductId(pId);
 			List<Product> relatedProducts = ProductDAO.getInstance().selectRelatedProductsByBrand(product.getBrandId(), product.getId());
-			
+			request.setAttribute("formattedPrice", formattedPrice);
 			request.setAttribute("relatedProducts", relatedProducts);
 			request.setAttribute("colorMap", colorMap);
 			request.setAttribute("selectedSize", selectedSize);
@@ -82,6 +99,7 @@ public class ProductDetailController extends HttpServlet {
 			request.setAttribute("productCurrentQuantity", productCurrentQuantity);
 			request.setAttribute("availableSizes", availableSizes);
 			request.setAttribute("product", product);
+			request.setAttribute("productDetail", productDetail);
 			request.setAttribute("imgList", proImgList);
 			request.getRequestDispatcher("/views/web/product-detail.jsp").forward(request, response);
 

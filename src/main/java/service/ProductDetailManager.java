@@ -2,7 +2,6 @@ package service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +35,6 @@ public class ProductDetailManager {
 	public int getCurrentProductQuantity(List<ProductDetail>list, String Color, String Size) {
 		int q = 0;
 		for(ProductDetail pd : list) {
-			System.out.println(pd.toString());
 			if(pd.getColor().equals(Color) && pd.getSize().equals(Size)) {
 				q = pd.getQuantity();
 			}
@@ -44,5 +42,13 @@ public class ProductDetailManager {
 		}
 		return q;
 		
+	}
+	public ProductDetail getProductDetailByProductIdAndSizeAndColor(int productId, String size, String color, List<ProductDetail>list) {
+		for(ProductDetail productDetail : list) {
+			if(productDetail.getProductId() == productId && productDetail.getSize().equals(size)&& productDetail.getColor().equals(color)) {
+				return productDetail;
+			}
+		}
+		return null;
 	}
 }
