@@ -11,13 +11,15 @@ import model.OrderDetail;
 
 public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 	private static OrderDetailDAO orderDetailDao;
+	private OrderDAO orderDAO;
+	private ProductDetailDAO productDetailDAO;
 	public static OrderDetailDAO getInstance() {
 		if(orderDetailDao == null) {
 			orderDetailDao = new OrderDetailDAO();
 		}
 		return orderDetailDao;
 	}
-
+	
 	@Override
 	public int insert(OrderDetail t) {
 		int ketqua = 0;
@@ -25,8 +27,8 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `order_details`(`order_id`, `product_details_id`, `price`, `num`) VALUES ( ? , ? , ? , ?)";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getOrderId());
-			pst.setInt(2, t.getProductDetailId());
+			pst.setInt(1, t.getOrder().getId());
+			pst.setInt(2, t.getProductDetail().getId());
 			pst.setInt(3, t.getPrice());
 			pst.setInt(4, t.getNum());
 			pst.executeUpdate();
@@ -46,8 +48,8 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `order_details` SET `order_id`= ? ,`product_details_id`= ? ,`price`= ? ,`num`= ? WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getOrderId());
-			pst.setInt(2, t.getProductDetailId());
+			pst.setInt(1, t.getOrder().getId());
+			pst.setInt(2, t.getProductDetail().getId());
 			pst.setInt(3, t.getPrice());
 			pst.setInt(4, t.getNum());
 			pst.setInt(5, t.getId());
@@ -84,6 +86,8 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 	@Override
 	public List<OrderDetail> selectAll() {
 		List<OrderDetail> ketqua = new ArrayList<OrderDetail>();
+		orderDAO = new OrderDAO();
+		productDetailDAO = new ProductDetailDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `order_details` ";
@@ -95,10 +99,10 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 				int productDetailId = rs.getInt("product_details_id");
 				int price = rs.getInt("price");
 				int num = rs.getInt("num");
-				OrderDetail od = new OrderDetail(id, orderId, productDetailId, price, num);
+				OrderDetail od = new OrderDetail(id, orderDAO.selectById(orderId), productDetailDAO.selectById(productDetailId), price, num);
 				ketqua.add(od);
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,6 +113,8 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 	@Override
 	public OrderDetail selectById(int id) {
 		OrderDetail ketqua = null;
+		orderDAO = new OrderDAO();
+		productDetailDAO = new ProductDetailDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `supplier` WHERE `id` = ?";
@@ -121,10 +127,9 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 				int productDetailId = rs.getInt("product_details_id");
 				int price = rs.getInt("price");
 				int num = rs.getInt("num");
-				ketqua = new OrderDetail(Id, orderId, productDetailId, price, num);
-				
-				
+				ketqua = new OrderDetail(Id, orderDAO.selectById(orderId), productDetailDAO.selectById(productDetailId), price, num);
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

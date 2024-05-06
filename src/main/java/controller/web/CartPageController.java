@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dal.ProductDetailDAO;
+import dao.ProductDetailDAO;
 import model.Cart;
-import model.CartItem;
 import model.ProductDetail;
 
 /**
@@ -52,7 +51,7 @@ public class CartPageController extends HttpServlet {
 			
 			String buyQuantity = request.getParameter("buyQuantity");
 			String productDetailId = request.getParameter("productDetailId");
-			int productId = ProductDetailDAO.getInstance().selectById(Integer.parseInt(productDetailId)).getProductId();
+			int productId = ProductDetailDAO.getInstance().selectById(Integer.parseInt(productDetailId)).getProduct().getId();
 			if(txt.isEmpty() || txt.equals("")) {
 				txt = productDetailId+":"+buyQuantity;
 			}else {

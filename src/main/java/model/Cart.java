@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import dal.ProductDAO;
+import dao.ProductDAO;
 
 public class Cart {
 	private List<CartItem> items;
@@ -65,7 +65,7 @@ public class Cart {
 					int id = Integer.parseInt(n[0]);
 					int quantity = Integer.parseInt(n[1]);
 					ProductDetail p = getProductDetailById(id, list);
-					CartItem ci = new CartItem(p, quantity, ProductDAO.getInstance().selectById(p.getProductId()).getPrice());
+					CartItem ci = new CartItem(p, quantity, ProductDAO.getInstance().selectById(p.getProduct().getId()).getPrice());
 					addItem(ci);
 				}
 						

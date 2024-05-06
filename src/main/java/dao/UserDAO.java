@@ -127,7 +127,7 @@ public class UserDAO implements DAOInterface<User>{
 				User u = new User(id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);
 				ketqua.add(u);
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,9 +155,9 @@ public class UserDAO implements DAOInterface<User>{
 				Date updatedAt = rs.getDate("updated_at");
 				int status = rs.getInt("status");
 				int role = rs.getInt("role");
-				ketqua = new User(Id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);
-				
+				ketqua = new User(Id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);		
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -187,8 +187,8 @@ public class UserDAO implements DAOInterface<User>{
 				int status = rs.getInt("status");
 				int role = rs.getInt("role");
 				ketqua = new User(Id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);
-				
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -217,6 +217,7 @@ public class UserDAO implements DAOInterface<User>{
 				int Role = rs.getInt("role");
 				result.add(new User(Id, fullname, email, phoneNum, address, password, createdAt, updatedAt, status, Role));
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

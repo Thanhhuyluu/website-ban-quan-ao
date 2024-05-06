@@ -4,18 +4,20 @@ import java.sql.Date;
 
 public class Order {
 
-	private int id, userId;
+	private int id;
+	private User user;
 	private String fullname, email,phoneNum,address,note;
 	private Date orderDate;
 	private int status;
 	public Order() {
 		super();
 	}
-	public Order(int id, int userId, String fullname, String email, String phoneNum, String address, String note,
+	
+	public Order(int id, User user, String fullname, String email, String phoneNum, String address, String note,
 			Date orderDate, int status) {
 		super();
 		this.id = id;
-		this.userId = userId;
+		this.user = user;
 		this.fullname = fullname;
 		this.email = email;
 		this.phoneNum = phoneNum;
@@ -24,10 +26,11 @@ public class Order {
 		this.orderDate = orderDate;
 		this.status = status;
 	}
-	public Order(int userId, String fullname, String email, String phoneNum, String address, String note,
-			Date orderDate, int status) {
+
+	public Order(User user, String fullname, String email, String phoneNum, String address, String note, Date orderDate,
+			int status) {
 		super();
-		this.userId = userId;
+		this.user = user;
 		this.fullname = fullname;
 		this.email = email;
 		this.phoneNum = phoneNum;
@@ -36,18 +39,22 @@ public class Order {
 		this.orderDate = orderDate;
 		this.status = status;
 	}
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserId() {
-		return userId;
+
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
+
 	public String getFullname() {
 		return fullname;
 	}
@@ -90,14 +97,11 @@ public class Order {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", userId=" + userId + ", fullname=" + fullname + ", email=" + email + ", phoneNum="
+		return "Order [id=" + id + ", user=" + user + ", fullname=" + fullname + ", email=" + email + ", phoneNum="
 				+ phoneNum + ", address=" + address + ", note=" + note + ", orderDate=" + orderDate + ", status="
 				+ status + "]";
 	}
-	
-	
-	
-	
 }
