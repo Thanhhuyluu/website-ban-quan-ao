@@ -3,7 +3,11 @@ encoding//src/main/java/message.properties=UTF-8
 encoding//src/main/webapp/common/web/footer.jsp=UTF-8
 encoding//src/main/webapp/common/web/header.jsp=UTF-8
 <<<<<<< HEAD
+<<<<<<< HEAD
 encoding//src/main/webapp/views/web/cart-page.jsp=UTF-8
 =======
 encoding//src/main/webapp/decorators/admin.jsp=UTF-8
 >>>>>>> a6e2860 (Hau up code CRUD cate staff cus)
+=======
+encoding//src/main/webapp/decorators/admin.jsp=UTF-8
+>>>>>>> main
