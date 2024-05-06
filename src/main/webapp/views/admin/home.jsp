@@ -1,110 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@include file="/common/taglib.jsp"%>
     <!-- Sale & Revenue Start -->
-    <div class="container-fluid pt-4 px-4">
-      <div class="row g-4">
-        <div class="col-sm-6 col-xl-3">
-          <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-chart-line fa-3x text-primary"></i>
-            <div class="ms-3">
-              <p class="mb-2">Today Sale</p>
-              <h6 class="mb-0">$1234</h6>
+   <div class="container-body">
+                <div class="column-3-2">
+                    
+                    <ul class="chart-group">
+                        <li class="chart-item">
+                            <div class="chart-item__name">Ten bieu do</div>
+                            <div class="chart">
+                                <canvas id="barchart-profit"  ></canvas>
+
+                            </div>
+                        </li>
+                        <li class="chart-item">
+                            <div class="chart-item__name">Ten bieu do</div>
+                            <div class="chart">
+                                <canvas id="barchart-orders"  ></canvas>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column-3-1">
+                    <ul class="cart-list">
+                        <li class="cart-item">
+                            <img src="<c:url value='/template/admin/assets/imgs/profit.png' />" alt="" class="cart-item__img">
+                            <span class="cart-item__total">1.679.000 VNĐ</span>
+                            <span class="cart-item__title">Tien lai/ngay</span>
+                        </li>
+                        <li class="cart-item">
+                            <img src="<c:url value='/template/admin/assets/imgs/money_current.png' />" alt="" class="cart-item__img">
+                            <span class="cart-item__total">1.679.000 VNĐ</span>
+                            <span class="cart-item__title">So tien hien co</span>
+                        </li>
+                        <li class="cart-item">
+                            <img src="<c:url value='/template/admin/assets/imgs/growth.png' />" alt="" class="cart-item__img">
+                            <span class="cart-item__total">100%</span>
+                            <span class="cart-item__title">Tang truong thang truoc</span>
+                        </li>
+                        <li class="cart-item">
+                            <img src="<c:url value='/template/admin/assets/imgs/order.png' />" alt="" class="cart-item__img">
+                            <span class="cart-item__total">1000 đơn</span>
+                            <span class="cart-item__title">Don hang/ngay</span>
+                        </li>
+                    </ul>
+                </div>
+                
             </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-          <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-chart-bar fa-3x text-primary"></i>
-            <div class="ms-3">
-              <p class="mb-2">Total Sale</p>
-              <h6 class="mb-0">$1234</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-          <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-chart-area fa-3x text-primary"></i>
-            <div class="ms-3">
-              <p class="mb-2">Today Revenue</p>
-              <h6 class="mb-0">$1234</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-          <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-chart-pie fa-3x text-primary"></i>
-            <div class="ms-3">
-              <p class="mb-2">Total Revenue</p>
-              <h6 class="mb-0">$1234</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Sale & Revenue End -->
-    <!-- Sales Chart Start -->
-    <div class="container-fluid pt-4 px-4">
-      <div class="row g-4">
-        <div class="col-sm-12 col-xl-6">
-          <div class="bg-secondary text-center rounded p-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-              <h6 class="mb-0">Worldwide Sales</h6>
-              <a href="">Show All</a>
-            </div>
-            <canvas id="worldwide-sales"></canvas>
-          </div>
-        </div>
-        <div class="col-sm-12 col-xl-6">
-          <div class="bg-secondary text-center rounded p-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-              <h6 class="mb-0">Salse & Revenue</h6>
-              <a href="">Show All</a>
-            </div>
-            <canvas id="salse-revenue"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Sales Chart End -->
-    <!-- Recent Sales Start -->
-    <div class="container-fluid pt-4 px-4">
-      <div class="bg-secondary text-center rounded p-4">
-        <div class="d-flex align-items-center justify-content-between mb-4">
-          <h6 class="mb-0">Recent Salse</h6>
-          <a href="">Show All</a>
-        </div>
-        <div class="table-responsive">
-          <table class="table text-start align-middle table-bordered table-hover mb-0">
-            <thead>
-              <tr class="text-white">
-                <th scope="col">
-                  <input class="form-check-input" type="checkbox">
-                </th>
-                <th scope="col">Fullname</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Address</th>
-                <th scope="col">Role</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach var="user" items="${users}">
-                <tr>
-                  <td>
-                    <input class="form-check-input" type="checkbox">
-                  </td>
-                  <td>${user.fullname}</td>
-                  <td>${user.email}</td>
-                  <td>${user.phoneNumber}</td>
-                  <td>${user.address}</td>
-                  <td>${user.role}</td>
-                  <td>
-                    <a class="btn btn-sm btn-primary" href="">Detail</a>
-                  </td>
-                </tr>
-              </c:forEach>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>

@@ -3,7 +3,8 @@ package model;
 import java.sql.Date;
 
 public class ProductDetail {
-	private int id, productId;
+	private int id;
+	private Product product;
 	String size;
 	int quantity;
 	private Date createdAt;
@@ -11,35 +12,41 @@ public class ProductDetail {
 	public ProductDetail() {
 		super();
 	}
-	public ProductDetail(int id, int productId, String size, int quantity, Date createdAt, String color) {
+	
+	public ProductDetail(int id, Product product, String size, int quantity, Date createdAt, String color) {
 		super();
 		this.id = id;
-		this.productId = productId;
+		this.product = product;
 		this.size = size;
 		this.quantity = quantity;
 		this.createdAt = createdAt;
 		this.color = color;
 	}
-	public ProductDetail(int productId, String size, int quantity, Date createdAt, String color) {
+
+	public ProductDetail(Product product, String size, int quantity, Date createdAt, String color) {
 		super();
-		this.productId = productId;
+		this.product = product;
 		this.size = size;
 		this.quantity = quantity;
 		this.createdAt = createdAt;
 		this.color = color;
 	}
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getProductId() {
-		return productId;
+
+	public Product getProduct() {
+		return product;
 	}
-	public void setProductId(int productId) {
-		this.productId = productId;
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
+
 	public String getSize() {
 		return size;
 	}
@@ -67,10 +74,8 @@ public class ProductDetail {
 
 	@Override
 	public String toString() {
-		return "ProductDetail [id=" + id + ", productId=" + productId + ", size=" + size + ", quantity=" + quantity
+		return "ProductDetail [id=" + id + ", product=" + product + ", size=" + size + ", quantity=" + quantity
 				+ ", createdAt=" + createdAt + ", color=" + color + "]";
 	}
-	
-	
-	
+
 }

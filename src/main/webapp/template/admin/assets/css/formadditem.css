@@ -1,0 +1,112 @@
+
+html{
+    font-family: "Roboto",sans-serif;;
+}
+.container-body{
+    display: flex;
+    justify-content: center;
+    
+}
+.form{
+    width: 600px;
+    /* min-height: 600px; */
+    background-color: bisque;
+    padding: 20px;
+    border-radius: 5px;
+    padding-bottom: 50px;
+}
+.form-child{
+    position: relative;
+}
+.form-title{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+label {
+    display: inline-block;
+}
+.form-label{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;  
+    margin-bottom: 4px; 
+}
+.form-control{
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #453434;
+    color: white;
+    appearance: none;
+    font-weight: 300;
+    outline: none;
+}
+.form-control:active{
+    outline:  1px 2px orange;
+}
+
+.icon-select{
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 43px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.form-textarea{
+    background-color: #453434;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    font-size: 16px;
+    padding: 8px 16px;
+    height: 150px;
+    width: 100%;
+}
+.fomrFile{
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    overflow: hidden;
+    border: none;
+    border-radius: 5px;
+    background-color: #453434;
+    color: white;
+    appearance: none;
+    cursor: pointer;
+}
+textarea{
+    resize: vertical;
+}
+input[type="file"]::file-selector-button {
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    border: 1px solid #000;
+    margin-right: 12px;
+    cursor: pointer;
+}
+.btn-submit{
+    font-size: 16px;
+    padding: 6px 12px;
+    background-color: #EB1616;
+    font-weight: 400;
+    line-height: 1.5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 16px;
+    float: right;
+}
+.btn-submit:hover {
+    background-color: #c81313;
+}

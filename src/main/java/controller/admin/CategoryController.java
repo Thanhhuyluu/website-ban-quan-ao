@@ -29,6 +29,7 @@ public class CategoryController extends HttpServlet{
 //		req.setAttribute("categories", categoryDAO.selectAll());
 //		RequestDispatcher rq = req.getRequestDispatcher("/views/admin/category/showCategory.jsp");
 //		rq.forward(req, resp);
+		req.setCharacterEncoding("UTF-8");
 		String action = req.getServletPath();
 		System.out.println(action);
         try {

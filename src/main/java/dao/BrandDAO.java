@@ -83,7 +83,7 @@ public class BrandDAO implements DAOInterface<Brand> {
 				Brand b = new Brand(id,name);
 				ketqua.add(b);
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,6 +105,7 @@ public class BrandDAO implements DAOInterface<Brand> {
 				String name = rs.getString("name");
 				ketqua = new Brand(Id,name);
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

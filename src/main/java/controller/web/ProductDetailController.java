@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dal.ImageDAO;
-import dal.ProductDAO;
-import dal.ProductDetailDAO;
+import dao.ImageDAO;
+import dao.ProductDAO;
+import dao.ProductDetailDAO;
 import model.Image;
 import model.Product;
 import model.ProductDetail;
@@ -70,7 +70,7 @@ public class ProductDetailController extends HttpServlet {
 
 			Product product = ProductDAO.getInstance().selectById(pId);
 			List<Image> proImgList = ImageDAO.getInstance().selectByProductId(pId);
-			List<Product> relatedProducts = ProductDAO.getInstance().selectRelatedProductsByBrand(product.getBrandId(), product.getId());
+			List<Product> relatedProducts = ProductDAO.getInstance().selectRelatedProductsByBrand(product.getBrand().getId(), product.getId());
 			
 			request.setAttribute("relatedProducts", relatedProducts);
 			request.setAttribute("colorMap", colorMap);

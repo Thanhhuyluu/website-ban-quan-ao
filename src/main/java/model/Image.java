@@ -2,44 +2,51 @@ package model;
 
 public class Image {
 	private int id;
-	private int productId;
+	private Product product;
 	private String img;
-	public Image(int id, int productId, String img) {
-		super();
-		this.id = id;
-		this.productId = productId;
-		this.img = img;
-	}
-	public Image(int productId, String img) {
-		super();
-		this.productId = productId;
-		this.img = img;
-	}
+	
 	public Image() {
 		super();
 	}
+	
+	public Image(int id, Product product, String img) {
+		super();
+		this.id = id;
+		this.product = product;
+		this.img = img;
+	}
+
+	public Image(Product product, String img) {
+		super();
+		this.product = product;
+		this.img = img;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getProductId() {
-		return productId;
-	}
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
+	
 	public String getImg() {
 		return img;
 	}
 	public void setImg(String img) {
 		this.img = img;
 	}
+
 	@Override
 	public String toString() {
-		return "image [id=" + id + ", productId=" + productId + ", img=" + img + "]";
+		return "Image [id=" + id + ", product=" + product + ", img=" + img + "]";
 	}
-	
-	
+
 }
