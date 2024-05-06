@@ -102,8 +102,9 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				String color = rs.getString("color");
 				ProductDetail pd = new ProductDetail(id, productId, size, quantity, createdAt, color);
 				ketqua.add(pd);
+				
 			}
-
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -128,8 +129,9 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				Date createdAt = rs.getDate("created_at");
 				String color = rs.getString("color");
 				ketqua = new ProductDetail(Id, productId, size, quantity, createdAt, color);
-
+				
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -159,6 +161,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				ProductDetail pd = new ProductDetail(id, productId, size, quantity, createdAt, color);
 				ketqua.add(pd);
 			}
+			JDBCUtil.closeConnection(c);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -166,14 +169,15 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 
 		return ketqua;
 	}
-	public ProductDetail selectByColorAndSize(String pColor, String pSize) {
+	public ProductDetail selectByColorAndSize(String pColor, String pSize, int proId) {
 		ProductDetail ketqua = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT * FROM `product_details` WHERE `color` = ? AND `size` = ? ";
+			String sql = "SELECT * FROM `product_details` WHERE `color` = ? AND `size` = ? 	AND product_id = ? ";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setString(1, pColor);
 			pst.setString(2, pSize);
+			pst.setInt(3, proId);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				int Id = rs.getInt("id");
@@ -185,18 +189,20 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				ketqua = new ProductDetail(Id, productId, size, quantity, createdAt, color);
 
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return ketqua;
 	}
-	public List<String> selectDistinctSizeByColor(String pColor) {
+	public List<String> selectDistinctSizeByColor(String pColor, int productId) {
 		List<String> ketqua = new ArrayList<String>();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT DISTINCT `size` FROM `product_details` WHERE `color` = ? ";
+			String sql = "SELECT DISTINCT `size` FROM `product_details` WHERE `color` = ? AND `product_id` = ?	";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setString(1, pColor);
+			pst.setInt(2, productId);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				
@@ -204,6 +210,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				
 				ketqua.add(size);
 			}
+			JDBCUtil.closeConnection(c);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -211,13 +218,14 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 
 		return ketqua;
 	}
-	public List<String> selectDistinctColorBySize(String pSize) {
+	public List<String> selectDistinctColorBySize(String pSize, int pId) {
 		List<String> ketqua = new ArrayList<String>();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT DISTINCT `color` FROM `product_details` WHERE `size` = ? ";
+			String sql = "SELECT DISTINCT `color` FROM `product_details` WHERE `size` = ? AND product_id = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setString(1, pSize);
+			pst.setInt(2, pId);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				
@@ -225,7 +233,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				
 				ketqua.add(size);
 			}
-
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

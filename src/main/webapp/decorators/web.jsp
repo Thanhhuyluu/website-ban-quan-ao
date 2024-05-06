@@ -22,6 +22,7 @@
 	<link rel="stylesheet"
 		href="<c:url value="/template/web/assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css"/>" type="text/css">
 	<title><dec:title default="Trang chủ" /></title>
+	<link rel="icon" type="image/x-icon" href="<c:url value="/template/web/assets/imgs/high-logo.ico"/>">
 </head>
 <body>
 

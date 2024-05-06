@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dal.ImageDAO;
-import dal.ProductDAO;
-import dal.ProductDetailDAO;
+import dao.ImageDAO;
+import dao.ProductDAO;
+import dao.ProductDetailDAO;
 import model.Image;
 import model.Product;
 import model.ProductDetail;
@@ -59,11 +59,11 @@ public class ProductDetailController extends HttpServlet {
 				selectedColor = colorList.get(0);
 			}
 
-			List<String> availableSizes = ProductDetailDAO.getInstance().selectDistinctSizeByColor(selectedColor);
+			List<String> availableSizes = ProductDetailDAO.getInstance().selectDistinctSizeByColor(selectedColor,pId);
 			if ((selectedSize == "" && availableSizes.size() > 0) || (selectedSize == null && availableSizes.size() > 0)) {
 				selectedSize = availableSizes.get(0);
 			}
-			List<String> availableColors = ProductDetailDAO.getInstance().selectDistinctColorBySize(selectedSize);
+			List<String> availableColors = ProductDetailDAO.getInstance().selectDistinctColorBySize(selectedSize,pId);
 
 			Map<String, Boolean> colorMap = new HashMap<String, Boolean>();
 			for (String color : colorList) {

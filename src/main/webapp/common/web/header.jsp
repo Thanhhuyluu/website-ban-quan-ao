@@ -23,6 +23,13 @@
                                     Thoát
                                 </a>
                             	</li>
+                            	<c:if test="${USER.getRole()==1 }">
+                            		<li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
+	                                <a id="" class="header__navbar-item--link" href="admin-home">
+	                                    Trở về trang quản lý
+	                                </a>
+	                            	</li>
+                            	</c:if>
                             	
                             </c:if>
                             <c:if test="${empty USER }">

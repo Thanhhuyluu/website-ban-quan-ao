@@ -37,7 +37,7 @@ public class AuthorizationFilter implements Filter	{
 			if(user != null) {
 				if(user.getRole() == SystemConstant.ADMIN) {
 					filterChain.doFilter(servletRequest, servletResponse);
-				}else if(user.getRole() == SystemConstant.CUSTOMER) {
+				}else if(user.getRole() == SystemConstant.CUSTOMER ||user.getRole() == SystemConstant.STAFF  ) {
 					
 					response.sendRedirect(request.getContextPath() + "/trang-chu");
 					

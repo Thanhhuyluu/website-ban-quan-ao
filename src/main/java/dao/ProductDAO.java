@@ -123,7 +123,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 				ketqua.add(p);
+				
 			}
+			JDBCUtil.closeConnection(c);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,6 +161,7 @@ public class ProductDAO implements DAOInterface<Product> {
 				ketqua =  new Product(Id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -222,8 +225,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 				ketqua.add(p);
+				
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -260,8 +264,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 				ketqua.add(p);
+				
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -296,8 +301,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 				ketqua.add(p);
+				
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

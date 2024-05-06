@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import dal.ProductDAO;
+import dao.ProductDAO;
 
 public class Cart {
 	private List<CartItem> items;
@@ -21,17 +21,19 @@ public class Cart {
 	private CartItem getItemById(int id) {
 		for(CartItem ci : items) {
 			if(ci.getProductDetail().getId() == id) {
+				
 				return ci;
 			}
 		}
+		
 		return null;
 	}
 	public void addItem(CartItem ci) {
 		CartItem cI = getItemById(ci.getProductDetail().getId());
-		if(cI!= null) {
+		if(cI != null) {
 			cI.setQuantity(cI.getQuantity() + ci.getQuantity());
 		}else {
-			items.add(cI);
+			items.add(ci);
 		}
 	}
 	public void removeItems(int id) {
@@ -39,6 +41,25 @@ public class Cart {
 		if(cI != null) {
 			items.remove(cI);
 		}
+	}
+	public void updateItem(int id, CartItem cartItem) {
+			CartItem oldCartItem = getItemById(id);
+			
+			if(oldCartItem != null) {
+				
+					for(CartItem ci: items) {
+						if(ci.getProductDetail().getId() == cartItem.getProductDetail().getId()) {
+							removeItems(id);
+							addItem(cartItem);
+							return;
+						}
+					}
+					cartItem.setQuantity(oldCartItem.getQuantity());
+					items.set(items.indexOf(oldCartItem), cartItem);
+					
+			}
+		
+		
 	}
 	public int getTotalMoney() {
 		int t = 0;
@@ -59,14 +80,17 @@ public class Cart {
 		items = new ArrayList<CartItem>();
 		try {
 			if(txt!= null && txt.length() != 0) {
-				String[] s = txt.split(",");
+				
+				String[] s = txt.split("/");
 				for(String i : s) {
 					String[] n = i.split(":");
 					int id = Integer.parseInt(n[0]);
 					int quantity = Integer.parseInt(n[1]);
-					ProductDetail p = getProductDetailById(id, list);
-					CartItem ci = new CartItem(p, quantity, ProductDAO.getInstance().selectById(p.getProductId()).getPrice());
+					ProductDetail productDetail = getProductDetailById(id, list);
+					Product product = ProductDAO.getInstance().selectById(productDetail.getProductId());
+					CartItem ci = new CartItem(product,productDetail, quantity, product.getPrice());
 					addItem(ci);
+					
 				}
 						
 			}
