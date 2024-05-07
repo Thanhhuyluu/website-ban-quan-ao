@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ImageDAO;
 import dao.ProductDAO;
 import dao.ProductDetailDAO;
+import model.Cart;
 import model.Image;
 import model.Product;
 import model.ProductDetail;
@@ -41,6 +42,12 @@ public class ProductDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//lấy cart để hiển thị số lượng trên header
+		if(request.getAttribute("cart") == null) {
+					
+			Cart.setCartAttribute(request, response, null);
+		}
+		
 		String proId = request.getParameter("proId");
 		if( request.getAttribute("proId")!= null) {
 			proId = (String)request.getAttribute("proId");

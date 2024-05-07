@@ -112,31 +112,3 @@ homeSliderBtnLeft.addEventListener('click',()=>{
 
 
 //authform
-
-const switchLinks = document.querySelectorAll('.auth-form__switch-link');
-            switchLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const forms = document.querySelectorAll('.auth-form');
-                    forms.forEach(form => form.classList.toggle('active'));
-                });
-            });
-
-
-
-
-// modal
-
-
-const loginBtn = document.querySelector('#login__btn');
-const overLay = document.querySelector('.modal__overlay');
-
-// Định nghĩa hàm trước khi sử dụng
-function toggleForm(){
-    var modal = document.querySelector('.modal');
-    modal.classList.toggle('hide-modal');
-}
-
-
-loginBtn.onclick = toggleForm;
-overLay.onclick = toggleForm;

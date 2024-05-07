@@ -18,6 +18,7 @@ import constant.SystemConstant;
 import dao.CategoryDAO;
 import dao.ProductDAO;
 import dao.UserDAO;
+import model.Cart;
 import model.Category;
 import model.Product;
 import model.User;
@@ -46,6 +47,12 @@ public class HomeAllController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		ResourceBundle resourceBundle =  ResourceBundle.getBundle("message");
+		
+		//lấy cart để hiển thị số lượng trên header
+		Cart.setCartAttribute(request, response, null);
+		
+		
+		
 		String action = request.getParameter("action");
 		if(action != null &&action.equals("logout")) {
 			System.out.println("enter logout");
