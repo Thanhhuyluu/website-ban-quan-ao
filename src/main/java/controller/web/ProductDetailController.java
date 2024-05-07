@@ -83,14 +83,9 @@ public class ProductDetailController extends HttpServlet {
 		    DecimalFormat formatter = new DecimalFormat("#,###");
 	        String formattedPrice = formatter.format(discountPrice);
 			List<Image> proImgList = ImageDAO.getInstance().selectByProductId(pId);
-<<<<<<< HEAD
 
 			List<Product> relatedProducts = ProductDAO.getInstance().selectRelatedProductsByBrand(product.getBrand().getId(), product.getId());
 			request.setAttribute("formattedPrice", formattedPrice);
-=======
-			List<Product> relatedProducts = ProductDAO.getInstance().selectRelatedProductsByBrand(product.getBrand().getId(), product.getId());
-			
->>>>>>> main
 			request.setAttribute("relatedProducts", relatedProducts);
 			request.setAttribute("colorMap", colorMap);
 			request.setAttribute("selectedSize", selectedSize);
