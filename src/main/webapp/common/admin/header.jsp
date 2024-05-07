@@ -1,104 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!-- Navbar Start -->
-<nav
-	class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-	<a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-		<h2 class="text-primary mb-0">
-			<i class="fa fa-user-edit"></i>
-		</h2>
-	</a> <a href="#" class="sidebar-toggler flex-shrink-0"> <i
-		class="fa fa-bars"></i>
-	</a>
-	<form class="d-none d-md-flex ms-4">
-		<input class="form-control bg-dark border-0" type="search"
-			placeholder="Search">
-	</form>
-	<div class="navbar-nav align-items-center ms-auto">
-		<div class="nav-item dropdown">
-			<a href="#" class="nav-link dropdown-toggle"
-				data-bs-toggle="dropdown"> <i class="fa fa-envelope me-lg-2"></i>
-				<span class="d-none d-lg-inline-flex">Message</span>
-			</a>
-			<div
-				class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-				<a href="#" class="dropdown-item">
-					<div class="d-flex align-items-center">
-						<img class="rounded-circle" src="img/user.jpg" alt=""
-							style="width: 40px; height: 40px;">
-						<div class="ms-2">
-							<h6 class="fw-normal mb-0">Jhon send you a message</h6>
-							<small>15 minutes ago</small>
-						</div>
-					</div>
-				</a>
-				<hr class="dropdown-divider">
-				<a href="#" class="dropdown-item">
-					<div class="d-flex align-items-center">
-						<img class="rounded-circle" src="img/user.jpg" alt=""
-							style="width: 40px; height: 40px;">
-						<div class="ms-2">
-							<h6 class="fw-normal mb-0">Jhon send you a message</h6>
-							<small>15 minutes ago</small>
-						</div>
-					</div>
-				</a>
-				<hr class="dropdown-divider">
-				<a href="#" class="dropdown-item">
-					<div class="d-flex align-items-center">
-						<img class="rounded-circle" src="img/user.jpg" alt=""
-							style="width: 40px; height: 40px;">
-						<div class="ms-2">
-							<h6 class="fw-normal mb-0">Jhon send you a message</h6>
-							<small>15 minutes ago</small>
-						</div>
-					</div>
-				</a>
-				<hr class="dropdown-divider">
-				<a href="#" class="dropdown-item text-center">See all message</a>
-			</div>
-		</div>
-		<div class="nav-item dropdown">
-			<a href="#" class="nav-link dropdown-toggle"
-				data-bs-toggle="dropdown"> <i class="fa fa-bell me-lg-2"></i> <span
-				class="d-none d-lg-inline-flex">Notificatin</span>
-			</a>
-			<div
-				class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-				<a href="#" class="dropdown-item">
-					<h6 class="fw-normal mb-0">Profile updated</h6> <small>15
-						minutes ago</small>
-				</a>
-				<hr class="dropdown-divider">
-				<a href="#" class="dropdown-item">
-					<h6 class="fw-normal mb-0">New user added</h6> <small>15
-						minutes ago</small>
-				</a>
-				<hr class="dropdown-divider">
-				<a href="#" class="dropdown-item">
-					<h6 class="fw-normal mb-0">Password changed</h6> <small>15
-						minutes ago</small>
-				</a>
-				<hr class="dropdown-divider">
-				<a href="#" class="dropdown-item text-center">See all
-					notifications</a>
-			</div>
-		</div>
-		<div class="nav-item dropdown">
-			<c:if test="${not empty USER }">
-			<a href="#" class="nav-link dropdown-toggle"
-				data-bs-toggle="dropdown"> <img class="rounded-circle me-lg-2"
-				src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-				<span class="d-none d-lg-inline-flex">${USER.getFullname()} </span>
-			</a>
-			</c:if>
-			
-			<div
-				class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-				<a href="trang-chu" class="dropdown-item">My Profile</a> 
-				<a href="#" class="dropdown-item">Settings</a>
-				<a href="thoat?action=logout" class="dropdown-item">Log Out</a>
-			</div>
-		</div>
-	</div>
-</nav>
-<!-- Navbar End -->
+
+<%@include file="/common/taglib.jsp"%>
+  <div class="container-header">
+                <div class="sidebar-toggler">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <div class="header__search">
+                    
+                    <div class="header__search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <input type="text" class="header__search-input" placeholder="Tim kiem">
+                </div>
+                <div class="header__right">
+                    <div class="header__right-notify">
+                        <i class="notify-icon fa-solid fa-bell"></i>
+                    </div>
+                    <div class="header__right-user">
+                        <img src="<c:url value='/template/admin/assets/imgs/high-logo-D022924D47-seeklogo.com.png' />" alt="" class="header__right-user-img">
+                        <span class="header__right-user-name">Chu shop high</span>
+                        <i class="icon-down fa-solid fa-angle-down"></i>
+                        <ul class="user-menu">
+                            <li class="user-item">
+                                <a href="#" class="user-item-link">Thông tin cá nhân</a></li>
+                            <li class="user-item">
+                                <a href="#" class="user-item-link">Cài đặt</a></li>
+                            <li class="user-item">
+                                <a href="thoat?action=logout" class="user-item-link">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+			  <script>
+				  const header_right_user = document.querySelector('.header__right-user')
+				  const user_menu = document.querySelector('.user-menu')
+				  const down = document.querySelector('.icon-down')
+				  header_right_user.addEventListener('click', function(){
+				    user_menu.classList.toggle('open')
+				    down.classList.toggle('down')
+				  	console.log('oke');
+				  })
+				  
+				  
+				  
+				
+	
+			     // sidebar toggler
+			     const sidebarToggler = document.querySelector('.sidebar-toggler')
+			     const sidebar = document.querySelector('.side-bar')
+			     const container = document.querySelector('.container')
+			     sidebarToggler.addEventListener('click', function(){
+			         sidebar.classList.toggle('open')
+			         container.classList.toggle('open')
+			     });
+
+        
+			</script>

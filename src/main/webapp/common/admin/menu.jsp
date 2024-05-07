@@ -1,36 +1,60 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
 		pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>
 	<!-- Sidebar Start -->
-	<div class="sidebar pe-4 pb-3">
-	  <nav class="navbar bg-secondary navbar-dark">
-	    <a href="index.html" class="navbar-brand mx-4 mb-3">
-	      <h3 class="text-primary">
-	        <i class="fa fa-user-edit me-2"></i>HIGH
-	      </h3>
-	    </a>
-	    <div class="d-flex align-items-center ms-4 mb-4"></div>
-	    <div class="navbar-nav w-100">
-	      <a href="index.html" class="nav-item nav-link active">
-	        <i class="fa fa-tachometer-alt me-2"></i>Thống kê </a>
-	      <div class="nav-item dropdown">
-	        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-	        	<i class="fa fa-laptop me-2"></i>Đơn hàng </a>
-	        <div class="dropdown-menu bg-transparent border-0">
-	          <a href="button.html" class="dropdown-item">Buttons</a>
-	          <a href="typography.html" class="dropdown-item">Typography</a>
-	          <a href="element.html" class="dropdown-item">Other Elements</a>
-	        </div>
-	        <a href="<c:url value='/admin-customer'/>" class="nav-item nav-link">
-	        	<i class="fa fa-th me-2"></i>Khách hàng</a>
-        	<a href="<c:url value='/admin-product'/>" class="nav-item nav-link">
-	        	<i class="fa fa-th me-2"></i>Sản phẩm</a>
-        	<a href="<c:url value='/admin-category'/>" class="nav-item nav-link">
-	        	<i class="fa fa-th me-2"></i>Phân loại
-	        	</a>
-        	<a href="<c:url value='/admin-staff'/>" class="nav-item nav-link">
-	        	<i class="fa fa-th me-2"></i>Nhân viên</a>
-	      </div>
-	    </div>
-	  </nav>
-	</div>
+		
+	  <div class="side-bar">
+            <div class="side-bar__header">
+                <img class="side-bar__header-img" src="<c:url value='/template/admin/assets/imgs/high-logo-D022924D47-seeklogo.com.png' />" alt="">
+            </div>
+			<c:set var="url" value="${pageContext.request.requestURL}" />
+			<c:set var="desiredPart" value="${fn:substringAfter(url, '/Online_Shop/')}" />
+            <ul class="side-bar__list-item">
+                <li class="side-bar__item <c:if test="${desiredPart == 'admin-home' }">
+  					  active
+				</c:if> ">
+                    <a href="<c:url value = "admin-home"/>" class="side-bar__item-link"> 
+                        <img src="<c:url value='/template/admin/assets/imgs/home.png' />" alt="">
+                        <span class="item-title">Thống kê</span>
+                    </a>
+                </li>
+                <li class="side-bar__item " >
+                    <a href="#" class="side-bar__item-link"> 
+                        <img src="<c:url value='/template/admin/assets/imgs/invoice.png' />" alt="">
+                        <span class="item-title">Đơn hàng</span>
+                    </a>
+                </li>
+                <li class="side-bar__item <c:if test="${desiredPart == 'admin-customer' }">
+  					  active
+				</c:if> " >
+                    <a href="<c:url value = "admin-customer"/>" class="side-bar__item-link"> 
+                        <img src="<c:url value='/template/admin/assets/imgs/cus.png' />" alt="">
+                        <span class="item-title">Khách hàng</span>
+                    </a>
+                </li>
+                <li class="side-bar__item ">
+                    <a href="<c:url value = "admin-product"/>" class="side-bar__item-link"> 
+                        <img src="<c:url value='/template/admin/assets/imgs/product.png' />" alt="">
+                        <span class="item-title">Sản phẩm</span>
+                    </a>
+                </li>
+                <!-- <c:url value = "/admin-category"/> -->
+                <li class="side-bar__item  <c:if test="${desiredPart == 'admin-category' }">
+  					  active
+				</c:if>" >
+                    <a href="<c:url value = "admin-category"/>" class="side-bar__item-link"> 
+                        <img src="<c:url value='/template/admin/assets/imgs/classify.png' />" alt="">
+                        <span class="item-title">Phân loại</span>
+                    </a>
+                </li>
+                <li class="side-bar__item <c:if test="${desiredPart == 'admin-staff' }">
+  					  active
+				</c:if> " >
+                    <a href="<c:url value = "admin-staff"/>" class="side-bar__item-link"> 
+                        <img src="<c:url value='/template/admin/assets/imgs/staff.png' />" alt="">
+                        <span class="item-title">Nhân viên</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 	<!-- Sidebar End -->

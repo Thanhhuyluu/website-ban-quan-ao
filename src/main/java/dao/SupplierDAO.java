@@ -96,7 +96,7 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 				Supplier sup = new Supplier(id, name, email, phoneNum, address);
 				ketqua.add(sup);
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -120,9 +120,8 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 				String phoneNum = rs.getString("phone_num");
 				String address= rs.getString("address");
 				ketqua = new Supplier(Id, name, email, phoneNum, address);
-				
-				
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

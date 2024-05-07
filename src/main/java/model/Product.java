@@ -4,7 +4,10 @@ import java.sql.Date;
 
 public class Product {
 
-	private int id,categoryId, brandId,supplierId;
+	private int id;
+	private Category category;
+	private Brand brand;
+	private Supplier supplier;
 	private String title;
 	private int price,discount;
 	private String img,description;
@@ -14,13 +17,14 @@ public class Product {
 	public Product() {
 		super();
 	}
-	public Product(int id, int categoryId, int brandId, int supplierId, String title, int price, int discount,
+	
+	public Product(int id, Category category, Brand brand, Supplier supplier, String title, int price, int discount,
 			String img, String description, Date createdAt, Date updatedAt, boolean deleted, int gender, int likes) {
 		super();
 		this.id = id;
-		this.categoryId = categoryId;
-		this.brandId = brandId;
-		this.supplierId = supplierId;
+		this.category = category;
+		this.brand = brand;
+		this.supplier = supplier;
 		this.title = title;
 		this.price = price;
 		this.discount = discount;
@@ -32,12 +36,13 @@ public class Product {
 		this.gender = gender;
 		this.likes = likes;
 	}
-	public Product(int categoryId, int brandId, int supplierId, String title, int price, int discount, String img,
+
+	public Product(Category category, Brand brand, Supplier supplier, String title, int price, int discount, String img,
 			String description, Date createdAt, Date updatedAt, boolean deleted, int gender, int likes) {
 		super();
-		this.categoryId = categoryId;
-		this.brandId = brandId;
-		this.supplierId = supplierId;
+		this.category = category;
+		this.brand = brand;
+		this.supplier = supplier;
 		this.title = title;
 		this.price = price;
 		this.discount = discount;
@@ -49,30 +54,38 @@ public class Product {
 		this.gender = gender;
 		this.likes = likes;
 	}
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCategoryId() {
-		return categoryId;
+
+	public Category getCategory() {
+		return category;
 	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
-	public int getBrandId() {
-		return brandId;
+
+	public Brand getBrand() {
+		return brand;
 	}
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
-	public int getSupplierId() {
-		return supplierId;
+
+	public Supplier getSupplier() {
+		return supplier;
 	}
-	public void setSupplierId(int supplierId) {
-		this.supplierId = supplierId;
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -122,7 +135,6 @@ public class Product {
 		this.deleted = deleted;
 	}
 	
-	
 	public int getGender() {
 		return gender;
 	}
@@ -135,15 +147,14 @@ public class Product {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", categoryId=" + categoryId + ", brandId=" + brandId + ", supplierId="
-				+ supplierId + ", title=" + title + ", price=" + price + ", discount=" + discount + ", img=" + img
-				+ ", description=" + description + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
-				+ ", deleted=" + deleted + ", gender=" + gender + ", likes=" + likes +"]";
+		return "Product [id=" + id + ", category=" + category + ", brand=" + brand + ", supplier=" + supplier
+				+ ", title=" + title + ", price=" + price + ", discount=" + discount + ", img=" + img + ", description="
+				+ description + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", deleted=" + deleted
+				+ ", gender=" + gender + ", likes=" + likes + "]";
 	}
-	
 	
 	
 }

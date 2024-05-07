@@ -16,7 +16,6 @@ import model.Cart;
 import model.CartItem;
 import model.Product;
 import model.ProductDetail;
-import service.ProductDetailManager;
 
 /**
  * Servlet implementation class CartPageController
@@ -57,10 +56,11 @@ public class CartPageController extends HttpServlet {
 
 			String buyQuantity = request.getParameter("buyQuantity");
 			String productDetailId = request.getParameter("productDetailId");
-			int productId = ProductDetailDAO.getInstance().selectById(Integer.parseInt(productDetailId)).getProductId();
-			if (txt.isEmpty() || txt.equals("")) {
-				txt = productDetailId + ":" + buyQuantity;
-			} else {
+
+			int productId = ProductDetailDAO.getInstance().selectById(Integer.parseInt(productDetailId)).getProduct().getId();
+			if(txt.isEmpty() || txt.equals("")) {
+				txt = productDetailId+":"+buyQuantity;
+			}else {
 				txt = txt + "/" + productDetailId + ":" + buyQuantity;
 			}
 
@@ -112,7 +112,7 @@ public class CartPageController extends HttpServlet {
 			try {
 				productDetailId = Integer.parseInt(productDetailId_raw);
 				ProductDetail productDetail = ProductDetailDAO.getInstance().selectById(productDetailId);
-				Product product  = ProductDAO.getInstance().selectById(productDetail.getProductId());
+				Product product  = ProductDAO.getInstance().selectById(productDetail.getProduct().getId());
 				int availableQuantity = productDetail.getQuantity();
 				System.out.println(availableQuantity + productDetail.getSize() + productDetail.getColor());
 				num= Integer.parseInt(num_raw);
@@ -159,13 +159,13 @@ public class CartPageController extends HttpServlet {
 					int productDetailId = Integer.parseInt(productDetailId_raw);
 					int quantity = Integer.parseInt(quantity_raw);
 					ProductDetail productDetail = ProductDetailDAO.getInstance().selectById(productDetailId);
-					Product product = ProductDAO.getInstance().selectById(productDetail.getProductId());
+					Product product = ProductDAO.getInstance().selectById(productDetail.getProduct().getId());
 					
 					  
 					 
 					ProductDetail newProductDetail = ProductDetailDAO.getInstance().selectByColorAndSize(selectedColor, selectedSize, product.getId());
 					if(newProductDetail == null) {
-						newProductDetail = new ProductDetail(productDetail.getId(), product.getId(), selectedSize, 0, null, selectedColor);
+						newProductDetail = new ProductDetail(productDetail.getId(), product, selectedSize, 0, null, selectedColor);
 					}
 					
 					CartItem cartItem = new CartItem(product, newProductDetail, quantity, product.getPrice());

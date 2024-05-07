@@ -186,6 +186,8 @@ public class HomeAllController extends HttpServlet {
 			if(action!= null && action.equals("login")) {
 				String password = request.getParameter("passwordLogin");
 				String emailOrPhoneNumber = request.getParameter("emailOrPhoneNumberLogin");
+				System.out.println(password);
+				System.out.println(emailOrPhoneNumber);
 				String remember= request.getParameter("remember");
 				User user = UserDAO.getInstance().seletUserByPasswordAndStatusAndPhoneNumberOrEmail(password, emailOrPhoneNumber, 0);
 				if(user!=  null) {

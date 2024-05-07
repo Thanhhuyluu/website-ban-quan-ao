@@ -27,19 +27,6 @@ public class ProductController extends HttpServlet{
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			// TODO Auto-generated method stub
 
-//			ProductDAO productDAO = new ProductDAO();
-//			CategoryDAO categoryDAO = new CategoryDAO();
-//			List<Product> products = productDAO.selectAll();
-//			List<Category> categories = new ArrayList<Category>();
-//			Category category = new Category(); 
-//			for (Product product : products) {
-//				category = categoryDAO.selectById(product.getCategoryId());
-//				categories.add(category);
-//			}
-//			req.setAttribute("products", products);
-//			req.setAttribute("categories", categories);
-//			RequestDispatcher rq = req.getRequestDispatcher("/views/admin/product/productList.jsp");
-//			rq.forward(req, resp);
 			String action = req.getServletPath();
 			System.out.println(action);
 	        try {
@@ -121,11 +108,10 @@ public class ProductController extends HttpServlet{
 	    private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException {
 	        int id = Integer.parseInt(request.getParameter("id"));
-	 
-	        Product product = new Product();
-	        product.setId(id);
+	        
+	        Product product = productDAO.selectById(id);
 	        productDAO.delete(product);
-	        response.sendRedirect("admin-category");
+	        response.sendRedirect("admin-product");
 	 
 	    }
 }

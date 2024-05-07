@@ -1,25 +1,27 @@
 package model;
 
 public class OrderDetail {	
-	private int id, orderId, productDetailId, price,num;
-
+	private int id;
+	private Order order;
+	private ProductDetail productDetail;
+	private int price,num;
 	public OrderDetail() {
 		super();
 	}
 
-	public OrderDetail(int id, int orderId, int productDetailId, int price, int num) {
+	public OrderDetail(int id, Order order, ProductDetail productDetail, int price, int num) {
 		super();
 		this.id = id;
-		this.orderId = orderId;
-		this.productDetailId = productDetailId;
+		this.order = order;
+		this.productDetail = productDetail;
 		this.price = price;
 		this.num = num;
 	}
 
-	public OrderDetail(int orderId, int productDetailId, int price, int num) {
+	public OrderDetail(Order order, ProductDetail productDetail, int price, int num) {
 		super();
-		this.orderId = orderId;
-		this.productDetailId = productDetailId;
+		this.order = order;
+		this.productDetail = productDetail;
 		this.price = price;
 		this.num = num;
 	}
@@ -32,20 +34,21 @@ public class OrderDetail {
 		this.id = id;
 	}
 
-	public int getOrderId() {
-		return orderId;
+
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
-	public int getProductDetailId() {
-		return productDetailId;
+	public ProductDetail getProductDetail() {
+		return productDetail;
 	}
 
-	public void setProductDetailId(int productDetailId) {
-		this.productDetailId = productDetailId;
+	public void setProductDetail(ProductDetail productDetail) {
+		this.productDetail = productDetail;
 	}
 
 	public int getPrice() {
@@ -66,9 +69,10 @@ public class OrderDetail {
 
 	@Override
 	public String toString() {
-		return "OrderDetail [id=" + id + ", orderId=" + orderId + ", productDetailId=" + productDetailId + ", price="
-				+ price + ", num=" + num + "]";
+		return "OrderDetail [id=" + id + ", order=" + order + ", productDetail=" + productDetail + ", price=" + price
+				+ ", num=" + num + "]";
 	}
-	
+
+
 	
 }

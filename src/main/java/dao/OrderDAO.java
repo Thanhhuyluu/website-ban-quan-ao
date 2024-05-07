@@ -12,10 +12,10 @@ import model.Order;
 
 public class OrderDAO implements DAOInterface<Order>{
 
+	private UserDAO userDAO;
 	public static OrderDAO getInstance() {
 		return new OrderDAO();
 	}
-	
 	@Override
 	public int insert(Order t) {
 		int ketqua = 0;
@@ -23,7 +23,7 @@ public class OrderDAO implements DAOInterface<Order>{
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `order`(`user_id`, `fullname`, `email`, `phone_number`, `address`, `note`, `order_date`, `status`) VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getUserId());
+			pst.setInt(1, t.getUser().getId());
 			pst.setString(2, t.getFullname());
 			pst.setString(3, t.getEmail());
 			pst.setString(4, t.getPhoneNum());
@@ -48,7 +48,7 @@ public class OrderDAO implements DAOInterface<Order>{
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `order` SET `user_id`= ?,`fullname`= ?,`email`= ?,`phone_number`= ?,`address`= ?,`note`= ?,`order_date`= ?,`status`= ? WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getUserId());
+			pst.setInt(1, t.getUser().getId());
 			pst.setString(2, t.getFullname());
 			pst.setString(3, t.getEmail());
 			pst.setString(4, t.getPhoneNum());
@@ -90,6 +90,7 @@ public class OrderDAO implements DAOInterface<Order>{
 	@Override
 	public List<Order> selectAll() {
 		List<Order> ketqua = new ArrayList<Order>();
+		userDAO = new UserDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `order` ";
@@ -105,10 +106,10 @@ public class OrderDAO implements DAOInterface<Order>{
 				String note = rs.getString("note");
 				Date orderDate = rs.getDate("order_date");
 				int status = rs.getInt("status");
-				Order o = new Order(id, userId, fullname, email, phoneNumber, address, note, orderDate, status);
+				Order o = new Order(id, userDAO.selectById(userId), fullname, email, phoneNumber, address, note, orderDate, status);
 				ketqua.add(o);
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,6 +120,7 @@ public class OrderDAO implements DAOInterface<Order>{
 	@Override
 	public Order selectById(int id) {
 		Order ketqua = null;
+		userDAO = new UserDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `order` WHERE `id` = ?";
@@ -135,10 +137,9 @@ public class OrderDAO implements DAOInterface<Order>{
 				String note = rs.getString("note");
 				Date orderDate = rs.getDate("order_date");
 				int status = rs.getInt("status");
-				ketqua = new Order(Id, userId, fullname, email, phoneNumber, address, note, orderDate, status);
-				
-				
+				ketqua = new Order(Id, userDAO.selectById(userId), fullname, email, phoneNumber, address, note, orderDate, status);	
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

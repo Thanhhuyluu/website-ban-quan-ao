@@ -89,7 +89,7 @@ public class CategoryDAO implements DAOInterface<Category> {
 				Category cate = new Category(id,name, type);
 				ketqua.add(cate);
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,6 +112,7 @@ public class CategoryDAO implements DAOInterface<Category> {
 				int type = rs.getInt("type");
 				ketqua = new Category(Id,name,type);
 			}
+			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -134,7 +135,7 @@ public class CategoryDAO implements DAOInterface<Category> {
 				Category ct = new Category(Id,name,Type);
 				ketqua.add(ct);
 			}
-			
+			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

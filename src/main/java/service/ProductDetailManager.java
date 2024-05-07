@@ -45,7 +45,7 @@ public class ProductDetailManager {
 	}
 	public ProductDetail getProductDetailByProductIdAndSizeAndColor(int productId, String size, String color, List<ProductDetail>list) {
 		for(ProductDetail productDetail : list) {
-			if(productDetail.getProductId() == productId && productDetail.getSize().equals(size)&& productDetail.getColor().equals(color)) {
+			if(productDetail.getProduct().getId() == productId && productDetail.getSize().equals(size)&& productDetail.getColor().equals(color)) {
 				return productDetail;
 			}
 		}

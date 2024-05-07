@@ -12,9 +12,13 @@ import model.Product;
 
 public class ProductDAO implements DAOInterface<Product> {
 
+	private CategoryDAO categoryDAO;
+	private BrandDAO brandDAO;
+	private SupplierDAO supplierDAO;
 	public static ProductDAO getInstance() {
 		return new ProductDAO();
 	}
+
 	@Override
 	public int insert(Product t) {
 		int ketqua = 0;
@@ -23,9 +27,9 @@ public class ProductDAO implements DAOInterface<Product> {
 			String sql = "INSERT INTO `product`(`category_id`, `brand_id`, `supplier_id`, `title`, `price`, `discount`, `img`, `description`, `created_at`, `updated_at`, `deleted`, `gender`, `likes`) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getCategoryId());
-			pst.setInt(2, t.getBrandId());
-			pst.setInt(3, t.getSupplierId());
+			pst.setInt(1, t.getCategory().getId());
+			pst.setInt(2, t.getBrand().getId());
+			pst.setInt(3, t.getSupplier().getId());
 			pst.setString(4, t.getTitle());
 			pst.setInt(5, t.getPrice());
 			pst.setInt(6, t.getDiscount());
@@ -53,9 +57,9 @@ public class ProductDAO implements DAOInterface<Product> {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `product` SET `category_id`= ? ,`brand_id`= ? ,`supplier_id`= ? ,`title`= ? ,`price`= ? ,`discount`= ? ,`img`= ? ,`description`= ? ,`created_at`= ? ,`updated_at`= ? ,`deleted`= ? ,`gender`= ?, `likes` = ?  WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getCategoryId());
-			pst.setInt(2, t.getBrandId());
-			pst.setInt(3, t.getSupplierId());
+			pst.setInt(1, t.getCategory().getId());
+			pst.setInt(2, t.getBrand().getId());
+			pst.setInt(3, t.getSupplier().getId());
 			pst.setString(4, t.getTitle());
 			pst.setInt(5, t.getPrice());
 			pst.setInt(6, t.getDiscount());
@@ -100,6 +104,9 @@ public class ProductDAO implements DAOInterface<Product> {
 	@Override
 	public List<Product> selectAll() {
 		List<Product> ketqua = new ArrayList<Product>();
+		categoryDAO = new CategoryDAO();
+		brandDAO = new BrandDAO();
+		supplierDAO = new SupplierDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` ";
@@ -120,13 +127,13 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 				ketqua.add(p);
 				
 			}
 			JDBCUtil.closeConnection(c);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -137,6 +144,9 @@ public class ProductDAO implements DAOInterface<Product> {
 	@Override
 	public Product selectById(int id) {
 		Product ketqua = null;
+		categoryDAO = new CategoryDAO();
+		brandDAO = new BrandDAO();
+		supplierDAO = new SupplierDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` WHERE `id` = ?";
@@ -158,7 +168,7 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes = rs.getInt("likes");
-				ketqua =  new Product(Id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				ketqua =  new Product(Id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -185,6 +195,9 @@ public class ProductDAO implements DAOInterface<Product> {
 	
 	public List<Product> selectByCateId(int[] arr) {
 		List<Product> ketqua = new ArrayList<Product>();
+		categoryDAO = new CategoryDAO();
+		brandDAO = new BrandDAO();
+		supplierDAO = new SupplierDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT p.id, p.category_id, p.brand_id, p.supplier_id, p.title, p.price, p.discount, p.img, p.description, p.created_at, p.updated_at, p.deleted, p.gender, p.likes FROM product p INNER JOIN category on p.category_id = category.id WHERE 1=1";
@@ -222,7 +235,7 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 				ketqua.add(p);
 				
@@ -240,6 +253,9 @@ public class ProductDAO implements DAOInterface<Product> {
 	
 	public List<Product> searchByName(String key) {
 		List<Product> ketqua = new ArrayList<Product>();
+		categoryDAO = new CategoryDAO();
+		brandDAO = new BrandDAO();
+		supplierDAO = new SupplierDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` where title like ?";
@@ -261,7 +277,7 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 				ketqua.add(p);
 				
@@ -276,6 +292,9 @@ public class ProductDAO implements DAOInterface<Product> {
 
 	public List<Product> selectRelatedProductsByBrand(int bId, int pId) {
 		List<Product> ketqua = new ArrayList<Product>();
+		categoryDAO = new CategoryDAO();
+		brandDAO = new BrandDAO();
+		supplierDAO = new SupplierDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` where brand_id = ? AND id != ? LIMIT 16 ";
@@ -298,7 +317,7 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryId, brandId, supplierId, title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 				ketqua.add(p);
 				

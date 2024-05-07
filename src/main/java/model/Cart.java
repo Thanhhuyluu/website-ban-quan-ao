@@ -86,9 +86,11 @@ public class Cart {
 					String[] n = i.split(":");
 					int id = Integer.parseInt(n[0]);
 					int quantity = Integer.parseInt(n[1]);
+
 					ProductDetail productDetail = getProductDetailById(id, list);
-					Product product = ProductDAO.getInstance().selectById(productDetail.getProductId());
+					Product product = ProductDAO.getInstance().selectById(productDetail.getProduct().getId());
 					CartItem ci = new CartItem(product,productDetail, quantity, product.getPrice());
+
 					addItem(ci);
 					
 				}
