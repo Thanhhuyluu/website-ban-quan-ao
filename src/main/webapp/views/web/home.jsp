@@ -152,7 +152,7 @@
 				</div>
 
 				<h3 class="no-product-infor">Không có sản phẩm nào</h3>
-				<ul class="pagination home-product__pagination">
+				<ul class="nation home-product__pagination">
 
 					<c:set var="page" value="${requestScope.page }" />
 

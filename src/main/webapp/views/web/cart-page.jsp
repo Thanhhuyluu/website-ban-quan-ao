@@ -118,10 +118,10 @@
 												<i class="filled-heart fa-solid fa-heart"></i> <i
 													class="empty-heart fa-regular fa-heart"></i>
 											</div>
-											<div class="cart__item-product-remove-btn">
+											<a href="gio-hang?action=delete&deleteCartItemId=${productDetail.getId() }" class="cart__item-product-remove-btn">
 
 												<i class="fa-solid fa-trash"></i>
-											</div>
+											</a>
 
 											
 										</div>
@@ -129,6 +129,7 @@
 										
 										
 									</li>
+									
 									<c:if test="${ cartItem.getQuantity() > productDetail.getQuantity()}">
 										<div class="cart-item-error">
 												<h4 class="cart-item-error-text">Sản phẩm trên chỉ còn ${productDetail.getQuantity() }. Vui lòng cập nhận lại số lượng</h4>
@@ -137,11 +138,24 @@
 								</c:forEach>
 										
 
-
+				
 
 							</ul>
+							
+							<c:if test="${!cart.isEmpty( ) }">
+								<div class="cart-nav-link-wrapper">
+									<div class="cart-nav-link">
+										<a href="gio-hang?action=delete-all" class="return-to-shop-link">XÓA HẾT</a>
+									</div>
+									<div class="cart-nav-link">
+										<a href="trang-chu" class="return-to-shop-link">TIẾP TỤC MUA HÀNG</a>
+									</div>
+								</div>
+							</c:if>
+	
 						</div>
-						<div class="grid__column-3-3">
+						<c:if test="${!cart.isEmpty()}">
+							<div class="grid__column-3-3">
 							<div class="payment__container">
 								<h1 class="payment-heading">Đơn hàng</h1>
 								<div class="payment-item-infor-row">
@@ -159,8 +173,18 @@
 								<div class="payment-submit-button">Tiếp tục thanh toán</div>
 							</div>
 						</div>
+						</c:if>
 					</div>
-
+					
+					<c:if test="${cart.isEmpty()}">
+								<h1 class="cart-heading">
+									GIỎ HÀNG CỦA BẠN
+								</h1>
+								<h4 class="empty-cart-message">Bạn đang không có sản phẩm nào trong giỏ hàng!</h4>
+								<div class="cart-nav-link">
+									<a href="trang-chu" class="return-to-shop-link">TIẾP TỤC MUA HÀNG</a>
+								</div>
+					</c:if>
 
 				</div>
 			</div>
@@ -174,39 +198,7 @@
 </body>
 <script>
 			
-		/* var itemColorButtons = document.querySelectorAll('.cart-item__color-item');
-		var itemSelectedColorInput = document.getElementById('itemSelectedColor');
 		
-		var itemSizeButtons = document.querySelectorAll('.cart-item__size-item-btn');
-		var itemSelectedSizeInput = document.getElementById('itemSelectedSize');
-		
-		itemColorButtons.forEach(function(button) {
-			
-		    button.addEventListener('click', function() {
-		        if(!this.classList.contains('not-available')){
-		        	itemSelectedColorInput.value = this.value; 
-		            document.getElementById('processForm').submit(); 
-		        }
-		    });
-		});
-		
-		
-		
-		
-		itemSizeButtons.forEach(function(button) {
-			
-		    button.addEventListener('click', function() {
-		    	if(!this.classList.contains('not-available')){
-		    		itemSelectedSizeInput.value = this.value; 
-			        document.getElementById('processForm').submit(); 
-		        }
-		    });
-		});  
-
-		
-		function sizeButtonHandle(element, productDetailId){
-			if(element.classList)
-		} */
 
 </script>
 </html>

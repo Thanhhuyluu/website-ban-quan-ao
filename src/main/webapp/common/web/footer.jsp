@@ -5,7 +5,7 @@
             <div class="grid">
                 <div class="grid__row">
                     <div class="grid__column-3">
-                        <h3 class="footer__heading">Sản phẩm</h3>
+                        <h3 class="footer__heading">SẢN PHẨM</h3>
                         <ul class="footer__list">
                             <li class="footer__item">
                                 <a href="trang-chu?gender=1" class="footer__link">Nam</a>
@@ -32,7 +32,7 @@
                         </ul>
                     </div>
                     <div class="grid__column-3">
-                        <h3 class="footer__heading">Liên hệ</h3>
+                        <h3 class="footer__heading">lIÊN HỆ</h3>
                         <ul class="footer__list">
                             <li class="footer__item">
                                 <a href="#" class="footer__link">Email góp ý</a>
@@ -43,7 +43,7 @@
                         </ul>
                     </div>
                     <div class="grid__column-3">
-                        <h3 class="footer__heading">Social</h3>
+                        <h3 class="footer__heading">SOCIAL</h3>
                         <ul class="footer__list">
                             <li class="footer__item">
                                 <a href="#" class="footer__link-icon">

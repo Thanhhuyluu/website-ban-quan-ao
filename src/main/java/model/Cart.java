@@ -98,4 +98,8 @@ public class Cart {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean isEmpty() {
+		return items.size() <= 0 ? true: false;
+	}
 }

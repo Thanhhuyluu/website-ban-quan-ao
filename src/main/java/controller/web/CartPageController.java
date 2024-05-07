@@ -184,6 +184,52 @@ public class CartPageController extends HttpServlet {
 				}
 			}
 			
+		}else if(action.equals("delete")) {
+			String deleteCartItemId_raw = request.getParameter("deleteCartItemId");
+			List<ProductDetail> productDetailList = ProductDetailDAO.getInstance().selectAll();
+			Cookie[] cookies = request.getCookies();
+			String txt = "";
+			if (cookies != null) {
+				for (Cookie c : cookies) {
+					if (c.getName().equals("cart")) {
+						txt += c.getValue();
+						response.addCookie(c);
+					}
+				}
+			}
+			Cart cart = new Cart(txt, productDetailList);
+			try {
+				
+				if(deleteCartItemId_raw != null || !deleteCartItemId_raw.isEmpty()) {
+					int deleteCartItemId = Integer.parseInt(deleteCartItemId_raw);
+					cart.removeItems(deleteCartItemId);
+					txt = cartToCookieTxt(cart);
+					Cookie cookie = new Cookie("cart", txt);
+					cookie.setMaxAge(60*60*24*30*6);
+					response.addCookie(cookie);
+					request.setAttribute("cart",cart);
+					request.getRequestDispatcher("/views/web/cart-page.jsp").forward(request, response);
+					
+				}
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}else if(action.equals("delete-all")) {
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie c : cookies) {
+					if (c.getName().equals("cart")) {
+						c.setValue("");
+						response.addCookie(c);
+						
+					}
+				}
+			}
+			Cart cart = new Cart();
+
+			request.setAttribute("cart",cart);
+			request.getRequestDispatcher("/views/web/cart-page.jsp").forward(request, response);
+			
 		}
 	}
 

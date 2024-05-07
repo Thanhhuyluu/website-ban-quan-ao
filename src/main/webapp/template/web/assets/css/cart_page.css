@@ -417,6 +417,9 @@
     cursor: pointer;
     color: #fff;
 }
+.cart__item-product-remove-btn{
+	text-decoration: none;
+}
 .filled-heart{
     color: rgb(223, 78, 78);
 }
@@ -487,7 +490,7 @@
 .payment-submit-button{
     padding: 20px;
     text-align: center;
-    background-color: #526971;
+    background-color: #e1532b;
     font-size: 2.2rem;
     color: #fff;
     font-weight: 500;
@@ -498,4 +501,57 @@
 .payment-submit-button:hover{
     
     background-color: #324f5a;
+}
+
+
+.cart-heading{
+	display: flex;
+	padding-bottom: 50px;
+	border-bottom: 3px solid var(--text-color);
+	justify-content: center;
+	font-size: 2.8rem;
+	
+}
+.empty-cart-message{
+	font-size: 1.8rem;
+	font-weight: 400;
+	text-align: center;
+	color: #808080;
+	padding: 50px 0;
+}
+
+
+
+.cart-nav-link-wrapper{
+	display:flex;
+	justify-content: space-between;
+	
+	margin-top: 100px;
+	border-top: 3px solid var(--text-color);
+	padding-top: 40px;
+}
+
+.cart-heading ~.cart-nav-link{
+	margin-bottom: 100px;
+}
+.cart-nav-link{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+.return-to-shop-link{
+	color: white;
+	text-decoration: none;
+	font-size: 1.8rem;
+	display: inline-block;
+	text-align: center;
+	background-color: black;
+	margin: auto;
+	font-weight: 500;
+	
+	padding: 15px 20px;
+	transition: opacity ease-in 0.2s;
+}
+.return-to-shop-link:hover{
+	opacity: 0.7;
 }
