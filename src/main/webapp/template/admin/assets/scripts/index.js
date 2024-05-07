@@ -69,4 +69,5 @@ const down = document.querySelector('.icon-down')
 header_right_user.addEventListener('click', function(){
   user_menu.classList.toggle('open')
   down.classList.toggle('down')
+	console.log('oke');
 })

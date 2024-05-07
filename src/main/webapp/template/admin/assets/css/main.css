@@ -184,6 +184,7 @@ body{
     padding: 0;
     list-style: none;
     display: none;
+    
 
 }
 .user-menu::before{
@@ -194,12 +195,13 @@ body{
     /* background-color: red; */
     height: 12px;
     
+    
 }
 .user-item{
     font-size: 13px;
-    padding: 8px;
     cursor: pointer;
-    padding-left: 16px ;
+    padding: 0;
+    margin: 0;
 }
 .user-item:hover a,
 .user-item:hover{
@@ -208,7 +210,10 @@ body{
 }
 .user-item-link{
     text-decoration: none;
-    color: white;   
+    color: white;  
+    display: block;
+    padding: 8px; 
+    padding-left: 16px;
 }
 /* container body */
 .container-body{

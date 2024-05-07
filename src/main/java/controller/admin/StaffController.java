@@ -100,7 +100,7 @@ public class StaffController extends HttpServlet{
         String phoneNumber = request.getParameter("phoneNumber");
         String address = request.getParameter("address");
         String password = "12341234";
-        int status = 0; 
+        int status = SystemConstant.USER_NORMAL; 
         int role = SystemConstant.STAFF;
          
         User newStaff = new User(name, enail, phoneNumber, address, password, new Date(System.currentTimeMillis()), null, status, role);

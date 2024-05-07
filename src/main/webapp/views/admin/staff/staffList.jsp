@@ -35,12 +35,12 @@
                    		<c:choose>
                             <c:when test="${staff.status == 0}">
                                  <a class="active-link" href="/Online_Shop/admin-staff-band?id=<c:out value='${staff.id}' />" >
-		                           	<i class="fa-solid fa-lock"></i>
+		                           	<i class="fa-solid fa-unlock"></i>
 		                        </a>
                             </c:when>    
                             <c:otherwise>
                                <a class="active-link" href="/Online_Shop/admin-staff-band?id=<c:out value='${staff.id}' />" >
-		                           	<i class="fa-solid fa-unlock"></i>
+		                           	<i class="fa-solid fa-lock"></i>
 		                        </a>
                             </c:otherwise>    
                         </c:choose>  
@@ -59,4 +59,5 @@
           </table>
       </div>
   </div>
+
 </div>   

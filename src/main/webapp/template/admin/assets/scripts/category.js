@@ -63,11 +63,3 @@ sidebarToggler.addEventListener('click', function(){
     container.classList.toggle('open')
 });
 
-// user menu down
-const header_right_user = document.querySelector('.header__right-user')
-const user_menu = document.querySelector('.user-menu')
-const down = document.querySelector('.icon-down')
-header_right_user.addEventListener('click', function(){
-  user_menu.classList.toggle('open')
-  down.classList.toggle('down')
-})
