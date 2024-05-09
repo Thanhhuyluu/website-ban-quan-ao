@@ -3,6 +3,7 @@
 <%@ include file="/common/taglib.jsp" %>
 	<c:set var="gender" value = "${requestScope.gender }"/>
     <c:set var="genderString" value = "gender=${requestScope.gender}&"/>
+    <c:set var="cart" value = "${requestScope.cart }"/>
 <header class="header">
 			
             <div class="header__navbar-cover">
@@ -47,6 +48,7 @@
                                 <a href="gio-hang?action=show" class="header__navbar-item--link">
                                     <i class="fa-solid fa-cart-shopping header__navbar-icon"></i>
                                     Giỏ hàng
+                                    <c:if test="${cart != null }">(${cart.getCartSize() })</c:if>
                                 </a>
                                 
                             </li>
@@ -257,5 +259,6 @@
                     </div>
                 </div>
             </div>
+            
         </header>
         

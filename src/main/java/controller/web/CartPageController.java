@@ -65,8 +65,11 @@ public class CartPageController extends HttpServlet {
 			}
 
 			Cookie c = new Cookie("cart", txt);
+			
 			c.setMaxAge(60 * 60 * 24 * 30 * 6);
 			response.addCookie(c);
+			//lấy cart để hiển thị số lượng trên header
+			Cart.setCartAttribute(request, response,c);
 			request.setAttribute("proId", String.valueOf(productId));
 			request.getRequestDispatcher("/chi-tiet-san-pham").forward(request, response);
 		}

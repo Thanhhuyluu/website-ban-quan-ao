@@ -3,7 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import dao.ProductDAO;
+import dao.ProductDetailDAO;
 
 public class Cart {
 	private List<CartItem> items;
@@ -103,5 +108,35 @@ public class Cart {
 	
 	public boolean isEmpty() {
 		return items.size() <= 0 ? true: false;
+	}
+	
+
+	public static void setCartAttribute(HttpServletRequest request, HttpServletResponse response, Cookie cookie) {
+		List<ProductDetail> productDetailList = ProductDetailDAO.getInstance().selectAll();
+		Cookie[] cookies = request.getCookies();
+		
+		String txt = "";
+		if ( cookie== null) {
+			if(cookies != null ) {
+				for (Cookie c : cookies) {
+					if (c.getName().equals("cart")) {
+						txt += c.getValue();
+						
+					}
+				}
+			}
+			
+		}else {
+			txt+= cookie.getValue();
+		}
+		Cart cart = new Cart(txt, productDetailList);
+		request.setAttribute("cart", cart);
+	}
+	public int getCartSize() {
+		int size = 0;
+		for(CartItem ci: items) {
+			size += ci.getQuantity();
+		}
+		return size;
 	}
 }
