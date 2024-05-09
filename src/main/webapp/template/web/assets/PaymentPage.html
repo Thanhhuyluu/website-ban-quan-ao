@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/payment_page.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome-free-6.5.2-web/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css">
+    <title>cart page</title>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="header__navbar-cover">
+                <div class="grid">
+                    <nav class="header__navbar">
+                        <ul class="header__navbar-list">
+                            <li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
+                                <a href="" class="header__navbar-item--link">
+                                    <i class="fa-solid fa-user header__navbar-icon"></i>
+                                    Đăng nhập
+                                </a>
+                                
+                            
+                            </li>
+                            <li class="header__navbar-item header__navbar-item--strong">
+                                <a href="" class="header__navbar-item--link">
+                                    <i class="fa-solid fa-cart-shopping header__navbar-icon"></i>
+                                    Giỏ hàng
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="header-with-search">
+                <div class="header-logo">
+                    <img class="header-logo-img" src="./assets/imgs/high-logo-D022924D47-seeklogo.com.png" alt="">
+                </div>
+                <div class="header-categories">
+                    <ul class="header-cate-list">
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">SẢN PHẨM
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                            <div class="header-cate-dropbox">
+                                <div class="grid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-3">
+                                            <a href="#" class="header-cate-dropbox-with-img">
+                                                <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/nam.jpg');">
+                                                    <div class="cate-dropbox-img-blur"></div>
+                                                </div>
+                                                
+                                                <h2 class="cate-dropbox-heading">Nam</h2>
+                                            </a>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <a href="#" class="header-cate-dropbox-with-img">
+                                                <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/nu.jpg');">
+                                                    <div class="cate-dropbox-img-blur"></div>
+                                                </div>
+                                                
+                                                <h2 class="cate-dropbox-heading">Nữ</h2>
+                                            </a>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <a href="#" class="header-cate-dropbox-with-img">
+                                                <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/phukien.jpg');">
+                                                    <div class="cate-dropbox-img-blur"></div>
+                                                </div>
+                                                
+                                                <h2 class="cate-dropbox-heading">Phụ kiện</h2>
+                                            </a>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <a href="#" class="header-cate-dropbox-with-img">
+                                                <div class="cate-dropbox-img" style="background-image: url('./assets/imgs/saleoff.jpg');">
+                                                    <div class="cate-dropbox-img-blur"></div>
+                                                </div>
+                                                
+                                                <h2 class="cate-dropbox-heading">SaleOff</h2>
+                                            </a>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">NAM
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                            <div class="header-cate-dropbox">
+                                <div class="grid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">NỮ
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                            <div class="header-cate-dropbox">
+                                <div class="grid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header-cate-item">
+                            <a href="" class="header-cate-link">SALEOFF
+                                <i class="header-cate-icon fa-solid fa-chevron-down"></i>
+                            </a>
+                            <div class="header-cate-dropbox">
+                                <div class="grid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nổi bật</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="grid__column-3">
+                                            <ul class="header-cate-dropbox-list">
+                                                <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Best Seller</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                                <li class="header-cate-dropbox-item">
+                                                    <a href="#" class="header-cate-dropbox-link">Áo dài tay</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                </div>
+                <div class="header-search">
+                    <div class="header-search-input-wrap">
+                        <input type="text" class="header-search-input" placeholder="Tìm kiếm">
+                            
+                        
+                        <!-- search history -->
+
+
+                        <div class="header-search-history">
+                            <h3 class="header-search-history-heading">Lịch sử tìm kiếm</h3>
+                            <ul class="header-search-history-list">
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                                <li class="header-search-history-item">
+                                    <a href="" class="header-search-history-item-link">Áo khoác chống nắng</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="header-search-btn"><i class="header-search-btn-icon fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <div class="header-slider">
+                <div class="header-slider-inner">
+                    <div class="header-slider-btn header-slider-btn-left">
+                        <i class="header-slider-icon fa-solid fa-chevron-left"></i>
+                    </div>
+                    <div class="header-slider-list-wrap">
+                        <div class="header-slider-list">
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 10 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 9 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 8 ngày</h4></div>
+                            <div class="header-slider-item"><h4 class="header-slider-item-content">Hoàn trả 100% trước 7 ngày</h4></div>
+                        </div>
+                    </div>
+                    
+                    <div class="header-slider-btn header-slider-btn-right">
+                        <i class="header-slider-icon fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="app__container">
+            <div class="main__payment-area">
+                <div class="grid">
+                    <form  class="grid__row">
+                       
+
+                            <div class="grid__column-6-6">
+                                <h1 class="payment-page__heading">Thông tin giao hàng</h1>
+                                <div class="payment-page__infor">
+                                    <div class="payment-page__infor-input-group">
+                                        <input type="text" class="payment-page__infor-input" placeholder="HỌ TÊN">
+                                    </div>
+                                    <div class="payment-page__infor-input-group">
+                                        <input type="text" class="payment-page__infor-input" placeholder="Số điện thoại">
+                                    </div>
+                                    <div class="payment-page__infor-input-group">
+                                        <input type="text" class="payment-page__infor-input" placeholder="Email">
+                                    </div>
+                                    <div class="payment-page__infor-input-group">
+                                        <input type="text" class="payment-page__infor-input" placeholder="Địa chỉ">
+                                    </div>
+                                    <div class="payment-page__infor-input-group">
+                                        <input type="text" class="payment-page__infor-input" placeholder="Tỉnh / Thành phố">
+                                    </div>
+                                    <div class="payment-page__infor-input-group">
+                                        <input type="text" class="payment-page__infor-input" placeholder="Quận / Huyện">
+                                        <input type="text" class="payment-page__infor-input" placeholder="Phường / Xã">
+                                    </div>
+                                    <div class="payment-page__infor-input-group">
+                                        <input type="text" class="payment-page__infor-input" placeholder="Lưu ý">
+                                    </div>
+                                    
+                                   
+                                </div>
+                            </div>
+                            <div class="grid__column-3-3">
+                               <div class="payment-page__payment-infor">
+
+                                    <h1 class="payment-page__payment-infor-heading">Đơn hàng</h1>
+                                    
+                                    <div class="payment-page__product-list">
+                                        <div class="payment-page__product-item">
+                                            <div class="payment-page__row">
+    
+                                                <h3 class="payment-page__product-item-title payment-page-bold">Áo lennin chất liệu cực mát</h3>
+    
+                                                <p class="payment-page__product-item-price payment-page-normal">230.000 vnđ</p>
+                                                
+                                            </div>
+                                            <div class="payment-page__row">
+    
+                                                <p class="payment-page__product-item-size">Size: M</h3>
+    
+                                                <p class="payment-page__product-item-quantity">x 3</p>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="payment-page__product-item">
+                                            <div class="payment-page__row">
+    
+                                                <h3 class="payment-page__product-item-title">Áo lennin chất liệu cực mát</h3>
+    
+                                                <p class="payment-page__product-item-price">230.000 vnđ</p>
+                                                
+                                            </div>
+                                            <div class="payment-page__row">
+    
+                                                <p class="payment-page__product-item-size">Size: M</h3>
+    
+                                                <p class="payment-page__product-item-quantity">x 3</p>
+                                                
+                                            </div>
+                                        </div>
+    
+                                       
+
+                                    </div>
+                                    <div class="payment-page__price">
+                                        <div class="payment-page__total-price-item">
+                                            <div class="payment-page__row">
+                                                <h3 class="payment-page-bold">
+                                                    Đơn hàng
+                                                </h3>
+                                                <h3 class="payment-page-bold">
+                                                    2.500.000 vnđ
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="payment-page__total-price-item">
+                                            <div class="payment-page__row">
+                                                <h3 class="payment-page-bold">
+                                                    Giảm
+                                                </h3>
+                                                <h3 class="payment-page-normal">
+                                                    0 vnđ
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="payment-page__total-price">
+                                        <div class="payment-page__row">
+                                            <h3 class="payment-page__total-price-heading">Tổng cộng</h3>
+                                            <h3 class="payment-page__total-price-value">2.300.000 vnđ</h3>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="payment-page__btn-submit">Hoàn tất đặt hàng</button>
+                               </div>
+                            </div>
+
+                    </form>
+    
+    
+                </div>
+            </div>
+            
+        </div>
+        <div class="footer">
+                
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Sản phẩm</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Nam</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Nữ</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Saleoff</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Hỗ trợ</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Bảo mật thông tin</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Chính sách chung</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Liên hệ</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Email góp ý</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link">Hotline: 0388074177</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid__column-3">
+                        <h3 class="footer__heading">Social</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a href="#" class="footer__link-icon">
+                                    <i class="footer__icon fa-brands fa-square-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="#" class="footer__link-icon">
+                                    <i class="footer__icon fa-brands fa-square-instagram"></i>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="./scripts/cart_page.js"></script>
+</html>
