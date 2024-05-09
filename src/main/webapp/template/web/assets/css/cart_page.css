@@ -10,6 +10,13 @@
     margin-bottom: 30px;
 }
 .payment__container{
+<<<<<<< HEAD
+    background-color: #b5a7a7;
+    height: 300px;
+}
+
+
+=======
     background-color: #e2e2e2;
     height: 300px;
     position: relative;
@@ -18,6 +25,7 @@
 
 
 
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
 .cart__item{
     display: flex;
     justify-content: space-between;
@@ -75,11 +83,16 @@
 
 
 .cart__item-product-old-price{
+<<<<<<< HEAD
+    font-size: 1.4rem;
+    display: block;
+=======
 	margin-top: 4px;
     font-size: 1.6rem;
     display: block;
     color: var(--text-color);
     text-decoration: line-through;
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
 }
 
 .cart__item-product-current-price{
@@ -90,6 +103,13 @@
 
 
 
+<<<<<<< HEAD
+.product__size{
+    width: 50%;    
+}
+.product__count-title,
+.product__size-title {
+=======
 .cart-item__color{
 	height: 60px;
     display: flex  ;
@@ -146,14 +166,22 @@
 }
 .cart-item__count-title,
 .cart-item__size-title {
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     font-size: 1.4rem;
     color: #000;
     margin: 10px 0;
 }
+<<<<<<< HEAD
+.product__size-group{
+    position: relative;
+}
+.product__list-size{
+=======
 .cart-item__size-group{
     position: relative;
 }
 .cart-item__list-size{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     margin: 0;
     width: 100%;
     right: 0;
@@ -168,14 +196,22 @@
     display: flex;
     justify-content: space-around;
 }
+<<<<<<< HEAD
+.product__item-size{
+=======
 .cart-item__item-size{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     text-align: center;
     min-width: 40px;
     padding: 8px 8px;
     border: 1px solid #ccc ;
     cursor: pointer;
 }
+<<<<<<< HEAD
+.product__item-size.select-size{
+=======
 .cart__item-size.select-size{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     border: 2px solid var(--text-color);
 }
 
@@ -183,9 +219,14 @@
 
 
 
+<<<<<<< HEAD
+.product__size-btn{
+    border: 1px solid #ccc;
+=======
 .cart-item__size-btn{
     
     border: 1px solid var(--text-color);
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     height: 36px;
     width: 100%;
     background-color: #fff;
@@ -194,6 +235,14 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
+<<<<<<< HEAD
+    
+
+}
+
+
+.product__size-current{
+=======
 
 }
 
@@ -203,12 +252,17 @@
 	padding-right:5px;
 }
 .cart-item__size-current{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     font-size: 1.6rem;
     font-weight: 500;
     margin-left: 10px;
 }
 
+<<<<<<< HEAD
+.product__select-container{
+=======
 .cart-item__select-container{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     position: absolute;
     top: 100%;
     left: 0;
@@ -224,17 +278,29 @@
 
 }
 
+<<<<<<< HEAD
+.product__select-container.active{
+=======
 .cart-item__select-container.active{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     display: block;
 }
 
 
+<<<<<<< HEAD
+.product__select-row{
+=======
 .cart-item__select-row{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     display: flex;
     flex-wrap: wrap;
     margin: 6px;
 }
+<<<<<<< HEAD
+.product__select__column-3{
+=======
 .cart-item__select__column-3{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     padding: 2px;
     width: 25%;
     flex: 0 0 25%; /* Sử dụng flex-basis để đảm bảo kích thước cố định của các cột */
@@ -242,13 +308,27 @@
 }
 
 
+<<<<<<< HEAD
+.product__size-item-btn{
+=======
 .cart-item__size-item-btn{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     width: 100%;
     height: 40px;
     outline: none;
     border: 1px solid #ccc;
     font-size: 1.4rem;
     font-weight: 400;
+<<<<<<< HEAD
+}
+.product__size-item-btn.selected-size{
+    border: 2px solid var(--text-color);
+}
+
+
+
+.product__size-input{
+=======
     position: relative;
     cursor: pointer;
 	
@@ -297,13 +377,18 @@
 
 
 .cart-item__size-input{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     border: 1px solid #ccc;
     height: 36px;
     width: 100%; 
     cursor: pointer;
     background-color: #fff;
 }
+<<<<<<< HEAD
+.product__size-icon{
+=======
 .cart-item__size-icon{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     display: inline-block;
     font-size: 1.4rem;
     margin: 4px;
@@ -312,12 +397,20 @@
 
 
 
+<<<<<<< HEAD
+.product__count{
+=======
 .cart-item__count{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     width: 50%;
     padding-left: 10px;
 }
 
+<<<<<<< HEAD
+.product-count-container{
+=======
 .cart-item-count-container{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     border: 1px solid #ccc;
     height: 36px;
     width: 100%;
@@ -327,21 +420,36 @@
     align-items: center;
 }
 
+<<<<<<< HEAD
+.product__count-input{
+=======
 .cart-item__count-input{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     border: 1px solid var(--text-color);
     height: 36px;
     width: 100%;
     background-color: #fff;
 }
+<<<<<<< HEAD
+.product__count-input{
+    cursor: pointer;
+}
+.product__add-cart{
+=======
 .cart-item__count-input{
     cursor: pointer;
 }
 .cart-item__add-cart{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     margin-top: 20px;
     display: flex;
 }
 
+<<<<<<< HEAD
+.product-count-btn{
+=======
 .cart-item-count-btn{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     height: 100%;
     min-width:  35px;
     display: flex;
@@ -352,6 +460,9 @@
     background-color: rgba(0,0,0,0.2);
 }
 
+<<<<<<< HEAD
+.product-count-input{
+=======
 .cart-item-count-btn-link{
 	text-decoration: none;
 	color: var(--text-color);
@@ -364,6 +475,7 @@
 }
 
 .cart-item-count-input{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     height: 100%;
     width: 100%;
     outline: none;
@@ -373,7 +485,11 @@
     text-align: center;
 }
 
+<<<<<<< HEAD
+.product-current-quantity-wrapper{
+=======
 .cart-item-current-quantity-wrapper{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     font-size: 1.4rem;
     font-weight: 400;
     display: block;
@@ -396,11 +512,19 @@
 .cart__item-product-main-price{
     color: rgb(214, 71, 71);
     font-size: 2.2rem;
+<<<<<<< HEAD
+    margin: 0;
+=======
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     margin-top: 18px;
 }
 
 .cart__item-product-quantity-status{
+<<<<<<< HEAD
+    font-size: 1.8rem;
+=======
     font-size: 2rem;
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     font-weight: 500;
     color: rgb(199, 134, 14);
 }
@@ -417,9 +541,12 @@
     cursor: pointer;
     color: #fff;
 }
+<<<<<<< HEAD
+=======
 .cart__item-product-remove-btn{
 	text-decoration: none;
 }
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
 .filled-heart{
     color: rgb(223, 78, 78);
 }
@@ -442,10 +569,16 @@
 .payment__container{
     padding: 30px;
     height: 450px;
+<<<<<<< HEAD
+}
+
+.paymet-item-infor-row{
+=======
     margin-left: 15px;
 }
 
 .payment-item-infor-row{
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -457,6 +590,14 @@
 .payment-heading{
     font-size: 3rem;
     color: var(--text-color);
+<<<<<<< HEAD
+    margin-bottom: 30px;
+}
+
+.paymet-item-infor-row:last-child {
+    font-size: 2.2rem;
+    color: var(--text-color);
+=======
     margin-bottom: 10px;
     position: relative;
     padding-bottom: 30px;
@@ -473,6 +614,7 @@
 .paymet-item-infor-row:last-child {
     font-size: 2.2rem;
     color: #808080;
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
 }
 
 .paymet-item-infor-row::after{
@@ -490,7 +632,11 @@
 .payment-submit-button{
     padding: 20px;
     text-align: center;
+<<<<<<< HEAD
+    background-color: #526971;
+=======
     background-color: #e1532b;
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
     font-size: 2.2rem;
     color: #fff;
     font-weight: 500;
@@ -501,6 +647,8 @@
 .payment-submit-button:hover{
     
     background-color: #324f5a;
+<<<<<<< HEAD
+=======
 }
 
 
@@ -554,4 +702,5 @@
 }
 .return-to-shop-link:hover{
 	opacity: 0.7;
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
 }

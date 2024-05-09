@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+const productSizeBtns  = document.querySelectorAll('.product__size-btn');
+
+
+
+productSizeBtns.forEach(element => {
+    element.addEventListener('click',()=>{
+        var sizeContainer = element.querySelector('.product__select-container');
+=======
 const CartItemSizeBtns  = document.querySelectorAll('.cart-item__size-btn');
 
 
@@ -5,10 +14,14 @@ const CartItemSizeBtns  = document.querySelectorAll('.cart-item__size-btn');
 CartItemSizeBtns.forEach(element => {
     element.addEventListener('click',()=>{
         var sizeContainer = element.querySelector('.cart-item__select-container');
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508
         sizeContainer.classList.toggle('active');
     })
 
     
+<<<<<<< HEAD
+});
+=======
 });
 
 
@@ -58,3 +71,4 @@ CartItemSizeBtns.forEach(element => {
             cartItemCountInput.value = parseInt(cartItemCurrentQuantity);
         }
     });
+>>>>>>> 931742ee15a3d12d6c975474353137e7e4595508

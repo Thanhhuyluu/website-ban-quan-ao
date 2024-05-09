@@ -246,6 +246,7 @@
     border: 1px solid var(--text-color);
     border-style: double;
     display: none;
+    product__select-container
 
 }
 
