@@ -10,7 +10,17 @@
 <title>High</title>
 </head>
 <body>
-
+	<c:set var="productDetail" value="${requestScope.productDetail }" />
+	<c:set var="formattedPrice" value="${requestScope.formattedPrice }" />
+	<c:set var="relatedProducts" value="${requestScope.relatedProducts }" />
+	<c:set var="availableSizes" value="${requestScope.availableSizes }" />
+	<c:set var="product" value="${requestScope.product }"/>
+	<c:set var="imgList" value="${requestScope.imgList }"  />
+	<c:set var="colorList" value="${requestScope.colorList }"/>
+	<c:set var="selectedColor" value="${requestScope.selectedColor }"  />
+	<c:set var="selectedSize" value="${requestScope.selectedSize }"  />
+	<c:set var="productCurrentQuantity" value="${requestScope.productCurrentQuantity }"  />
+	<c:set var="colorMap" value="${requestScope.colorMap }"/>
 	<div class="grid">
 		<div class="app__heading">
 			<ul class="app__heading-list">
@@ -23,7 +33,7 @@
 			<div class="grid__row">
 				<div class="grid__column-7">
 					<div class="product-item-img"
-						style="background-image: url(<c:url value='/template/web/assets/imgs/quan1.png'/>);"></div>
+						style="background-image: url(<c:url value='/template/web/assets/imgs/${product.getImg() }'/>);"></div>
 
 					<div class="product-item-imgs-container">
 						<div class="product-item-imgs-btn-wrap">
@@ -31,21 +41,21 @@
 								class="product-item-imgs-btn product-item-imgs-btn-left fa-solid fa-chevron-left"></i>
 						</div>
 						<div class="product-item-imgs-list">
+						
+						
 							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
+								style="background-image: url(<c:url value="/template/web/assets//imgs/${product.getImg() }"/>);"></div>
+							
+							<c:forEach items="${imgList}" var="img">
+							
+							
+							
 							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/leninn_gangster_tee.png"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/lemia-00072a-8a2rOV_800x800.jpg"/>);"></div>
-
+								style="background-image: url(<c:url value="/template/web/assets//imgs/${img.getImg() }"/>);"></div>
+							
+							
+							</c:forEach>
+						
 						</div>
 
 						<div class="product-item-imgs-btn-wrap">
@@ -55,18 +65,44 @@
 
 					</div>
 				</div>
-				<form class="grid__column-5">
-					<h4 class="product__heading-title">Áo thun Lenin hoạ tiết bắt
-						mắt</h4>
+				
+				<div id = "san-pham-form" class="grid__column-5">
+					
+					<h4 class="product__heading-title">${product.getTitle() }</h4>
 					<h6 class="product__detail">
 						Mã sản phẩm: <strong>AV00207</strong>
 					</h6>
-					<h5 class="product__price">620.000 VND</h5>
+					<h5 class="product__price">${formattedPrice} vnđ</h5>
 					<div class="product__divider"></div>
 					<div class="product__color">
-						<div class="product__color-item product__color-1"></div>
-						<div class="product__color-item product__color-2"></div>
-						<div class="product__color-item product__color-3"></div>
+					
+						 <c:if test="${ colorMap != null}">
+							
+							<c:forEach items="${colorMap }" var="entry" >
+							
+								<c:set var="color" value="${entry.key}" />
+    							<c:set var="isAvailable" value="${entry.value}" />
+    							
+    							<input  value="${color}" type="button" class="product__color-item  ${color == selectedColor? "selected-color":"" } ${isAvailable == true ?"" : "not-available" }" style="background-color:#${color}; color : #${color }; ${isAvailable == true ?"" : "cursor:not-allowed; "} " />
+    							
+							</c:forEach>
+						
+						</c:if> 
+					
+						<!--
+						
+						FORM GỬI MÀU ĐÃ CHỌN
+						
+						  -->
+						
+						<form id="colorSenderForm" action="chi-tiet-san-pham" method="get">
+							<input id="selectedColor" name="selectedColor" type="hidden" value=""/>
+							<input id="selectedSize" name="selectedSize" type="hidden" value=""/>
+							<input value="${product.getId() }" name="proId" type="hidden"/>
+						</form>
+						
+						
+                        
 					</div>
 					<div class="product__divider"></div>
 
@@ -74,28 +110,24 @@
 						<div class="product__size">
 							<h5 class="product__size-title">SIZE</h5>
 							<div class="product__size-btn product__select-btn">
-								<span class="product__size-current">M</span> <i
+								<span class="product__size-current">${selectedSize }</span> <i
 									class="product__size-icon fa-solid fa-chevron-down"></i>
 								<div class="product__select-container">
 									<div class="product__select-row">
+									
+									
+									
+									
+									<c:forEach items = "${availableSizes }" var="size">
+									
 										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
+											<input type="button" class="product__size-item-btn ${size == selectedSize? "selected-size":"" }" value="${size}" >
 										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
-										<div class="product__select__column-3">
-											<input type="button" class="product__size-item-btn" value="M">
-										</div>
+										
+									</c:forEach>
+									
+									
+									
 									</div>
 								</div>
 							</div>
@@ -111,19 +143,24 @@
 
 							</div>
 							<span class="product-current-quantity-wrapper">Hiện còn <span
-								class="product-current-quantity">3</span> sản phẩm trong kho
+								class="product-current-quantity">${productCurrentQuantity }</span> sản phẩm trong kho
 							</span>
 						</div>
 
 					</div>
-					<div class="product__select"></div>
-					<div class="product__add-cart">
-						<button class="product__add-cart-btn">THÊM VÀO GIỎ HÀNG</button>
+					<div action="gio-hang" class="product__select"></div>
+					<form id="add-to-cart-form" class="product__add-cart">
+						<button class="product__add-cart-btn" onclick="addToCart()">THÊM VÀO GIỎ HÀNG</button>
+						<input id="add-cart-action" type="hidden" name="action" value="add"/>
+						<input id="productDetail-id" type="hidden" name="productDetailId" value="${productDetail.getId() }"/>
+						<input id="buy-quantity" type="hidden" name="buyQuantity" value=""/>
+						
+						
 						<div class="product__cart-icon-heart">
 							<i class="icon-heart-empty fa-solid fa-heart active-hearted"></i>
 							<i class="icon-heart-full fa-solid fa-heart"></i>
 						</div>
-					</div>
+					</form>
 					<div class="product__payment">THANH TOÁN</div>
 					<div class="panel-group">
 						<div class="panel-item ">
@@ -133,12 +170,19 @@
 							</div>
 							<div class="product__divider "></div>
 							<div class="panel-item__sub js-panel-item__sub ">
-								<div class="panel-item__sub-text">Gender: Unisex</div>
-								<div class="panel-item__sub-text">Size run: 35 – 46</div>
-								<div class="panel-item__sub-text">Upper: Canvas</div>
-								<div class="panel-item__sub-text">Outsole: Rubber</div>
+								
+							
+								<div class="panel-item__sub-text">Giới tính: 
+								
+									<c:if test="${product.getGender() == 1 }">Nam</c:if>
+									<c:if test="${product.getGender() == 2 }">Nữ</c:if>
+									<c:if test="${product.getGender() == 3 }">Nam/Nữ</c:if>
+									
+								</div>
+								<div class="panel-item__sub-text">Mô tả: ${product.getDescription() }</div>
+								
 								<div class="panel-item__sub-img"
-									style="background-image: url(/assets/imgs/Ananas_SizeChart.jpg);"></div>
+									style="background-image: url(<c:url value = "/template/web/assets/imgs/chon-size.png"/>);"></div>
 							</div>
 						</div>
 						<div class="panel-item">
@@ -159,7 +203,7 @@
 											buộc phải còn nguyên tem, hộp, nhãn mác.</li>
 										<li class="panel-text">Sản phẩm đổi không có dấu hiệu đã
 											qua sử dụng, không giặt tẩy, bám bẩn, biến dạng.</li>
-										<li class="panel-text">Ananas chỉ ưu tiên hỗ trợ đổi
+										<li class="panel-text">High chỉ ưu tiên hỗ trợ đổi
 											size. Trong trường hợp sản phẩm hết size cần đổi, bạn có thể
 											đổi sang 01 sản phẩm khác: - Nếu sản phẩm muốn đổi ngang giá
 											trị hoặc có giá trị cao hơn, bạn sẽ cần bù khoảng chênh lệch
@@ -174,32 +218,10 @@
 								</h6>
 							</div>
 						</div>
-						<div class="panel-item">
-							<div class="panel-item__heading js-panel-guarantee">
-								BẢO HÀNH THẾ NÀO <i
-									class="product__size-icon fa-solid fa-chevron-down"></i>
-							</div>
-							<div class="product__divider"></div>
-							<div class="panel-item__sub js-guarantee-sub">
-								<h6>
-									<p class="guarantee-text">Mỗi đôi giày Ananas trước khi
-										xuất xưởng đều trải qua nhiều khâu kiểm tra. Tuy vậy, trong
-										quá trình sử dụng, nếu nhận thấy các lỗi: gãy đế, hở đế, đứt
-										chỉ may,...trong thời gian 6 tháng từ ngày mua hàng, mong bạn
-										sớm gửi sản phẩm về Ananas nhằm giúp chúng tôi có cơ hội phục
-										vụ bạn tốt hơn. Vui lòng gửi sản phẩm về bất kỳ cửa hàng
-										Ananas nào, hoặc gửi đến trung tâm bảo hành Ananas ngay trong
-										trung tâm TP.HCM trong giờ hành chính:</p>
-									<p class="guarantee-text">
-										Địa chỉ: 5C Tân Cảng, P.25, Q.Bình Thạnh , TP. Hồ Chí Minh. <br>
-										Hotline: 028 2211 0067
-									</p>
-								</h6>
-							</div>
-						</div>
+						
 					</div>
-				</form>
-			</div>
+				</div>
+				</div>
 		</div>
 
 
@@ -215,12 +237,14 @@
 					<div class="container__footer-parents">
 						<div class="container__footer-slider">
 							<div class="container__footer-list-item">
+							
+							<c:forEach items="${relatedProducts }" var="pro">
 								<div class="grid__column-3">
 									<div class="product-item">
 										<div class="product-item__img"
-											style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
+											style="background-image: url(<c:url value="/template/web/assets/imgs/${pro.getImg()}"/>);">
 											<div class="product-item-action">
-												<a href="" class="product-item-buy__btn-link">
+												<a href="chi-tiet-san-pham?proId=${pro.getId() }" class="product-item-buy__btn-link">
 													<div class="product-item-buy__btn">Mua ngay</div>
 												</a>
 												<div
@@ -230,170 +254,18 @@
 												</div>
 											</div>
 										</div>
-										<h4 class="product-item__name">Áo lenin họa tiết bắt mắt
-											nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành
-											tinh cũng không sao sánh bằng được</h4>
-										<span class="product-item__price-old">255.000vnđ</span> <span
-											class="product-item__price-current">100.000vnđ</span>
+										<h4 class="product-item__name">${pro.getTitle() }</h4>
+										<c:set var="price" value="${pro.getPrice()}" />
+										<c:set var="discount" value="${pro.getDiscount()}" />
+										<span class="product-item__price-old">${price } vnđ</span>
+										<span
+											class="product-item__price-current">${price - (price * discount / 100)}vnđ</span>
 									</div>
 								</div>
-								<div class="grid__column-3">
-									<div class="product-item">
-										<div class="product-item__img"
-											style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
-											<div class="product-item-action">
-												<a href="" class="product-item-buy__btn-link">
-													<div class="product-item-buy__btn">Mua ngay</div>
-												</a>
-												<div
-													class="product-item-like__btn product-item-like__btn--liked">
-													<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-													<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
-												</div>
-											</div>
-										</div>
-										<h4 class="product-item__name">Áo lenin họa tiết bắt mắt
-											nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành
-											tinh cũng không sao sánh bằng được</h4>
-										<span class="product-item__price-old">255.000vnđ</span> <span
-											class="product-item__price-current">100.000vnđ</span>
-									</div>
-								</div>
-								<div class="grid__column-3">
-									<div class="product-item">
-										<div class="product-item__img"
-											style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
-											<div class="product-item-action">
-												<a href="" class="product-item-buy__btn-link">
-													<div class="product-item-buy__btn">Mua ngay</div>
-												</a>
-												<div
-													class="product-item-like__btn product-item-like__btn--liked">
-													<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-													<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
-												</div>
-											</div>
-										</div>
-										<h4 class="product-item__name">Áo lenin họa tiết bắt mắt
-											nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành
-											tinh cũng không sao sánh bằng được</h4>
-										<span class="product-item__price-old">255.000vnđ</span> <span
-											class="product-item__price-current">100.000vnđ</span>
-									</div>
-								</div>
-								<div class="grid__column-3">
-									<div class="product-item">
-										<div class="product-item__img"
-											style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
-											<div class="product-item-action">
-												<a href="" class="product-item-buy__btn-link">
-													<div class="product-item-buy__btn">Mua ngay</div>
-												</a>
-												<div
-													class="product-item-like__btn product-item-like__btn--liked">
-													<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-													<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
-												</div>
-											</div>
-										</div>
-										<h4 class="product-item__name">Áo lenin họa tiết bắt mắt
-											nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành
-											tinh cũng không sao sánh bằng được</h4>
-										<span class="product-item__price-old">255.000vnđ</span> <span
-											class="product-item__price-current">100.000vnđ</span>
-									</div>
-								</div>
-								<div class="grid__column-3">
-									<div class="product-item">
-										<div class="product-item__img"
-											style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
-											<div class="product-item-action">
-												<a href="" class="product-item-buy__btn-link">
-													<div class="product-item-buy__btn">Mua ngay</div>
-												</a>
-												<div
-													class="product-item-like__btn product-item-like__btn--liked">
-													<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-													<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
-												</div>
-											</div>
-										</div>
-										<h4 class="product-item__name">Áo lenin họa tiết bắt mắt
-											nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành
-											tinh cũng không sao sánh bằng được</h4>
-										<span class="product-item__price-old">255.000vnđ</span> <span
-											class="product-item__price-current">100.000vnđ</span>
-									</div>
-								</div>
-								<div class="grid__column-3">
-									<div class="product-item">
-										<div class="product-item__img"
-											style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
-											<div class="product-item-action">
-												<a href="" class="product-item-buy__btn-link">
-													<div class="product-item-buy__btn">Mua ngay</div>
-												</a>
-												<div
-													class="product-item-like__btn product-item-like__btn--liked">
-													<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-													<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
-												</div>
-											</div>
-										</div>
-										<h4 class="product-item__name">Áo lenin họa tiết bắt mắt
-											nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành
-											tinh cũng không sao sánh bằng được</h4>
-										<span class="product-item__price-old">255.000vnđ</span> <span
-											class="product-item__price-current">100.000vnđ</span>
-									</div>
-								</div>
-								<div class="grid__column-3">
-									<div class="product-item">
-										<div class="product-item__img"
-											style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
-											<div class="product-item-action">
-												<a href="" class="product-item-buy__btn-link">
-													<div class="product-item-buy__btn">Mua ngay</div>
-												</a>
-												<div
-													class="product-item-like__btn product-item-like__btn--liked">
-													<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-													<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
-												</div>
-											</div>
-										</div>
-										<h4 class="product-item__name">Áo lenin họa tiết bắt mắt
-											nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành
-											tinh cũng không sao sánh bằng được</h4>
-										<span class="product-item__price-old">255.000vnđ</span> <span
-											class="product-item__price-current">100.000vnđ</span>
-									</div>
-								</div>
-								<div class="grid__column-3">
-									<div class="product-item">
-										<div class="product-item__img"
-											style="background-image: url(./assets/imgs/lemia-00072a-8a2rOV_800x800.jpg);">
-											<div class="product-item-action">
-												<a href="" class="product-item-buy__btn-link">
-													<div class="product-item-buy__btn">Mua ngay</div>
-												</a>
-												<div
-													class="product-item-like__btn product-item-like__btn--liked">
-													<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-													<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
-												</div>
-											</div>
-										</div>
-										<h4 class="product-item__name">Áo lenin họa tiết bắt mắt
-											nhất đất nước Việt Nam và trên toàn thế giới kể cả ngoài hành
-											tinh cũng không sao sánh bằng được</h4>
-										<span class="product-item__price-old">255.000vnđ</span> <span
-											class="product-item__price-current">100.000vnđ</span>
-									</div>
-								</div>
-
-
-
+								
+							</c:forEach>
+							
+							
 							</div>
 							<div class="container__footer-icon-list">
 								<div
@@ -418,6 +290,7 @@
 	</div>
 
 	<script>
+	/* XỬ LÝ CHỨC NĂNG CHỌN XEM HÌNH ẢNH */
 	    document.addEventListener("DOMContentLoaded", function() {
 	        var imgsItems = document.querySelectorAll(".product-item-imgs-item");
 	
@@ -428,6 +301,56 @@
 	            });
 	        });
 	    });
-	</script>
-</body>
+	    
+	    
+	  /* XỬ LÝ GỬI MÀU ĐƯỢC CHỌN VỀ SERVLET ĐỂ LẤY SIZE HIỆN CÓ CỦA MÀU ĐÓ */
+	  
+	  
+   		var colorButtons = document.querySelectorAll('.product__color-item');
+    	var selectedColorInput = document.getElementById('selectedColor');
+
+    	var sizeButtons = document.querySelectorAll('.product__size-item-btn');
+    	var selectedSizeInput = document.getElementById('selectedSize');
+    	var selectedColorButton = document.querySelector('.product__color-item.selected-color');
+    	var selectedSizeButton = document.querySelector('.product__size-item-btn.selected-size');
+    	colorButtons.forEach(function(button) {
+    		
+            button.addEventListener('click', function() {
+                if(!this.classList.contains('not-available')){
+                	selectedColorInput.value = this.value; 
+                    selectedSizeInput.value = selectedSizeButton.value;
+                    
+                    console.log(selectedColorInput.value)
+                    document.getElementById('colorSenderForm').submit(); 
+                }
+            });
+        });
+    	
+    	
+
+    	
+    	sizeButtons.forEach(function(button) {
+    		
+            button.addEventListener('click', function() {
+            	selectedSizeInput.value = this.value; 
+            	selectedColorInput.value = selectedColorButton.value;
+                document.getElementById('colorSenderForm').submit(); 
+            });
+        });  
+    	
+    	const addToCartForm = document.getElementById('add-to-cart-form');
+    	const currentQuatityToBuy = document.querySelector('.product-count-input');
+    	function addToCart(){
+    		var addToCartQuantityInput = document.getElementById('buy-quantity');
+    		addToCartQuantityInput.value= currentQuatityToBuy.value;
+    		addToCartForm.action = "gio-hang";
+    		addToCartForm.submit();
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	</script>
 </html>

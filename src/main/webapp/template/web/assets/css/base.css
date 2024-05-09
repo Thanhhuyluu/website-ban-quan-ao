@@ -58,6 +58,7 @@ html {
     padding-right: 12px;
     width: 66.6667%;
 
+
 }
 .grid__column-4{
     padding-left: 12px;
@@ -154,5 +155,14 @@ html {
     box-shadow: 6px 6px 4px rgba(0,0,0,0.2);
     animation: growth linear 0.1s;
     z-index: 10;
+}
+
+
+
+.no-product-infor{
+	color: #b28383;
+    text-align: center;
+    font-size: 2.4rem;
+    margin-top: 100px;
 }
 

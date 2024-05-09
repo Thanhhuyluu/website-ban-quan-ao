@@ -3,6 +3,7 @@
 <%@ include file="/common/taglib.jsp" %>
 	<c:set var="gender" value = "${requestScope.gender }"/>
     <c:set var="genderString" value = "gender=${requestScope.gender}&"/>
+    <c:set var="cart" value = "${requestScope.cart }"/>
 <header class="header">
 			
             <div class="header__navbar-cover">
@@ -23,6 +24,13 @@
                                     Thoát
                                 </a>
                             	</li>
+                            	<c:if test="${USER.getRole()==1 }">
+                            		<li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
+	                                <a id="" class="header__navbar-item--link" href="admin-home">
+	                                    Trở về trang quản lý
+	                                </a>
+	                            	</li>
+                            	</c:if>
                             	
                             </c:if>
                             <c:if test="${empty USER }">
@@ -37,9 +45,10 @@
                             </c:if>
                             
                             <li class="header__navbar-item header__navbar-item--strong">
-                                <a href="" class="header__navbar-item--link">
+                                <a href="gio-hang?action=show" class="header__navbar-item--link">
                                     <i class="fa-solid fa-cart-shopping header__navbar-icon"></i>
                                     Giỏ hàng
+                                    <c:if test="${cart != null }">(${cart.getCartSize() })</c:if>
                                 </a>
                                 
                             </li>
@@ -48,9 +57,9 @@
                 </div>
             </div>
             <div class="header-with-search">
-                <div class="header-logo">
+                <a href="trang-chu" class="header-logo">
                     <img class="header-logo-img" src="<c:url value = 'template/web/assets/imgs/high-logo-D022924D47-seeklogo.com.png'/>" alt="">
-                </div>
+                </a>
                 <div class="header-categories">
                     <ul class="header-cate-list">
                         <li class="header-cate-item">
@@ -250,5 +259,6 @@
                     </div>
                 </div>
             </div>
+            
         </header>
         

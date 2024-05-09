@@ -52,7 +52,7 @@
 }
 .product__price{
     color: #e43232;
-    font-size: 22px;
+    font-size: 2.6rem;
     font-weight: 700;
     margin: 40px 0;
 }
@@ -67,20 +67,30 @@
     display: flex  ;
     justify-content: left;
     align-items: center;
+
+    
 }
+
 .product__color-item{
     width: 30px;
     height: 30px;
     margin-right: 12px;
-    background-color: #000;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
+
 
 
 
 .product__color-item.selected-color{
-    border: 1px solid beige;
+    border: 1px solid black;
 }
-
+.product__color-item.not-available{
+	
+    filter: blur(1px);
+	
+}
 
 
 
@@ -182,7 +192,9 @@
     border: 1px solid #ccc ;
     cursor: pointer;
 }
+
 .product__item-size.select-size{
+
     border: 2px solid var(--text-color);
 }
 
@@ -564,16 +576,17 @@ i.product-item-like-icon-fill{
 }
 
 .panel-item__sub-text{
-    font-size: 16px;
+    font-size: 1.8rem;
     line-height: 2rem;
     font-weight: 400;
 }
 .panel-item__sub-img{
-    width: 440px;
-    height: 623px;
+    width: 100%;
+    height:400px;
     background-size: contain;
     display: block;
-    background-repeat: none;
+    background-repeat: no-repeat;
+    margin-top: 20px;
 }
 .panel-text,
 .guarantee-text{
@@ -588,12 +601,15 @@ i.product-item-like-icon-fill{
     background-color: #54696e;
     padding: 60px 0;
     margin-top: 50px;
+    
+    padding-bottom: 250px;
 }
 
 .footer__heading{
-    font-size: 2.4rem;
-    color: var(--text-color);
+    font-size: 2.6rem;
+    color: rgba(255,255,255,0.8);
     font-weight: 900;
+    text-transform: uppercase;
 }
 
 .footer__list{
@@ -606,23 +622,25 @@ i.product-item-like-icon-fill{
 
 .footer__item{
     text-decoration: none;
-    margin: 8px 0;
+    margin: 15px 0;
 }
 
 .footer__link{
     text-decoration: none;
-    color: var(--text-color);
+    color: rgba(255,255,255,0.6);
 
 }
-
+.footer__link-icon:hover .footer__icon,
 .footer__link:hover{
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .footer__icon{
     color: rgba(255, 255, 255, 0.6);
     font-size: 3rem;
 }
+
+
 /*                                  Container footer slider */
 
 .container__footer-parents{

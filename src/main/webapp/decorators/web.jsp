@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/base.css'/>" type="text/css">
 	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/main.css'/>" type="text/css">
 	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/product_page.css'/>" type="text/css">
+	
+	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/cart_page.css'/>" type="text/css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
@@ -20,6 +22,7 @@
 	<link rel="stylesheet"
 		href="<c:url value="/template/web/assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css"/>" type="text/css">
 	<title><dec:title default="Trang chủ" /></title>
+	<link rel="icon" type="image/x-icon" href="<c:url value="/template/web/assets/imgs/high-logo.ico"/>">
 </head>
 <body>
 
@@ -83,13 +86,7 @@
                             </div>
                         </div>
                     </form>
-                       
-					
-
-
-
-
-					
+          		
                     <form action="<c:url value="dang-nhap?action=login"/>" method="post" class="auth-form  ${requestScope.isExistAccount== null && requestScope.isInvalidEmail== null && requestScope.isInvalidPhoneNumber== null && requestScope.sInvalidPassword== null? "active":"" }" id="auth-form-login">
                         <div class="auth-form__container">
                             <div class="auth-form__header">
@@ -138,6 +135,7 @@
 
 <script src="<c:url value='/template/web/assets/scripts/FormValidate.js'/>"></script>
 <script src="<c:url value='/template/web/assets/scripts/product_page.js'/>"></script>
+<script src="<c:url value='/template/web/assets/scripts/cart_page.js'/>"></script>
 <script>
         Validator({
             form: '#auth-form-login',
@@ -172,8 +170,38 @@
 
             ]
         });
+        
+
+        const switchLinks = document.querySelectorAll('.auth-form__switch-link');
+                    switchLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const forms = document.querySelectorAll('.auth-form');
+                            forms.forEach(form => form.classList.toggle('active'));
+                        });
+                    });
+
+
+
+
+        // modal
+
+
+        const loginBtn = document.querySelector('#login__btn');
+        const overLay = document.querySelector('.modal__overlay');
+
+        // Định nghĩa hàm trước khi sử dụng
+        function toggleForm(){
+            var modal = document.querySelector('.modal');
+            modal.classList.toggle('hide-modal');
+        }
+
+
+        loginBtn.onclick = toggleForm;
+        overLay.onclick = toggleForm;
 
     </script>
 </body>
+
 
 </html>
