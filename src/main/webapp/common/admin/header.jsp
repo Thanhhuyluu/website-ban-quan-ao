@@ -13,8 +13,12 @@
 	</div>
 	<div class="header__right">
 		<div class="header__right-notify">
+			<a class="get-back-to-shop-link" href="trang-chu">Cửa hàng của tôi</a>
+		</div>
+		<div class="header__right-notify">
 			<i class="notify-icon fa-solid fa-bell"></i>
 		</div>
+		
 		<div class="header__right-user">
 			<img
 				src="<c:url value='/template/admin/assets/imgs/high-logo-D022924D47-seeklogo.com.png' />"
