@@ -19,7 +19,7 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "INSERT INTO `supplier`(`name`, `email`, `phone_num`, `address`) "
+			String sql = "INSERT INTO `supplier`(`name`, `email`, `phone_number`, `address`) "
 					+ "VALUES (?,?,?,?)";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setString(1, t.getName());
@@ -42,7 +42,7 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `supplier` "
-					+ "SET `name`= ?,`email`=?,`phone_num`=?,`address`= ? WHERE `id` = ?";
+					+ "SET `name`= ?,`email`=?,`phone_number`=?,`address`= ? WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setString(1, t.getName());
 			pst.setString(2, t.getEmail());
@@ -91,7 +91,7 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String email = rs.getString("email");
-				String phoneNum = rs.getString("phone_num");
+				String phoneNum = rs.getString("phone_number");
 				String address= rs.getString("address");
 				Supplier sup = new Supplier(id, name, email, phoneNum, address);
 				ketqua.add(sup);
@@ -117,7 +117,7 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 				int Id = rs.getInt("id");
 				String name = rs.getString("name");
 				String email = rs.getString("email");
-				String phoneNum = rs.getString("phone_num");
+				String phoneNum = rs.getString("phone_number");
 				String address= rs.getString("address");
 				ketqua = new Supplier(Id, name, email, phoneNum, address);
 			}

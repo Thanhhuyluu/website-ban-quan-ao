@@ -15,7 +15,7 @@
             </div>
             <div class="form-child mb-16">
                 <label for="phoneNumber" class="form-label">Số điện thoại</label>
-                <input type="number" name="phoneNumber" id="phoneNumber" class="form-control">
+                <input type="tel" name="phoneNumber" id="phoneNumber" class="form-control">
             </div>
             <div class="form-child mb-16">
                 <label for="address" class="form-label">Địa chỉ</label>

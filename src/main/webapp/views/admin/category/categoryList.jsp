@@ -27,10 +27,10 @@
                         <td><c:out value="${category.name}" /></td>
                         <c:choose>
                             <c:when test="${category.type == 1}">
-                                <td>Ao</td>
+                                <td>Áo</td>
                             </c:when>    
                             <c:otherwise>
-                                <td>Quan</td>
+                                <td>Quần</td>
                             </c:otherwise>    
                         </c:choose>      
                         <td>

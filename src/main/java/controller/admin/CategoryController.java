@@ -25,10 +25,6 @@ public class CategoryController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-//		CategoryDAO categoryDAO = new CategoryDAO();
-//		req.setAttribute("categories", categoryDAO.selectAll());
-//		RequestDispatcher rq = req.getRequestDispatcher("/views/admin/category/showCategory.jsp");
-//		rq.forward(req, resp);
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getServletPath();
 		System.out.println(action);

@@ -329,6 +329,138 @@ public class ProductDAO implements DAOInterface<Product> {
 		
 		return ketqua;
 	}
-	
+	public List<Product> selectDistinctCate() {
+		List<Product> ketqua = new ArrayList<Product>();
+		categoryDAO = new CategoryDAO();
+		brandDAO = new BrandDAO();
+		supplierDAO = new SupplierDAO();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT *\n"
+					+ "FROM `product`\n"
+					+ "WHERE id IN (\n"
+					+ "    SELECT MIN(id)\n"
+					+ "    FROM `product`\n"
+					+ "    GROUP BY category_id\n"
+					+ ")";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery(sql);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int categoryId = rs.getInt("category_id");
+				int brandId = rs.getInt("brand_id");
+				int supplierId = rs.getInt("supplier_id");
+				String title = rs.getString("title");
+				int price = rs.getInt("price");
+				int discount = rs.getInt("discount");
+				String img = rs.getString("img");
+				String description = rs.getString("description");
+				Date createdAt = rs.getDate("created_at");
+				Date updatedAt = rs.getDate("updated_at");
+				boolean deleted = rs.getBoolean("deleted");
+				int gender = rs.getInt("gender");
+				int likes  = rs.getInt("likes");
+				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				
+				ketqua.add(p);
+				
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ketqua;
+	}
+	public List<Product> selectDistinctBrand() {
+		List<Product> ketqua = new ArrayList<Product>();
+		categoryDAO = new CategoryDAO();
+		brandDAO = new BrandDAO();
+		supplierDAO = new SupplierDAO();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT *\n"
+					+ "FROM product\n"
+					+ "WHERE id IN (\n"
+					+ "    SELECT MIN(id)\n"
+					+ "    FROM product\n"
+					+ "    GROUP BY brand_id\n"
+					+ ")";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery(sql);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int categoryId = rs.getInt("category_id");
+				int brandId = rs.getInt("brand_id");
+				int supplierId = rs.getInt("supplier_id");
+				String title = rs.getString("title");
+				int price = rs.getInt("price");
+				int discount = rs.getInt("discount");
+				String img = rs.getString("img");
+				String description = rs.getString("description");
+				Date createdAt = rs.getDate("created_at");
+				Date updatedAt = rs.getDate("updated_at");
+				boolean deleted = rs.getBoolean("deleted");
+				int gender = rs.getInt("gender");
+				int likes  = rs.getInt("likes");
+				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				
+				ketqua.add(p);
+				
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ketqua;
+	}
+	public List<Product> selectDistinctSupplier() {
+		List<Product> ketqua = new ArrayList<Product>();
+		categoryDAO = new CategoryDAO();
+		brandDAO = new BrandDAO();
+		supplierDAO = new SupplierDAO();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT *\n"
+					+ "FROM product\n"
+					+ "WHERE id IN (\n"
+					+ "    SELECT MIN(id)\n"
+					+ "    FROM product\n"
+					+ "    GROUP BY supplier_id\n"
+					+ ")";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery(sql);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int categoryId = rs.getInt("category_id");
+				int brandId = rs.getInt("brand_id");
+				int supplierId = rs.getInt("supplier_id");
+				String title = rs.getString("title");
+				int price = rs.getInt("price");
+				int discount = rs.getInt("discount");
+				String img = rs.getString("img");
+				String description = rs.getString("description");
+				Date createdAt = rs.getDate("created_at");
+				Date updatedAt = rs.getDate("updated_at");
+				boolean deleted = rs.getBoolean("deleted");
+				int gender = rs.getInt("gender");
+				int likes  = rs.getInt("likes");
+				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				
+				ketqua.add(p);
+				
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ketqua;
+	}
+
 
 }

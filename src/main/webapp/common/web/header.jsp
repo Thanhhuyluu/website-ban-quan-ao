@@ -186,7 +186,7 @@
                                         </div>
                                         <div class="grid__column-3">
                                             <ul class="header-cate-dropbox-list">
-                                                <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                <h3 class="header-cate-dropbox-heading">Áo</h3>
                                                 
                                                 <c:forEach items = "${requestScope.upperList }" var = "ct">
                                                 	<li class="header-cate-dropbox-item">
@@ -198,7 +198,7 @@
                                         </div>
                                         <div class="grid__column-3">
                                             <ul class="header-cate-dropbox-list">
-                                                <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                <h3 class="header-cate-dropbox-heading">Quần</h3>
                                                 
                                                 
                                                 <c:forEach items = "${requestScope.lowerList }" var = "ct">

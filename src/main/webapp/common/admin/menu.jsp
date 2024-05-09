@@ -5,7 +5,9 @@
 		
 	  <div class="side-bar">
             <div class="side-bar__header">
+                <a href="<c:url value = "admin-home"/>">
                 <img class="side-bar__header-img" src="<c:url value='/template/admin/assets/imgs/high-logo-D022924D47-seeklogo.com.png' />" alt="">
+                </a> 
             </div>
 			<c:set var="url" value="${pageContext.request.requestURL}" />
 			<c:set var="desiredPart" value="${fn:substringAfter(url, '/Online_Shop/')}" />

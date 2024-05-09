@@ -232,7 +232,7 @@ body{
 /* } */
 
 /* footer */
-.container-footer{
+/* .container-footer{
     position: absolute; 
     bottom: 0;
     height: 100px;
@@ -240,9 +240,9 @@ body{
     display: flex;
 
     border-top: 1px solid #d9cad7;
-    /* position: fixed;
-    bottom: 0; */
-    /* nhớ padding cho container */
+    position: fixed;
+    bottom: 0;
+    nhớ padding cho container
     
 }
 .footer-content {
@@ -250,7 +250,7 @@ body{
     font-size: 16px;
     color: #b5acb4;
     
-}
+} */
 
 /* container-body */
 .container-body{
