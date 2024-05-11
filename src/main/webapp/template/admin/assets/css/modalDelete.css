@@ -1,0 +1,122 @@
+
+.open-modal-btn{
+    font-size: 20px;   
+    background-color: white;
+    color: black;
+    padding: 12px 12px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+.open-modal-btn:hover{
+    opacity: 0.8;
+}
+
+.modal-alert{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+    display: none;
+}
+@keyframes showAlert {
+    from{
+        opacity: 0.5;
+        transform: translateY(-100px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.modal-alert__inner{
+    margin-top: 20px;
+    width: 400px;
+    /* height: 500px; */
+    overflow: hidden;
+    z-index: 1000;
+    border-radius: 5px;
+    background-color: white;
+    animation: showAlert 0.5s ease;
+    
+}
+.alert__header{
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    /* width: 100%; */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    border-bottom: 1px solid #b2b2b2;
+    
+}
+
+.alert__header-title{
+    color: black;
+}
+
+.alert__content{
+    padding: 20px;
+}
+.alert__content-title{
+    font-size: 30px ;
+    margin-bottom: 12px;  
+}
+.alert__content-text{
+    font-size: 16px;
+}
+.alert__footer{
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+.icon-close{
+    color: #666666;
+    cursor: pointer;
+    padding: 2px;
+}
+.icon-close:hover{
+    filter: brightness(150%);
+}
+.alert__footer{
+    display: flex;
+    justify-content: end;
+
+}
+.alert__footer-btn{
+    font-size: 16px;
+    min-width: 62px;
+    padding: 6px 12px;  
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    /* background-color: #e36f71; */
+    background-color: #6b757d;
+    color: white;
+    cursor: pointer;
+}
+.alert__footer-btn:first-child{
+    margin-right: 10px;
+    background-color: #e22828;
+
+}
+.alert__footer-btn:hover{
+    filter: brightness(120%);
+}
+
+.modal-alert.show{
+    display: flex;
+}

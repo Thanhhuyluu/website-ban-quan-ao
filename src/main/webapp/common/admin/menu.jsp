@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li class="side-bar__item " >
-                    <a href="#" class="side-bar__item-link"> 
+                    <a href="<c:url value = "admin-order"/>" class="side-bar__item-link"> 
                         <img src="<c:url value='/template/admin/assets/imgs/invoice.png' />" alt="">
                         <span class="item-title">Đơn hàng</span>
                     </a>

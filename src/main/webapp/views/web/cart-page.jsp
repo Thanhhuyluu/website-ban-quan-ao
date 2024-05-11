@@ -28,7 +28,7 @@
 								<c:set var="tt" value="0" />
 								<c:forEach items="${cart.getItems() }" var="cartItem">
 									<c:set var="product" value="${cartItem.getProduct() }" />
-									<c:set var="productDetail" value="${cartItem.getProductDetail() }"/>									<li class="cart__item">
+									<c:set var="productDetail" value="${cartItem.getProductDetail() }"/><li class="cart__item">
 										<div class="cart__item-product-infor">
 											<div class="cart__item-product-img"
 												style="background-image: url(<c:url value="/template/web/assets/imgs/${product.getImg() }"/>);"></div>

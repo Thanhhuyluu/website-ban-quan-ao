@@ -48,6 +48,9 @@
 	                        <a class="active-link" href="/Online_Shop/admin-product-delete?id=<c:out value='${product.id}' />">
 	                            <i class="fa-solid fa-trash-can"></i> 
 	                        </a>
+                            <a class="active-link" href="/Online_Shop/admin-productDetail?id=<c:out value='${product.id}' />">
+	                            <i class="fa-solid fa-magnifying-glass"></i>
+	                        </a>
 	                  </td> 
                   </tr>
                 </c:forEach>
