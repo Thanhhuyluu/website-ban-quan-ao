@@ -49,7 +49,7 @@
                         <a class="active-link" href="/Online_Shop/admin-staff-edit?id=<c:out value='${staff.id}' />" >
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
-                        <a class="active-link" href="/Online_Shop/admin-staff-delete?id=<c:out value='${staff.id}' />">
+                        <a  class="active-link" href="/Online_Shop/admin-staff-delete?id=<c:out value='${staff.id}' />">
                             <i class="fa-solid fa-trash-can"></i> 
                         </a>
                     </td>
@@ -61,3 +61,19 @@
   </div>
 
 </div>   
+<div class="modal-alert">
+        <div class="modal-alert__inner">
+            <div class="alert__header">
+                <div class="alert__header-title">Cảnh báo</div>
+                <i class="fa-solid fa-xmark icon-close"></i>
+            </div>
+            <div class="alert__content">
+                <p class="alert__content-text">Bạn có chắc chắn muốn xoá không ?</p>
+            </div>
+            <div class="alert__footer">
+               	<button class="alert__footer-btn btn-submit" type="button">Có</button>
+                <button class="alert__footer-btn btn-close">Thoát</button>
+            </div>
+        </div>
+    </div>
+    <script src="<c:url value='/template/admin/assets/scripts/modalDelete.js' />"></script>
