@@ -388,7 +388,7 @@
     width: 460px;
     border-radius: 24px;
     display: flex;
-    background-color: #c0c0c0;
+    background-color: #f3ecec;
     align-items: center;
     
 }
@@ -483,7 +483,7 @@
     justify-content: center;
     align-items: center;
     height: var(--slider-height);
-    background-color: #e2e2e2;
+    background-color: #f3ecec;
 }
 
 .header-slider-inner{
