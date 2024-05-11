@@ -74,6 +74,19 @@ public class Cart {
 		return t;
 	}
 	
+	public int getSaleoffMoney() {
+		int t = 0;
+		for(CartItem ci: items) {
+			t+= (float)(ci.getProduct().getDiscount() * ci.getProduct().getPrice())/ 100 ;
+		}
+		return t;
+	}
+	public int getAfterSaleoffMoney() {
+		int i = getTotalMoney();
+		int j = getSaleoffMoney();
+		return   i - j;
+	}
+	
 	private ProductDetail getProductDetailById(int id, List<ProductDetail> list) {
 		for(ProductDetail i : list) {
 			if(i.getId() == id) return i;
@@ -138,5 +151,18 @@ public class Cart {
 			size += ci.getQuantity();
 		}
 		return size;
+	}
+	public static String cartToCookieTxt(Cart cart) {
+		List<CartItem> cartItems = cart.getItems();
+		String txt="";
+		if(cartItems.size() > 0) {
+			txt = cartItems.get(0).getProductDetail().getId() + ":"+ cartItems.get(0).getQuantity();
+			for(int i = 1;i < cartItems.size(); i++) {
+				txt+="/" + cartItems.get(i).getProductDetail().getId() + ":"
+						 + cartItems.get(i).getQuantity();
+
+			}
+		}
+		return txt;
 	}
 }

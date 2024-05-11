@@ -25,7 +25,7 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "INSERT INTO `order_details`(`order_id`, `product_details_id`, `price`, `num`) VALUES ( ? , ? , ? , ?)";
+			String sql = "INSERT INTO `order_details`(`order_id`, `product_details_id`, `price`, `quantity`) VALUES ( ? , ? , ? , ?)";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, t.getOrder().getId());
 			pst.setInt(2, t.getProductDetail().getId());

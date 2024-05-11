@@ -5,7 +5,9 @@ function Validator(options){
     function Validate(inputElement, rule){
         var errorMessage;
         var errorElement = inputElement.parentElement.querySelector('.form-message');
-		formAlert.classList.toggle('active');
+        
+		formAlert.classList.add('active');
+		
         //lấy rules của selector
         var rules = selectorRules[rule.selector];
         //lặp qua từng rule & kiểm ra

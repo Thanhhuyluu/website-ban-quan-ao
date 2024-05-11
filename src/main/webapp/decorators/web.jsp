@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/product_page.css'/>" type="text/css">
 	
 	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/cart_page.css'/>" type="text/css">
+	<link rel="stylesheet" href="<c:url value='/template/web/assets/css/payment_page.css'/>" type="text/css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
@@ -35,7 +36,7 @@
 		
 		<%@ include file="/common/web/footer.jsp" %> 
 		 <!-- modal layout -->
-       <div class="modal ${requestScope.alert == null && requestScope.isExistAccount== null && requestScope.isInvalidEmail== null && requestScope.isInvalidPhoneNumber== null && requestScope.sInvalidPassword== null? "hide-modal":"" }" >
+       <div class="modal ${requestScope.alert == null && requestScope.isExistAccount== null && requestScope.isInvalidEmail== null && requestScope.isInvalidPhoneNumber== null && requestScope.isInvalidPassword== null? "hide-modal":"" }" >
             <div class="modal__overlay">
 
             </div>
@@ -169,7 +170,24 @@
 
             ]
         });
-        
+        Validator({
+            form: '#payment-form',
+            rules: [
+                Validator.isRequired('#payment-page__name-input'),
+                Validator.isRequired('#payment-page__phonenumber-input'),
+                Validator.isPhoneNumber('#payment-page__phonenumber-input'),
+                Validator.isRequired('#payment-page__email-input'),
+                Validator.isRequired('#payment-page__address-input'),
+                Validator.isRequired('#payment-page__province-input'),
+                Validator.isRequired('#payment-page__district-input'),
+                Validator.isRequired('#payment-page__wards-input'),
+                Validator.isEmail('#payment-page__email-input'),
+               // Validator.isRequired('#auth-form-login__password'),
+               // Validator.minLength('#auth-form-login__password', 6),
+                
+            ], 
+            
+        });
 
         const switchLinks = document.querySelectorAll('.auth-form__switch-link');
                     switchLinks.forEach(link => {

@@ -28,14 +28,15 @@
 								<c:set var="tt" value="0" />
 								<c:forEach items="${cart.getItems() }" var="cartItem">
 									<c:set var="product" value="${cartItem.getProduct() }" />
-									<c:set var="productDetail" value="${cartItem.getProductDetail() }"/>									<li class="cart__item">
+									<c:set var="productDetail" value="${cartItem.getProductDetail() }"/>									
+									<li class="cart__item">
 										<div class="cart__item-product-infor">
 											<div class="cart__item-product-img"
 												style="background-image: url(<c:url value="/template/web/assets/imgs/${product.getImg() }"/>);"></div>
 											<div class="cart__item-product-des">
-												<h2 class="cart__item-product-title">${ cartItem.getProduct().getTitle() }</h2>
+												<h2 class="cart__item-product-title">${ product.getTitle() }</h2>
 												<c:if test="${product.getDiscount()!=0 }">
-													<span class="cart__item-product-old-price">${cartItem.getProduct().getPrice() }
+													<span class="cart__item-product-old-price">${product.getPrice() }
 														vnđ</span>
 												</c:if>
 												<c:if test="${product.getDiscount()==0 }">
@@ -160,17 +161,17 @@
 								<h1 class="payment-heading">Đơn hàng</h1>
 								<div class="payment-item-infor-row">
 									<h3 class="payment-item-heading">Đơn hàng</h3>
-									<h3 class="payment-item-des">620.000 vnđ</h3>
+									<h3 class="payment-item-des">${cart.getTotalMoney() } vnđ</h3>
 								</div>
 								<div class="payment-item-infor-row">
 									<h3 class="payment-item-heading">Giảm</h3>
-									<h3 class="payment-item-des">0 vnđ</h3>
+									<h3 class="payment-item-des">${cart.getSaleoffMoney() } vnđ</h3>
 								</div>
 								<div class="payment-item-infor-row">
 									<h3 class="payment-item-heading">Tạm tính</h3>
-									<h3 class="payment-item-des">620.000 vnđ</h3>
+									<h3 class="payment-item-des">${cart.getAfterSaleoffMoney() } vnđ</h3>
 								</div>
-								<div class="payment-submit-button">Tiếp tục thanh toán</div>
+								<a href="thanh-toan?action=thanh-toan" class="payment-submit-button">Tiếp tục thanh toán</a>
 							</div>
 						</div>
 						</c:if>
@@ -194,11 +195,20 @@
 
 	</div>
 
-
-</body>
 <script>
-			
+		var errorCart = document.querySelectorAll('.cart-item-error');
+		
+		var submitCartBtn = document.querySelector('.payment-submit-button');
+		
+		if (errorCart.length > 0) {
+		    submitCartBtn.addEventListener('click', function(event) {
+		        event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+		    });
+		    submitCartBtn.style="cursor: not-allowed;"
+		}
 		
 
 </script>
+</body>
+
 </html>

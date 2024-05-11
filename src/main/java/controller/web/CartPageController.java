@@ -117,7 +117,7 @@ public class CartPageController extends HttpServlet {
 				ProductDetail productDetail = ProductDetailDAO.getInstance().selectById(productDetailId);
 				Product product  = ProductDAO.getInstance().selectById(productDetail.getProduct().getId());
 				int availableQuantity = productDetail.getQuantity();
-				System.out.println(availableQuantity + productDetail.getSize() + productDetail.getColor());
+				//System.out.println(availableQuantity + productDetail.getSize() + productDetail.getColor());
 				num= Integer.parseInt(num_raw);
 				if(num== -1 && cart.getQuantityById(productDetailId) <= 1) {
 					cart.removeItems(productDetailId);
@@ -132,7 +132,7 @@ public class CartPageController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			txt =cartToCookieTxt(cart);
+			txt =Cart.cartToCookieTxt(cart);
 			Cookie cookie = new Cookie("cart", txt);
 			cookie.setMaxAge(60*60*24*30*6);
 			response.addCookie(cookie);
@@ -173,7 +173,7 @@ public class CartPageController extends HttpServlet {
 					
 					CartItem cartItem = new CartItem(product, newProductDetail, quantity, product.getPrice());
 					cart.updateItem(productDetailId, cartItem);
-					txt = cartToCookieTxt(cart);
+					txt = Cart.cartToCookieTxt(cart);
 					Cookie cookie = new Cookie("cart", txt);
 					cookie.setMaxAge(60*60*24*30*6);
 					response.addCookie(cookie);
@@ -206,7 +206,7 @@ public class CartPageController extends HttpServlet {
 				if(deleteCartItemId_raw != null || !deleteCartItemId_raw.isEmpty()) {
 					int deleteCartItemId = Integer.parseInt(deleteCartItemId_raw);
 					cart.removeItems(deleteCartItemId);
-					txt = cartToCookieTxt(cart);
+					txt = Cart.cartToCookieTxt(cart);
 					Cookie cookie = new Cookie("cart", txt);
 					cookie.setMaxAge(60*60*24*30*6);
 					response.addCookie(cookie);
@@ -245,18 +245,6 @@ public class CartPageController extends HttpServlet {
 
 	}
 	
-	private String cartToCookieTxt(Cart cart) {
-		List<CartItem> cartItems = cart.getItems();
-		String txt="";
-		if(cartItems.size() > 0) {
-			txt = cartItems.get(0).getProductDetail().getId() + ":"+ cartItems.get(0).getQuantity();
-			for(int i = 1;i < cartItems.size(); i++) {
-				txt+="/" + cartItems.get(i).getProductDetail().getId() + ":"
-						 + cartItems.get(i).getQuantity();
-
-			}
-		}
-		return txt;
-	}
+	
 
 }

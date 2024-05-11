@@ -1,14 +1,31 @@
 .main__payment-area{
     margin-bottom: 70px;
 }
+.payment-page__input-group-wrapper{
+	display: flex;
+	
+   	justify-content: space-between;
+    width: 90%;
+     margin-left: 10px;
+     gap: 18px;
+}
+
 .payment-page__infor-input-group{
-    display: flex;
+    flex:1;
+    margin-left: 10px;
+    
     width: 90%;
     
-    margin-left: 10px;
-    gap: 30px;
-    
 }
+.payment-page__input-group-wrapper
+.payment-page__infor-input-group{
+	
+	width: 100%;
+	margin: 0;
+
+}
+
+
 .payment-page__infor-input{
     display: block;
     outline: none;
@@ -21,7 +38,11 @@
     border-radius: 3px;
     padding: 4px 15px;
     margin: 15px 0;
+    width: 100%;
 }
+
+
+
 .payment-page__heading{
     text-transform: uppercase;
     color: var(--text-color);
@@ -71,8 +92,9 @@
     font-size: 1.8rem;
     font-weight:700;
     color: #808087;
-    
+    line-height: 2rem;
     margin: 0;
+    flex: 3;
 }
 
 .payment-page-bold{
@@ -94,6 +116,7 @@
     font-weight: 400;
     color: #8d8d91;
     margin: 0;
+    flex: 1;
 }
 
 .payment-page__product-item-size{
@@ -147,4 +170,9 @@
     border-radius: 3px;
     color: white;
     margin-top: 20px;
+    transition: background-color ease-in 0.1s;
+    
+}
+.payment-page__btn-submit:hover{
+	background-color: #ef7f58;
 }

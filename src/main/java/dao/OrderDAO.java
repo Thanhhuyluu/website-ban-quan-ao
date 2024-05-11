@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Order;
+import model.User;
 
 public class OrderDAO implements DAOInterface<Order>{
 
@@ -21,16 +22,23 @@ public class OrderDAO implements DAOInterface<Order>{
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "INSERT INTO `order`(`user_id`, `fullname`, `email`, `phone_number`, `address`, `note`, `order_date`, `status`) VALUES (?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO `order`(`user_id`, `fullname`, `email`, `phone_number`, `address`, `note`, `order_date`, `status`) VALUES ( 1,?,?,?,?,?,?,?)";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, t.getUser().getId());
-			pst.setString(2, t.getFullname());
-			pst.setString(3, t.getEmail());
-			pst.setString(4, t.getPhoneNum());
-			pst.setString(5, t.getAddress());
-			pst.setString(6, t.getNote());
-			pst.setDate(7, t.getOrderDate());
-			pst.setInt(8, t.getStatus());
+			//pst.setInt(1, t.getUser().getId());
+			/*
+			 * pst.setString(2, t.getFullname()); pst.setString(3, t.getEmail());
+			 * pst.setString(4, t.getPhoneNum()); pst.setString(5, t.getAddress());
+			 * pst.setString(6, t.getNote()); pst.setDate(7, t.getOrderDate());
+			 * pst.setInt(8, t.getStatus());
+			 */
+			
+			pst.setString(1, t.getFullname());
+			pst.setString(2, t.getEmail());
+			pst.setString(3, t.getPhoneNum());
+			pst.setString(4, t.getAddress());
+			pst.setString(5, t.getNote());
+			pst.setDate(6, t.getOrderDate());
+			pst.setInt(7, t.getStatus());
 			pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
@@ -150,6 +158,37 @@ public class OrderDAO implements DAOInterface<Order>{
 	public ArrayList<Order> selectByCondition(String condition) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	public Order selectLastestOrderOfUser(int s) {
+		Order ketqua = null;
+		userDAO = new UserDAO();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `order` WHERE `user_id` = ? "
+					+ "ORDER BY order_date DESC "
+					+ "LIMIT 1;";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1,s);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				int Id = rs.getInt("id");
+				int userId = rs.getInt("user_id");
+				String fullname = rs.getString("fullname");
+				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phone_number");
+				String address = rs.getString("address");
+				String note = rs.getString("note");
+				Date orderDate = rs.getDate("order_date");
+				int status = rs.getInt("status");
+				ketqua = new Order(Id, userDAO.selectById(userId), fullname, email, phoneNumber, address, note, orderDate, status);	
+			}
+			JDBCUtil.closeConnection(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ketqua;
 	}
 
 }
