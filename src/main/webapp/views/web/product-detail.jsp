@@ -161,7 +161,7 @@
 							<i class="icon-heart-full fa-solid fa-heart"></i>
 						</div>
 					</form>
-					<div class="product__payment">THANH TOÁN</div>
+					<div class="product__payment"><a href="thanh-toan?action=thanh-toan" class="product__payment-link">THANH TOÁN</a></div>
 					<div class="panel-group">
 						<div class="panel-item ">
 							<div class="panel-item__heading js-panel-item__heading-infor ">

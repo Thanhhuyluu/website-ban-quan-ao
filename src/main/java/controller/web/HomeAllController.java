@@ -214,7 +214,7 @@ public class HomeAllController extends HttpServlet {
 					if(user.getRole() == SystemConstant.CUSTOMER) {
 						response.sendRedirect(request.getContextPath() + "/trang-chu");
 					}else if(user.getRole() ==  SystemConstant.ADMIN) {
-						response.sendRedirect(request.getContextPath() + "/admin-home");
+						response.sendRedirect(request.getContextPath() + "/trang-chu");
 					}
 						
 				}else {

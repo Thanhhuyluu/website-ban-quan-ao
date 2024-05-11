@@ -101,7 +101,7 @@
                                     
                                     <div class="payment-page__infor-input-group">
                                         <input name="note" type="text" class="payment-page__infor-input" placeholder="Lưu ý">
-										<span class="form-alert active">Bạn cần điền tất cả các trường</span>                                        
+										<span class="form-alert active"></span>                                        
                                     </div>
                                     
                                    

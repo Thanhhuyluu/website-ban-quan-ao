@@ -246,7 +246,7 @@
     border: 1px solid var(--text-color);
     border-style: double;
     display: none;
-    product__select-container
+    
 
 }
 
@@ -405,6 +405,15 @@
     margin-top: 20px;
     margin-bottom: 20px;
     cursor: pointer;
+}
+.product__payment-link{
+	text-decoration: none;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container__footer-heading{

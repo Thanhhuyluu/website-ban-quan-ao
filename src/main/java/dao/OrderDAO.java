@@ -22,23 +22,19 @@ public class OrderDAO implements DAOInterface<Order>{
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "INSERT INTO `order`(`user_id`, `fullname`, `email`, `phone_number`, `address`, `note`, `order_date`, `status`) VALUES ( 1,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO `order`(`user_id`, `fullname`, `email`, `phone_number`, `address`, `note`, `order_date`, `status`) VALUES ( ?,?,?,?,?,?,?,?)";
 			PreparedStatement pst = c.prepareStatement(sql);
-			//pst.setInt(1, t.getUser().getId());
-			/*
-			 * pst.setString(2, t.getFullname()); pst.setString(3, t.getEmail());
-			 * pst.setString(4, t.getPhoneNum()); pst.setString(5, t.getAddress());
-			 * pst.setString(6, t.getNote()); pst.setDate(7, t.getOrderDate());
-			 * pst.setInt(8, t.getStatus());
-			 */
+			pst.setInt(1, t.getUser().getId());
+			pst.setString(2, t.getFullname());
+			pst.setString(3, t.getEmail());
+			pst.setString(4, t.getPhoneNum());
+			pst.setString(5, t.getAddress());
+			pst.setString(6, t.getNote()); 
+			pst.setDate(7, t.getOrderDate());
+			pst.setInt(8, t.getStatus());
+			 
 			
-			pst.setString(1, t.getFullname());
-			pst.setString(2, t.getEmail());
-			pst.setString(3, t.getPhoneNum());
-			pst.setString(4, t.getAddress());
-			pst.setString(5, t.getNote());
-			pst.setDate(6, t.getOrderDate());
-			pst.setInt(7, t.getStatus());
+			
 			pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
