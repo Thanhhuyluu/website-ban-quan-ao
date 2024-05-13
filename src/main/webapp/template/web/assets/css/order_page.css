@@ -1,0 +1,108 @@
+
+.order__main-container{
+    width: 100%;
+}
+.order__main-heading{
+    font-weight: 700;
+    color: var(--text-color);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--text-color);
+}
+.order-list{
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+.order-item{
+    background-color: #F3F2F2;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    margin-top: 50px;
+    border-radius: 5px;
+
+}
+.order-item:last-child{
+    margin-bottom: 100px;
+}
+.order-item__des{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.order-item__date{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #665858;
+}
+.order-item__date-text{
+    font-size: 1.6rem;
+    font-weight: 400;
+    display: inline;
+}
+.order-item__infor{
+    font-size: 1.6rem;
+    color: #978080;
+    margin-top: 20px;
+}
+
+.order-item__address{
+    margin: 10px 0;
+}
+
+.order-item__phonenumber{
+    margin: 10px 0;
+}
+
+.order-item__button-wrapper{
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    transform: translateY(-100%);
+    flex-direction: row;
+    
+    max-height: 46px;
+    
+
+}
+
+.order-item__button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333333;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--white-color);
+    margin: 5px;
+    padding: 10px 30px;
+    min-width: 180px;
+    margin-bottom: 10px;
+    transition: all ease-in 0.15s;
+}
+.order-item__button:hover{
+    background-color: #726f6f;
+}
+.order-item__button:last-child{
+    margin-right: 10px;
+}
+
+.order-item__status{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -28px;
+    right: 4px;
+    background-color: #D6A9A9;
+    padding: 8px 30px;
+    min-width: 200px;
+    border: 2px solid var(--white-color);
+    color: var(--white-color);
+
+}

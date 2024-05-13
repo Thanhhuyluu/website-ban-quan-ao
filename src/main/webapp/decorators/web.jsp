@@ -132,10 +132,10 @@
 
 
 <script src="<c:url value='/template/web/assets/scripts/index.js'/>"></script>
-
 <script src="<c:url value='/template/web/assets/scripts/FormValidate.js'/>"></script>
 <script src="<c:url value='/template/web/assets/scripts/product_page.js'/>"></script>
 <script src="<c:url value='/template/web/assets/scripts/cart_page.js'/>"></script>
+
 <script>
         Validator({
             form: '#auth-form-login',
