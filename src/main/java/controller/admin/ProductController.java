@@ -19,7 +19,9 @@ import dao.SupplierDAO;
 import model.Brand;
 import model.Category;
 import model.Product;
+import model.ProductItem;
 import model.Supplier;
+import service.ProductManager;
 
 @WebServlet(urlPatterns = {"/admin-product", "/admin-product-new", "/admin-product-insert", "/admin-product-delete", "/admin-product-edit", "/admin-product-update" })
 public class ProductController extends HttpServlet{
@@ -71,8 +73,10 @@ public class ProductController extends HttpServlet{
 		
 		private void listProduct(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
-	        List<Product> products = productDAO.selectAll();    
-	        request.setAttribute("products", products);
+	        List<Product> products = productDAO.selectAll();   
+	        
+	        List<ProductItem> lProductItems =  ProductManager.getInstance().products2ProductItems(products);
+	        request.setAttribute("lProductItems", lProductItems);
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productList.jsp");
 	        dispatcher.forward(request, response);
 	    }

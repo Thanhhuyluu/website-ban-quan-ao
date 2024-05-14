@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Product;
+import model.ProductItem;
 
 public class ProductManager {
 	public static ProductManager getInstance() {
@@ -38,7 +39,17 @@ public class ProductManager {
 		}
 		return result;
 	}
-	
+	public List<ProductItem> products2ProductItems(List<Product> products){
+		List<ProductItem> lItems = new ArrayList<ProductItem>();
+		for (Product product : products) {
+			ProductItem n = new ProductItem(product);
+			lItems.add(n);
+		}
+		
+		
+		return lItems;
+		
+	}
 
 	
 	
