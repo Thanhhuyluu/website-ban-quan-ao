@@ -32,7 +32,7 @@
 									<li class="cart__item">
 										<div class="cart__item-product-infor">
 											<div class="cart__item-product-img"
-												style="background-image: url(<c:url value="/template/web/assets/imgs/${product.getImg() }"/>);"></div>
+												style="background-image: url(<c:url value="./imgs/${product.getImg() }"/>);"></div>
 											<div class="cart__item-product-des">
 												<h2 class="cart__item-product-title">${ product.getTitle() }</h2>
 												<c:if test="${product.getDiscount()!=0 }">

@@ -112,7 +112,7 @@
 								<!-- product item -->
 								<div class="product-item">
 									<div class="product-item__img"
-										style="background-image: url('template/web/assets/imgs/${p.getImg()}')">
+										style="background-image: url('./imgs/${p.getImg()}')">
 										<div class="product-item-action">
 											<a href="chi-tiet-san-pham?proId=${p.getId() }"
 												class="product-item-buy__btn-link">
