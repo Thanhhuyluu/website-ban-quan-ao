@@ -14,19 +14,26 @@
                 <div class="order-detail__main-container">
                     <h1 class="order-detail__heading">Đơn hàng ngày 05/11/2024</h1>
                     <ul class="order-detail__list">
+                        <c:set var="orderDetails" value="${requestScope.orderDetails }"/>
                         
-                        <li class="order-detail__item">
+                        <c:forEach items="${orderDetails }" var="orderDetail">
+                        	<c:set var="order" value="${ orderDetail.getOrder()}" />
+                        	<c:set var="productDetail" value="${orderDetail.getProductDetail() }" />
+                        	
+                        	<c:set var="product" value="${productDetail.getProduct()}" />
+                        	<li class="order-detail__item">
                             
                             <div class="order-detail__item-product-infor">
-                                <div class="order-detail__item-product-img" style="background-image: url(<c:url value="./template/web/assets/imgs/ao_nu_1.png"/>);"></div>
+                                <div class="order-detail__item-product-img" style="background-image: url(<c:url value="./imgs/${product.getImg() }"/>);"></div>
                                 <div class="order-detail__item-product-des">
-                                    <h2 class="order-detail__item-product-title">Áo thun leninn họa tiết bắt mắt</h2>
-                                    <span class="order-detail__item-product-old-price">250.000 vnđ</span>
+                                	
+                                    <h2 class="order-detail__item-product-title">${product.getTitle() }</h2>
+                                    <span class="order-detail__item-product-old-price">${product.getPrice() } vnđ</span>
                                     <div class="order-detail__item-color">
                                         
 
                                             
-                                                <a href="" class="order-detail__item-color-item" style="background-color:#000;">
+                                                <a href="" class="order-detail__item-color-item" style="background-color:#${productDetail.getColor()};">
                                                     
                                                 </a>			
                                                 
@@ -37,7 +44,7 @@
                                         <div class="product__size">
                                             <h5 class="product__size-title">SIZE</h5>
                                             <div class="product__size-btn product__select-btn">
-                                                <span class="product__size-current">M</span>
+                                                <span class="product__size-current">${productDetail.getSize() }</span>
                                                
                                             </div>
                                             
@@ -47,7 +54,7 @@
                                             <div class="product-count-container">
     
                                                 
-                                                <input disabled type="text" class="product-count-input" value="1">
+                                                <input disabled type="text" class="product-count-input" value="${orderDetail.getQuantity() }">
                                                 
                                             </div>
                                         </div>
@@ -65,6 +72,8 @@
                             </div>
                         
                     </li>
+                        </c:forEach>
+                        
                     </ul>
                 </div>
 

@@ -39,7 +39,7 @@
 										<a onclick="handleOrderCancleClick(${order.getId()})" class="order-item__button order-item__button-cancel">Hủy đơn hàng</a>
 										</c:if>
 										
-										 <a href="chi-tiet-don-hang" class="order-item__button">Xem chi tiết</a>
+										 <a href="chi-tiet-don-hang?orderId=${order.getId() }" class="order-item__button">Xem chi tiết</a>
 									</div>
 									<h2 class="order-item__status">
 										<c:if test="${order.getStatus() == 0 }">Chờ xác nhận</c:if>
