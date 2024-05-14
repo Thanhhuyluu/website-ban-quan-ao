@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/base.css' />">
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/main.css' />">
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/modalDelete.css' />">
+    <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/detailProduct.css' />">
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/category.css' />">
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/formadditem.css' />">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
@@ -18,6 +19,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- icon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- chart -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    
 </head>
 <body>
@@ -34,8 +37,11 @@
            <%@include file="/common/admin/footer.jsp" %>  
         </div>
     </div>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
     <script src="<c:url value='/template/admin/assets/scripts/index.js' />"></script>
-    <script src="<c:url value='/template/admin/assets/scripts/chart.js' />"></script> 
+    
+   <%--  <script src="<c:url value='/template/admin/assets/scripts/chart.js' />"></script>  --%>
+ 
+    
 </body>
 </html>

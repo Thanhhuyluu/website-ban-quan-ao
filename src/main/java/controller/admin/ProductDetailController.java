@@ -73,12 +73,13 @@ public class ProductDetailController extends HttpServlet{
 		private void listProductDetail(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
 			int id = Integer.parseInt(request.getParameter("id"));
+			System.out.println(id);
 			ProductDAO productDAO = new ProductDAO(); 
 			Product product = productDAO.selectById(id);
-	        List<ProductDetail> productDetails = productDetailDAO.selectByProductId(id);    
+	        List<ProductDetail> productDetails = productDetailDAO.selectByProductId(id);  
+	        request.setAttribute("p", product);
 	        request.setAttribute("productDetails", productDetails);
-	        request.setAttribute("product", product);
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productDetailList.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productList.jsp");
 	        dispatcher.forward(request, response);
 	    }
 	 
@@ -93,6 +94,7 @@ public class ProductDetailController extends HttpServlet{
 	    	request.setAttribute("categories", categories);
 	    	request.setAttribute("brands", brands);
 	    	request.setAttribute("suppliers", suppliers);
+	    	
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productAdd.jsp");
 	        dispatcher.forward(request, response);
 	    }
