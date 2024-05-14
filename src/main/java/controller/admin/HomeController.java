@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ReportDAO;
+import dao.RevenueDAO;
 import model.MyItem;
 
 @WebServlet(urlPatterns = {"/admin-home"})
@@ -19,16 +19,50 @@ public class HomeController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
-	private ReportDAO reportDAO = new ReportDAO();
+	private RevenueDAO revenueDAO = new RevenueDAO();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Date date = new Date();
-		List<MyItem> receipts = reportDAO.reportReceipt(date, 7);
+		// Ngay hien tai
+		Date currentDate = new Date();
+		
+		// Doanh thu 1 tuan vua roi
+		List<MyItem> receipts = revenueDAO.reportReceipt(currentDate, 7);
         System.out.println(receipts.toString());
         req.setAttribute("receipts", receipts);	
-		RequestDispatcher rq = req.getRequestDispatcher("/views/admin/home.jsp");
+        
+        // Doanh thu ngay hom nay
+		List<MyItem> receipt = revenueDAO.reportReceipt(currentDate, 1);
+		int revenueOfDayRaw = 0; 
+		for (MyItem myItem : receipt) {
+			revenueOfDayRaw = myItem.getValue();
+		}
+		String revenueOfDay = revenueDAO.formatRevenue(revenueOfDayRaw);
+        req.setAttribute("revenueOfDay", revenueOfDay);	
+        
+        // Doanh thu thang truoc
+        int lastRevenue = revenueDAO.revenueOfLastMonth(currentDate);
+        String revenueOfLastMonth = revenueDAO.formatRevenue(lastRevenue);
+        req.setAttribute("revenueOfLastMonth", revenueOfLastMonth);	
+        
+     
+        // Doanh thu thang hien tai
+        int currentRevenue = revenueDAO.revenueOfCurrentMonth(currentDate);
+        
+        // Tang truong doanh thu thang truoc
+        double revenueGrowth = 0;
+        if (lastRevenue != 0){
+        	revenueGrowth = ((double)(currentRevenue - lastRevenue) / lastRevenue) * 100;
+        }      
+        req.setAttribute("revenueGrowth", revenueGrowth);	
+        
+        // So don hang trong ngay
+        
+        int orderOfDate = revenueDAO.countOrderByDate(currentDate);
+        
+        req.setAttribute("orderOfDate", orderOfDate);	
+        RequestDispatcher rq = req.getRequestDispatcher("/views/admin/home.jsp");
 		rq.forward(req, resp);
 	}
 	
@@ -37,4 +71,7 @@ public class HomeController extends HttpServlet{
 		// TODO Auto-generated method stub
 		super.doPost(req, resp);
 	}
+	
+	
+	
 }
