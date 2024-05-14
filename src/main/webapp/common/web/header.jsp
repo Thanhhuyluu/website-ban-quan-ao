@@ -14,10 +14,16 @@
                             <c:if test="${not empty USER }">
                             
                             	<li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
-                                <a id="" class="header__navbar-item--link">
+                                <div style="margin: 0;" id="" class="header__navbar-item--link">
                                     <i class="fa-solid fa-user header__navbar-icon"></i>
                                     Welcome, ${USER.getFullname()} 
-                                </a>
+                                    <ul class="header__user-option-list">
+                                		<li class="header__user-option-item">
+                                			<a href="don-hang?action=xem-tat-ca" class="header__user-option-item-link">Đơn hàng</a>
+                                		</li>
+                                	</ul>
+                                </div>
+                                
                             	</li>
                             	<li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
                                 <a id="" class="header__navbar-item--link" href="thoat?action=logout">

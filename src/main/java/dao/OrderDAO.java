@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Order;
-import model.User;
 
 public class OrderDAO implements DAOInterface<Order>{
 
@@ -184,6 +183,37 @@ public class OrderDAO implements DAOInterface<Order>{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return ketqua;
+	}
+	
+	public List<Order> selectByUserId(int uId) {
+		List<Order> ketqua = new ArrayList<Order>();
+		userDAO = new UserDAO();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `order` WHERE `user_id` = ? ORDER BY `order_date` DESC ";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1, uId);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int userId = rs.getInt("user_id");
+				String fullname = rs.getString("fullname");
+				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phone_number");
+				String address = rs.getString("address");
+				String note = rs.getString("note");
+				Date orderDate = rs.getDate("order_date");
+				int status = rs.getInt("status");
+				Order o = new Order(id, userDAO.selectById(userId), fullname, email, phoneNumber, address, note, orderDate, status);
+				ketqua.add(o);
+			}
+			JDBCUtil.closeConnection(c);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return ketqua;
 	}
 

@@ -429,7 +429,6 @@
 .product-item{
     margin-top: 24px;
     box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
-    border-radius: 8px;
     background-color: #d8d8cc;
     color: var(--text-color);
     padding-bottom: 20px;
