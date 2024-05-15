@@ -1,13 +1,20 @@
 package controller.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.OrderDAO;
+import dao.OrderDetailDAO;
 import model.Cart;
+import model.Order;
+import model.OrderDetail;
 
 /**
  * Servlet implementation class CartDetailPageController
@@ -32,6 +39,20 @@ public class OrderDetailPageController extends HttpServlet {
 		
 		//lấy cart để hiển thị số lượng trên header
 		Cart.setCartAttribute(request, response, null);
+		
+		String orderId_raw = request.getParameter("orderId");
+		int orderId= -1;
+		try {
+			orderId= Integer.parseInt(orderId_raw);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		Order od = OrderDAO.getInstance().selectById(orderId);
+		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+		if(od != null) {
+			 orderDetails = OrderDetailDAO.getInstance().selectByOrderId(od);
+		}
+		request.setAttribute("orderDetails", orderDetails);
 		request.getRequestDispatcher("/views/web/order-detail-page.jsp").forward(request, response);
 		
 		

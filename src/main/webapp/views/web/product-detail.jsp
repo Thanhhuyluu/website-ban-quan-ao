@@ -33,7 +33,7 @@
 			<div class="grid__row">
 				<div class="grid__column-7">
 					<div class="product-item-img"
-						style="background-image: url(<c:url value='/template/web/assets/imgs/${product.getImg() }'/>);"></div>
+						style="background-image: url(<c:url value='./imgs/${product.getImg() }'/>);"></div>
 
 					<div class="product-item-imgs-container">
 						<div class="product-item-imgs-btn-wrap">
@@ -44,14 +44,14 @@
 						
 						
 							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/${product.getImg() }"/>);"></div>
+								style="background-image: url(<c:url value="./imgs/${product.getImg() }"/>);"></div>
 							
 							<c:forEach items="${imgList}" var="img">
 							
 							
 							
 							<div class="product-item-imgs-item"
-								style="background-image: url(<c:url value="/template/web/assets//imgs/${img.getImg() }"/>);"></div>
+								style="background-image: url(<c:url value="./imgs/${img.getImg() }"/>);"></div>
 							
 							
 							</c:forEach>
@@ -242,7 +242,7 @@
 								<div class="grid__column-3">
 									<div class="product-item">
 										<div class="product-item__img"
-											style="background-image: url(<c:url value="/template/web/assets/imgs/${pro.getImg()}"/>);">
+											style="background-image: url(<c:url value="./imgs/${pro.getImg()}"/>);">
 											<div class="product-item-action">
 												<a href="chi-tiet-san-pham?proId=${pro.getId() }" class="product-item-buy__btn-link">
 													<div class="product-item-buy__btn">Mua ngay</div>

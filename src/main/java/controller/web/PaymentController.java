@@ -96,9 +96,11 @@ public class PaymentController extends HttpServlet {
 			String note= request.getParameter("note");
 			User u =(User) SessionUtil.getInstance().getValue(request, "USER");
 			model.Order o = new model.Order(u, fullname, email, phoneNumber, address + ","+wards + ","+ district + "," + province,note ,Date.valueOf(LocalDate.now()), SystemConstant.WAIT_FOR_PACKING);
-			System.out.println(o.toString());
+			
 			OrderDAO.getInstance().insert(o);
+			
 			model.Order order = OrderDAO.getInstance().selectLastestOrderOfUser(u.getId());
+			System.out.println("------"+ order.getId());
 			if(order != null) {
 				System.out.println("oke");
 				List<ProductDetail> productDetailList = ProductDetailDAO.getInstance().selectAll();
