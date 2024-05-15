@@ -63,14 +63,14 @@ public class OrderDetail {
 		return quantity;
 	}
 
-	public void setQuantity(int num) {
-		this.quantity = num;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	@Override
 	public String toString() {
 		return "OrderDetail [id=" + id + ", order=" + order + ", productDetail=" + productDetail + ", price=" + price
-				+ ", num=" + quantity + "]";
+				+ ", quantity=" + quantity + "]";
 	}
 
 

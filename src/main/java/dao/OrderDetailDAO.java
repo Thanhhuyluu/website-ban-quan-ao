@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Order;
 import model.OrderDetail;
 
 public class OrderDetailDAO implements DAOInterface<OrderDetail> {
@@ -98,8 +99,8 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 				int orderId = rs.getInt("order_id");
 				int productDetailId = rs.getInt("product_details_id");
 				int price = rs.getInt("price");
-				int num = rs.getInt("quantity");
-				OrderDetail od = new OrderDetail(id, orderDAO.selectById(orderId), productDetailDAO.selectById(productDetailId), price, num);
+				int quantity = rs.getInt("quantity");
+				OrderDetail od = new OrderDetail(id, orderDAO.selectById(orderId), productDetailDAO.selectById(productDetailId), price, quantity);
 				ketqua.add(od);
 			}
 			JDBCUtil.closeConnection(c);
@@ -110,6 +111,55 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 		return ketqua;
 	}
 
+	public List<OrderDetail> selectByOrderId(Order order) {
+		List<OrderDetail> ketqua = new ArrayList<OrderDetail>();
+		orderDAO = new OrderDAO();
+		productDetailDAO = new ProductDetailDAO();
+		Connection c = null;
+		ResultSet rs = null;
+		PreparedStatement pst = null;
+		try {
+			c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `order_details` WHERE `order_id` = ?";
+			pst = c.prepareStatement(sql);
+			pst.setInt(1, order.getId());
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int orderId = rs.getInt("order_id");
+				int productDetailId = rs.getInt("product_details_id");
+				int price = rs.getInt("price");
+				int quantity = rs.getInt("quantity");
+				OrderDetail od = new OrderDetail(id, orderDAO.selectById(orderId), productDetailDAO.selectById(productDetailId), price, quantity);
+				ketqua.add(od);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if( pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(c != null ) {
+				JDBCUtil.closeConnection(c);
+			}
+		}
+		return ketqua;
+	}
 	@Override
 	public OrderDetail selectById(int id) {
 		OrderDetail ketqua = null;
@@ -117,7 +167,7 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 		productDetailDAO = new ProductDetailDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT * FROM `supplier` WHERE `id` = ?";
+			String sql = "SELECT * FROM `order_details` WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1,id);
 			ResultSet rs = pst.executeQuery();
@@ -126,8 +176,8 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 				int orderId = rs.getInt("order_id");
 				int productDetailId = rs.getInt("product_details_id");
 				int price = rs.getInt("price");
-				int num = rs.getInt("quantity");
-				ketqua = new OrderDetail(Id, orderDAO.selectById(orderId), productDetailDAO.selectById(productDetailId), price, num);
+				int quantity = rs.getInt("quantity");
+				ketqua = new OrderDetail(Id, orderDAO.selectById(orderId), productDetailDAO.selectById(productDetailId), price, quantity);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
@@ -141,34 +191,6 @@ public class OrderDetailDAO implements DAOInterface<OrderDetail> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public List<OrderDetail> selectByOrderId(int oId) {
-		List<OrderDetail> ketqua = new ArrayList<OrderDetail>();
-		orderDAO = new OrderDAO();
-		productDetailDAO = new ProductDetailDAO();
-		try {
-			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT * FROM `order_details` WHERE `order_id` = ? ";
-			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1, oId);
-			ResultSet rs = pst.executeQuery();
-			while(rs.next()) {
-				int id = rs.getInt("id");
-				int orderId = rs.getInt("order_id");
-				int productDetailId = rs.getInt("product_details_id");
-				int price = rs.getInt("price");
-				int num = rs.getInt("quantity");
-				OrderDetail od = new OrderDetail(id, orderDAO.selectById(orderId), productDetailDAO.selectById(productDetailId), price, num);
-				ketqua.add(od);
-			}
-			JDBCUtil.closeConnection(c);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return ketqua;
-	}
-	
 	
 	
 }

@@ -217,4 +217,59 @@ public class OrderDAO implements DAOInterface<Order>{
 		return ketqua;
 	}
 
+	public List<Order> selectByOrderDate(Date date) {
+		List<Order> result = new ArrayList<Order>();
+	    PreparedStatement preparedStatement = null;
+	    ResultSet rs = null;
+	    Connection c = JDBCUtil.getConnection();
+	    try {
+	        // Tạo truy vấn SQL
+	        String sql = "SELECT * FROM `order` WHERE `order_date` = ?";
+	        preparedStatement = c.prepareStatement(sql);     
+	        preparedStatement.setDate(1, date);
+	        // Thực thi truy vấn
+	        rs = preparedStatement.executeQuery();
+	        // Lấy kết quả
+	        if (rs.next()) {
+	        	int id = rs.getInt("id");
+				int userId = rs.getInt("user_id");
+				String fullname = rs.getString("fullname");
+				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phone_number");
+				String address = rs.getString("address");
+				String note = rs.getString("note");
+				Date orderDate = rs.getDate("order_date");
+				int status = rs.getInt("status");
+				Order o = new Order(id, UserDAO.getInstance().selectById(userId), fullname, email, phoneNumber, address, note, orderDate, status);
+				result.add(o);
+	        }
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        // Đóng ResultSet, PreparedStatement không cần kiểm tra null vì chúng không thể null
+	        if (rs != null) {
+	            try {
+	                rs.close();
+	            } catch (SQLException ex) {
+	                ex.printStackTrace();
+	            }
+	        }
+	        if (preparedStatement != null) {
+	            try {
+	                preparedStatement.close();
+	            } catch (SQLException ex) {
+	                ex.printStackTrace();
+	            }
+	        }
+	        if ( c != null) {
+	        	try {
+	        		JDBCUtil.closeConnection(c);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+	        }
+	    }
+
+	    return result;
+	}
 }

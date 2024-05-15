@@ -6,14 +6,14 @@
           
           <ul class="chart-group">
               <li class="chart-item">
-                  <div class="chart-item__name">Ten bieu do</div>
+                  <div class="chart-item__name">Doanh thu tuần qua </div>
                   <div class="chart">
                       <canvas id="barchart-profit"  ></canvas>
                        <script>
                          		var barChartData = {
                              	labels: [<c:forEach var="item" items="${receipts}">'${item.time}',</c:forEach>],
                               datasets: [{
-                                  label: 'Tien lai/ngay',
+                                  label: 'Doanh thu/ngay',
                                   data: [<c:forEach var="item" items="${receipts}">${item.value},</c:forEach>],
                                   borderWidth: 1,
                                   backgroundColor: "rgb(83, 104, 110)",
@@ -36,37 +36,30 @@
 
                   </div>
               </li>
-              <li class="chart-item">
-                  <div class="chart-item__name">Ten bieu do</div>
-                  <div class="chart">
-                      <canvas id="barchart-orders"  ></canvas>
-                     
-                  </div>
-              </li>
           </ul>
       </div>
       <div class="column-3-1">
           <ul class="cart-list">
               <li class="cart-item">
                   <img src="<c:url value='/template/admin/assets/imgs/profit.png' />" alt="" class="cart-item__img">
-                  <span class="cart-item__total">1.679.000 VNĐ</span>
-                  <span class="cart-item__title">Tien lai/ngay</span>
+                  <span class="cart-item__total">${revenueOfDay} VNĐ</span>
+                  <span class="cart-item__title">Daonh thu hôm nay</span>
               </li>
               <li class="cart-item">
                   <img src="<c:url value='/template/admin/assets/imgs/money_current.png' />" alt=""
                       class="cart-item__img">
-                  <span class="cart-item__total">1.679.000 VNĐ</span>
-                  <span class="cart-item__title">So tien hien co</span>
+                  <span class="cart-item__total">${revenueOfLastMonth} VNĐ</span>
+                  <span class="cart-item__title">Doanh thu tháng trước </span>
               </li>
               <li class="cart-item">
                   <img src="<c:url value='/template/admin/assets/imgs/growth.png' />" alt="" class="cart-item__img">
-                  <span class="cart-item__total">100%</span>
-                  <span class="cart-item__title">Tang truong thang truoc</span>
+                  <span class="cart-item__total">${revenueGrowth}%</span>
+                  <span class="cart-item__title">Tăng trưởng tháng trước </span>
               </li>
               <li class="cart-item">
                   <img src="<c:url value='/template/admin/assets/imgs/order.png' />" alt="" class="cart-item__img">
-                  <span class="cart-item__total">1000 đơn</span>
-                  <span class="cart-item__title">Don hang/ngay</span>
+                  <span class="cart-item__total">${orderOfDate} đơn</span>
+                  <span class="cart-item__title">Đơn hàng/ngày </span>
               </li>
           </ul>
       </div>
