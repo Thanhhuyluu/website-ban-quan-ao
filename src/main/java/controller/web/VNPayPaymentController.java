@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,8 @@ import Config.VNPayConfig;
 /**
  * Servlet implementation class VNPayPaymentController
  */
+
+@WebServlet(urlPatterns = {"/vnpay-payment"})
 public class VNPayPaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,11 +42,16 @@ public class VNPayPaymentController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int totalMoney  = (int) req.getAttribute("totalMoney") *100;
 		
-        //String orderType = "other";
-        long amount = 1000000;//Integer.parseInt(req.getParameter("amount"))*100;
-        //String bankCode = req.getParameter("bankCode");
+		
+		long amount =totalMoney;
+		
+		
+		String vnp_Version = "2.1.0";
+        String vnp_Command = "pay";
+        String orderType = "other";
+        String bankCode = "NCB";
         
         String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
         String vnp_IpAddr = VNPayConfig.getIpAddress(req);
@@ -51,16 +59,27 @@ public class VNPayPaymentController extends HttpServlet {
         String vnp_TmnCode = VNPayConfig.vnp_TmnCode;
         
         Map<String, String> vnp_Params = new HashMap<>();
-        vnp_Params.put("vnp_Version", VNPayConfig.vnp_Version);
-        vnp_Params.put("vnp_Command",VNPayConfig.vnp_Command);
+        vnp_Params.put("vnp_Version", vnp_Version);
+        vnp_Params.put("vnp_Command", vnp_Command);
         vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
         vnp_Params.put("vnp_Amount", String.valueOf(amount));
         vnp_Params.put("vnp_CurrCode", "VND");
-        vnp_Params.put("vnp_BankCode", "NCB");
-        vnp_Params.put("vnp_Locale", "vn");
+        
+        if (bankCode != null && !bankCode.isEmpty()) {
+            vnp_Params.put("vnp_BankCode", bankCode);
+        }
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
         vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
+        vnp_Params.put("vnp_OrderType", orderType);
 
+        String locate = req.getParameter("language");
+        if (locate != null && !locate.isEmpty()) {
+            vnp_Params.put("vnp_Locale", locate);
+        } else {
+            vnp_Params.put("vnp_Locale", "vn");
+        }
+        vnp_Params.put("vnp_ReturnUrl", VNPayConfig.vnp_ReturnUrl);
+        vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -103,9 +122,10 @@ public class VNPayPaymentController extends HttpServlet {
 //        job.addProperty("message", "success");
 //        job.addProperty("data", paymentUrl);
 //        Gson gson = new Gson();
-       // resp.getWriter().write("<h1>"+ paymentUrl + "<h1/>");
-        System.out.println(paymentUrl);
-       //req.getRequestDispatcher(paymentUrl).forward(req, resp);
+//        resp.getWriter().write(gson.toJson(job));
+        //System.out.println(paymentUrl);
+        resp.sendRedirect(paymentUrl);
+        //req.getRequestDispatcher(paymentUrl).forward(req, resp);
 	}
 
 	/**
@@ -113,7 +133,7 @@ public class VNPayPaymentController extends HttpServlet {
 	 */
     
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        doGet(req, resp);
        
     }
 

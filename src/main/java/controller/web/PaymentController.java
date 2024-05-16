@@ -94,42 +94,67 @@ public class PaymentController extends HttpServlet {
 			String district= request.getParameter("district");
 			String wards= request.getParameter("wards");
 			String note= request.getParameter("note");
+			String paymentMethod= request.getParameter("paymentMethod");
 			User u =(User) SessionUtil.getInstance().getValue(request, "USER");
 			model.Order o = new model.Order(u, fullname, email, phoneNumber, address + ","+wards + ","+ district + "," + province,note ,Date.valueOf(LocalDate.now()), SystemConstant.WAIT_FOR_PACKING);
+			List<ProductDetail> productDetailList = ProductDetailDAO.getInstance().selectAll();
 			
-			OrderDAO.getInstance().insert(o);
 			
-			model.Order order = OrderDAO.getInstance().selectLastestOrderOfUser(u.getId());
-			System.out.println("------"+ order.getId());
-			if(order != null) {
-				System.out.println("oke");
-				List<ProductDetail> productDetailList = ProductDetailDAO.getInstance().selectAll();
+			
+			
+			
+			//=====thanh toán bằng COD
+			if(paymentMethod.equals("cod")) {
+				OrderDAO.getInstance().insert(o);
+				
+				model.Order order = OrderDAO.getInstance().selectLastestOrderOfUser(u.getId());
+				
+				if(order != null) {
+					Cookie[] cookies = request.getCookies();
+					String txt = "";
+					if (cookies != null) {
+						for (Cookie c : cookies) {
+							if (c.getName().equals("cart")) {
+								txt += c.getValue();
+								c.setValue("");
+								response.addCookie(c);
+							}
+						}
+					}
+					Cart cart = new Cart(txt, productDetailList);
+					for(CartItem i : cart.getItems()) {
+						System.out.println(i.getProductDetail().toString());
+						float discount = i.getProduct().getDiscount()/100;
+						int price =  i.getQuantity() * (i.getProduct().getPrice() - (int)(discount * i.getProduct().getPrice()) );
+						OrderDetail od = new OrderDetail(order, i.getProductDetail(), price, i.getQuantity());
+						
+						OrderDetailDAO.getInstance().insert(od);
+					}
+					
+//					
+					
+				}
+				response.sendRedirect(request.getContextPath() + "/trang-chu");
+			}
+			
+			//=====thanh toán bằng VNPAY
+			else if(paymentMethod.equals("vnpay")) {
 				Cookie[] cookies = request.getCookies();
 				String txt = "";
 				if (cookies != null) {
 					for (Cookie c : cookies) {
 						if (c.getName().equals("cart")) {
 							txt += c.getValue();
-							c.setValue("");
 							response.addCookie(c);
 						}
 					}
 				}
 				Cart cart = new Cart(txt, productDetailList);
-				for(CartItem i : cart.getItems()) {
-					System.out.println(i.getProductDetail().toString());
-					float discount = i.getProduct().getDiscount()/100;
-					int price =  i.getQuantity() * (i.getProduct().getPrice() - (int)(discount * i.getProduct().getPrice()) );
-					OrderDetail od = new OrderDetail(order, i.getProductDetail(), price, i.getQuantity());
-					
-					OrderDetailDAO.getInstance().insert(od);
-				}
-				
-				
-				
+				SessionUtil.getInstance().putValue(request, "ORDER", o);
+				request.setAttribute("totalMoney", cart.getTotalMoney());
+				request.getRequestDispatcher("/vnpay-payment").forward(request, response);
 			}
 			
-			response.sendRedirect(request.getContextPath() + "/trang-chu");
 		}
 	}
 

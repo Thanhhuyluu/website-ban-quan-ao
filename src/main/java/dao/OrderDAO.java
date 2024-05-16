@@ -191,7 +191,7 @@ public class OrderDAO implements DAOInterface<Order>{
 		userDAO = new UserDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT * FROM `order` WHERE `user_id` = ? ORDER BY `order_date` DESC ";
+			String sql = "SELECT * FROM `order` WHERE `user_id` = ? ORDER BY `id` DESC, `order_date` DESC ";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, uId);
 			ResultSet rs = pst.executeQuery();

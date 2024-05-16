@@ -21,6 +21,7 @@
     position: relative;
     margin-top: 50px;
     border-radius: 5px;
+   	height: 200px;
 
 }
 .order-item:last-child{
@@ -37,6 +38,7 @@
     font-size: 1.8rem;
     font-weight: 500;
     color: #665858;
+    margin-top: 25px;
 }
 .order-item__date-text{
     font-size: 1.6rem;
@@ -64,8 +66,7 @@
     top: 100%;
     transform: translateY(-100%);
     flex-direction: row;
-    
-    max-height: 46px;
+    max-height:60px;
     
 
 }
@@ -80,7 +81,7 @@
     font-weight: 500;
     color: var(--white-color);
     margin: 5px;
-    padding: 10px 30px;
+    padding: 20px 30px;
     min-width: 180px;
     margin-bottom: 10px;
     transition: all ease-in 0.15s;
@@ -98,12 +99,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    top: -28px;
-    right: 4px;
+    top: 0;
+    transform: translateY(-50%);
+    margin: 0;
+    right: 0px;
     background-color: #D6A9A9;
-    padding: 8px 30px;
+    padding: 12px 30px;
     min-width: 200px;
-    border: 2px solid var(--white-color);
+    border-radius: 10px;
+    border: 5px solid var(--white-color);
     color: var(--white-color);
 
 }
@@ -157,7 +161,6 @@
 	background-color: var(--white-color);
 	padding: 20px;
 	text-align: center;
-	border-radius: 10px;
 	
 }
 .order-cancel-confirm__heading{
@@ -165,7 +168,8 @@
 	font-size: 1.6rem;
 	color: rgb(199, 134, 14);
 	display: block;
-	margin-bottom: 40px;	
+	margin-bottom: 40px;
+	font-weight: 400;	
 	
 }
 .order-cancel-confirm__btn-wrapper{

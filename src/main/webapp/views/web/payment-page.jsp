@@ -56,12 +56,27 @@
                                     
                                     <div class="payment-page__infor-input-group">
                                         <input name="note" type="text" class="payment-page__infor-input" placeholder="Lưu ý">
-										<span class="form-alert active">Bạn cần điền tất cả các trường</span>                                        
+										<span class="form-alert active"></span>                                        
                                     </div>
                                     
-                                   
                                 </div>
-                            
+                            		<h1 class="payment-page__heading">Phương thức thanh toán</h1>
+                                   	<div class="payment-by">
+                                   		
+                                   		<div class="payment-page__radio-input-group">
+	                                        <input checked class="payment__radio-input" type="radio" id="" name="paymentMethod" value="cod">
+	                                       
+	                                        <span  class="radio-input-infor"> Thanh toán khi nhận hàng </span>
+	                                        <i class="radio-input-infor-icon fa-regular fa-money-bill-1"></i>
+	                                        
+	                                    </div>
+	                                    <div class="payment-page__radio-input-group">
+	                                        <input class="payment__radio-input" type="radio" id="" name="paymentMethod" value="vnpay">
+	                                        
+	                                        <span class="radio-input-infor"> Thanh toán bằng VNPay</span>
+	                                    	<i class="radio-input-infor-icon fa-regular fa-credit-card"></i>
+	                                    </div>
+                                   	</div>
                             	</c:if>
                             	<c:if test="${empty USER }">
                             		<div class="payment-page__infor">
