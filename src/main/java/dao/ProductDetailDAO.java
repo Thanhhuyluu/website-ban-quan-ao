@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Product;
 import model.ProductDetail;
 
 public class ProductDetailDAO implements DAOInterface<ProductDetail> {
@@ -174,6 +175,49 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 
 		return ketqua;
 	}
+	public int countProductDetail(Product product) {
+		PreparedStatement pst = null;
+	    ResultSet rs = null;
+	    int count = 0;
+	    Connection c = null;
+		try {
+			 c = JDBCUtil.getConnection();
+			String sql = "SELECT COUNT(*) FROM `product_details` WHERE `product_id` = ?";
+			pst = c.prepareStatement(sql);
+			pst.setInt(1, product.getId());
+			rs = pst.executeQuery();
+			if (rs.next()) {
+	            count = rs.getInt(1);
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+	        // Đóng ResultSet, PreparedStatement không cần kiểm tra null vì chúng không thể null
+	        if (rs != null) {
+	            try {
+	                rs.close();
+	            } catch (SQLException ex) {
+	                ex.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException ex) {
+	                ex.printStackTrace();
+	            }
+	        }
+	        if ( c != null) {
+	        	try {
+	        		JDBCUtil.closeConnection(c);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+	        }
+		}
+		return count;
+	}
 	public ProductDetail selectByColorAndSize(String pColor, String pSize, int proId) {
 		ProductDetail ketqua = null;
 		productDAO = new ProductDAO();
@@ -224,6 +268,29 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 
 		return ketqua;
 	}
+	public List<String> selectDistinctSize(Product product) {
+		List<String> ketqua = new ArrayList<String>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT DISTINCT `size` FROM `product_details` WHERE `product_id` = ?	";
+			PreparedStatement pst = c.prepareStatement(sql);
+
+			pst.setInt(1, product.getId());
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				
+				String size = rs.getString("size");
+				
+				ketqua.add(size);
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ketqua;
+	}
 	public List<String> selectDistinctColorBySize(String pSize, int pId) {
 		List<String> ketqua = new ArrayList<String>();
 		try {
@@ -232,6 +299,26 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setString(1, pSize);
 			pst.setInt(2, pId);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				
+				String size = rs.getString("color");
+				
+				ketqua.add(size);
+			}
+			JDBCUtil.closeConnection(c);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+	public List<String> selectDistinctColor(Product product) {
+		List<String> ketqua = new ArrayList<String>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT DISTINCT `color` FROM `product_details` WHERE product_id = ?";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1, product.getId());
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				
