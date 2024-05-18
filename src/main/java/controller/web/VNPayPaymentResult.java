@@ -1,6 +1,8 @@
 package controller.web;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Utils.SessionUtil;
+import dao.OnlinePaymentDAO;
 import dao.OrderDAO;
 import dao.OrderDetailDAO;
 import dao.ProductDetailDAO;
 import model.Cart;
 import model.CartItem;
+import model.OnlinePayment;
 import model.Order;
 import model.OrderDetail;
 import model.ProductDetail;
@@ -43,21 +47,28 @@ public class VNPayPaymentResult extends HttpServlet {
 		// TODO Auto-generated method stub
 		String paymentResultCode = request.getParameter("vnp_TransactionStatus");
 		String PaymentTransactionNo = request.getParameter("vnp_TransactionNo");
+
+		
 		String result = "";
 		if(paymentResultCode!= null && paymentResultCode.equals("00")) {
+			String amount = request.getParameter("vnp_Amount");
+			String transactionDate = request.getParameter("vnp_PayDate");
+			Order o = (Order)SessionUtil.getInstance().getValue(request, "ORDER");
+
+			User u =(User) SessionUtil.getInstance().getValue(request, "USER");
+			OrderDAO.getInstance().insert(o);
+			model.Order order = OrderDAO.getInstance().selectLastestOrderOfUser(u.getId());
+			System.out.println("test: " + order.toString());
+			String createdBy = order.getUser().getFullname();
+			boolean refunded = false;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+	        
 			result = "Giao dịch thành công";
-			
-			
+			OnlinePayment onlPayment = new OnlinePayment(order,Integer.parseInt(amount) ,PaymentTransactionNo,LocalDateTime.parse(transactionDate,formatter),createdBy,refunded);
+			OnlinePaymentDAO.getInstance().insert(onlPayment);
 			
 			List<ProductDetail> productDetailList = ProductDetailDAO.getInstance().selectAll();
 			
-
-			User u =(User) SessionUtil.getInstance().getValue(request, "USER");
-			Order o =(Order)SessionUtil.getInstance().getValue(request, "ORDER");
-			
-			OrderDAO.getInstance().insert(o);
-			
-			model.Order order = OrderDAO.getInstance().selectLastestOrderOfUser(u.getId());
 			
 			if(order != null) {
 				Cookie[] cookies = request.getCookies();

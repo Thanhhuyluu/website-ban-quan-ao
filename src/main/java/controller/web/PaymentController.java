@@ -127,7 +127,8 @@ public class PaymentController extends HttpServlet {
 						float discount = i.getProduct().getDiscount()/100;
 						int price =  i.getQuantity() * (i.getProduct().getPrice() - (int)(discount * i.getProduct().getPrice()) );
 						OrderDetail od = new OrderDetail(order, i.getProductDetail(), price, i.getQuantity());
-						
+						i.getProductDetail().setQuantity(i.getProductDetail().getQuantity() - i.getQuantity());
+						ProductDetailDAO.getInstance().update(i.getProductDetail());
 						OrderDetailDAO.getInstance().insert(od);
 					}
 					
