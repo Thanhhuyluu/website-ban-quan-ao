@@ -11,9 +11,12 @@ import model.Brand;
 
 public class BrandDAO implements DAOInterface<Brand> {
 
+	public static BrandDAO getInstance() {
+		return new BrandDAO();
+	}
 	@Override
 	public int insert(Brand t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `brand`(`name`) "
@@ -21,18 +24,18 @@ public class BrandDAO implements DAOInterface<Brand> {
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setString(1, t.getName());
 			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int update(Brand t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `brand` SET `name`= ? WHERE `id` = ?";
@@ -40,18 +43,18 @@ public class BrandDAO implements DAOInterface<Brand> {
 			pst.setString(1, t.getName());
 			pst.setInt(2, t.getId());
 			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int delete(Brand brand) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql ="DELETE FROM `brand`"
@@ -60,18 +63,18 @@ public class BrandDAO implements DAOInterface<Brand> {
 			pst.setInt(1, brand.getId());
 			pst.executeUpdate();
 			
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public List<Brand> selectAll() {
-		List<Brand> ketqua = new ArrayList<Brand>();
+		List<Brand> result = new ArrayList<Brand>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `brand`";
@@ -81,19 +84,19 @@ public class BrandDAO implements DAOInterface<Brand> {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				Brand b = new Brand(id,name);
-				ketqua.add(b);
+				result.add(b);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public Brand selectById(int id) {
-		Brand ketqua = null;
+		Brand result = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `brand` WHERE `id` = ?";
@@ -103,13 +106,13 @@ public class BrandDAO implements DAOInterface<Brand> {
 			while(rs.next()) {
 				int Id = rs.getInt("id");
 				String name = rs.getString("name");
-				ketqua = new Brand(Id,name);
+				result = new Brand(Id,name);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override

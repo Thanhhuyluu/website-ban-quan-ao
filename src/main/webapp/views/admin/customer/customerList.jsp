@@ -11,11 +11,11 @@
           <table class="table">
               <thead>
                   <tr>
-                    <th>Fullname</th>
+                    <th>Họ và tên </th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Status</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Trạng thái</th>
                   </tr>
               </thead>
               <tbody>

@@ -260,6 +260,7 @@ body{
     /* height: 100vh; */
 }
 .table-classify{
+	min-height: 700px;
     width: 80%;
     margin: auto;
     
@@ -276,7 +277,7 @@ body{
 .table{
     width: 100%;   
     background-color: #d9d9d9;
-    border-radius: 5px;
+	border-radius: 5px; 
     overflow: hidden;
 }
 
@@ -285,7 +286,7 @@ body{
     font-weight: bold;
 }
 .table, th{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid black; 
     border-collapse: collapse;
 }
 /* loi hien thị border của thead tr */
@@ -314,7 +315,7 @@ table th{
 }
 .btn-add-link{
     border: 1px solid #000;
-    border-radius: 5px;
+    border-radius: 5px; 
     padding: 4px;
 }
 .active-link{

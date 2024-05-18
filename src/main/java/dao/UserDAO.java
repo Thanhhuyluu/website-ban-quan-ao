@@ -21,7 +21,7 @@ public class UserDAO implements DAOInterface<User>{
 	@Override
 	
 	public int insert(User t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `user`"
@@ -37,19 +37,19 @@ public class UserDAO implements DAOInterface<User>{
 			pst.setDate(7, t.getUpdatedAt());
 			pst.setInt(8, t.getStatus());
 			pst.setInt(9, t.getRole());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int update(User t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `user` SET \r\n"
@@ -74,40 +74,40 @@ public class UserDAO implements DAOInterface<User>{
 			pst.setInt(8, t.getStatus());
 			pst.setInt(9, t.getRole());
 			pst.setInt(10, t.getId());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int delete(User user) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql ="DELETE FROM `user`"
 					+ " WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, user.getId());
-			pst.executeUpdate();
+			result = pst.executeUpdate();
 			
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public List<User> selectAll() {
 		 
-		List<User> ketqua = new ArrayList<User>();
+		List<User> result = new ArrayList<User>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `user`";
@@ -125,19 +125,19 @@ public class UserDAO implements DAOInterface<User>{
 				int status = rs.getInt("status");
 				int role = rs.getInt("role");
 				User u = new User(id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);
-				ketqua.add(u);
+				result.add(u);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public User selectById(int id) {
-		User ketqua = null;
+		User result = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `user` WHERE `id` = ?";
@@ -155,17 +155,17 @@ public class UserDAO implements DAOInterface<User>{
 				Date updatedAt = rs.getDate("updated_at");
 				int status = rs.getInt("status");
 				int role = rs.getInt("role");
-				ketqua = new User(Id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);		
+				result = new User(Id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);		
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 	
 	public User seletUserByPasswordAndStatusAndPhoneNumberOrEmail(String pass, String emailOrPhoneNum, int stat) {
-		User ketqua = null;
+		User result = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `user` WHERE `password` = ? and `status` = ? and (`email` = ? or `phone_number` = ?)";
@@ -186,13 +186,13 @@ public class UserDAO implements DAOInterface<User>{
 				Date updatedAt = rs.getDate("updated_at");
 				int status = rs.getInt("status");
 				int role = rs.getInt("role");
-				ketqua = new User(Id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);
+				result = new User(Id,fullname,email,phoneNum,address,password,createdAt,updatedAt,status,role);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 	
 	public List<User> selecteByRole(int role){

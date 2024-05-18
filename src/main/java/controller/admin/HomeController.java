@@ -29,7 +29,6 @@ public class HomeController extends HttpServlet{
 		
 		// Doanh thu 1 tuan vua roi
 		List<MyItem> receipts = revenueDAO.reportReceipt(currentDate, 7);
-        System.out.println(receipts.toString());
         req.setAttribute("receipts", receipts);	
         
         // Doanh thu ngay hom nay

@@ -10,10 +10,11 @@ html{
 .form{
     width: 600px;
     /* min-height: 600px; */
-    background-color: bisque;
+    background-color: #D9D9D9;
     padding: 20px;
     border-radius: 5px;
     padding-bottom: 50px;
+    color: black; 
 }
 .form-child{
     position: relative;
@@ -40,8 +41,8 @@ label {
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
-    background-color: #453434;
-    color: white;
+    background-color: #FFF;
+    color: black;
     appearance: none;
     font-weight: 300;
     outline: none;
@@ -61,8 +62,8 @@ label {
 
 }
 .form-textarea{
-    background-color: #453434;
-    color: white;
+    background-color: white;
+    color: black;
     border: none;
     border-radius: 5px;
     display: block;
@@ -78,8 +79,8 @@ label {
     overflow: hidden;
     border: none;
     border-radius: 5px;
-    background-color: #453434;
-    color: white;
+    background-color: white;
+    color: black;
     appearance: none;
     cursor: pointer;
 }
@@ -97,7 +98,7 @@ input[type="file"]::file-selector-button {
 .btn-submit{
     font-size: 16px;
     padding: 6px 12px;
-    background-color: #EB1616;
+    background-color: #E1532B;
     font-weight: 400;
     line-height: 1.5;
     color: white;
@@ -109,4 +110,7 @@ input[type="file"]::file-selector-button {
 }
 .btn-submit:hover {
     background-color: #c81313;
+}
+ .error-message {
+    color: red;
 }

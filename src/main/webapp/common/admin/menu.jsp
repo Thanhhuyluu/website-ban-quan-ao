@@ -20,7 +20,9 @@
                         <span class="item-title">Thống kê</span>
                     </a>
                 </li>
-                <li class="side-bar__item " >
+                <li class="side-bar__item <c:if test="${desiredPart == 'admin-order' }">
+  					  active
+				</c:if>" >
                     <a href="<c:url value = "admin-order"/>" class="side-bar__item-link"> 
                         <img src="<c:url value='/template/admin/assets/imgs/invoice.png' />" alt="">
                         <span class="item-title">Đơn hàng</span>
@@ -34,7 +36,9 @@
                         <span class="item-title">Khách hàng</span>
                     </a>
                 </li>
-                <li class="side-bar__item ">
+                <li class="side-bar__item <c:if test="${desiredPart == 'admin-product' }">
+  					  active
+				</c:if>">
                     <a href="<c:url value = "admin-product"/>" class="side-bar__item-link"> 
                         <img src="<c:url value='/template/admin/assets/imgs/product.png' />" alt="">
                         <span class="item-title">Sản phẩm</span>

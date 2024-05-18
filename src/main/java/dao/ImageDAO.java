@@ -22,7 +22,7 @@ public class ImageDAO implements DAOInterface<Image>{
 
 	@Override
 	public int insert(Image t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `image`(`product_id`,`img`) "
@@ -30,19 +30,19 @@ public class ImageDAO implements DAOInterface<Image>{
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, t.getProduct().getId());
 			pst.setString(2, t.getImg());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int update(Image t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `image` SET `product_id`= ? ,`img`=? WHERE `id` = ?";
@@ -50,39 +50,39 @@ public class ImageDAO implements DAOInterface<Image>{
 			pst.setInt(1, t.getProduct().getId());
 			pst.setString(2, t.getImg());
 			pst.setInt(3, t.getId());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int delete(Image img) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql ="DELETE FROM `image`"
 					+ " WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, img.getId());
-			pst.executeUpdate();
+			result = pst.executeUpdate();
 			
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public List<Image> selectAll() {
-		List<Image> ketqua = new ArrayList<Image>();
+		List<Image> result = new ArrayList<Image>();
 		productDAO = new ProductDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
@@ -94,19 +94,19 @@ public class ImageDAO implements DAOInterface<Image>{
 				int productId = rs.getInt("product_id");
 				String img = rs.getString("img");
 				Image i = new Image(id, productDAO.selectById(productId), img);
-				ketqua.add(i);
+				result.add(i);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public Image selectById(int id) {
-		Image ketqua = null;
+		Image result = null;
 		productDAO = new ProductDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
@@ -118,13 +118,13 @@ public class ImageDAO implements DAOInterface<Image>{
 				int Id = rs.getInt("id");
 				int productId = rs.getInt("product_id");
 				String img = rs.getString("img");
-				ketqua = new Image(Id, productDAO.selectById(productId), img);
+				result = new Image(Id, productDAO.selectById(productId), img);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class ImageDAO implements DAOInterface<Image>{
 		return null;
 	}
 	public List<Image> selectByProductId(int pId) {
-		List<Image> ketqua = new ArrayList<Image>();
+		List<Image> result = new ArrayList<Image>();
 		productDAO = new ProductDAO();
 		try {
 			Connection c = JDBCUtil.getConnection();
@@ -146,13 +146,13 @@ public class ImageDAO implements DAOInterface<Image>{
 				int productId = rs.getInt("product_id");
 				String img = rs.getString("img");
 				Image i = new Image(id, productDAO.selectById(productId), img);
-				ketqua.add(i);
+				result.add(i);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 }

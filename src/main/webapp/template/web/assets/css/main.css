@@ -3,7 +3,9 @@
     
 }
 .header__navbar-cover{
-    height: var(--header__nav-height);
+	align-items: center;
+	display: flex;
+    height: 36px;
     background-color: rgb(52, 58, 59);
 }
 .header__navbar{

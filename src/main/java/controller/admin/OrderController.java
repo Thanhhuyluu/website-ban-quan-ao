@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.OrderDAO;
 import model.Order;
+import model.OrderItem;
+import service.OrderManager;
 
 @WebServlet(urlPatterns = {"/admin-order", "/admin-order-new", "/admin-order-insert", "/admin-order-deleteSoft", "/admin-order-edit", "/admin-order-update", "/admin-orderDetail" })
 public class OrderController extends HttpServlet{
@@ -56,7 +58,9 @@ public class OrderController extends HttpServlet{
 		private void listOrder(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
 	        List<Order> orders = orderDAO.selectAll();    
-	        request.setAttribute("orders", orders);
+	        
+	        List<OrderItem> lOrderItems = OrderManager.getInstance().oders2OrderItems(orders);
+	        request.setAttribute("lOrderItems", lOrderItems);
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/order/orderList.jsp");
 	        dispatcher.forward(request, response);
 	    }

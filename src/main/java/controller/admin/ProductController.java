@@ -1,16 +1,24 @@
 package controller.admin;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.BrandDAO;
 import dao.CategoryDAO;
@@ -23,154 +31,253 @@ import model.ProductItem;
 import model.Supplier;
 import service.ProductManager;
 
-@WebServlet(urlPatterns = {"/admin-product", "/admin-product-new", "/admin-product-insert", "/admin-product-delete", "/admin-product-edit", "/admin-product-update" })
-public class ProductController extends HttpServlet{
+@WebServlet(urlPatterns = { "/admin-product", "/admin-product-new", "/admin-product-insert", "/admin-product-delete",
+		"/admin-product-edit", "/admin-product-update" })
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+		maxFileSize = 1024 * 1024 * 10, // 10MB
+		maxRequestSize = 1024 * 1024 * 50 // 50MB
+)
+public class ProductController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
 
-	
-	 private ProductDAO productDAO = new ProductDAO();
-		
-		@Override
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			// TODO Auto-generated method stub
+	private ProductDAO productDAO = new ProductDAO();
 
-			String action = req.getServletPath();
-			req.setCharacterEncoding("UTF-8");
-			System.out.println(action);
-	        try {
-	            switch (action) {
-	            case "/admin-product-new":
-	                showNewForm(req, resp);
-	                break;
-	            case "/admin-product-insert":
-	                insertProduct(req, resp);
-	                break;
-	            case "/admin-product-delete":
-	                deleteProduct(req, resp);
-	                break;
-	            case "/admin-product-edit":
-	                showEditForm(req, resp);
-	                break;
-	            case "/admin-product-update":
-	                updateProduct(req, resp);
-	                break;
-	            default:
-	                listProduct(req, resp);
-	                break;
-	            }
-	        } catch (SQLException ex) {
-	            throw new ServletException(ex);
-	        }
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		String action = req.getServletPath();
+		req.setCharacterEncoding("UTF-8");
+		System.out.println(action);
+		try {
+			switch (action) {
+			case "/admin-product-new":
+				showNewForm(req, resp);
+				break;
+			case "/admin-product-insert":
+				insertProduct(req, resp);
+				break;
+			case "/admin-product-delete":
+				deleteProduct(req, resp);
+				break;
+			case "/admin-product-edit":
+				showEditForm(req, resp);
+				break;
+			case "/admin-product-update":
+				updateProduct(req, resp);
+				break;
+			default:
+				listProduct(req, resp);
+				break;
+			}
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
 		}
-		
-		@Override
-		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			// TODO Auto-generated method stub
-			doGet(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(req, resp);
+	}
+
+	private void listProduct(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<Product> productRaws = productDAO.selectAll();
+		List<Product> products = new ArrayList<Product>();
+		for (Product product : productRaws) {
+			if(!product.isDeleted()) {
+				products.add(product);
+			}
 		}
-		
-		private void listProduct(HttpServletRequest request, HttpServletResponse response)
-	            throws SQLException, IOException, ServletException {
-	        List<Product> products = productDAO.selectAll();   
-	        
-	        List<ProductItem> lProductItems =  ProductManager.getInstance().products2ProductItems(products);
-	        request.setAttribute("lProductItems", lProductItems);
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productList.jsp");
-	        dispatcher.forward(request, response);
-	    }
-	 
-	    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	    	CategoryDAO categoryDAO = new CategoryDAO(); 
-	    	BrandDAO brandDAO = new BrandDAO(); 
-	    	SupplierDAO supplierDAO = new SupplierDAO(); 
-	    	List<Category> categories = categoryDAO.selectAll();
-	    	List<Brand> brands = brandDAO.selectAll();
-	    	List<Supplier> suppliers = supplierDAO.selectAll();
-	    	request.setAttribute("categories", categories);
-	    	request.setAttribute("brands", brands);
-	    	request.setAttribute("suppliers", suppliers);
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productAdd.jsp");
-	        dispatcher.forward(request, response);
-	    }
-	 
-	    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-	            throws SQLException, ServletException, IOException {
-	        int id = Integer.parseInt(request.getParameter("id"));
-	        CategoryDAO categoryDAO = new CategoryDAO(); 
-	    	BrandDAO brandDAO = new BrandDAO(); 
-	    	SupplierDAO supplierDAO = new SupplierDAO(); 
-	    	Product existingProduct = productDAO.selectById(id);
-	    	List<Category> categories = categoryDAO.selectAll();
-	    	List<Brand> brands = brandDAO.selectAll();
-	    	List<Supplier> suppliers = supplierDAO.selectAll();
-	        request.setAttribute("categories", categories);
-	    	request.setAttribute("brands", brands);
-	    	request.setAttribute("suppliers", suppliers);
-	        request.setAttribute("product", existingProduct);
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productEdit.jsp");
-	        dispatcher.forward(request, response);
-	 
-	    }
-	 
-	    private void insertProduct(HttpServletRequest request, HttpServletResponse response)
-	            throws SQLException, IOException {
-	    	CategoryDAO categoryDAO = new CategoryDAO();
-	    	BrandDAO brandDAO = new BrandDAO();
-	    	SupplierDAO supplierDAO = new SupplierDAO();
-	        String title = request.getParameter("title");
-	        int category_id = Integer.parseInt(request.getParameter("category_id"));
-	        int brand_id = Integer.parseInt(request.getParameter("brand_id"));
-	        int supplier_id = Integer.parseInt(request.getParameter("supplier_id"));
-	        int price = Integer.parseInt(request.getParameter("price"));
-	        int discount = Integer.parseInt(request.getParameter("discount"));
-	        String img = request.getParameter("img");
-	        int gender = Integer.parseInt(request.getParameter("gender"));
-	        String description = request.getParameter("description");
-	        Date createdAt = new Date(System.currentTimeMillis());
-	        Date updatedAt = null;
-	        int likes = 0; 
-	        boolean deleted = false;
-	        
-	        Product newProduct = new Product(categoryDAO.selectById(category_id), brandDAO.selectById(brand_id), supplierDAO.selectById(supplier_id), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
-	        productDAO.insert(newProduct);
-	        response.sendRedirect("admin-product");
-	    }
-	 
-	    private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		    CategoryDAO categoryDAO = new CategoryDAO();
-	    	BrandDAO brandDAO = new BrandDAO();
-	    	SupplierDAO supplierDAO = new SupplierDAO();
-	    	int id = Integer.parseInt(request.getParameter("id"));
-	        String title = request.getParameter("title");
-	        int category_id = Integer.parseInt(request.getParameter("category_id"));
-	        int brand_id = Integer.parseInt(request.getParameter("brand_id"));
-	        int supplier_id = Integer.parseInt(request.getParameter("supplier_id"));
-	        int price = Integer.parseInt(request.getParameter("price"));
-	        int discount = Integer.parseInt(request.getParameter("discount"));
-	        String img = request.getParameter("img");
-	        int gender = Integer.parseInt(request.getParameter("gender"));
-	        String description = request.getParameter("description");
-	        Date createdAt = Date.valueOf(request.getParameter("createdAt"));
-	        Date updatedAt = new Date(System.currentTimeMillis());
-	        int likes = Integer.parseInt(request.getParameter("likes"));
-	        boolean deleted = false;
-	        
-	        Product updatedProduct = new Product(id, categoryDAO.selectById(category_id), brandDAO.selectById(brand_id), supplierDAO.selectById(supplier_id), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
-	        productDAO.update(updatedProduct);    
-			response.sendRedirect("admin-product");
-		
-	    }
-	 
-	    private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
-	            throws SQLException, IOException {
-	        int id = Integer.parseInt(request.getParameter("id"));
-	        
-	        Product product = productDAO.selectById(id);
-	        productDAO.delete(product);
-	        response.sendRedirect("admin-product");
-	 
-	    }
+		List<ProductItem> lProductItems = ProductManager.getInstance().products2ProductItems(products);
+		request.setAttribute("lProductItems", lProductItems);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productList.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		CategoryDAO categoryDAO = new CategoryDAO();
+		BrandDAO brandDAO = new BrandDAO();
+		SupplierDAO supplierDAO = new SupplierDAO();
+		List<Category> categories = categoryDAO.selectAll();
+		List<Brand> brands = brandDAO.selectAll();
+		List<Supplier> suppliers = supplierDAO.selectAll();
+		request.setAttribute("categories", categories);
+		request.setAttribute("brands", brands);
+		request.setAttribute("suppliers", suppliers);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productAdd.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		CategoryDAO categoryDAO = new CategoryDAO();
+		BrandDAO brandDAO = new BrandDAO();
+		SupplierDAO supplierDAO = new SupplierDAO();
+		Product existingProduct = productDAO.selectById(id);
+		List<Category> categories = categoryDAO.selectAll();
+		List<Brand> brands = brandDAO.selectAll();
+		List<Supplier> suppliers = supplierDAO.selectAll();
+		request.setAttribute("categories", categories);
+		request.setAttribute("brands", brands);
+		request.setAttribute("suppliers", suppliers);
+		request.setAttribute("product", existingProduct);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productEdit.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void insertProduct(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		if (!ServletFileUpload.isMultipartContent(request)) {
+			System.out.println("Form is not multipart, cannot upload file.");
+			return;
+		}
+
+		try {
+			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+			File file1 = new File("/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp");
+			diskFileItemFactory.setRepository(file1);
+			ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
+			List<FileItem> fileItems = fileUpload.parseRequest(request);
+
+			String title = null;
+			String category_id = null;
+			String brand_id = null;
+			String supplier_id = null;
+			String price = null;
+			String discount = null;
+			String gender = null;
+			String description = null;
+			String img = null;
+
+			for (FileItem item : fileItems) {
+				if (item.isFormField()) {
+					// Process regular form field (input type="text|radio|checkbox|etc", select,
+					// etc).
+					String fieldName = item.getFieldName();
+					String fieldValue = item.getString();
+
+					switch (fieldName) {
+					case "title":
+						title = fieldValue;
+						break;
+					case "category_id":
+						category_id = fieldValue;
+						break;
+					case "brand_id":
+						brand_id = fieldValue;
+						break;
+					case "supplier_id":
+						supplier_id = fieldValue;
+						break;
+					case "price":
+						price = fieldValue;
+						break;
+					case "discount":
+						discount = fieldValue;
+						break;
+					case "gender":
+						gender = fieldValue;
+						break;
+					case "description":
+						description = fieldValue;
+						break;
+					}
+				} else {
+					// Process form file field (input type="file").
+					if ("img".equals(item.getFieldName())) {
+						img = item.getName();
+						File file = new File(
+								"/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/imgs/"
+										+ img);
+						item.write(file);
+
+					}
+				}
+			}
+			int categoryId = Integer.parseInt(category_id);
+			int brandId = Integer.parseInt(brand_id);
+			int supplierId = Integer.parseInt(supplier_id);
+			int priceValue = Integer.parseInt(price);
+			int discountValue = Integer.parseInt(discount);
+			int genderValue = Integer.parseInt(gender);
+			Date createdAt = new Date(System.currentTimeMillis());
+			Date updatedAt = null;
+			int likes = 0;
+			boolean deleted = false;
+
+			Product newProduct = new Product(CategoryDAO.getInstance().selectById(categoryId),
+					BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title,
+					priceValue, discountValue, img, description, createdAt, updatedAt, deleted, genderValue, likes);
+
+			String message = null; 
+			if (ProductDAO.getInstance().insert(newProduct) > 0){
+				message = "Thêm sản phẩm thành công!!"; 
+			}{
+				message = "Thêm sản phẩm thất !!";
+			}
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("admin-product");
+			dispatcher.forward(request, response);
+
+		} catch (FileUploadException e) {
+			System.out.println("File upload error!");
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			System.out.println("Number format error: " + e.getMessage());
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			System.out.println("Thiếu tham số: " + e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Lỗi khác: " + e.getMessage());
+		}
+	}
+
+	private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		CategoryDAO categoryDAO = new CategoryDAO();
+		BrandDAO brandDAO = new BrandDAO();
+		SupplierDAO supplierDAO = new SupplierDAO();
+		int id = Integer.parseInt(request.getParameter("id"));
+		String title = request.getParameter("title");
+		int category_id = Integer.parseInt(request.getParameter("category_id"));
+		int brand_id = Integer.parseInt(request.getParameter("brand_id"));
+		int supplier_id = Integer.parseInt(request.getParameter("supplier_id"));
+		int price = Integer.parseInt(request.getParameter("price"));
+		int discount = Integer.parseInt(request.getParameter("discount"));
+		String img = request.getParameter("img");
+		int gender = Integer.parseInt(request.getParameter("gender"));
+		String description = request.getParameter("description");
+		Date createdAt = Date.valueOf(request.getParameter("createdAt"));
+		Date updatedAt = new Date(System.currentTimeMillis());
+		int likes = Integer.parseInt(request.getParameter("likes"));
+		boolean deleted = false;
+
+		Product updatedProduct = new Product(id, categoryDAO.selectById(category_id), brandDAO.selectById(brand_id),
+				supplierDAO.selectById(supplier_id), title, price, discount, img, description, createdAt, updatedAt,
+				deleted, gender, likes);
+		productDAO.update(updatedProduct);
+		response.sendRedirect("admin-product");
+
+	}
+
+	private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		Product product = productDAO.selectById(id);
+		if (!product.isDeleted()) {
+			product.setDeleted(true);
+		}
+		productDAO.update(product);
+		response.sendRedirect("admin-product");
+
+	}
+
 }
