@@ -4,7 +4,7 @@
 <div class="container-body">
 	<div class="table-classify">
 		<div class="classify__header">
-			<h6 class="classify__header-title">Products</h6>
+			<h6 class="classify__header-title">Danh sách sản phẩm </h6>
 			<div class="btn-add">
 				<a class="btn-add-link" href=" <c:url value = " admin-product-new" />"> <i class="fa-solid fa-plus"></i>
 				</a>
@@ -14,13 +14,12 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Title</th>
-						<th>Price</th>
-						<th>Image</th>
-						<th>Gender</th>
-						<th>Created At</th>
-						<th>Actions</th>
+						<th>Tên</th>
+						<th>Giá</th>
+						<th>Ảnh</th>
+						<th>Giới tính</th>
+						<th>Ngày tạo</th>
+						<th>Thao tác</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,21 +32,21 @@
 						<c:set var="countProductDetail" value="${lProductItem.countProductDetail}" />
 						<tr class="product-item__row">
 							<td>
-								<c:out value="${product.id}" />
-							</td>
-							<td>
 								<c:out value="${product.title}" />
 							</td>
 							<td>
 								<c:out value="${product.price}" /> VNĐ</td>
-							<td><img style="height: 30px; width: 30px;"
-									src="<c:url value='/template/web/assets/imgs/${product.img}'/>" alt=""></td>
+							<td><img style="height: 50px; width: 50px;"
+									src="<c:url value='/imgs/${product.img}'/>" alt=""></td>
 							<c:choose>
 								<c:when test="${product.gender == 1}">
 									<td>Nam</td>
 								</c:when>
-								<c:otherwise>
+								<c:when test="${product.gender == 2}">
 									<td>Nữ</td>
+								</c:when>
+								<c:otherwise>
+									<td>Cả nam và nữ</td>
 								</c:otherwise>
 							</c:choose>
 							<td>
@@ -56,8 +55,7 @@
 							<td><a class="active-link"
 									href="/Online_Shop/admin-product-edit?id=<c:out value='${product.id}' />">
 									<i class="fa-solid fa-pen-to-square"></i>
-								</a> <a class="active-link"
-									href="/Online_Shop/admin-product-delete?id=<c:out value='${product.id}' />">
+								</a> <a class="active-link product-delete-btn" data-bs-id="${product.id}">
 									<i class="fa-solid fa-trash-can"></i>
 								</a> <a class="active-link btn-detail-product" id="btn-detail-product"> <i
 										class="fa-solid fa-magnifying-glass"></i>
@@ -67,8 +65,9 @@
 								<div class="modal__content" id="product-details">
 									<div class="modal__header">
 										<i class="fa-solid fa-xmark icon-close"></i>
-										<div class="product-detail__img" style="background-image: url(<c:url value='/template/web/assets/imgs/${product.img}'/>);" > </div>
+										<div class="product-detail__img" style="background-image: url(<c:url value='/imgs/${product.img}'/>);" > </div>
 										<div class="product-detail__title">${product.title}</div>
+										<div class="product-detail__category">Loại áo: Nam</div>
 									</div>
 									<div class="modal__main">
 										<div class="select-size-color">
@@ -87,18 +86,29 @@
 												</div>
 												<div id="colorOptions" class="color-options">
 													<c:forEach var="color" items="${colorsOfProduct}">
-													<div class="color-option" onclick="changeColor('red')"
+													<div class="color-option" onclick="changeColor('#${color}')"
 														style="background-color: #${color};"></div>
 													</c:forEach>
 												</div>
 											</div>
 										</div>
+										<div class="detail-product-count-fav">
+											<div class="detail-product-status-count">Trong kho còn ${countProductDetail} sản
+												phẩm</div>
+											<div class="detail-product-status-fav">Luợt thích: 17</div>
+										</div>
+										<div class="detail-product-descript">
+											<div class="descript-title">Mô tả</div>
+											<div class="descript-content">Áo này thuộc cho dòng thời trang cao cấp, hạng sang mà sang đàng</div>
+										</div>
 
 									</div>
 									<div class="modal__footer">
-										<div class="product-detail__count">Trong kho còn ${countProductDetail} sản
-											phẩm</div>
-										<button class="close">Thoát</button>
+										<div class="modal__footer-btn-wrapper">
+											<button class="add-productDetail-btn">Thêm sản phẩm </button>
+											<button class="close">Thoát</button>
+										</div>
+										
 									</div>
 								</div>
 
@@ -131,8 +141,78 @@
 			</ul>  --%>
 		</div>
 	</div>
-
 </div>
+<div class="modal-alert">
+    <div class="modal-alert__inner">
+        <div class="alert__header">
+            <div class="alert__header-title">Cảnh báo</div>
+            <i class="fa-solid fa-xmark icon-close" id="icon-close"></i>
+        </div>
+        <div class="alert__content">
+            <p class="alert__content-text">Bạn có chắc chắn muốn xoá không ?</p>
+        </div>
+        <div class="alert__footer">
+           	<button class="alert__footer-btn " id="delete-item-modal" >Có</button>
+            <button class="alert__footer-btn " id="exit-delete-modal" >Thoát</button>
+        </div>
+    </div>
+</div>
+    
+<form name="form-product-delete" method="POST"></form>
+ 
+
+
+<script>
+	// Xử lí modal-delete
+   const open_modal = document.getElementById('open-modal-btn')
+   const modal_alert = document.querySelector('.modal-alert')
+   const icon_close = document.getElementById('icon-close')
+   const btnDeleteProducts = document.querySelectorAll('.product-delete-btn')
+   // const alert_footer_btn = document.querySelectorAll('.alert__footer-btn')
+   const modal_alert_inner = document.querySelector('.modal-alert__inner')
+   const btnDeleteItem = document.getElementById('delete-item-modal');
+   const btnExitDelete = document.getElementById('exit-delete-modal');
+
+	// Xử lí xoá
+	var productId;
+	const formDeleteProduct = document.forms['form-product-delete'];
+
+	/* open_modal.onclick = function () {
+       
+   } */
+	
+   
+   function show(){
+       modal_alert.classList.toggle('show')
+   }
+  /*  icon_close.addEventListener('click',show) */
+
+    btnDeleteProducts.forEach(element => {
+        element.addEventListener('click',() => {
+        show();
+        productId = element.getAttribute("data-bs-id");
+        console.log(productId);
+        });
+    });
+   
+   // btn_close.addEventListener('click', show)
+   // alert_footer_btn.forEach(element => {
+   //     element.addEventListener('click', show)
+   // });
+   btnDeleteItem.addEventListener('click', ()=>{
+	   formDeleteProduct.action = '/Online_Shop/admin-product-delete?id=' + productId ;
+	   formDeleteProduct.submit();
+       console.log('xoa');
+   });
+   btnExitDelete.addEventListener('click', ()=>{
+       show();
+       console.log('exit');
+   });
+   icon_close.addEventListener('click', ()=>{
+       show();
+       console.log('exit');
+   });
+</script>
 
 <script>
 	//  ĐỔ SIZE RA
@@ -164,13 +244,7 @@
 		var colorOptions = document.getElementById("colorOptions");
 		colorOptions.style.display = "none";
 	}
-
-
-
 	const btn_show_detail = document.querySelectorAll('.btn-detail-product');
-
-
-
 	btn_show_detail.forEach(button => {
 		button.addEventListener('click', function () {
 			const tableCell = button.parentElement;
@@ -178,26 +252,24 @@
 			const modal_product_detail = tableRow.querySelector('td#modal_detail_product.modal.modal-detail-product');
 			// const modal_product_detail = document.getElementById('product-details');
 			// console.log(modal_product_detail);		
-			modal_product_detail.classList.toggle('modal--active')
+			modal_product_detail.classList.toggle('show')
 			const icon_close = modal_product_detail.querySelector('.icon-close');
 			const btn_close = modal_product_detail.querySelector('.close');
 			icon_close.addEventListener('click', () => {
-				modal_product_detail.classList.remove("modal--active");
-				// console.log('Turn off');	
+				modal_product_detail.classList.remove("show");
+				console.log('Turn off');	
 			})
 			btn_close.addEventListener('click', () => {	
-				modal_product_detail.classList.remove("modal--active");
+				modal_product_detail.classList.remove("show");
 				// modal_product_detail.classList.toggle('modal--active')
-				// console.log('Turn off');
+				console.log('Turn off'); 
 			})
 
 			
 		});
 	});
 	
-
-
-
+	
 	// MODAL
 	// const btnModals = document.querySelectorAll("[data-trigger = 'modal']")
 

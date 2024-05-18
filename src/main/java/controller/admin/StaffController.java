@@ -73,6 +73,12 @@ public class StaffController extends HttpServlet{
             throws SQLException, IOException, ServletException {
         List<User> staffs = staffDAO.selecteByRole(SystemConstant.STAFF);
         request.setAttribute("staffs", staffs);
+        
+        String message = (String)request.getAttribute("message");
+        if(message != "" || message != null) {
+        	request.setAttribute("message", message);
+        	System.out.println(message);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/staff/staffList.jsp");
         dispatcher.forward(request, response);
     }
@@ -102,9 +108,9 @@ public class StaffController extends HttpServlet{
         String password = "12341234";
         int status = SystemConstant.USER_NORMAL; 
         int role = SystemConstant.STAFF;
-         
         User newStaff = new User(name, enail, phoneNumber, address, password, new Date(System.currentTimeMillis()), null, status, role);
         staffDAO.insert(newStaff);
+        System.out.println(newStaff);
         response.sendRedirect("admin-staff");
     }
  
@@ -142,13 +148,21 @@ public class StaffController extends HttpServlet{
  
     }
     private void deleteStaff(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
- 
+            throws SQLException, IOException, ServletException {
+    	
+    	int id = Integer.parseInt(request.getParameter("id"));
+    	String message = "";
         User staff = new User();
         staff.setId(id);
-        staffDAO.delete(staff);
-        response.sendRedirect("admin-staff");
+        if(staffDAO.delete(staff) != 0) {
+        	message = "Xoá nhân viên thành công!"; 
+        }else {
+        	message = "Xoá nhân viên không thành công!";
+        }
+        request.setAttribute("message", message);
+        System.out.println("++" + message);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin-staff");
+        dispatcher.forward(request, response);
  
     }
 }

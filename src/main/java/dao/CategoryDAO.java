@@ -16,7 +16,7 @@ public class CategoryDAO implements DAOInterface<Category> {
 	}
 	@Override
 	public int insert(Category t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `category`(`name`,`type`)"
@@ -25,18 +25,18 @@ public class CategoryDAO implements DAOInterface<Category> {
 			pst.setString(1, t.getName());
 			pst.setInt(2,t.getType());
 			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int update(Category t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `category` SET `name`= ? , `type` = ? WHERE `id` = ?";
@@ -45,18 +45,18 @@ public class CategoryDAO implements DAOInterface<Category> {
 			pst.setInt(2, t.getType());
 			pst.setInt(3, t.getId());
 			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int delete(Category category) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql ="DELETE FROM `category`"
@@ -65,18 +65,18 @@ public class CategoryDAO implements DAOInterface<Category> {
 			pst.setInt(1, category.getId());
 			pst.executeUpdate();
 			
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 		
 	@Override
 	public List<Category> selectAll() {
-		List<Category> ketqua = new ArrayList<Category>();
+		List<Category> result = new ArrayList<Category>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `category`";
@@ -87,19 +87,19 @@ public class CategoryDAO implements DAOInterface<Category> {
 				String name = rs.getString("name");
 				int type = rs.getInt("type");
 				Category cate = new Category(id,name, type);
-				ketqua.add(cate);
+				result.add(cate);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public Category selectById(int id) {
-		Category ketqua = null;
+		Category result = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `category` WHERE `id` = ?";
@@ -110,18 +110,18 @@ public class CategoryDAO implements DAOInterface<Category> {
 				int Id = rs.getInt("id");
 				String name = rs.getString("name");
 				int type = rs.getInt("type");
-				ketqua = new Category(Id,name,type);
+				result = new Category(Id,name,type);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 	
 	
 	public List<Category> selectByType(int type) {                  //áo : 1   quần : 2   Không phải áo quần : 3
-		List<Category> ketqua = new ArrayList<Category>();
+		List<Category> result = new ArrayList<Category>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `category` WHERE `type` = ?";
@@ -133,14 +133,14 @@ public class CategoryDAO implements DAOInterface<Category> {
 				String name = rs.getString("name");
 				int Type = rs.getInt("type");
 				Category ct = new Category(Id,name,Type);
-				ketqua.add(ct);
+				result.add(ct);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 	
 	

@@ -13,7 +13,6 @@ import model.ProductDetail;
 
 public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 	private static ProductDetailDAO productDetailDao;
-	private ProductDAO productDAO;
 	public static ProductDetailDAO getInstance() {
 		if (productDetailDao == null) {
 			productDetailDao = new ProductDetailDAO();
@@ -23,7 +22,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 
 	@Override
 	public int insert(ProductDetail t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `product_details`(`product_id`, `size`, `quantity`, `created_at`, `color`)"
@@ -34,19 +33,19 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 			pst.setInt(3, t.getQuantity());
 			pst.setDate(4, t.getCreatedAt());
 			pst.setString(5, t.getColor());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result= pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int update(ProductDetail t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `product_details` SET `product_id`= ? ,`size`= ? ,`quantity`= ? ,`created_at`= ? ,`color`= ?  WHERE `id` = ?";
@@ -57,39 +56,38 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 			pst.setDate(4, t.getCreatedAt());
 			pst.setString(5, t.getColor());
 			pst.setInt(6, t.getId());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int delete(ProductDetail productDetail) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "DELETE FROM `product_details`" + " WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, productDetail.getId());
-			pst.executeUpdate();
+			result = pst.executeUpdate();
 
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public List<ProductDetail> selectAll() {
-		List<ProductDetail> ketqua = new ArrayList<ProductDetail>();
-		productDAO = new ProductDAO();
+		List<ProductDetail> result = new ArrayList<ProductDetail>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product_details`";
@@ -102,8 +100,8 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				int quantity = rs.getInt("quantity");
 				Date createdAt = rs.getDate("created_at");
 				String color = rs.getString("color");
-				ProductDetail pd = new ProductDetail(id, productDAO.selectById(productId), size, quantity, createdAt, color);
-				ketqua.add(pd);
+				ProductDetail pd = new ProductDetail(id, ProductDAO.getInstance().selectById(productId), size, quantity, createdAt, color);
+				result.add(pd);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -111,13 +109,12 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 			e.printStackTrace();
 		}
 
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public ProductDetail selectById(int id) {
-		ProductDetail ketqua = null;
-		productDAO = new ProductDAO();
+		ProductDetail result = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product_details` WHERE `id` = ?";
@@ -132,7 +129,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				Date createdAt = rs.getDate("created_at");
 				String color = rs.getString("color");
 
-				ketqua = new ProductDetail(Id, productDAO.selectById(productId), size, quantity, createdAt, color);
+				result = new ProductDetail(Id, ProductDAO.getInstance().selectById(productId), size, quantity, createdAt, color);
 
 
 			}
@@ -140,7 +137,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
@@ -149,8 +146,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 		return null;
 	}
 	public List<ProductDetail> selectByProductId(int pId) {
-		List<ProductDetail> ketqua = new ArrayList<ProductDetail>();
-		productDAO = new ProductDAO();
+		List<ProductDetail> result = new ArrayList<ProductDetail>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product_details` WHERE `product_id` = ?";
@@ -164,8 +160,8 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				int quantity = rs.getInt("quantity");
 				Date createdAt = rs.getDate("created_at");
 				String color = rs.getString("color");
-				ProductDetail pd = new ProductDetail(id, productDAO.selectById(productId), size, quantity, createdAt, color);
-				ketqua.add(pd);
+				ProductDetail pd = new ProductDetail(id, ProductDAO.getInstance().selectById(productId), size, quantity, createdAt, color);
+				result.add(pd);
 			}
 			JDBCUtil.closeConnection(c);
 
@@ -173,7 +169,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 			e.printStackTrace();
 		}
 
-		return ketqua;
+		return result;
 	}
 	public int countProductDetail(Product product) {
 		PreparedStatement pst = null;
@@ -219,8 +215,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 		return count;
 	}
 	public ProductDetail selectByColorAndSize(String pColor, String pSize, int proId) {
-		ProductDetail ketqua = null;
-		productDAO = new ProductDAO();
+		ProductDetail result = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product_details` WHERE `color` = ? AND `size` = ? 	AND product_id = ? ";
@@ -236,17 +231,17 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				int quantity = rs.getInt("quantity");
 				Date createdAt = rs.getDate("created_at");
 				String color = rs.getString("color");
-				ketqua = new ProductDetail(Id, productDAO.selectById(productId), size, quantity, createdAt, color);
+				result = new ProductDetail(Id, ProductDAO.getInstance().selectById(productId), size, quantity, createdAt, color);
 
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 	public List<String> selectDistinctSizeByColor(String pColor, int productId) {
-		List<String> ketqua = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT DISTINCT `size` FROM `product_details` WHERE `color` = ? AND `product_id` = ?	";
@@ -258,7 +253,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				
 				String size = rs.getString("size");
 				
-				ketqua.add(size);
+				result.add(size);
 			}
 			JDBCUtil.closeConnection(c);
 
@@ -266,10 +261,10 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 			e.printStackTrace();
 		}
 
-		return ketqua;
+		return result;
 	}
 	public List<String> selectDistinctSize(Product product) {
-		List<String> ketqua = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT DISTINCT `size` FROM `product_details` WHERE `product_id` = ?	";
@@ -281,7 +276,7 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				
 				String size = rs.getString("size");
 				
-				ketqua.add(size);
+				result.add(size);
 			}
 			JDBCUtil.closeConnection(c);
 
@@ -289,10 +284,10 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 			e.printStackTrace();
 		}
 
-		return ketqua;
+		return result;
 	}
 	public List<String> selectDistinctColorBySize(String pSize, int pId) {
-		List<String> ketqua = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT DISTINCT `color` FROM `product_details` WHERE `size` = ? AND product_id = ?";
@@ -304,16 +299,16 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				
 				String size = rs.getString("color");
 				
-				ketqua.add(size);
+				result.add(size);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 	public List<String> selectDistinctColor(Product product) {
-		List<String> ketqua = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT DISTINCT `color` FROM `product_details` WHERE product_id = ?";
@@ -324,13 +319,13 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				
 				String size = rs.getString("color");
 				
-				ketqua.add(size);
+				result.add(size);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 }

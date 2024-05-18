@@ -89,9 +89,7 @@ public class RevenueDAO  {
 
 	        // Thực thi truy vấn
 	        resultSet = preparedStatement.executeQuery();
-	        
-	        System.out.println(resultSet);
-
+	       
 	        // Lấy kết quả
 	        if (resultSet.next()) {
 	            count = resultSet.getInt(1);

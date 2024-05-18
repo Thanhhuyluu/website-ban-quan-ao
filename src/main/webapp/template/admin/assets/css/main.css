@@ -303,7 +303,6 @@ body{
 
 /* footer */
 .container-footer{
-    position: absolute;
     height: 100px;
     width: 100%;
     display: flex;
@@ -316,5 +315,6 @@ body{
     color: #b5acb4;
     
 }
+
 
 

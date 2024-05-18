@@ -16,7 +16,7 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 	}
 	@Override
 	public int insert(Supplier t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `supplier`(`name`, `email`, `phone_number`, `address`) "
@@ -26,19 +26,19 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 			pst.setString(2, t.getEmail());
 			pst.setString(3, t.getPhoneNum());
 			pst.setString(4, t.getAddress());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int update(Supplier t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `supplier` "
@@ -49,39 +49,39 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 			pst.setString(3, t.getPhoneNum());
 			pst.setString(4, t.getAddress());
 			pst.setInt(5, t.getId());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int delete(Supplier supplier) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql ="DELETE FROM `supplier`"
 					+ " WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, supplier.getId());
-			pst.executeUpdate();
+			result = pst.executeUpdate();
 			
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public List<Supplier> selectAll() {
-		List<Supplier> ketqua = new ArrayList<Supplier>();
+		List<Supplier> result = new ArrayList<Supplier>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `supplier` ";
@@ -94,19 +94,19 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 				String phoneNum = rs.getString("phone_number");
 				String address= rs.getString("address");
 				Supplier sup = new Supplier(id, name, email, phoneNum, address);
-				ketqua.add(sup);
+				result.add(sup);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public Supplier selectById(int id) {
-		Supplier ketqua = null;
+		Supplier result = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `supplier` WHERE `id` = ?";
@@ -119,13 +119,13 @@ public class SupplierDAO implements DAOInterface<Supplier>{
 				String email = rs.getString("email");
 				String phoneNum = rs.getString("phone_number");
 				String address= rs.getString("address");
-				ketqua = new Supplier(Id, name, email, phoneNum, address);
+				result = new Supplier(Id, name, email, phoneNum, address);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override

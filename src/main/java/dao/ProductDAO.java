@@ -11,17 +11,13 @@ import java.util.List;
 import model.Product;
 
 public class ProductDAO implements DAOInterface<Product> {
-
-	private CategoryDAO categoryDAO;
-	private BrandDAO brandDAO;
-	private SupplierDAO supplierDAO;
 	public static ProductDAO getInstance() {
 		return new ProductDAO();
 	}
 
 	@Override
 	public int insert(Product t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `product`(`category_id`, `brand_id`, `supplier_id`, `title`, `price`, `discount`, `img`, `description`, `created_at`, `updated_at`, `deleted`, `gender`, `likes`) "
@@ -40,19 +36,19 @@ public class ProductDAO implements DAOInterface<Product> {
 			pst.setBoolean(11, t.isDeleted());
 			pst.setInt(12, t.getGender());
 			pst.setInt(13, t.getLikes());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int update(Product t) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "UPDATE `product` SET `category_id`= ? ,`brand_id`= ? ,`supplier_id`= ? ,`title`= ? ,`price`= ? ,`discount`= ? ,`img`= ? ,`description`= ? ,`created_at`= ? ,`updated_at`= ? ,`deleted`= ? ,`gender`= ?, `likes` = ?  WHERE `id` = ?";
@@ -71,42 +67,39 @@ public class ProductDAO implements DAOInterface<Product> {
 			pst.setInt(12, t.getGender());
 			pst.setInt(13, t.getLikes());
 			pst.setInt(14, t.getId());
-			pst.executeUpdate();
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			result = pst.executeUpdate();
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public int delete(Product product) {
-		int ketqua = 0;
+		int result = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql ="DELETE FROM `product` "
 					+ " WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, product.getId());
-			pst.executeUpdate();
+			result = pst.executeUpdate();
 			
-			System.out.println("Số lệnh đã thêm: " + ketqua);
+			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public List<Product> selectAll() {
-		List<Product> ketqua = new ArrayList<Product>();
-		categoryDAO = new CategoryDAO();
-		brandDAO = new BrandDAO();
-		supplierDAO = new SupplierDAO();
+		List<Product> result = new ArrayList<Product>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` ";
@@ -127,9 +120,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id,CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
-				ketqua.add(p);
+				result.add(p);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -138,15 +131,12 @@ public class ProductDAO implements DAOInterface<Product> {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 
 	@Override
 	public Product selectById(int id) {
-		Product ketqua = null;
-		categoryDAO = new CategoryDAO();
-		brandDAO = new BrandDAO();
-		supplierDAO = new SupplierDAO();
+		Product result = null;
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` WHERE `id` = ?";
@@ -168,14 +158,14 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes = rs.getInt("likes");
-				ketqua =  new Product(Id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				result =  new Product(Id,CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ketqua;
+		return result;
 	}
 
 	@Override
@@ -194,10 +184,7 @@ public class ProductDAO implements DAOInterface<Product> {
 	}
 	
 	public List<Product> selectByCateId(int[] arr) {
-		List<Product> ketqua = new ArrayList<Product>();
-		categoryDAO = new CategoryDAO();
-		brandDAO = new BrandDAO();
-		supplierDAO = new SupplierDAO();
+		List<Product> result = new ArrayList<Product>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT p.id, p.category_id, p.brand_id, p.supplier_id, p.title, p.price, p.discount, p.img, p.description, p.created_at, p.updated_at, p.deleted, p.gender, p.likes FROM product p INNER JOIN category on p.category_id = category.id WHERE 1=1";
@@ -235,9 +222,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id, CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
-				ketqua.add(p);
+				result.add(p);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -245,17 +232,14 @@ public class ProductDAO implements DAOInterface<Product> {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 	
 	
 	
 	
 	public List<Product> searchByName(String key) {
-		List<Product> ketqua = new ArrayList<Product>();
-		categoryDAO = new CategoryDAO();
-		brandDAO = new BrandDAO();
-		supplierDAO = new SupplierDAO();
+		List<Product> result = new ArrayList<Product>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` where title like ?";
@@ -277,9 +261,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id,CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
-				ketqua.add(p);
+				result.add(p);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -287,14 +271,11 @@ public class ProductDAO implements DAOInterface<Product> {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 
 	public List<Product> selectRelatedProductsByBrand(int bId, int pId) {
-		List<Product> ketqua = new ArrayList<Product>();
-		categoryDAO = new CategoryDAO();
-		brandDAO = new BrandDAO();
-		supplierDAO = new SupplierDAO();
+		List<Product> result = new ArrayList<Product>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` where brand_id = ? AND id != ? LIMIT 16 ";
@@ -317,9 +298,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id, CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
-				ketqua.add(p);
+				result.add(p);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -327,13 +308,10 @@ public class ProductDAO implements DAOInterface<Product> {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 	public List<Product> selectDistinctCate() {
-		List<Product> ketqua = new ArrayList<Product>();
-		categoryDAO = new CategoryDAO();
-		brandDAO = new BrandDAO();
-		supplierDAO = new SupplierDAO();
+		List<Product> result = new ArrayList<Product>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT *\n"
@@ -360,9 +338,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id,CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
-				ketqua.add(p);
+				result.add(p);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -371,13 +349,10 @@ public class ProductDAO implements DAOInterface<Product> {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 	public List<Product> selectDistinctBrand() {
-		List<Product> ketqua = new ArrayList<Product>();
-		categoryDAO = new CategoryDAO();
-		brandDAO = new BrandDAO();
-		supplierDAO = new SupplierDAO();
+		List<Product> result = new ArrayList<Product>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT *\n"
@@ -404,9 +379,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id, CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
-				ketqua.add(p);
+				result.add(p);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -415,13 +390,10 @@ public class ProductDAO implements DAOInterface<Product> {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 	public List<Product> selectDistinctSupplier() {
-		List<Product> ketqua = new ArrayList<Product>();
-		categoryDAO = new CategoryDAO();
-		brandDAO = new BrandDAO();
-		supplierDAO = new SupplierDAO();
+		List<Product> result = new ArrayList<Product>();
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT *\n"
@@ -448,9 +420,9 @@ public class ProductDAO implements DAOInterface<Product> {
 				boolean deleted = rs.getBoolean("deleted");
 				int gender = rs.getInt("gender");
 				int likes  = rs.getInt("likes");
-				Product p = new Product(id, categoryDAO.selectById(categoryId), brandDAO.selectById(brandId), supplierDAO.selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				Product p = new Product(id, CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
 				
-				ketqua.add(p);
+				result.add(p);
 				
 			}
 			JDBCUtil.closeConnection(c);
@@ -459,7 +431,7 @@ public class ProductDAO implements DAOInterface<Product> {
 			e.printStackTrace();
 		}
 		
-		return ketqua;
+		return result;
 	}
 
 
