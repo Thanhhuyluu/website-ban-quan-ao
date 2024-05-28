@@ -20,6 +20,7 @@
 						<th>Giới tính</th>
 						<th>Ngày tạo</th>
 						<th>Thao tác</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -67,7 +68,19 @@
 										<i class="fa-solid fa-xmark icon-close"></i>
 										<div class="product-detail__img" style="background-image: url(<c:url value='/imgs/${product.img}'/>);" > </div>
 										<div class="product-detail__title">${product.title}</div>
-										<div class="product-detail__category">Loại áo: Nam</div>
+										<div class="product-detail__category">Loại áo: 
+										<c:choose>
+											<c:when test="${product.gender == 1}">
+												Nam
+											</c:when>
+											<c:when test="${product.gender == 2}">
+												Nữ
+											</c:when>
+											<c:otherwise>
+												Cả nam và nữ
+											</c:otherwise>
+										</c:choose>
+										</div>
 									</div>
 									<div class="modal__main">
 										<div class="select-size-color">
@@ -80,32 +93,36 @@
 												</c:forEach>
 												</select>
 											</div>
+											
 											<div class="select-item__color">
 												<label for="colorPicker" class="color__title">Màu: </label>
-												<div id="colorPicker" class="square" onclick="toggleColorOptions()">
+												
+												<div class="square colorPicker" >
 												</div>
-												<div id="colorOptions" class="color-options">
-													<c:forEach var="color" items="${colorsOfProduct}">
-													<div class="color-option" onclick="changeColor('#${color}')"
+												
+												<div class="color-options colorOptions" >
+												<c:forEach var="color" items="${colorsOfProduct}">
+													<div class="color-option" 
 														style="background-color: #${color};"></div>
-													</c:forEach>
+												</c:forEach>
 												</div>
 											</div>
+											
 										</div>
 										<div class="detail-product-count-fav">
 											<div class="detail-product-status-count">Trong kho còn ${countProductDetail} sản
 												phẩm</div>
-											<div class="detail-product-status-fav">Luợt thích: 17</div>
+											<div class="detail-product-status-fav">Luợt thích: ${product.likes}</div>
 										</div>
 										<div class="detail-product-descript">
 											<div class="descript-title">Mô tả</div>
-											<div class="descript-content">Áo này thuộc cho dòng thời trang cao cấp, hạng sang mà sang đàng</div>
+											<div class="descript-content">${product.description}</div>
 										</div>
 
 									</div>
 									<div class="modal__footer">
 										<div class="modal__footer-btn-wrapper">
-											<button class="add-productDetail-btn">Thêm sản phẩm </button>
+										 	 <a href="/Online_Shop/admin-productDetail-add?id=<c:out value='${product.id}'/>" class="add-productDetail-btn" >Thêm sản phẩm </a>  
 											<button class="close">Thoát</button>
 										</div>
 										
@@ -221,29 +238,28 @@
 		button.textContent = size;
 		toggleSizeDropdown();
 	}
-
-	function toggleColorOptions() {
-		var colorOptions = document.getElementById("colorOptions");
-		if (colorOptions.style.display === "none") {
+	function rgbToHex(rgb) {
+		// Chia chuỗi RGB thành mảng các số
+		var rgbArray = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		// Chuyển đổi các số thành hex
+		function hex(x) {
+			return ("0" + parseInt(x).toString(16)).slice(-2);
+		}
+		// Trả về mã hex
+		return "#" + hex(rgbArray[1]) + hex(rgbArray[2]) + hex(rgbArray[3]);
+	}
+ 	/* function toggleColorOptions() {
+		 const colorOptions = document.querySelector(".colorOptions");
+		 if (colorOptions.style.display === "none") {
 			colorOptions.style.display = "block";
 		} else {
 			colorOptions.style.display = "none";
-		}
-	}
-	//          SET MAU BAN DAU
-	window.onload = function () {
-		var firstColorOption = document.querySelector(".color-option"); // Lấy color-option đầu tiên
-		var firstColor = window.getComputedStyle(firstColorOption).getPropertyValue(
-			"background-color"); // Lấy màu nền của color-option đầu tiên
-		changeColor(firstColor); // Áp dụng màu của color-option đầu tiên vào ô màu chính
-	};
-
-	function changeColor(color) {
-		var colorPicker = document.getElementById("colorPicker");
-		colorPicker.style.backgroundColor = color;
-		var colorOptions = document.getElementById("colorOptions");
-		colorOptions.style.display = "none";
-	}
+		} 
+	}   */
+	/* function changeColor(color) {
+		
+		
+	}   */
 	const btn_show_detail = document.querySelectorAll('.btn-detail-product');
 	btn_show_detail.forEach(button => {
 		button.addEventListener('click', function () {
@@ -264,7 +280,42 @@
 				// modal_product_detail.classList.toggle('modal--active')
 				console.log('Turn off'); 
 			})
-
+			
+			const colorPicker = modal_product_detail.querySelector(".colorPicker");
+			const colorOption = modal_product_detail.querySelector('.colorOptions');
+			
+			 
+			
+			const firstColorOption = modal_product_detail.querySelector('.color-option'); // Lấy color-option đầu tiên
+			const firstColor = window.getComputedStyle(firstColorOption).getPropertyValue("background-color"); // Lấy màu nền của color-option đầu tiên
+			console.log(rgbToHex(firstColor));
+			/* changeColor(rgbToHex(firstColor)); // Áp dụng màu của color-option đầu tiên vào ô màu chính */
+			
+			colorPicker.style.backgroundColor = rgbToHex(firstColor);
+			
+			const colorOptions = modal_product_detail.querySelectorAll(".color-option");
+			colorOptions.forEach(changeColor => {
+				
+				changeColor.addEventListener('click', function () {
+					console.log("ok")
+					colorPicker.style.backgroundColor = window.getComputedStyle(changeColor).getPropertyValue("background-color");
+					colorOption.style.display = "none";
+				})
+			})
+			
+			colorPicker.addEventListener('click', () => {
+				console.log("ok2")
+				if (colorOption.style.display === "none" || colorOption.style.display === "") {
+					colorOption.style.display = "block";
+				} else {
+					colorOption.style.display = "none";
+				} 
+			}) 
+				
+			/* const colorOptions = modal_product_detail.querySelector(".colorOptions"); */
+			/* colorOptions.style.display = "none"; */
+			/* changeColor(rgbToHex(firstColor)); */
+			
 			
 		});
 	});

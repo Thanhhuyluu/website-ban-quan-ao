@@ -179,9 +179,6 @@ public class CartPageController extends HttpServlet {
 					response.addCookie(cookie);
 					request.setAttribute("cart",cart);
 					request.getRequestDispatcher("/views/web/cart-page.jsp").forward(request, response);
-					
-					
-					
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				}

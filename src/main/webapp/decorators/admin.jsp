@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/category.css' />">
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/formadditem.css' />">
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/orderDetail.css' />">
+    <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/addNewProduct.css' />">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">	
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- icon -->

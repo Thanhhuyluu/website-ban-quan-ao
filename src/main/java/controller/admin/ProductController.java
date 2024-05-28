@@ -32,7 +32,7 @@ import model.Supplier;
 import service.ProductManager;
 
 @WebServlet(urlPatterns = { "/admin-product", "/admin-product-new", "/admin-product-insert", "/admin-product-delete",
-		"/admin-product-edit", "/admin-product-update" })
+		"/admin-product-edit", "/admin-product-update", "/admin-productDetail-add", "/admin-productDetail-insert" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50 // 50MB
@@ -66,6 +66,12 @@ public class ProductController extends HttpServlet {
 				break;
 			case "/admin-product-update":
 				updateProduct(req, resp);
+				break;
+			case "/admin-productDetail-add":
+				showNewProductDetail(req, resp);
+				break;
+			case "/admin-productDetail-insert":
+				insertProductDetail(req, resp);
 				break;
 			default:
 				listProduct(req, resp);
@@ -109,6 +115,14 @@ public class ProductController extends HttpServlet {
 		request.setAttribute("brands", brands);
 		request.setAttribute("suppliers", suppliers);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productAdd.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void showNewProductDetail(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int productId = Integer.parseInt(request.getParameter("id"));
+		request.setAttribute("productId", productId);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productDetailAdd.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -266,6 +280,8 @@ public class ProductController extends HttpServlet {
 		response.sendRedirect("admin-product");
 
 	}
+	
+	
 
 	private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
@@ -279,5 +295,13 @@ public class ProductController extends HttpServlet {
 		response.sendRedirect("admin-product");
 
 	}
-
+	
+	private void insertProductDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int productId = Integer.parseInt(request.getParameter("productId"));
+		String size = request.getParameter("size");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String colorRaw = request.getParameter("color");
+		String color = colorRaw.substring(1);
+		System.out.println(productId);
+	}
 }

@@ -228,6 +228,7 @@ body{
 }
 /* container body */
 .container-body{
+	min-height: calc(80vh);
     background-color: white;
     /* height: 1000px; */
     display: flex;

@@ -172,47 +172,12 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 		return result;
 	}
 	public int countProductDetail(Product product) {
-		PreparedStatement pst = null;
-	    ResultSet rs = null;
-	    int count = 0;
-	    Connection c = null;
-		try {
-			 c = JDBCUtil.getConnection();
-			String sql = "SELECT COUNT(*) FROM `product_details` WHERE `product_id` = ?";
-			pst = c.prepareStatement(sql);
-			pst.setInt(1, product.getId());
-			rs = pst.executeQuery();
-			if (rs.next()) {
-	            count = rs.getInt(1);
-	        }
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<ProductDetail> lProductDetails = selectByProductId(product.getId());
+		int result = 0;
+		for (ProductDetail productDetail : lProductDetails) {
+			result += productDetail.getQuantity();
 		}
-		finally {
-	        // Đóng ResultSet, PreparedStatement không cần kiểm tra null vì chúng không thể null
-	        if (rs != null) {
-	            try {
-	                rs.close();
-	            } catch (SQLException ex) {
-	                ex.printStackTrace();
-	            }
-	        }
-	        if (pst != null) {
-	            try {
-	                pst.close();
-	            } catch (SQLException ex) {
-	                ex.printStackTrace();
-	            }
-	        }
-	        if ( c != null) {
-	        	try {
-	        		JDBCUtil.closeConnection(c);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-	        }
-		}
-		return count;
+		return result;
 	}
 	public ProductDetail selectByColorAndSize(String pColor, String pSize, int proId) {
 		ProductDetail result = null;
