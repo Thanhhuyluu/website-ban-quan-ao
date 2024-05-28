@@ -60,11 +60,10 @@ public class VNPayPaymentResult extends HttpServlet {
 			model.Order order = OrderDAO.getInstance().selectLastestOrderOfUser(u.getId());
 			System.out.println("test: " + order.toString());
 			String createdBy = order.getUser().getFullname();
-			boolean refunded = false;
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 	        
 			result = "Giao dịch thành công";
-			OnlinePayment onlPayment = new OnlinePayment(order,Integer.parseInt(amount) ,PaymentTransactionNo,LocalDateTime.parse(transactionDate,formatter),createdBy,refunded);
+			OnlinePayment onlPayment = new OnlinePayment(order,Integer.parseInt(amount) ,PaymentTransactionNo,LocalDateTime.parse(transactionDate,formatter),createdBy);
 			OnlinePaymentDAO.getInstance().insert(onlPayment);
 			
 			List<ProductDetail> productDetailList = ProductDetailDAO.getInstance().selectAll();

@@ -101,6 +101,20 @@ body{
 .sidebar-toggler:hover{
     opacity: 0.8;
 }
+
+.side-bar__item-link-request-count{
+	
+	margin-left: 20px;
+	border-radius: 50%;
+	color: #fff;
+	line-height: 20px;
+	text-align: center;
+	background-color: #a79797;
+	height: 20px;
+	width: 20px;
+	font-size: 1.2rem;
+	font-weight: 500;
+}
 .header__search{
     display: flex;
     border: 1px solid #dadada;

@@ -163,7 +163,7 @@
                                                     Đơn hàng
                                                 </h3>
                                                 <h3 class="payment-page-bold">
-                                                    2.500.000 vnđ
+                                                    ${cart.getTotalMoney() } vnđ
                                                 </h3>
                                             </div>
                                         </div>
@@ -174,7 +174,7 @@
                                                     Giảm
                                                 </h3>
                                                 <h3 class="payment-page-normal">
-                                                    0 vnđ
+                                                    ${cart.getSaleoffMoney() } vnđ
                                                 </h3>
                                             </div>
                                         </div>
@@ -183,7 +183,7 @@
                                     <div class="payment-page__total-price">
                                         <div class="payment-page__row">
                                             <h3 class="payment-page__total-price-heading">Tổng cộng</h3>
-                                            <h3 class="payment-page__total-price-value">2.300.000 vnđ</h3>
+                                            <h3 class="payment-page__total-price-value">${cart.getAfterSaleoffMoney() } vnđ</h3>
                                         </div>
                                     </div>
                                     <button type="submit" class="payment-page__btn-submit">Hoàn tất đặt hàng</button>

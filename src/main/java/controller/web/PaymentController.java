@@ -152,7 +152,7 @@ public class PaymentController extends HttpServlet {
 				}
 				Cart cart = new Cart(txt, productDetailList);
 				SessionUtil.getInstance().putValue(request, "ORDER", o);
-				request.setAttribute("totalMoney", cart.getTotalMoney());
+				request.setAttribute("totalMoney", cart.getAfterSaleoffMoney());
 				request.getRequestDispatcher("/vnpay-payment").forward(request, response);
 			}
 			

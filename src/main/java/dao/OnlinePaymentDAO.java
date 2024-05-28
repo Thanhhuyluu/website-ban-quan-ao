@@ -23,15 +23,14 @@ public class OnlinePaymentDAO implements DAOInterface<OnlinePayment>{
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "INSERT INTO `online_payment`(`order_id`, `amount`, `transaction_no`, `transaction_date`, `created_by`, `refunded`) "
-					+ "VALUES (?,?,?,?,?,?)";
+			String sql = "INSERT INTO `online_payment`(`order_id`, `amount`, `transaction_no`, `transaction_date`, `created_by`) "
+					+ "VALUES (?,?,?,?,?)";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, t.getOrder().getId());
 			pst.setInt(2, t.getAmount());
 			pst.setString(3, t.getTransactionNo());
 			pst.setTimestamp(4, java.sql.Timestamp.valueOf(t.getTransactionDate()));
 			pst.setString(5, t.getCreatedBy());
-			pst.setBoolean(6, t.isRefunded());
 			pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
@@ -47,15 +46,14 @@ public class OnlinePaymentDAO implements DAOInterface<OnlinePayment>{
 		int ketqua = 0;
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "UPDATE `online_payment` SET `order_id`= ? ,`amount`= ? ,`transaction_no`= ? ,`transaction_date`= ? ,`created_by`= ? ,`refunded`= ? WHERE `id` = ?";
+			String sql = "UPDATE `online_payment` SET `order_id`= ? ,`amount`= ? ,`transaction_no`= ? ,`transaction_date`= ? ,`created_by`= ? WHERE `id` = ?";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, t.getOrder().getId());
 			pst.setInt(2, t.getAmount());
 			pst.setString(3, t.getTransactionNo());
 			pst.setTimestamp(4, java.sql.Timestamp.valueOf(t.getTransactionDate()));
 			pst.setString(5, t.getCreatedBy());
-			pst.setBoolean(6, t.isRefunded());
-			pst.setInt(7, t.getId());
+			pst.setInt(6, t.getId());
 			pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + ketqua);
 			System.out.println("Lệnh đã thực thi là: " + sql);
@@ -102,8 +100,7 @@ public class OnlinePaymentDAO implements DAOInterface<OnlinePayment>{
 				String transactionNo = rs.getString("transaction_no");
 				Timestamp transactionDate_raw = rs.getTimestamp("transaction_date");
 				String createdBy = rs.getString("created_by");
-				boolean refunded = rs.getBoolean("refunded");
-				OnlinePayment onlPayment = new OnlinePayment(id, orderDao.selectById(orderId),amount,transactionNo,transactionDate_raw.toLocalDateTime(),createdBy,refunded);
+				OnlinePayment onlPayment = new OnlinePayment(id, orderDao.selectById(orderId),amount,transactionNo,transactionDate_raw.toLocalDateTime(),createdBy);
 				
 				ketqua.add(onlPayment);
 				
@@ -135,9 +132,8 @@ public class OnlinePaymentDAO implements DAOInterface<OnlinePayment>{
 				String transactionNo = rs.getString("transaction_no");
 				Timestamp transactionDate_raw = rs.getTimestamp("transaction_date");
 				String createdBy = rs.getString("created_by");
-				boolean refunded = rs.getBoolean("refunded");
 				
-				ketqua  = new OnlinePayment(Id, orderDao.selectById(orderId),amount,transactionNo,transactionDate_raw.toLocalDateTime(),createdBy,refunded);
+				ketqua  = new OnlinePayment(Id, orderDao.selectById(orderId),amount,transactionNo,transactionDate_raw.toLocalDateTime(),createdBy);
 				
 			}
 			JDBCUtil.closeConnection(c);

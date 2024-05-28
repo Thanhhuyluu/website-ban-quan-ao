@@ -940,6 +940,7 @@ i.product-item-like-icon-fill{
 .product-item-like__btn .product-item-like-icon-empty{
     transition: scale 0.3s;
     line-height: 50px;
+    color: red;
 
 }
 

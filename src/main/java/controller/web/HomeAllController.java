@@ -170,9 +170,10 @@ public class HomeAllController extends HttpServlet {
 			List<Category> upperList = categoryDao.selectByType(1);
 			List<Category> lowerList = categoryDao.selectByType(2);
 			
-					
+			List<Integer> likesList = ProductLikeHandle.getLikesProducst(request, response);
 			
 			
+			request.setAttribute("likedProducts", likesList);
 			request.setAttribute("upperList", upperList);
 			request.setAttribute("lowerList", lowerList);
 			request.setAttribute("list", list);

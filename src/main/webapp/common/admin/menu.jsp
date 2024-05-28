@@ -61,6 +61,15 @@
                         <span class="item-title">Nhân viên</span>
                     </a>
                 </li>
+                <li class="side-bar__item <c:if test="${desiredPart == 'admin-refund-request' }">
+  					  active
+				</c:if> ">
+                    <a href="<c:url value = "admin-refund-request-list"/>" class="side-bar__item-link"> 
+                        <i class="fa-solid fa-code-pull-request" style="font-size: 1.6rem; margin-right: 12px; margin-left: 3px;"></i>
+                        <span class="item-title">Request</span>
+                        <span class="side-bar__item-link-request-count">20</span>
+                    </a>
+                </li>
             </ul>
         </div>
         

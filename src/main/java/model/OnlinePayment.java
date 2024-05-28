@@ -9,9 +9,8 @@ public class OnlinePayment {
 	private String transactionNo;
 	private LocalDateTime transactionDate;
 	private String createdBy;
-	private boolean refunded;
 	public OnlinePayment(int id, Order order, int amount, String transactionNo, LocalDateTime transactionDate,
-			String createdBy, boolean refunded) {
+			String createdBy) {
 		super();
 		this.id = id;
 		this.order = order;
@@ -19,17 +18,15 @@ public class OnlinePayment {
 		this.transactionNo = transactionNo;
 		this.transactionDate = transactionDate;
 		this.createdBy = createdBy;
-		this.refunded = refunded;
 	}
 	public OnlinePayment(Order order, int amount, String transactionNo, LocalDateTime transactionDate,
-			String createdBy, boolean refunded) {
+			String createdBy) {
 		super();
 		this.order = order;
 		this.amount = amount;
 		this.transactionNo = transactionNo;
 		this.transactionDate = transactionDate;
 		this.createdBy = createdBy;
-		this.refunded = refunded;
 	}
 	public int getId() {
 		return id;
@@ -66,12 +63,6 @@ public class OnlinePayment {
 	}
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
-	}
-	public boolean isRefunded() {
-		return refunded;
-	}
-	public void setRefunded(boolean refunded) {
-		this.refunded = refunded;
 	}
 	
 	

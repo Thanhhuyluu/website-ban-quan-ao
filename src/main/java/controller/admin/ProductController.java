@@ -140,7 +140,7 @@ public class ProductController extends HttpServlet {
 
 		try {
 			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-			File file1 = new File("/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp");
+			File file1 = new File("C:\\Users\\ADMIN\\git\\new_repository\\Online_Shop\\src\\main\\webapp\\");
 			diskFileItemFactory.setRepository(file1);
 			ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
 			List<FileItem> fileItems = fileUpload.parseRequest(request);
@@ -193,7 +193,7 @@ public class ProductController extends HttpServlet {
 					if ("img".equals(item.getFieldName())) {
 						img = item.getName();
 						File file = new File(
-								"/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/imgs/"
+								"C:\\Users\\ADMIN\\git\\new_repository\\Online_Shop\\src\\main\\webapp\\imgs\\"
 										+ img);
 						item.write(file);
 
@@ -222,8 +222,7 @@ public class ProductController extends HttpServlet {
 				message = "Thêm sản phẩm thất !!";
 			}
 			request.setAttribute("message", message);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("admin-product");
-			dispatcher.forward(request, response);
+			response.sendRedirect("admin-product");
 
 		} catch (FileUploadException e) {
 			System.out.println("File upload error!");
