@@ -26,14 +26,14 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 		try {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "INSERT INTO `product_details`(`product_id`, `size`, `quantity`, `created_at`, `color`)"
-					+ " VALUES (?,?,?,?,?,?)";
+					+ " VALUES (?,?,?,?,?)";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, t.getProduct().getId());
 			pst.setString(2, t.getSize());
 			pst.setInt(3, t.getQuantity());
 			pst.setDate(4, t.getCreatedAt());
 			pst.setString(5, t.getColor());
-			result= pst.executeUpdate();
+			result = pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
@@ -198,6 +198,33 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				String color = rs.getString("color");
 				result = new ProductDetail(Id, ProductDAO.getInstance().selectById(productId), size, quantity, createdAt, color);
 
+			}
+			JDBCUtil.closeConnection(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public List<ProductDetail> selectByColorAndSizeAndProductId(String pColor, String pSize, int proId) {
+		List<ProductDetail> result = new ArrayList<ProductDetail>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `product_details` WHERE `color` = ? AND `size` = ? 	AND product_id = ? ";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, pColor);
+			pst.setString(2, pSize);
+			pst.setInt(3, proId);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				int Id = rs.getInt("id");
+				int productId = rs.getInt("product_id");
+				String size = rs.getString("size");
+				int quantity = rs.getInt("quantity");
+				Date createdAt = rs.getDate("created_at");
+				String color = rs.getString("color");
+				ProductDetail productDetail= new ProductDetail(Id, ProductDAO.getInstance().selectById(productId), size, quantity, createdAt, color);
+				result.add(productDetail);
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (SQLException e) {

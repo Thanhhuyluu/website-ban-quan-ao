@@ -5,6 +5,8 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="dec"%>
 <%@ include file="/common/taglib.jsp"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,7 @@
 	<c:set var="saleoffString" value="saleoff=${requestScope.saleoff}&" />
 	<c:set var="searchKey" value="${requestScope.searchKey }" />
 	<c:set var="searchKeyString" value="searchKey=${requestScope.searchKey}&" />
+	<c:set var="likedProducts" value="${requestScope.likedProducts}" />
 	<div class="grid">
 		<div class="grid__row">
 			<div class="grid__column-3">
@@ -119,8 +122,8 @@
 												<div class="product-item-buy__btn">Mua ngay</div>
 											</a>
 
-											<div
-												class="product-item-like__btn product-item-like__btn--liked">
+											<div id="product-item-like-${p.getId() }" onclick="likeProduct(${p.getId()})"
+												class="product-item-like__btn  ${fn:contains(likedProducts, p.getId()) == true ?"product-item-like__btn--liked":""  } ">
 												<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
 												<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
 											</div>
@@ -185,6 +188,24 @@
 			</div>
 
 			<script type="text/javascript">
+			
+			function likeProduct(Id){
+				$.ajax({
+				    type: "POST",
+				    url: "/Online_Shop/like-product",
+				    data: {
+				    	productId: Id
+				    	
+				    },
+				    
+				    success: function(result) {
+				        var likedProduct = document.getElementById('product-item-like-'+Id);
+				        likedProduct.classList.toggle('product-item-like__btn--liked');
+						}
+					});
+			
+			}
+			
 				var container = document
 						.querySelector(".home-product .grid__row");
 				console.log(container);
@@ -203,6 +224,12 @@
 
 					noProduct.style.display = "none";
 				}
+				
+				
+				
+				
+				
+				
 			</script>
 		</div>
 	</div>

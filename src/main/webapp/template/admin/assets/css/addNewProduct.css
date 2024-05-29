@@ -201,6 +201,7 @@ html {
   cursor: pointer;
 }
 .btn-add-product.cancel {
+  text-decoration: none;
   background-color: #666666;
 }
 .btn-add-product:first-child {

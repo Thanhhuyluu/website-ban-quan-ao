@@ -102,8 +102,7 @@
 												
 												<div class="color-options colorOptions" >
 												<c:forEach var="color" items="${colorsOfProduct}">
-													<div class="color-option" 
-														style="background-color: #${color};"></div>
+													<div class="color-option" style="background-color: #${color};"></div>
 												</c:forEach>
 												</div>
 											</div>

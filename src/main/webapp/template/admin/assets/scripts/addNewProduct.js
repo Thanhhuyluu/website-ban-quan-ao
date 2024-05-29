@@ -82,7 +82,6 @@ function rgbToHex(rgb) {
 }
 
 //    CHONJ ANH
-
 const inputImg = document.getElementById('input-img');
 const displayImgs = document.getElementById('display-imgs');
 let imgList = [];
@@ -113,7 +112,6 @@ inputImg.addEventListener('change', function(){
     }
     reader.readAsDataURL(file);
   }
-
 });
 
 displayImgs.addEventListener('click', function(event){

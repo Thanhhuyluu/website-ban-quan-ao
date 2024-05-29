@@ -2,6 +2,7 @@ package controller.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,17 +23,21 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.BrandDAO;
 import dao.CategoryDAO;
+import dao.ImageDAO;
 import dao.ProductDAO;
+import dao.ProductDetailDAO;
 import dao.SupplierDAO;
 import model.Brand;
 import model.Category;
+import model.Image;
 import model.Product;
+import model.ProductDetail;
 import model.ProductItem;
 import model.Supplier;
 import service.ProductManager;
 
 @WebServlet(urlPatterns = { "/admin-product", "/admin-product-new", "/admin-product-insert", "/admin-product-delete",
-		"/admin-product-edit", "/admin-product-update", "/admin-productDetail-add", "/admin-productDetail-insert" })
+		"/admin-product-edit", "/admin-product-update", "/admin-productDetail-add", "/admin-productDetail-insert", "/admin-productDetail-back" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50 // 50MB
@@ -69,6 +74,9 @@ public class ProductController extends HttpServlet {
 				break;
 			case "/admin-productDetail-add":
 				showNewProductDetail(req, resp);
+				break;
+			case "/admin-productDetail-back":
+				backProductDetail(req, resp);
 				break;
 			case "/admin-productDetail-insert":
 				insertProductDetail(req, resp);
@@ -154,7 +162,7 @@ public class ProductController extends HttpServlet {
 
 		try {
 			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-			File file1 = new File("/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp");
+			File file1 = new File("/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/");
 			diskFileItemFactory.setRepository(file1);
 			ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
 			List<FileItem> fileItems = fileUpload.parseRequest(request);
@@ -232,12 +240,11 @@ public class ProductController extends HttpServlet {
 			String message = null; 
 			if (ProductDAO.getInstance().insert(newProduct) > 0){
 				message = "Thêm sản phẩm thành công!!"; 
-			}{
+			}else {
 				message = "Thêm sản phẩm thất !!";
 			}
 			request.setAttribute("message", message);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("admin-product");
-			dispatcher.forward(request, response);
+			response.sendRedirect("admin-product");
 
 		} catch (FileUploadException e) {
 			System.out.println("File upload error!");
@@ -280,9 +287,6 @@ public class ProductController extends HttpServlet {
 		response.sendRedirect("admin-product");
 
 	}
-	
-	
-
 	private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -295,13 +299,116 @@ public class ProductController extends HttpServlet {
 		response.sendRedirect("admin-product");
 
 	}
-	
 	private void insertProductDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int productId = Integer.parseInt(request.getParameter("productId"));
-		String size = request.getParameter("size");
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
-		String colorRaw = request.getParameter("color");
-		String color = colorRaw.substring(1);
-		System.out.println(productId);
+		
+		if (!ServletFileUpload.isMultipartContent(request)) {
+			System.out.println("Form is not multipart, cannot upload file.");
+			return;
+		}
+
+		try {
+			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+			File file1 = new File("/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/");
+			diskFileItemFactory.setRepository(file1);
+			ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
+			List<FileItem> fileItems = fileUpload.parseRequest(request);
+
+			String productId = null;
+			String size = null;
+			String quantity = null;
+			String color = null;
+			List<String> imagePaths = new ArrayList<>();
+
+
+			for (FileItem item : fileItems) {
+				if (item.isFormField()) {
+					// Process regular form field (input type="text|radio|checkbox|etc", select,
+					// etc).
+					String fieldName = item.getFieldName();
+					String fieldValue = item.getString();
+
+					switch (fieldName) {
+					case "productId":
+						productId = fieldValue;
+						break;
+					case "size":
+						size = fieldValue;
+						break;
+					case "quantity":
+						quantity = fieldValue;
+						break;
+					case "color":
+						color = fieldValue.substring(1);
+						break;	
+					}
+				} else {
+					// Process form file field (input type="file").
+					if ("img".equals(item.getFieldName())) {
+                        String img = item.getName();
+                        String filePath = "/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/imgs/";
+                        File file = new File(filePath + img);
+                        item.write(file);
+                        imagePaths.add(img);  // Lưu tên file vào danh sách
+                    }
+				}
+			}
+			int productIdValue = Integer.parseInt(productId);
+			String sizeValue = size;
+			int quantityValue = Integer.parseInt(quantity);
+			String colorValue = color;
+			Date createdAt = new Date(System.currentTimeMillis());
+			int rs1 = 0,rs2 = 0; 
+			ProductDetail productDetail = ProductDetailDAO.getInstance().selectByColorAndSize(colorValue, sizeValue, productIdValue);
+			
+			if(productDetail == null) {
+				rs1 = ProductDetailDAO.getInstance().insert(new ProductDetail(ProductDAO.getInstance().selectById(productIdValue), sizeValue, quantityValue, createdAt, colorValue)); 
+			}else {
+				int qtt = productDetail.getQuantity(); 
+				qtt += quantityValue;
+				productDetail.setQuantity(qtt);
+				rs1 = ProductDetailDAO.getInstance().update(productDetail);
+			}
+			List<Image> imgs = new ArrayList<Image>();
+			for (String img : imagePaths) {
+				Image image = ImageDAO.getInstance().selectByImgAndProductId(img, productIdValue);
+				if(image == null) {
+					imgs.add(new Image(ProductDAO.getInstance().selectById(productIdValue), img));
+				}
+			}
+			if (imgs.isEmpty()) {
+				System.out.println("Anh da ton tai!!");
+			}else {
+				rs2 = ImageDAO.getInstance().insert(imgs);
+			}
+			
+			String message = null; 
+			
+			if ( rs1 > 0 ){
+				message = "Thêm sản phẩm thành công!!"; 
+			}
+			else {
+				message = "Thêm sản phẩm thất bại!!";
+			}
+			System.out.println(message);
+			request.setAttribute("message", message);
+			response.sendRedirect("admin-product");
+			
+		} catch (FileUploadException e) {
+			System.out.println("File upload error!");
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			System.out.println("Number format error: " + e.getMessage());
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			System.out.println("Thiếu tham số: " + e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Lỗi khác: " + e.getMessage());
+		}
+		
+	}
+	private void backProductDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.sendRedirect("admin-product");
 	}
 }

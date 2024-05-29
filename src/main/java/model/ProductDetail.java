@@ -5,8 +5,8 @@ import java.sql.Date;
 public class ProductDetail {
 	private int id;
 	private Product product;
-	String size;
-	int quantity;
+	private String size;
+	private int quantity;
 	private Date createdAt;
 	private String color;
 	public ProductDetail() {

@@ -7,7 +7,7 @@
             <div class="new-product__header ">
                 <h2 class="new-product-title">Thêm sản phẩm</h2>
             </div>
-            <form action="admin-productDetail-insert" method="POST">
+            <form action="admin-productDetail-insert" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="productId" value="${productId}">
                 <div class="new-product__body">
                     <div class="new-product__select-item__size">
@@ -70,7 +70,7 @@
                     
                 </div>
                 <div class="new-product__footer">
-                    <button class="btn-add-product cancel">Huỷ</button>
+                    <a class="btn-add-product cancel" href="/Online_Shop/admin-productDetail-back" >Huỷ</a>
                     <button class="btn-add-product add " type="submit">Thêm</button>
                 </div>
             </form>

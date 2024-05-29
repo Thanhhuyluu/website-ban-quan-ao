@@ -168,8 +168,8 @@
 				<form action="don-hang" id="order-cancel-id-sender" class="order-cancel-confirm">
 					<input type="hidden" name="action" value="huy"/>
 					<input type="hidden" name="orderId" id="order_id_input" value=""/>
-					<h3 class="order-cancel-confirm__heading">Bạn đã chắc muốn xóa
-						đơn hàng này chứ</h3>
+					<h3 class="order-cancel-confirm__heading">Bạn đã chắc muốn hủy
+						đơn hàng này chứ ?</h3>
 					<div class="order-cancel-confirm__btn-wrapper">
 						<a class="order-cancel-confirm__btn order-cancel-out">Thoát</a> 
 						<button
@@ -191,7 +191,8 @@
 		src="<c:url value='/template/web/assets/scripts/product_page.js'/>"></script>
 	<script
 		src="<c:url value='/template/web/assets/scripts/cart_page.js'/>"></script>
-
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script>
         Validator({
             form: '#auth-form-login',

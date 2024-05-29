@@ -40,6 +40,34 @@ public class ImageDAO implements DAOInterface<Image>{
 		return result;
 	}
 
+	public int insert(List<Image> images) {
+        int result = 0;
+        Connection c = null;
+        PreparedStatement pst = null;
+        try {
+            c = JDBCUtil.getConnection();
+            String sql = "INSERT INTO `image`(`product_id`,`img`) VALUES (?, ?)";
+            pst = c.prepareStatement(sql);
+
+            for (Image img : images) {
+                pst.setInt(1, img.getProduct().getId());
+                pst.setString(2, img.getImg());
+                result += pst.executeUpdate();
+                System.out.println("Lệnh đã thực thi là: " + sql);
+            }
+            System.out.println("Tổng số lệnh đã thêm: " + result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) pst.close();
+                if (c != null) JDBCUtil.closeConnection(c);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
 	@Override
 	public int update(Image t) {
 		int result = 0;
@@ -126,6 +154,29 @@ public class ImageDAO implements DAOInterface<Image>{
 		}
 		return result;
 	}
+	
+	public Image selectByImgAndProductId(String imgName, int proId) {
+	    Image result = null;
+	    try {
+	        Connection c = JDBCUtil.getConnection();
+	        String sql = "SELECT * FROM `image` WHERE `img` = ? AND `product_id` = ?";
+	        PreparedStatement pst = c.prepareStatement(sql);
+	        pst.setString(1, imgName);
+	        pst.setInt(2, proId);
+	        ResultSet rs = pst.executeQuery();
+	        if (rs.next()) {
+	            int id = rs.getInt("id");
+	            int productId = rs.getInt("product_id");
+	            String img = rs.getString("img");
+	            result = new Image(id, ProductDAO.getInstance().selectById(productId), img);
+	        }
+	        JDBCUtil.closeConnection(c);
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return result;
+	}
+
 
 	@Override
 	public ArrayList<Image> selectByCondition(String condition) {
