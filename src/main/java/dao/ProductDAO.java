@@ -183,6 +183,60 @@ public class ProductDAO implements DAOInterface<Product> {
 		return arr;
 	}
 	
+	public List<Product> searchByName(String productName) {
+	    List<Product> result = new ArrayList<>();
+	    Connection c = null;
+	    PreparedStatement pst = null;
+	    ResultSet rs = null;
+	    try {
+	        c = JDBCUtil.getConnection();
+	        String sql = "SELECT * FROM `product` WHERE title LIKE ?";
+	        pst = c.prepareStatement(sql);
+	        pst.setString(1, "%" + productName + "%"); // Tìm kiếm sản phẩm có tên chứa productName
+	        rs = pst.executeQuery();
+	        while (rs.next()) {
+	            int id = rs.getInt("id");
+	            int categoryId = rs.getInt("category_id");
+	            int brandId = rs.getInt("brand_id");
+	            int supplierId = rs.getInt("supplier_id");
+	            String title = rs.getString("title");
+	            int price = rs.getInt("price");
+	            int discount = rs.getInt("discount");
+	            String img = rs.getString("img");
+	            String description = rs.getString("description");
+	            Date createdAt = rs.getDate("created_at");
+	            Date updatedAt = rs.getDate("updated_at");
+	            boolean deleted = rs.getBoolean("deleted");
+	            int gender = rs.getInt("gender");
+	            int likes = rs.getInt("likes");
+	            Product p = new Product(id, CategoryDAO.getInstance().selectById(categoryId),
+	                    BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId),
+	                    title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+	            result.add(p);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (rs != null) {
+	            try {
+	                rs.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        JDBCUtil.closeConnection(c);
+	    }
+	    return result;
+	}
+
+	
 	public List<Product> selectByCateId(int[] arr) {
 		List<Product> result = new ArrayList<Product>();
 		try {
@@ -237,42 +291,6 @@ public class ProductDAO implements DAOInterface<Product> {
 	
 	
 	
-	
-	public List<Product> searchByName(String key) {
-		List<Product> result = new ArrayList<Product>();
-		try {
-			Connection c = JDBCUtil.getConnection();
-			String sql = "SELECT * FROM `product` where title like ?";
-			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setString(1,"%" + key + "%");
-			ResultSet rs = pst.executeQuery(sql);
-			while(rs.next()) {
-				int id = rs.getInt("id");
-				int categoryId = rs.getInt("category_id");
-				int brandId = rs.getInt("brand_id");
-				int supplierId = rs.getInt("supplier_id");
-				String title = rs.getString("title");
-				int price = rs.getInt("price");
-				int discount = rs.getInt("discount");
-				String img = rs.getString("img");
-				String description = rs.getString("description");
-				Date createdAt = rs.getDate("created_at");
-				Date updatedAt = rs.getDate("updated_at");
-				boolean deleted = rs.getBoolean("deleted");
-				int gender = rs.getInt("gender");
-				int likes  = rs.getInt("likes");
-				Product p = new Product(id,CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
-				
-				result.add(p);
-				
-			}
-			JDBCUtil.closeConnection(c);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
 
 	public List<Product> selectRelatedProductsByBrand(int bId, int pId) {
 		List<Product> result = new ArrayList<Product>();
@@ -434,5 +452,6 @@ public class ProductDAO implements DAOInterface<Product> {
 		return result;
 	}
 
+	
 
 }

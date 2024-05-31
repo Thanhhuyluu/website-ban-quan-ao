@@ -16,7 +16,7 @@ import model.Order;
 import model.OrderItem;
 import service.OrderManager;
 
-@WebServlet(urlPatterns = {"/admin-order", "/admin-order-new", "/admin-order-insert", "/admin-order-deleteSoft", "/admin-order-edit", "/admin-order-update", "/admin-orderDetail" })
+@WebServlet(urlPatterns = {"/admin-order", "/admin-order-new", "/admin-order-insert", "/admin-order-deleteSoft", "/admin-order-edit", "/admin-order-update", "/admin-orderDetail", "/admin-order-acceptOrder"})
 public class OrderController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +39,9 @@ public class OrderController extends HttpServlet{
 	                break;
 	            case "/admin-orderDetail":
 //	            	deleteSoftOrder(req, resp);
+	                break;
+	            case "/admin-order-acceptOrder":
+	            	acceptOrder(req, resp);
 	                break;
 	            default:
 	                listOrder(req, resp);
@@ -70,9 +73,23 @@ public class OrderController extends HttpServlet{
 	    	  int id = Integer.parseInt(request.getParameter("id"));
 		        
 		        Order order = orderDAO.selectById(id);
+		        if (order.getStatus() != 2) {
+		        	order.setStatus(3);
+			        orderDAO.update(order);
+		        }
 		        
-		        order.setStatus(3);
-		        orderDAO.update(order);
+		        response.sendRedirect("admin-order");
+	    }
+	    private void acceptOrder(HttpServletRequest request, HttpServletResponse response)
+	            throws ServletException, IOException {
+	    	  int id = Integer.parseInt(request.getParameter("id"));
+		        
+		        Order order = orderDAO.selectById(id);
+		        if(order.getStatus() == 0) {
+		        	order.setStatus(1);
+			        orderDAO.update(order);
+		        }
+		        
 		        response.sendRedirect("admin-order");
 	    }
 	 

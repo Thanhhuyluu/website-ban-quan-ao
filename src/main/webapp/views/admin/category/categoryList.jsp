@@ -8,7 +8,7 @@
             </h6>
             <div class="btn-add">
                 <a class="btn-add-link" href=" <c:url value = "admin-category-new"/>" >
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-plus" style="text-align: center;" title="Thêm loại sản phẩm mới "></i>
                 </a>
             </div>
         </div>
@@ -35,7 +35,7 @@
                         </c:choose>      
                         <td>
                             <a class="active-link" href="/Online_Shop/admin-category-edit?id=<c:out value='${category.id}' />" >
-                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-pen-to-square" style="text-align: center;" title="Chỉnh sửa loại sản phẩm "></i>
                             </a>
                             
                         </td>

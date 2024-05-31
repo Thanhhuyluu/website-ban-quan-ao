@@ -29,12 +29,12 @@
                    		<c:choose>
                             <c:when test="${customer.status == 0}">
                                  <a class="active-link" href="/Online_Shop/admin-customer-delete?id=<c:out value='${customer.id}' />" >
-		                           	<i class="fa-solid fa-unlock"></i>
+		                           	<i class="fa-solid fa-unlock"  style="text-align: center;" title="Tài khoản chưa bị khoá" ></i>
 		                        </a>
                             </c:when>    
                             <c:otherwise>
                                <a class="active-link" href="/Online_Shop/admin-customer-delete?id=<c:out value='${customer.id}' />" >
-		                           	<i class="fa-solid fa-lock"></i>
+		                           	<i class="fa-solid fa-lock"  style="text-align: center;" title="Tài khoản đã bị khoá" ></i>
 		                        </a>
                             </c:otherwise>    
                         </c:choose>  

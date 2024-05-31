@@ -6,7 +6,7 @@
 		<div class="classify__header">
 			<h6 class="classify__header-title">Danh sách sản phẩm </h6>
 			<div class="btn-add">
-				<a class="btn-add-link" href=" <c:url value = " admin-product-new" />"> <i class="fa-solid fa-plus"></i>
+				<a class="btn-add-link" href=" <c:url value = "admin-product-new" />"> <i class="fa-solid fa-plus" style="text-align: center;" title="Thêm sản phẩm mới "></i>
 				</a>
 			</div>
 		</div>
@@ -23,7 +23,7 @@
 						<th></th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="product-list">
 					<c:forEach var="lProductItem" items="${lProductItems}">
 						<c:set var="product" value="${lProductItem.product}" />
 						<c:set var="productDetails" value="${lProductItem.productDetails}" />
@@ -55,11 +55,11 @@
 							</td>
 							<td><a class="active-link"
 									href="/Online_Shop/admin-product-edit?id=<c:out value='${product.id}' />">
-									<i class="fa-solid fa-pen-to-square"></i>
+									<i class="fa-solid fa-pen-to-square" style="text-align: center;" title="Chỉnh sửa thông tin sản phẩm "></i>
 								</a> <a class="active-link product-delete-btn" data-bs-id="${product.id}">
-									<i class="fa-solid fa-trash-can"></i>
+									<i class="fa-solid fa-trash-can" style="text-align: center;" title="Xoá sản phẩm "></i>
 								</a> <a class="active-link btn-detail-product" id="btn-detail-product"> <i
-										class="fa-solid fa-magnifying-glass"></i>
+										class="fa-solid fa-magnifying-glass" style="text-align: center;" title="Xem chi tiết sản phẩm "></i>
 								</a></td>
 
 							<td id="modal_detail_product" class="modal modal-detail-product">

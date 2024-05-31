@@ -8,7 +8,7 @@
           </h6>
           <div class="btn-add">
               <a class="btn-add-link" href=" <c:url value = "admin-staff-new"/>" >
-                  <i class="fa-solid fa-plus"></i>
+                  <i class="fa-solid fa-plus" style="text-align: center;" title="Thêm nhân viên mới "></i>
               </a>
           </div>
       </div>
@@ -36,22 +36,22 @@
                    		<c:choose>
                             <c:when test="${staff.status == 0}">
                                  <a class="active-link" href="/Online_Shop/admin-staff-band?id=<c:out value='${staff.id}' />" >
-		                           	<i class="fa-solid fa-unlock" style="text-align: center;" title="Khoá tài khoản" ></i>
+		                           	<i class="fa-solid fa-unlock" style="text-align: center;" title="Tài khoản chưa bị khoá " ></i>
 		                        </a>
                             </c:when>    
                             <c:otherwise>
                                <a class="active-link" href="/Online_Shop/admin-staff-band?id=<c:out value='${staff.id}' />" >
-		                           	<i class="fa-solid fa-lock" style="text-align: center;" title="Mở khoá tài khoản" ></i>
+		                           	<i class="fa-solid fa-lock" style="text-align: center;" title="Tài khoản đã bị khoá" ></i>
 		                        </a>
                             </c:otherwise>    
                         </c:choose>  
                     </td>
                     <td>
                         <a class="active-link" href="/Online_Shop/admin-staff-edit?id=<c:out value='${staff.id}' />" >
-                            <i class="fa-solid fa-pen-to-square"></i>
+                            <i class="fa-solid fa-pen-to-square" style="text-align: center;" title="Cập nhật thông tin nhân viên  "></i>
                         </a>
                         <a class="active-link staff-delete-btn" id="open-modal-btn" data-bs-id="${staff.id}" >
-						    <i class="fa-solid fa-trash-can"></i> 
+						    <i class="fa-solid fa-trash-can" style="text-align: center;" title="Xoá nhân viên "></i> 
 						</a>
                     </td>
                   </tr>

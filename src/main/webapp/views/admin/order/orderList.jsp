@@ -13,7 +13,6 @@
 						<th>ID</th>
 						<th>Tên người nhận</th>
 						<th>Số điện thoại</th>
-						<th>Địa chỉ</th>
 						<th>Ngày đặt hàng</th>
 						<th>Trạng thái đơn</th>
 						<th>Thao tác</th>
@@ -29,7 +28,6 @@
 							<td><c:out value="${order.id}" /></td>
 							<td><c:out value="${order.fullname}" /></td>
 							<td><c:out value="${order.phoneNum}" /></td>
-							<td><c:out value="${order.address}" /></td>
 							<td><c:out value="${order.orderDate}" /></td>
 							<c:choose>
 								<c:when test="${order.status == 0}">
@@ -47,9 +45,12 @@
 							</c:choose>
 							<td><a class="active-link"
 								href="/Online_Shop/admin-order-deleteSoft?id=<c:out value='${order.id}' />">
-									<i class="fa-regular fa-calendar-xmark"></i>
+									<i class="fa-regular fa-calendar-xmark"  style="text-align: center;" title="Xác nhận huỷ đơn hàng " ></i>
+							</a><a class="active-link"
+								href="/Online_Shop/admin-order-acceptOrder?id=<c:out value='${order.id}' />">
+									<i class="fa-solid fa-calendar-check" style="text-align: center;" title="Xác nhận đơn hàng " ></i>
 							</a> <a class="active-link btn-show-modal-order-detail"> <i
-									class="fa-solid fa-magnifying-glass"></i>
+									class="fa-solid fa-magnifying-glass" style="text-align: center;" title="Xem chi tiết đơn hàng "></i>
 							</a></td>
 							<td class="modal modal-detail-order"
 								id="modal_detail_order_<c:out value='${order.id}' />">

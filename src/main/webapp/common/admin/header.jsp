@@ -9,7 +9,7 @@
 		<div class="header__search-icon">
 			<i class="fa-solid fa-magnifying-glass"></i>
 		</div>
-		<input type="text" class="header__search-input" placeholder="Tim kiem">
+		<input type="text"  name="txt" class="header__search-input" placeholder="Tim kiem">
 	</div>
 	<div class="header__right">
 		<div class="header__right-notify">

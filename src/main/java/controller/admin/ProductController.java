@@ -2,7 +2,6 @@ package controller.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,7 +36,8 @@ import model.Supplier;
 import service.ProductManager;
 
 @WebServlet(urlPatterns = { "/admin-product", "/admin-product-new", "/admin-product-insert", "/admin-product-delete",
-		"/admin-product-edit", "/admin-product-update", "/admin-productDetail-add", "/admin-productDetail-insert", "/admin-productDetail-back" })
+		"/admin-product-edit", "/admin-product-update", "/admin-productDetail-add", "/admin-productDetail-insert", 
+		"/admin-productDetail-back" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50 // 50MB
@@ -357,7 +357,8 @@ public class ProductController extends HttpServlet {
 			int quantityValue = Integer.parseInt(quantity);
 			String colorValue = color;
 			Date createdAt = new Date(System.currentTimeMillis());
-			int rs1 = 0,rs2 = 0; 
+			int rs1 = 0; 
+			int rs2 = 0; 
 			ProductDetail productDetail = ProductDetailDAO.getInstance().selectByColorAndSize(colorValue, sizeValue, productIdValue);
 			
 			if(productDetail == null) {
@@ -411,4 +412,5 @@ public class ProductController extends HttpServlet {
 	private void backProductDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("admin-product");
 	}
+
 }
