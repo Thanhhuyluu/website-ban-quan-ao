@@ -20,6 +20,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 
 import dao.BrandDAO;
 import dao.CategoryDAO;
@@ -162,7 +165,7 @@ public class ProductController extends HttpServlet {
 
 		try {
 			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-			File file1 = new File("/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/");
+			File file1 = new File("C:\\Users\\ADMIN\\git\\new_repository\\Online_Shop\\src\\main\\webapp\\");
 			diskFileItemFactory.setRepository(file1);
 			ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
 			List<FileItem> fileItems = fileUpload.parseRequest(request);
@@ -215,10 +218,39 @@ public class ProductController extends HttpServlet {
 					if ("img".equals(item.getFieldName())) {
 						img = item.getName();
 						File file = new File(
-								"/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/imgs/"
+								"C:\\Users\\ADMIN\\git\\new_repository\\Online_Shop\\src\\main\\webapp\\imgs\\"
 										+ img);
 						item.write(file);
 
+						try {
+				            // Đặt tên project cần tìm
+				            String projectName = "Online_Shop";
+
+				            // Lấy tất cả các project trong workspace
+				            IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+
+				            // Tìm project theo tên
+				            IProject targetProject = null;
+				            for (IProject project : projects) {
+				                if (project.getName().equals(projectName)) {
+				                    targetProject = project;
+				                    break;
+				                }
+				            }
+
+				            // Kiểm tra và làm việc với project được tìm thấy
+				            if (targetProject != null) {
+				                System.out.println("Found project: " + targetProject.getName());
+
+				                // Ví dụ: Refresh project được tìm thấy
+				                targetProject.refreshLocal(IResource.DEPTH_INFINITE, null);
+				                System.out.println("Project " + targetProject.getName() + " refreshed successfully.");
+				            } else {
+				                System.out.println("Project with name '" + projectName + "' not found.");
+				            }
+				        } catch (Exception e) {
+				            e.printStackTrace();
+				        }
 					}
 				}
 			}
@@ -308,7 +340,7 @@ public class ProductController extends HttpServlet {
 
 		try {
 			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-			File file1 = new File("/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/");
+			File file1 = new File("C:\\Users\\ADMIN\\git\\new_repository\\Online_Shop\\src\\main\\webapp\\");
 			diskFileItemFactory.setRepository(file1);
 			ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
 			List<FileItem> fileItems = fileUpload.parseRequest(request);
@@ -345,10 +377,39 @@ public class ProductController extends HttpServlet {
 					// Process form file field (input type="file").
 					if ("img".equals(item.getFieldName())) {
                         String img = item.getName();
-                        String filePath = "/Users/user/Documents/Workplace/JavaWeb/website-ban-quan-ao/src/main/webapp/imgs/";
+                        String filePath = "C:\\Users\\ADMIN\\git\\new_repository\\Online_Shop\\src\\main\\webapp\\imgs";
                         File file = new File(filePath + img);
                         item.write(file);
                         imagePaths.add(img);  // Lưu tên file vào danh sách
+                        try {
+				            // Đặt tên project cần tìm
+				            String projectName = "Online_Shop";
+
+				            // Lấy tất cả các project trong workspace
+				            IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+
+				            // Tìm project theo tên
+				            IProject targetProject = null;
+				            for (IProject project : projects) {
+				                if (project.getName().equals(projectName)) {
+				                    targetProject = project;
+				                    break;
+				                }
+				            }
+
+				            // Kiểm tra và làm việc với project được tìm thấy
+				            if (targetProject != null) {
+				                System.out.println("Found project: " + targetProject.getName());
+
+				                // Ví dụ: Refresh project được tìm thấy
+				                targetProject.refreshLocal(IResource.DEPTH_INFINITE, null);
+				                System.out.println("Project " + targetProject.getName() + " refreshed successfully.");
+				            } else {
+				                System.out.println("Project with name '" + projectName + "' not found.");
+				            }
+				        } catch (Exception e) {
+				            e.printStackTrace();
+				        }
                     }
 				}
 			}

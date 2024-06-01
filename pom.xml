@@ -16,6 +16,19 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<dependencies>
+		<!--
+		https://mvnrepository.com/artifact/org.eclipse.platform/org.eclipse.ui.workbench -->
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.ui.workbench</artifactId>
+			<version>3.131.100</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jdt</groupId>
+			<artifactId>org.eclipse.jdt.core</artifactId>
+			<version>3.12.2</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -65,18 +78,19 @@
 			<artifactId>weld-servlet</artifactId>
 			<version>1.1.0.Final</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+
+		<!--
+		https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
-		    <groupId>commons-fileupload</groupId>
-		    <artifactId>commons-fileupload</artifactId>
-		    <version>1.5</version>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.5</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.16.1</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.16.1</version>
 		</dependency>
 
 	</dependencies>

@@ -6,7 +6,7 @@
 		<div class="classify__header">
 			<h6 class="classify__header-title">Danh sách sản phẩm </h6>
 			<div class="btn-add">
-				<a class="btn-add-link" href=" <c:url value = " admin-product-new" />"> <i class="fa-solid fa-plus"></i>
+				<a class="btn-add-link" href=" <c:url value = "admin-product-new" />"> <i class="fa-solid fa-plus"></i>
 				</a>
 			</div>
 		</div>
