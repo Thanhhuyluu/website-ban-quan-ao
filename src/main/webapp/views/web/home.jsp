@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><dec:title default="Trang chủ" /></title>
+<title>Trang chủ - High</title>
 
 </head>
 <body>
@@ -21,7 +21,7 @@
 	<c:set var="saleoffString" value="saleoff=${requestScope.saleoff}&" />
 	<c:set var="searchKey" value="${requestScope.searchKey }" />
 	<c:set var="searchKeyString" value="searchKey=${requestScope.searchKey}&" />
-	<c:set var="likedProducts" value="${requestScope.likedProducts}" />
+	<c:set var="likedProduct" value="${requestScope.likedProduct}" />
 	<div class="grid">
 		<div class="grid__row">
 			<div class="grid__column-3">
@@ -123,9 +123,17 @@
 											</a>
 
 											<div id="product-item-like-${p.getId() }" onclick="likeProduct(${p.getId()})"
-												class="product-item-like__btn  ${fn:contains(likedProducts, p.getId()) == true ?"product-item-like__btn--liked":""  } ">
+											
+											<c:set var="isProductInList" value="false" />
+    
+										    <c:forEach var="id" items="${likedProduct}">
+										        <c:if test="${id == p.getId()}">
+										            <c:set var="isProductInList" value="true" />
+										        </c:if>
+										    </c:forEach>
+											
+												class="product-item-like__btn  ${isProductInList == true ?"product-item-like__btn--liked":""  } ">
 												<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-												<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
 											</div>
 										</div>
 									</div>
@@ -201,7 +209,12 @@
 				    success: function(result) {
 				        var likedProduct = document.getElementById('product-item-like-'+Id);
 				        likedProduct.classList.toggle('product-item-like__btn--liked');
-						}
+				        
+				        location.reload();
+				    
+				    }
+				    
+				    	
 					});
 			
 			}

@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ProductDAO;
+import dao.ProductDetailDAO;
+import model.Product;
+import model.ProductDetail;
+import service.LikedProductsManager;
+
 /**
  * Servlet implementation class ProductLikeHandle
  */
@@ -49,14 +55,21 @@ public class ProductLikeHandle extends HttpServlet {
 						txt+=c.getValue();
 				}
 			}
+			Product pd = ProductDAO.getInstance().selectById(Integer.parseInt(proId_raw));
+			ProductDetail pDD = ProductDetailDAO.getInstance().selectOne(pd);
 			if(txt.isEmpty()) {
-				txt+=proId_raw;
+				
+				if(pDD != null)
+				{
+					txt+=proId_raw;
+					
+				}
 			}else {
 				String []a = txt.split("/");
 				txt="";
 				int flat = -1;
 				for(int i = 0; i< a.length; i++) {
-					if(a[i].equals(proId_raw)) {
+					if(a[i].equals(String.valueOf(proId_raw))) {
 						flat = i;
 					}
 				}
@@ -72,13 +85,18 @@ public class ProductLikeHandle extends HttpServlet {
 					for(int i = 0; i < a.length; i++) {
 						txt+=a[i] + "/";
 					}
-					txt += proId_raw;
+					txt += String.valueOf(proId_raw);
 				}
 			}
 			Cookie co = new Cookie("likedProducts",txt);
+			co.setMaxAge(60*60*24*30*12);
 			response.addCookie(co);
+			
+			
+			
 		}
 	}
+	
 	public static List<Integer> getLikesProducst(HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
 		String txt = "";
@@ -93,11 +111,21 @@ public class ProductLikeHandle extends HttpServlet {
 			List<Integer> b = new ArrayList<Integer>();
 			for(int i = 0; i < a.length; i++) {
 				b.add(Integer.parseInt(a[i])) ;
+				System.out.println(a[i]);
 			}
+			System.out.println("");
 			
 			return b;
 		}
 		return null;
+	}
+	public static void setLikedProductCountAttribute(HttpServletRequest request, HttpServletResponse response) {
+		List<Integer> likedProductCount = getLikesProducst(request, response);
+		int count = 0 ;
+		if(likedProductCount != null) {
+			count = likedProductCount.size();
+		}
+		request.setAttribute("likedProductCount", count);
 	}
 
 }

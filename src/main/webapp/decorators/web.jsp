@@ -30,6 +30,9 @@
 <link rel="stylesheet"
 	href="<c:url value='/template/web/assets/css/order_detail_page.css'/>"
 	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/assets/css/liked_product.css'/>"
+	type="text/css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -191,7 +194,8 @@
 		src="<c:url value='/template/web/assets/scripts/product_page.js'/>"></script>
 	<script
 		src="<c:url value='/template/web/assets/scripts/cart_page.js'/>"></script>
-	
+	<script
+		src="<c:url value='/template/web/assets/scripts/liked_product_page.js'/>"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script>
         Validator({

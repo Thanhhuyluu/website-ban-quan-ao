@@ -3,6 +3,11 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.CommonProductItem;
 import model.Product;
 import model.ProductItem;
 
@@ -50,7 +55,29 @@ public class ProductManager {
 		return lItems;
 		
 	}
-
+	public List<CommonProductItem> getLikedProductFromCookie(HttpServletRequest request, HttpServletResponse response){
+		
+		Cookie[] cookies = request.getCookies();
+		String txt = "";
+		if(cookies != null) {
+			for(Cookie c : cookies) {
+				if(c.getName().equals("likedProducts"))
+					txt+=c.getValue();
+			}
+		}
+		LikedProductsManager lpm = new LikedProductsManager(txt);
+//		List<Integer> likesProduct = ProductLikeHandle.getLikesProducst(request, response);
+//		if(likesProduct != null) {
+//			for(int i = 0 ; i < likesProduct.size(); i++ ) {
+//				Product product = ProductDAO.getInstance().selectById(likesProduct.get(i));
+//				ProductDetail productDetail = ProductDetailDAO.getInstance().selectOne(product);
+//				pList.add(new CommonProductItem(product,productDetail));
+//			}
+//		}
+		List<CommonProductItem> pList = lpm.getItems();
+		
+		return pList;
+	}
 	
 	
 	

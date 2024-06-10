@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>High</title>
+<title>Giỏ hàng - High</title>
 <link rel="shortcut icon" type="image/x-icon"
 	href="<c:url value="/template/web/assets/imgs/high-log.ico"/>">
 </head>
@@ -53,7 +53,7 @@
 															<c:set var="selectedColor" value="${cartItem.getProductDetail().getColor() }"/>
 															<a href="gio-hang?action=process&productDetailId=${productDetail.getId()}&selectedSize=${productDetail.getSize() }&selectedColor=${color }&quantity=${cartItem.getQuantity() }" class="cart-item__color-item  ${color == selectedColor? "
 																selected-color":"" } ${isAvailable==
-																true ?"" : "not-available" }" style="background-color:#${color}; color : #${color }; ${isAvailable == true ?" " : "cursor:not-allowed; "} ">
+																true ?"" : "not-available" }" style="background-color:#${color}; color : #${color }; ${isAvailable == true ?" " : "cursor:not-allowed;pointer-events: none; "} ">
 															
 															</a>			
 														</c:forEach>

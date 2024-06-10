@@ -23,6 +23,11 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 
 import dao.BrandDAO;
 import dao.CategoryDAO;
@@ -54,9 +59,9 @@ public class ProductController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getServletPath();
-		req.setCharacterEncoding("UTF-8");
 		System.out.println(action);
 		try {
 			switch (action) {
@@ -96,11 +101,15 @@ public class ProductController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		req.setCharacterEncoding("UTF-8");
+
 		doGet(req, resp);
 	}
 
 	private void listProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		request.setCharacterEncoding("UTF-8");
+
 		List<Product> productRaws = productDAO.selectAll();
 		List<Product> products = new ArrayList<Product>();
 		for (Product product : productRaws) {
@@ -116,6 +125,8 @@ public class ProductController extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		CategoryDAO categoryDAO = new CategoryDAO();
 		BrandDAO brandDAO = new BrandDAO();
 		SupplierDAO supplierDAO = new SupplierDAO();
@@ -131,6 +142,8 @@ public class ProductController extends HttpServlet {
 	
 	private void showNewProductDetail(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		int productId = Integer.parseInt(request.getParameter("id"));
 		request.setAttribute("productId", productId);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productDetailAdd.jsp");
@@ -139,6 +152,8 @@ public class ProductController extends HttpServlet {
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		int id = Integer.parseInt(request.getParameter("id"));
 		CategoryDAO categoryDAO = new CategoryDAO();
 		BrandDAO brandDAO = new BrandDAO();
@@ -158,6 +173,8 @@ public class ProductController extends HttpServlet {
 
 	private void insertProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		request.setCharacterEncoding("UTF-8");
+
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			System.out.println("Form is not multipart, cannot upload file.");
 			return;
@@ -294,6 +311,8 @@ public class ProductController extends HttpServlet {
 	}
 
 	private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		CategoryDAO categoryDAO = new CategoryDAO();
 		BrandDAO brandDAO = new BrandDAO();
 		SupplierDAO supplierDAO = new SupplierDAO();
@@ -321,6 +340,8 @@ public class ProductController extends HttpServlet {
 	}
 	private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		Product product = productDAO.selectById(id);
@@ -332,7 +353,8 @@ public class ProductController extends HttpServlet {
 
 	}
 	private void insertProductDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+		request.setCharacterEncoding("UTF-8");
+
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			System.out.println("Form is not multipart, cannot upload file.");
 			return;
@@ -470,6 +492,8 @@ public class ProductController extends HttpServlet {
 		
 	}
 	private void backProductDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		response.sendRedirect("admin-product");
 	}
 }

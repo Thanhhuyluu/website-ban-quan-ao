@@ -61,26 +61,6 @@ panel_heading_infor.addEventListener("click", () => {
     //      }
     // });    
 
-    //heart active 
-    const heart_empty = document.querySelector('.icon-heart-empty')
-    const heart_full = document.querySelector('.icon-heart-full')
-    heart_empty.addEventListener('click', () => {
-        if(heart_empty.classList.contains("active-hearted")){
-            heart_empty.classList.remove("active-hearted")
-            heart_full.classList.add("active-hearted")
-        }
-        else if(heart_full.classList.contains("active-hearted")){
-            heart_full.classList.remove("active-hearted")
-            heart_empty.classList.add("active-hearted")
-        }
-    })
-
-    heart_full.addEventListener('click', () => {
-        if(heart_full.classList.contains("active-hearted")){
-            heart_full.classList.remove("active-hearted")
-            heart_empty.classList.add("active-hearted")
-        }
-    })
     
 
 

@@ -4,6 +4,7 @@
 	<c:set var="gender" value = "${requestScope.gender }"/>
     <c:set var="genderString" value = "gender=${requestScope.gender}&"/>
     <c:set var="cart" value = "${requestScope.cart }"/>
+    <c:set var="likedProductCount" value = "${requestScope.likedProductCount }"/>
 <header class="header">
 			
             <div class="header__navbar-cover">
@@ -49,7 +50,13 @@
                             	</li>
                             	
                             </c:if>
-                            
+                            <li class="header__navbar-item--saparate header__navbar-item header__navbar-item--strong">
+                                <a id="likedProductCountHeader" href="yeu-thich" class="header__navbar-item--link">
+                                    <i style="margin-right: 3px;" class="fa-solid fa-heart"></i>
+                                    <p>Yêu thích (${likedProductCount })</p>
+                                </a>
+                                
+                            </li>
                             <li class="header__navbar-item header__navbar-item--strong">
                                 <a href="gio-hang?action=show" class="header__navbar-item--link">
                                     <i class="fa-solid fa-cart-shopping header__navbar-icon"></i>
@@ -58,6 +65,7 @@
                                 </a>
                                 
                             </li>
+                            
                         </ul>
                     </nav>
                 </div>

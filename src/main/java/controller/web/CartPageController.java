@@ -39,7 +39,7 @@ public class CartPageController extends HttpServlet {
 	@SuppressWarnings("null")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		String action = request.getParameter("action");
 		if (action.equals("add")) {
 			Cookie[] cookies = request.getCookies();
@@ -70,6 +70,10 @@ public class CartPageController extends HttpServlet {
 			response.addCookie(c);
 			//lấy cart để hiển thị số lượng trên header
 			Cart.setCartAttribute(request, response,c);
+			
+			
+			
+			
 			request.setAttribute("proId", String.valueOf(productId));
 			request.getRequestDispatcher("/chi-tiet-san-pham").forward(request, response);
 		}
@@ -88,6 +92,8 @@ public class CartPageController extends HttpServlet {
 			}
 			Cart cart = new Cart(txt, productDetailList);
 			request.setAttribute("cart", cart);
+
+			
 			request.getRequestDispatcher("views/web/cart-page.jsp").forward(request, response);
 		}
 		//XỬ LÝ THAY ĐỔI SỐ LƯỢNG
@@ -214,6 +220,7 @@ public class CartPageController extends HttpServlet {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
+			
 		}else if(action.equals("delete-all")) {
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
@@ -226,11 +233,12 @@ public class CartPageController extends HttpServlet {
 				}
 			}
 			Cart cart = new Cart();
-
+			
 			request.setAttribute("cart",cart);
 			request.getRequestDispatcher("/views/web/cart-page.jsp").forward(request, response);
 			
 		}
+		ProductLikeHandle.setLikedProductCountAttribute(request, response);
 	}
 
 	/**

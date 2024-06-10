@@ -3,24 +3,28 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="dec"%>
 <%@ include file="/common/taglib.jsp"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>High</title>
+
+<c:set var="product" value="${requestScope.product }"/>
+<title>${product.getTitle() }</title>
 </head>
 <body>
 	<c:set var="productDetail" value="${requestScope.productDetail }" />
 	<c:set var="formattedPrice" value="${requestScope.formattedPrice }" />
 	<c:set var="relatedProducts" value="${requestScope.relatedProducts }" />
 	<c:set var="availableSizes" value="${requestScope.availableSizes }" />
-	<c:set var="product" value="${requestScope.product }"/>
 	<c:set var="imgList" value="${requestScope.imgList }"  />
 	<c:set var="colorList" value="${requestScope.colorList }"/>
 	<c:set var="selectedColor" value="${requestScope.selectedColor }"  />
 	<c:set var="selectedSize" value="${requestScope.selectedSize }"  />
 	<c:set var="productCurrentQuantity" value="${requestScope.productCurrentQuantity }"  />
 	<c:set var="colorMap" value="${requestScope.colorMap }"/>
+	<c:set var="likedProduct" value="${requestScope.likedProduct}" />
 	<div class="grid">
 		<div class="app__heading">
 			<ul class="app__heading-list">
@@ -150,18 +154,24 @@
 					</div>
 					<div action="gio-hang" class="product__select"></div>
 					<form id="add-to-cart-form" class="product__add-cart">
-						<button class="product__add-cart-btn" onclick="addToCart()">THÊM VÀO GIỎ HÀNG</button>
+						<button  class="product__add-cart-btn" onclick="addToCart()" style="${productCurrentQuantity == 0 ? "pointer-events: none; background-color: #555050; color:#a1a1a1; ":""}">THÊM VÀO GIỎ HÀNG</button>
 						<input id="add-cart-action" type="hidden" name="action" value="add"/>
 						<input id="productDetail-id" type="hidden" name="productDetailId" value="${productDetail.getId() }"/>
 						<input id="buy-quantity" type="hidden" name="buyQuantity" value=""/>
 						
-						
-						<div class="product__cart-icon-heart">
-							<i class="icon-heart-empty fa-solid fa-heart active-hearted"></i>
+						<c:set var="isProductInList" value="false" />
+   						 	<c:forEach var="id" items="${likedProduct}">
+								<c:if test="${id == product.getId()}">
+									<c:set var="isProductInList" value="true" />
+								</c:if>
+							</c:forEach>
+										    
+						<div id="product-item-like__btn-${product.getId() }" onclick="likeProduct(${product.getId()},'main')" class="product__cart-icon-heart ${isProductInList == true ?"active-hearted":""  }">
+							
 							<i class="icon-heart-full fa-solid fa-heart"></i>
 						</div>
 					</form>
-					<div class="product__payment"><a href="thanh-toan?action=thanh-toan" class="product__payment-link">THANH TOÁN</a></div>
+					<div class="product__payment"><a href="thanh-toan?action=thanh-toan" class="product__payment-link" style="${productCurrentQuantity == 0 ? "pointer-events: none; background-color: #555050; color:#a1a1a1;cursor: not-allowed; ":""}">THANH TOÁN</a></div>
 					<div class="panel-group">
 						<div class="panel-item ">
 							<div class="panel-item__heading js-panel-item__heading-infor ">
@@ -247,11 +257,18 @@
 												<a href="chi-tiet-san-pham?proId=${pro.getId() }" class="product-item-buy__btn-link">
 													<div class="product-item-buy__btn">Mua ngay</div>
 												</a>
-												<div
-													class="product-item-like__btn product-item-like__btn--liked">
+												<c:set var="isProductInList" value="false" />
+    
+											    <c:forEach var="id" items="${likedProduct}">
+											        <c:if test="${id == pro.getId()}">
+											            <c:set var="isProductInList" value="true" />
+											        </c:if>
+											    </c:forEach>
+												<div id="product-item-like__btn-${pro.getId() }" onclick="likeProduct(${pro.getId()},'relate')"
+													class="product-item-like__btn  ${isProductInList == true ?"product-item-like__btn--liked":""  }">
 													<i class="product-item-like-icon-fill fa-solid fa-heart"></i>
-													<i class="product-item-like-icon-empty fa-regular fa-heart"></i>
 												</div>
+												
 											</div>
 										</div>
 										<h4 class="product-item__name">${pro.getTitle() }</h4>
@@ -348,7 +365,29 @@
     	}
     	
     	
-    	
+    	function likeProduct(Id,flat){
+			$.ajax({
+			    type: "POST",
+			    url: "/Online_Shop/like-product",
+			    data: {
+			    	productId: Id
+			    	
+			    },
+			    
+			    success: function(result) {
+			        var likedProduct = document.getElementById('product-item-like__btn-'+Id);
+			        if(flat == 'main')
+			        	{
+			        		likedProduct.classList.toggle('active-hearted')
+			        	}
+			        else if(flat=='relate'){
+			        	likedProduct.classList.toggle('product-item-like__btn--liked');
+			        }
+			        location.reload();
+					}
+				});
+		
+		}
     	
     	
     	

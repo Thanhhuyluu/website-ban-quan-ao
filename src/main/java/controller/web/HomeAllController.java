@@ -51,7 +51,7 @@ public class HomeAllController extends HttpServlet {
 		//lấy cart để hiển thị số lượng trên header
 		Cart.setCartAttribute(request, response, null);
 		
-		
+		ProductLikeHandle.setLikedProductCountAttribute(request, response);
 		
 		String action = request.getParameter("action");
 		if(action != null &&action.equals("logout")) {
@@ -120,7 +120,7 @@ public class HomeAllController extends HttpServlet {
 			ProductDAO pd = ProductDAO.getInstance();
 			if(cateIdRaw == null ) {
 				
-				rawList = pd.selectAll();
+				rawList = pd.selectAllAvailabilities();
 			}
 			else {
 				
@@ -173,7 +173,7 @@ public class HomeAllController extends HttpServlet {
 			List<Integer> likesList = ProductLikeHandle.getLikesProducst(request, response);
 			
 			
-			request.setAttribute("likedProducts", likesList);
+			request.setAttribute("likedProduct", likesList);
 			request.setAttribute("upperList", upperList);
 			request.setAttribute("lowerList", lowerList);
 			request.setAttribute("list", list);
