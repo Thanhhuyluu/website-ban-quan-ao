@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Category;
 import model.Product;
 import model.User;
 
@@ -49,6 +50,15 @@ public class UserDAO implements DAOInterface<User>{
 		return result;
 	}
 
+	public List<User> searchByKey(List<User> li, String key){
+		List<User> result = new ArrayList<User>();
+		for(User user : li) {
+			if(user.getFullname().toLowerCase().contains(key.toLowerCase())) {
+				result.add(user);
+			}
+		}
+		return result;
+	}
 	@Override
 	public int update(User t) {
 		int result = 0;

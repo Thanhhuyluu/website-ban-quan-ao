@@ -13,16 +13,6 @@ CartItemSizeBtns.forEach(element => {
     
 
 });
-
-
-
-
-
-
-
-
-
-
 	const cartItemCountInput = document.querySelector('.cart-item-count-input');
     const cartItemDecreaseBtn = document.querySelector('.cart-item-count-btn-dec');
     const cartItemIncreaseBtn = document.querySelector('.cart-item-count-btn-inc');

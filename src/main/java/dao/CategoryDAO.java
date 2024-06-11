@@ -10,6 +10,7 @@ import java.util.List;
 
 import model.Category;
 import model.Product;
+import model.User;
 
 public class CategoryDAO implements DAOInterface<Category> {
 
@@ -145,7 +146,15 @@ public class CategoryDAO implements DAOInterface<Category> {
 		return result;
 	}
 	
-	
+	public List<Category> searchByKey(List<Category> li, String key){
+		List<Category> result = new ArrayList<Category>();
+		for(Category category : li) {
+			if(category.getName().toLowerCase().contains(key.toLowerCase())) {
+				result.add(category);
+			}
+		}
+		return result;
+	}
 
 	@Override
 	public ArrayList<Category> selectByCondition(String condition) {

@@ -10,6 +10,7 @@ import java.util.List;
 
 import model.Order;
 import model.Product;
+import model.User;
 
 public class OrderDAO implements DAOInterface<Order>{
 
@@ -319,5 +320,14 @@ public class OrderDAO implements DAOInterface<Order>{
 	    }
 
 	    return result;
+	}
+	public List<Order> searchByKey(List<Order> li, String key){
+		List<Order> result = new ArrayList<Order>();
+		for(Order order : li) {
+			if(order.getFullname().toLowerCase().contains(key.toLowerCase())) {
+				result.add(order);
+			}
+		}
+		return result;
 	}
 }

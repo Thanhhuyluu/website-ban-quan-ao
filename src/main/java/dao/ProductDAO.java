@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Order;
 import model.Product;
 
 public class ProductDAO implements DAOInterface<Product> {
@@ -189,6 +190,41 @@ public class ProductDAO implements DAOInterface<Product> {
 		
 		return result;
 	}
+	public List<Product> selectAllAvailabilities() {
+		List<Product> result = new ArrayList<Product>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `product` WHERE `deleted` = 0";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery(sql);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int categoryId = rs.getInt("category_id");
+				int brandId = rs.getInt("brand_id");
+				int supplierId = rs.getInt("supplier_id");
+				String title = rs.getString("title");
+				int price = rs.getInt("price");
+				int discount = rs.getInt("discount");
+				String img = rs.getString("img");
+				String description = rs.getString("description");
+				Date createdAt = rs.getDate("created_at");
+				Date updatedAt = rs.getDate("updated_at");
+				boolean deleted = rs.getBoolean("deleted");
+				int gender = rs.getInt("gender");
+				int likes  = rs.getInt("likes");
+				Product p = new Product(id,CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				
+				result.add(p);
+				
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 
 	@Override
 	public Product selectById(int id) {
@@ -294,6 +330,15 @@ public class ProductDAO implements DAOInterface<Product> {
 	    return result;
 	}
 
+	public List<Product> searchByKey(List<Product> li, String key){
+		List<Product> result = new ArrayList<Product>();
+		for(Product product : li) {
+			if(product.getTitle().toLowerCase().contains(key.toLowerCase())) {
+				result.add(product);
+			}
+		}
+		return result;
+	}
 	
 	public List<Product> selectByCateId(int[] arr) {
 		List<Product> result = new ArrayList<Product>();

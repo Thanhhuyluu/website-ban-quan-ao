@@ -47,6 +47,8 @@ public class PaymentController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");	
+
+		ProductLikeHandle.setLikedProductCountAttribute(request, response);
 		String action = request.getParameter("action");
 		if(action.equals("thanh-toan")) {
 			

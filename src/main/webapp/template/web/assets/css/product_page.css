@@ -374,24 +374,19 @@
     align-items: center;
     
 }
-.product__cart-icon-heart .icon-heart-empty {
+.product__cart-icon-heart .icon-heart-full {
     color:  #fff;
     font-size: 30px;
-    display: none;
     cursor:pointer ;
 }
-.product__cart-icon-heart .icon-heart-full {
+.product__cart-icon-heart.active-hearted .icon-heart-full {
     color: #e43232;
     font-size: 30px;
-    display: none;
     cursor: pointer;
 }
-.icon-heart-empty.active-hearted{
-    display: block;
-}
-.icon-heart-full.active-hearted{
-    display: block;
-}
+
+
+
 .product__payment{
     font-size: 22px;
     background-color: #ac6a1f;
@@ -477,43 +472,6 @@
 .product-item-buy__btn:hover{
     background-color: rgba(240, 15, 15,0.9);
 }
-.product-item-like__btn{
-    width: 50px;
-    background-color: #524b4b;
-    line-height: 50px;
-    cursor: pointer;
-
-}
-.product-item-like__btn--liked .product-item-like-icon-empty{
-    display: none;
-}
- .product-item-like__btn--liked .product-item-like-icon-fill{
-    display: inline-block;
-}
-
-.product-item-like__btn{
-    height: 100%;
-}
-
-i.product-item-like-icon-fill{
-    display: none;
-}
-
-.product-item-like__btn .product-item-like-icon-fill,
-.product-item-like__btn .product-item-like-icon-empty{
-    transition: scale 0.3s;
-    line-height: 50px;
-
-}
-
-
-.product-item-like__btn:hover .product-item-like-icon-fill,
-.product-item-like__btn:hover .product-item-like-icon-empty
-{
-    transform: scale(1.2);
-}
-
-
 .product-item__name{
     padding: 0 20px;
     line-height: 1.8rem;

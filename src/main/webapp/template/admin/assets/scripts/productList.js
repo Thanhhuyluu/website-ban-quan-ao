@@ -1,39 +1,3 @@
-function searchByName(param) {
-  var txtSearch = param.value;
-  $.ajax({
-    url: "/Online_Shop/admin-searchProduct",
-    type: "GET",
-    data: {
-      txt: txtSearch,
-    },
-    success: function (data) {
-      // Tạo một phần tử div tạm thời để chứa dữ liệu từ servlet
-      var tempDiv = document.createElement("div");
-      tempDiv.innerHTML = data;
-      var tbodyElement = tempDiv.querySelector("tbody");
-      var tbodyElement2 = tempDiv.querySelector(".modal-alert");
-      console.log(tbodyElement);
-      console.log(tbodyElement2);
-      if (tbodyElement) {
-        var tbodyContent = tbodyElement.innerHTML;
-        var tbodyContent2 = tbodyElement2.innerHTML;
-        // Lấy phần tử cần gán dữ liệu vào
-        var row = document.getElementById("product-list");
-        console.log(row);
-        // Gán nội dung của tbody từ servlet vào phần tử trên trang web của bạn
-        row.innerHTML = tbodyContent;
-        var row2 = document.getElementById("product-main");
-        console.log(row2);
-        row2.innerHTML = tbodyContent2;
-      } else {
-        console.log("Không tìm thấy phần tử <tbody> trong tempDiv.");
-      }
-    },
-    error: function (xhr, status, error) {
-      console.error("An error occurred: " + status + " " + error);
-    },
-  });
-}
 
 // Xử lí modal-delete
 const open_modal = document.getElementById("open-modal-btn");

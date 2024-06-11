@@ -108,7 +108,6 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return result;
 	}
 
@@ -317,6 +316,32 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return result;
+	}
+	public ProductDetail selectOne(Product product) {
+		ProductDetail result = new ProductDetail();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM `product_details` WHERE product_id = ? LIMIT 1";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1, product.getId());
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int productId = rs.getInt("product_id");
+				String size = rs.getString("size");
+				int quantity = rs.getInt("quantity");
+				Date createdAt = rs.getDate("created_at");
+				String color = rs.getString("color");
+				ProductDetail pd = new ProductDetail(id, ProductDAO.getInstance().selectById(productId), size, quantity, createdAt, color);
+				result = pd;
+				System.out.print(pd.toString() + "    -----");
+			}
+			JDBCUtil.closeConnection(c);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 

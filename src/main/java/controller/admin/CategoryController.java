@@ -2,6 +2,7 @@ package controller.admin;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -64,6 +65,7 @@ public class CategoryController extends HttpServlet{
 	
 	private void listCategory(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
+		String searchKey = request.getParameter("txtSearch");
 		String indexPage = request.getParameter("index");
 		if(indexPage == null) {
 			indexPage = "1";
@@ -76,9 +78,13 @@ public class CategoryController extends HttpServlet{
 		}
 		
 		List<Category> categories = CategoryDAO.getInstance().pagingAcount(index);
+		if(searchKey != null) {
+			categories = CategoryDAO.getInstance().searchByKey(categories, searchKey);
+		}
 		request.setAttribute("categories", categories);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("tag", index);
+		request.setAttribute("txtSearch", searchKey);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/category/categoryList.jsp");
 	    dispatcher.forward(request, response);
     }

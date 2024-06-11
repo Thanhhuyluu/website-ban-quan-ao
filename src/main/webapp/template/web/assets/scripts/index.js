@@ -1,6 +1,7 @@
 
 
 
+
 const listItem = document.querySelector('.header-slider-list')
 const items = document.querySelectorAll('.header-slider-item');
 const btnLeft  = document.querySelector('.header-slider-btn-left')

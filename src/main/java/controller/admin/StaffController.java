@@ -75,6 +75,7 @@ public class StaffController extends HttpServlet{
 	
 	private void listStaff(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
+		String searchKey = request.getParameter("txtSearch");
 		String indexPage = request.getParameter("index");
 		if(indexPage == null) {
 			indexPage = "1";
@@ -87,9 +88,13 @@ public class StaffController extends HttpServlet{
 		}
 		
 		List<User> staffs = UserDAO.getInstance().pagingAcountStaff(index);
+		if(searchKey != null) {
+			staffs = UserDAO.getInstance().searchByKey(staffs, searchKey);
+		}
 		request.setAttribute("staffs", staffs);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("tag", index);
+		request.setAttribute("txtSearch", searchKey);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/staff/staffList.jsp");
         dispatcher.forward(request, response);
     }

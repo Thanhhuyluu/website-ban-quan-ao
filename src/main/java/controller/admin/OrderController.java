@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.OrderDAO;
 import dao.ProductDAO;
+import dao.UserDAO;
 import model.Order;
 import model.OrderItem;
 import model.Product;
@@ -64,6 +65,7 @@ public class OrderController extends HttpServlet{
 		
 		private void listOrder(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
+			String searchKey = request.getParameter("txtSearch");
 			String indexPage = request.getParameter("index");
 			if(indexPage == null) {
 				indexPage = "1";
@@ -76,13 +78,14 @@ public class OrderController extends HttpServlet{
 			}
 			
 			List<Order> orders = OrderDAO.getInstance().pagingAcount(index);
-			for (Order order : orders) {
-				System.out.println(order);
+			if(searchKey != null) {
+				orders = OrderDAO.getInstance().searchByKey(orders, searchKey);
 			}
 			List<OrderItem> lOrderItems = OrderManager.getInstance().oders2OrderItems(orders);
 			request.setAttribute("lOrderItems", lOrderItems);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("tag", index);
+			request.setAttribute("txtSearch", searchKey);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/order/orderList.jsp");
 		    dispatcher.forward(request, response);
 	    }

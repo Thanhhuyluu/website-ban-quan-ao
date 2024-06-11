@@ -44,7 +44,7 @@
 	
     <script src="<c:url value='/template/admin/assets/scripts/index.js' />"></script>
     <script src="<c:url value='/template/admin/assets/scripts/validateForm.js' />"></script>
-    	<script src="<c:url value='/template/admin/assets/scripts/productList.js' />"></script>	
+    	
     
    <%--  <script src="<c:url value='/template/admin/assets/scripts/chart.js' />"></script>  --%>
  

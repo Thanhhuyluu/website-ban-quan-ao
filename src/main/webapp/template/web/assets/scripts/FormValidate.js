@@ -1,3 +1,4 @@
+
 function Validator(options){
     var selectorRules = {};
     var formElement = document.querySelector(options.form);
@@ -38,9 +39,6 @@ function Validator(options){
                         isValidForm = false;
                 }
             });
-
-
-
             if(isValidForm){
                 formElement.submit();
             }
