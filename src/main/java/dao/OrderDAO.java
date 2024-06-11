@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Order;
+import model.Product;
 
 public class OrderDAO implements DAOInterface<Order>{
 
@@ -120,6 +121,53 @@ public class OrderDAO implements DAOInterface<Order>{
 		return result;
 	}
 
+	public int getCountTotal() {
+		int result = 0;
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select count(*) from `order`";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public List<Order> pagingAcount(int index) {
+		List<Order> result = new ArrayList<Order>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select * from `order` limit ?, 5;";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1,(index-1)*5);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int userId = rs.getInt("user_id");
+				String fullname = rs.getString("fullname");
+				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phone_number");
+				String address = rs.getString("address");
+				String note = rs.getString("note");
+				Date orderDate = rs.getDate("order_date");
+				int status = rs.getInt("status");
+				Order o = new Order(id, UserDAO.getInstance().selectById(userId), fullname, email, phoneNumber, address, note, orderDate, status);
+				result.add(o);
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	@Override
 	public Order selectById(int id) {
 		Order result = null;

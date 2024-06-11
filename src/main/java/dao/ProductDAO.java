@@ -15,6 +15,7 @@ public class ProductDAO implements DAOInterface<Product> {
 		return new ProductDAO();
 	}
 
+	
 	@Override
 	public int insert(Product t) {
 		int result = 0;
@@ -104,7 +105,62 @@ public class ProductDAO implements DAOInterface<Product> {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `product` ";
 			PreparedStatement pst = c.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery(sql);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				int categoryId = rs.getInt("category_id");
+				int brandId = rs.getInt("brand_id");
+				int supplierId = rs.getInt("supplier_id");
+				String title = rs.getString("title");
+				int price = rs.getInt("price");
+				int discount = rs.getInt("discount");
+				String img = rs.getString("img");
+				String description = rs.getString("description");
+				Date createdAt = rs.getDate("created_at");
+				Date updatedAt = rs.getDate("updated_at");
+				boolean deleted = rs.getBoolean("deleted");
+				int gender = rs.getInt("gender");
+				int likes  = rs.getInt("likes");
+				Product p = new Product(id,CategoryDAO.getInstance().selectById(categoryId), BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title, price, discount, img, description, createdAt, updatedAt, deleted, gender, likes);
+				
+				result.add(p);
+				
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int getCountTotal() {
+		int result = 0;
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select count(*) from product where product.deleted = 0";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public List<Product> pagingAcount(int index) {
+		List<Product> result = new ArrayList<Product>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select * from product where deleted = 0 limit ?, 5;";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1,(index-1)*5);
+			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int categoryId = rs.getInt("category_id");
@@ -167,6 +223,8 @@ public class ProductDAO implements DAOInterface<Product> {
 		}
 		return result;
 	}
+	
+	
 
 	@Override
 	public ArrayList<Product> selectByCondition(String condition) {
@@ -260,7 +318,7 @@ public class ProductDAO implements DAOInterface<Product> {
 			System.out.println(sql);
 			
 			PreparedStatement pst = c.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery(sql);
+			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int categoryId = rs.getInt("category_id");
@@ -340,7 +398,7 @@ public class ProductDAO implements DAOInterface<Product> {
 					+ "    GROUP BY category_id\n"
 					+ ")";
 			PreparedStatement pst = c.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery(sql);
+			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int categoryId = rs.getInt("category_id");
@@ -381,7 +439,7 @@ public class ProductDAO implements DAOInterface<Product> {
 					+ "    GROUP BY brand_id\n"
 					+ ")";
 			PreparedStatement pst = c.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery(sql);
+			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int categoryId = rs.getInt("category_id");
@@ -422,7 +480,7 @@ public class ProductDAO implements DAOInterface<Product> {
 					+ "    GROUP BY supplier_id\n"
 					+ ")";
 			PreparedStatement pst = c.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery(sql);
+			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int categoryId = rs.getInt("category_id");

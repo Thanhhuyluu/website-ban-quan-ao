@@ -4,13 +4,6 @@
 	<div class="sidebar-toggler">
 		<i class="fa fa-bars"></i>
 	</div>
-	<div class="header__search">
-
-		<div class="header__search-icon">
-			<i class="fa-solid fa-magnifying-glass"></i>
-		</div>
-		<input type="text"  name="txt" class="header__search-input" placeholder="Tim kiem">
-	</div>
 	<div class="header__right">
 		<div class="header__right-notify">
 			<a class="get-back-to-shop-link" href="trang-chu">Cửa hàng của tôi</a>

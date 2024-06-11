@@ -4,13 +4,12 @@
 <div class="container-body">
 	<div class="table-classify">
 		<div class="classify__header">
-			<h6 class="classify__header-title">Orders</h6>
+			<h6 class="classify__header-title">Danh sách đơn hàng </h6>
 		</div>
 		<div class="classify__body">
 			<table class="table">
 				<thead>
 					<tr>
-						<th>ID</th>
 						<th>Tên người nhận</th>
 						<th>Số điện thoại</th>
 						<th>Ngày đặt hàng</th>
@@ -25,7 +24,6 @@
 						<c:set var="priceOrder" value="${lOrderItem.priceOrder}" />
 						<c:set var="discountOrders" value="${lOrderItem.discountOrders}" />
 						<tr>
-							<td><c:out value="${order.id}" /></td>
 							<td><c:out value="${order.fullname}" /></td>
 							<td><c:out value="${order.phoneNum}" /></td>
 							<td><c:out value="${order.orderDate}" /></td>
@@ -127,6 +125,26 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<ul class="pagination home-product__pagination">
+				<c:if test="${tag >1}">
+				<li class="pagination-item "><a
+					href="admin-order?index=${tag-1}" class="pagination-item__link"> <i
+						class="pagination-item__icon fa-solid fa-chevron-left"></i>
+				</a></li>
+				 </c:if>
+				<c:forEach begin="1" end="${endPage}" var="i">
+					<li class="pagination-item ${tag == i?"pagination-item--active":""}">
+
+						<a class="pagination-item__link" href="admin-order?index=${i}" >${i}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${tag < endPage}">
+				<li class="pagination-item"><a
+					href="admin-order?index=${tag+1}" class="pagination-item__link"> <i
+						class="pagination-item__icon fa-solid fa-chevron-right"></i>
+				</a></li>
+				 </c:if> 
+			</ul>
 		</div>
 	</div>
 </div>

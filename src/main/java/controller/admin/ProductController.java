@@ -2,6 +2,7 @@ package controller.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -52,7 +53,9 @@ public class ProductController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		
 		String action = req.getServletPath();
+		resp.setContentType("text/html");
 		req.setCharacterEncoding("UTF-8");
 		System.out.println(action);
 		try {
@@ -98,15 +101,32 @@ public class ProductController extends HttpServlet {
 
 	private void listProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<Product> productRaws = productDAO.selectAll();
-		List<Product> products = new ArrayList<Product>();
-		for (Product product : productRaws) {
-			if(!product.isDeleted()) {
-				products.add(product);
-			}
+//		List<Product> productRaws = productDAO.selectAll();
+//		List<Product> products = new ArrayList<Product>();
+//		for (Product product : productRaws) {
+//			if(!product.isDeleted()) {
+//				products.add(product);
+//			}
+//		}
+//		List<ProductItem> lProductItems = ProductManager.getInstance().products2ProductItems(products);
+//		request.setAttribute("lProductItems", lProductItems);
+		
+		String indexPage = request.getParameter("index");
+		if(indexPage == null) {
+			indexPage = "1";
 		}
-		List<ProductItem> lProductItems = ProductManager.getInstance().products2ProductItems(products);
+		int index = Integer.parseInt(indexPage);
+		int count = ProductDAO.getInstance().getCountTotal();
+		int endPage = count/5;
+		if(count % 5 != 0) {
+			endPage++;
+		}
+		
+		List<Product> lProducts = ProductDAO.getInstance().pagingAcount(index);
+		List<ProductItem> lProductItems = ProductManager.getInstance().products2ProductItems(lProducts);
 		request.setAttribute("lProductItems", lProductItems);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("tag", index);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productList.jsp");
 		dispatcher.forward(request, response);
 	}

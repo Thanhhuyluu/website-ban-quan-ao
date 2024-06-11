@@ -58,6 +58,26 @@
                 </c:forEach>
               </tbody>
           </table>
+          <ul class="pagination home-product__pagination">
+			<c:if test="${tag >1}">
+			<li class="pagination-item "><a
+				href="admin-staff?index=${tag-1}" class="pagination-item__link"> <i
+					class="pagination-item__icon fa-solid fa-chevron-left"></i>
+			</a></li>
+			 </c:if>
+			<c:forEach begin="1" end="${endPage}" var="i">
+				<li class="pagination-item ${tag == i?"pagination-item--active":""}">
+
+					<a class="pagination-item__link" href="admin-staff?index=${i}" >${i}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${tag < endPage}">
+			<li class="pagination-item"><a
+				href="admin-staff?index=${tag+1}" class="pagination-item__link"> <i
+					class="pagination-item__icon fa-solid fa-chevron-right"></i>
+			</a></li>
+			 </c:if> 
+		</ul>
       </div>
   </div>
 </div>   
