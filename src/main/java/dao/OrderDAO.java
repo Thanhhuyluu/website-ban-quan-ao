@@ -100,7 +100,7 @@ public class OrderDAO implements DAOInterface<Order>{
 			Connection c = JDBCUtil.getConnection();
 			String sql = "SELECT * FROM `order` ";
 			PreparedStatement pst = c.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery(sql);
+			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int userId = rs.getInt("user_id");
@@ -146,7 +146,7 @@ public class OrderDAO implements DAOInterface<Order>{
 			Connection c = JDBCUtil.getConnection();
 			String sql = "select * from `order` limit ?, 8;";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1,(index-1)*5);
+			pst.setInt(1,(index-1)*8);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");

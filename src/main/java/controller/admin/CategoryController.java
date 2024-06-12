@@ -111,6 +111,7 @@ public class CategoryController extends HttpServlet{
         int type = Integer.parseInt(request.getParameter("type"));
         
         Category newCategory = new Category(name, type);
+        System.out.println(newCategory);
         categoryDAO.insert(newCategory);
         response.sendRedirect("admin-category");
     }
