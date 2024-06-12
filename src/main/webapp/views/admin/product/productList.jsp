@@ -30,6 +30,7 @@
 								<th>Giới tính</th>
 								<th>Ngày tạo</th>
 								<th>Thao tác</th>
+								<th></th>
 							</tr>
 						</thead>
 
@@ -157,6 +158,7 @@
 				</div>
 			</div>
 		</div>
+
 	
 		<div class="modal-alert" id="product-main">
 			<div class="modal-alert__inner">

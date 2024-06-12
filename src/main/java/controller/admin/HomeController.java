@@ -48,13 +48,14 @@ public class HomeController extends HttpServlet{
      
         // Doanh thu thang hien tai
         int currentRevenue = revenueDAO.revenueOfCurrentMonth(currentDate);
-        
+
         // Tang truong doanh thu thang truoc
         double revenueGrowth = 0;
         if (lastRevenue != 0){
         	revenueGrowth = ((double)(currentRevenue - lastRevenue) / lastRevenue) * 100;
-        }      
-        req.setAttribute("revenueGrowth", revenueGrowth);	
+        } 
+        
+        req.setAttribute("revenueGrowth", String.format("%.2f", revenueGrowth));	
         
         // So don hang trong ngay
         

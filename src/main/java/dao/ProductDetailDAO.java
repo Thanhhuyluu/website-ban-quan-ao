@@ -102,12 +102,12 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 				String color = rs.getString("color");
 				ProductDetail pd = new ProductDetail(id, ProductDAO.getInstance().selectById(productId), size, quantity, createdAt, color);
 				result.add(pd);
-				
 			}
 			JDBCUtil.closeConnection(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 

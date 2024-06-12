@@ -62,11 +62,14 @@ public class RevenueDAO  {
 	    calendar.setTime(currentDate);
 	    
 	    // Lấy ngày đầu tiên của tháng hiện tại
-	    calendar.set(Calendar.DAY_OF_MONTH, 1);
-	    Date firstDayOfCurrentMonth = calendar.getTime();
+//	    calendar.set(Calendar.DAY_OF_MONTH, 1);
+//	    Date firstDayOfCurrentMonth = calendar.getTime();
+	    
+	    calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        Date lastDayOfCurrentMonth = calendar.getTime();
 	    
 	    // Doanh thu của tháng hiện tại
-	    List<MyItem> currentMonthReceipts = reportReceipt(firstDayOfCurrentMonth, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+	    List<MyItem> currentMonthReceipts = reportReceipt(lastDayOfCurrentMonth, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 	    
 	    for (MyItem myItem : currentMonthReceipts) {
 	        revenue += myItem.getValue();
@@ -131,7 +134,9 @@ public class RevenueDAO  {
 		List<Order> orders = OrderDAO.getInstance().selectByOrderDate(new java.sql.Date(date.getTime()));
 		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 		for (Order order : orders) {
-			orderDetails = OrderDetailDAO.getInstance().selectByOrderId(order);
+			for (OrderDetail orderDetail : OrderDetailDAO.getInstance().selectByOrderId(order)) {
+				orderDetails.add(orderDetail);
+			}
 		}
 		for (OrderDetail orderDetail : orderDetails) {
 			revenueOfDate += orderDetail.getPrice();
