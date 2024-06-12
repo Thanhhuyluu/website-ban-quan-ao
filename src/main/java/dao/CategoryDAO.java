@@ -27,7 +27,7 @@ public class CategoryDAO implements DAOInterface<Category> {
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setString(1, t.getName());
 			pst.setInt(2,t.getType());
-			pst.executeUpdate();
+			result = pst.executeUpdate();
 			System.out.println("Số lệnh đã thêm: " + result);
 			System.out.println("Lệnh đã thực thi là: " + sql);
 			JDBCUtil.closeConnection(c);
@@ -184,9 +184,9 @@ public class CategoryDAO implements DAOInterface<Category> {
 		List<Category> result = new ArrayList<Category>();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "select * from category limit ?, 5;";
+			String sql = "select * from category limit ?, 8;";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1,(index-1)*5);
+			pst.setInt(1,(index-1)*8);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int Id = rs.getInt("id");
