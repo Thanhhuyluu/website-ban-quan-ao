@@ -82,8 +82,8 @@ public class StaffController extends HttpServlet{
 		}
 		int index = Integer.parseInt(indexPage);
 		int count = UserDAO.getInstance().getCountTotalStaff();
-		int endPage = count/5;
-		if(count % 5 != 0) {
+		int endPage = count/8;
+		if(count % 8 != 0) {
 			endPage++;
 		}
 		

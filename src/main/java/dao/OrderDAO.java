@@ -144,7 +144,7 @@ public class OrderDAO implements DAOInterface<Order>{
 		List<Order> result = new ArrayList<Order>();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "select * from `order` limit ?, 5;";
+			String sql = "select * from `order` limit ?, 8;";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1,(index-1)*5);
 			ResultSet rs = pst.executeQuery();

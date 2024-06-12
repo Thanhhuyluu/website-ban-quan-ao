@@ -110,8 +110,8 @@ public class ProductController extends HttpServlet {
 		}
 		int index = Integer.parseInt(indexPage);
 		int count = ProductDAO.getInstance().getCountTotal();
-		int endPage = count/5;
-		if(count % 5 != 0) {
+		int endPage = count/8;
+		if(count % 8 != 0) {
 			endPage++;
 		}
 		

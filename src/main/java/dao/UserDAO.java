@@ -186,7 +186,7 @@ public class UserDAO implements DAOInterface<User>{
 		List<User> result = new ArrayList<User>();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "select * from user where status = 0 and role = 2 limit ?, 5;";
+			String sql = "select * from user where status = 0 and role = 2 limit ?, 8;";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1,(index-1)*5);
 			ResultSet rs = pst.executeQuery();

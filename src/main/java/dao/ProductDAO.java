@@ -158,7 +158,7 @@ public class ProductDAO implements DAOInterface<Product> {
 		List<Product> result = new ArrayList<Product>();
 		try {
 			Connection c = JDBCUtil.getConnection();
-			String sql = "select * from product where deleted = 0 limit ?, 5;";
+			String sql = "select * from product where deleted = 0 limit ?, 8;";
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1,(index-1)*5);
 			ResultSet rs = pst.executeQuery();
