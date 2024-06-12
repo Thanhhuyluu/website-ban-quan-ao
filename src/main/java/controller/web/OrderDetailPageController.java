@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import dao.OrderDAO;
 import dao.OrderDetailDAO;
 import model.Cart;
+import model.CommonProductItem;
 import model.Order;
 import model.OrderDetail;
+import service.LikedProductsManager;
 
 /**
  * Servlet implementation class CartDetailPageController
@@ -52,6 +55,11 @@ public class OrderDetailPageController extends HttpServlet {
 		if(od != null) {
 			 orderDetails = OrderDetailDAO.getInstance().selectByOrderId(od);
 		}
+		List<Integer> likesList = ProductLikeHandle.getLikesProducst(request, response);
+		
+
+		ProductLikeHandle.setLikedProductCountAttribute(request, response);
+		request.setAttribute("likedProduct", likesList);
 		request.setAttribute("orderDetails", orderDetails);
 		request.getRequestDispatcher("/views/web/order-detail-page.jsp").forward(request, response);
 		

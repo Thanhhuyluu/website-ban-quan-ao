@@ -107,6 +107,7 @@ public class LikedProductPage extends HttpServlet {
 					}
 				}
 			}
+			
 		}
 		List<CommonProductItem> productList = likedProductManager.getItems();
 		request.setAttribute("productList", productList);

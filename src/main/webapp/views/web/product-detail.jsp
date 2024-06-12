@@ -28,9 +28,9 @@
 	<div class="grid">
 		<div class="app__heading">
 			<ul class="app__heading-list">
-				<li class="app__heading-item">Áo</li>
+				<li class="app__heading-item">${productDetail.getProduct().getCategory().getName() }</li>
 				<li class="app__heading-separate"></li>
-				<li class="app__heading-item">Áo thun Lenin hoạ tiết bắt mắt</li>
+				<li class="app__heading-item">${productDetail.getProduct().getTitle() }</li>
 			</ul>
 		</div>
 		<div class="app__body">

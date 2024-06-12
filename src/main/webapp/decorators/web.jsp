@@ -33,6 +33,9 @@
 <link rel="stylesheet"
 	href="<c:url value='/template/web/assets/css/liked_product.css'/>"
 	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/assets/css/personal_infor_page.css'/>"
+	type="text/css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -248,6 +251,24 @@
                 
             ], 
             
+        });
+        Validator({
+            form: '#infor-form',
+            rules: [
+                Validator.isRequired('#payment-page__email-input'),
+                Validator.isEmail('#payment-page__email-input'),
+				
+                Validator.isRequired('#payment-page__name-input', 'Vui lòng nhập họ tên của bạn'),
+                
+                Validator.isRequired('#payment-page__phonenumber-input'),
+                Validator.isPhoneNumber('#payment-page__phonenumber-input'),
+
+                Validator.isRequired('#infor-page__password-input'),
+                Validator.minLength('#infor-page__password-input',6),
+
+               
+
+            ]
         });
 
         const switchLinks = document.querySelectorAll('.auth-form__switch-link');

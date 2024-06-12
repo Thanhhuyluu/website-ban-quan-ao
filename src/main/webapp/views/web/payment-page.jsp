@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Thanh toán - High</title>
 </head>
 <body>
 	<div class="app">

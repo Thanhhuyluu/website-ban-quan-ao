@@ -9,6 +9,7 @@
 </head>
 <body>
 
+	<c:set var="likedProduct" value="${requestScope.likedProduct}" />
 	<div class="app__container">
             <div class="grid">
                 <div class="order-detail__main-container">
@@ -64,9 +65,16 @@
                             <div class="order-detail__item-product-action">
                                 <h1 class="order-detail__item-product-main-price">250.000 vnđ</h1>
                                 <span class="order-detail__item-product-quantity-status">Còn hàng</span>
-                                <div class="order-detail__item-product-like-btn liked">
+                                <c:set var="isProductInList" value="false" />
+    
+                                <c:forEach var="id" items="${likedProduct}">
+									<c:if test="${id == product.getId()}">
+										<c:set var="isProductInList" value="true" />
+									</c:if>
+								</c:forEach>
+                                <div id="order-detail__item-product-like-btn-${product.getId() }" onclick="likeProduct(${product.getId()})" class="order-detail__item-product-like-btn  ${isProductInList== true?"liked":""}">
                                     <i class="filled-heart fa-solid fa-heart"></i>
-                                    <i class="empty-heart fa-regular fa-heart"></i>
+                                    
                                 </div>
                                 
                             </div>
@@ -79,6 +87,30 @@
 
             </div>
         </div>
+<script type="text/javascript">
 
+           function likeProduct(Id){
+				$.ajax({
+				    type: "POST",
+				    url: "/Online_Shop/like-product",
+				    data: {
+				    	productId: Id
+				    	
+				    },
+				    
+				    success: function(result) {
+				        var likedProduct = document.getElementById('order-detail__item-product-like-btn-'+Id);
+				        likedProduct.classList.toggle('liked');
+				        
+				        location.reload();
+				    
+				    }
+				    
+				    	
+					});
+			
+			}
+</script>
 </body>
+
 </html>

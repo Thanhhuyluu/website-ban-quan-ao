@@ -158,6 +158,7 @@
 				</div>
 			</div>
 		</div>
+
 	
 		<div class="modal-alert" id="product-main">
 			<div class="modal-alert__inner">

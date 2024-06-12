@@ -181,22 +181,16 @@
 .order-__item-product-remove-btn{
 	text-decoration: none;
 }
-.filled-heart{
-    color: rgb(223, 78, 78);
-}
+
 .order-detail__item-product-like-btn .filled-heart{
-    display: none;
-}
-.order-detail__item-product-like-btn .empty-heart{
-    display: block;
+    color: white;
 }
 
+
 .order-detail__item-product-like-btn.liked .filled-heart{
-    display: block;
+     color: rgb(223, 78, 78);
 }
-.order-detail__item-product-like-btn.liked  .empty-heart{
-    display: none;
-}
+
 
 .product-count-input{
     height: 100%;

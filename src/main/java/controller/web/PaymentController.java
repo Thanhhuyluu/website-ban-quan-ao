@@ -108,7 +108,6 @@ public class PaymentController extends HttpServlet {
 			//=====thanh toán bằng COD
 			if(paymentMethod.equals("cod")) {
 				OrderDAO.getInstance().insert(o);
-				
 				model.Order order = OrderDAO.getInstance().selectLastestOrderOfUser(u.getId());
 				
 				if(order != null) {

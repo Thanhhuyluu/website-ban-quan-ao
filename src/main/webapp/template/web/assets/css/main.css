@@ -108,7 +108,7 @@
 	position: absolute;
 	padding: 0;
 	background-color: #393232;
-	top: calc(100% + 5px);
+	top: calc(100% + 8px);
 	right: 0;
 	left:0px;
 	z-index: 4;
@@ -119,6 +119,7 @@
 	padding: 10px;
 	text-decoration: none;
 	color: var(--white-color);
+	font-size: 1.4rem;
 }
 .header__user-option-item:hover{
 	background-color: rgba(255,255,255,0.2);

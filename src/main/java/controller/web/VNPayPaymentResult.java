@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Utils.SessionUtil;
+import constant.SystemConstant;
 import dao.OnlinePaymentDAO;
 import dao.OrderDAO;
 import dao.OrderDetailDAO;
@@ -56,6 +57,8 @@ public class VNPayPaymentResult extends HttpServlet {
 			Order o = (Order)SessionUtil.getInstance().getValue(request, "ORDER");
 
 			User u =(User) SessionUtil.getInstance().getValue(request, "USER");
+
+			o.setStatus(SystemConstant.SHIPPING);
 			OrderDAO.getInstance().insert(o);
 			model.Order order = OrderDAO.getInstance().selectLastestOrderOfUser(u.getId());
 			System.out.println("test: " + order.toString());

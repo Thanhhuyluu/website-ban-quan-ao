@@ -37,7 +37,8 @@ public class OrderPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		ProductLikeHandle.setLikedProductCountAttribute(request, response);
 		String action = request.getParameter("action");
 		//lấy cart để hiển thị số lượng trên header
 				Cart.setCartAttribute(request, response, null);
