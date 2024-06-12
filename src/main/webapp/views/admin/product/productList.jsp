@@ -30,7 +30,6 @@
 								<th>Giới tính</th>
 								<th>Ngày tạo</th>
 								<th>Thao tác</th>
-								<th></th>
 							</tr>
 						</thead>
 

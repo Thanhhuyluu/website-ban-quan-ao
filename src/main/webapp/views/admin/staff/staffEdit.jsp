@@ -22,7 +22,7 @@
                 <label for="address" class="form-label">Địa chỉ</label>
                 <input type="text" name="address" id="address" class="form-control" value="<c:out value='${staff.address}' />">
             </div>
-            <!-- <input type="hidden" name="createdAt" value="<c:out value='${staff.createdAt}' />" />      -->
+            <input type="hidden" name="createdAt" value="<c:out value='${staff.createdAt}' />" />    
             <button type="submit" class="btn-submit">Lưu lại</button>    
         </form>
     </div>

@@ -53,7 +53,7 @@ public class StaffController extends HttpServlet{
                 showEditForm(req, resp);
                 break;
             case "/admin-staff-update":
-                updateStaff(req, resp);
+            	updateStaff(req, resp);
                 break;
             case "/admin-staff-band":
             	bandStaff(req, resp);

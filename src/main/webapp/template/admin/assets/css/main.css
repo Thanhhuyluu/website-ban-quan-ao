@@ -354,3 +354,47 @@ body {
 
 
 
+
+.home-product__pagination{
+
+    margin: 56px 0;
+
+}
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.pagination-item{
+    margin: 0 8px;
+}
+
+.pagination-item--active .pagination-item__link{
+    background-color: red;
+    color: var(--white-color);
+}
+.pagination-item--active .pagination-item__link:hover{
+    background-color: red;
+}
+
+.pagination-item__link{
+    --height: 30px;
+    text-decoration: none;
+    font-size: 2rem;
+    display: block;
+    text-align: center;
+    min-width: 40px;
+    height: var(--height);
+    line-height: var(--height);
+    color: var(--text-color);
+    border-radius: 3px;
+    
+}
+
+.pagination-item__link:hover{
+    background-color: rgba(0,0,0,0.2);
+}
+

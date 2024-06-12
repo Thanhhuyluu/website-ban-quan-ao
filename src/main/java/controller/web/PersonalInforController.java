@@ -108,6 +108,7 @@ public class PersonalInforController extends HttpServlet {
 			}else {
 				System.out.println("don't have error");
 				u.setPassword(password);
+				System.out.println(u.getAddress());
 				UserDAO.getInstance().update(u);
 				
 				System.out.println(u.getAddress());
