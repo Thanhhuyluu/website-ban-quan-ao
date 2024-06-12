@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Category;
+import model.Product;
 import model.User;
 
 public class UserDAO implements DAOInterface<User>{
@@ -47,6 +50,15 @@ public class UserDAO implements DAOInterface<User>{
 		return result;
 	}
 
+	public List<User> searchByKey(List<User> li, String key){
+		List<User> result = new ArrayList<User>();
+		for(User user : li) {
+			if(user.getFullname().toLowerCase().contains(key.toLowerCase())) {
+				result.add(user);
+			}
+		}
+		return result;
+	}
 	@Override
 	public int update(User t) {
 		int result = 0;
@@ -135,6 +147,101 @@ public class UserDAO implements DAOInterface<User>{
 		return result;
 	}
 
+	public int getCountTotalStaff() {
+		int result = 0;
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select count(*) from user where user.status = 0 and user.role = 2";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery(sql);
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int getCountTotalCustomer() {
+		int result = 0;
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select count(*) from user where user.status = 0 and user.role = 0";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery(sql);
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public List<User> pagingAcountStaff(int index) {
+		List<User> result = new ArrayList<User>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select * from user where status = 0 and role = 2 limit ?, 5;";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1,(index-1)*5);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				int Id = rs.getInt("id");
+				String fullname = rs.getString("fullname");
+				String email = rs.getString("email");
+				String phoneNum = rs.getString("phone_number");
+				String address = rs.getString("address");
+				String password = rs.getString("password");
+				Date createdAt = rs.getDate("created_at");
+				Date updatedAt = rs.getDate("updated_at");
+				int status = rs.getInt("status");
+				int Role = rs.getInt("role");
+				result.add(new User(Id, fullname, email, phoneNum, address, password, createdAt, updatedAt, status, Role));	
+				
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	public List<User> pagingAcountCustomer(int index) {
+		List<User> result = new ArrayList<User>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select * from user where status = 0 and role = 0 limit ?, 5;";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1,(index-1)*5);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				int Id = rs.getInt("id");
+				String fullname = rs.getString("fullname");
+				String email = rs.getString("email");
+				String phoneNum = rs.getString("phone_number");
+				String address = rs.getString("address");
+				String password = rs.getString("password");
+				Date createdAt = rs.getDate("created_at");
+				Date updatedAt = rs.getDate("updated_at");
+				int status = rs.getInt("status");
+				int Role = rs.getInt("role");
+				result.add(new User(Id, fullname, email, phoneNum, address, password, createdAt, updatedAt, status, Role));	
+				
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	@Override
 	public User selectById(int id) {
 		User result = null;

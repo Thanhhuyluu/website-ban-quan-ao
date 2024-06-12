@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import constant.SystemConstant;
+import dao.CategoryDAO;
 import dao.UserDAO;
 import model.User;
 
@@ -68,9 +69,28 @@ public class CustomerController extends HttpServlet{
 	
 	private void listCustomer(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<User> customers = customerDao.selecteByRole(SystemConstant.CUSTOMER);
-        request.setAttribute("customers", customers);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/customer/customerList.jsp");
+		String searchKey = request.getParameter("txtSearch");
+		String indexPage = request.getParameter("index");
+		if(indexPage == null) {
+			indexPage = "1";
+		}
+		int index = Integer.parseInt(indexPage);
+		int count = UserDAO.getInstance().getCountTotalCustomer();
+		int endPage = count/5;
+		if(count % 5 != 0) {
+			endPage++;
+		}
+		
+		List<User> customers = UserDAO.getInstance().pagingAcountCustomer(index);
+		
+		if(searchKey != null) {
+			customers = UserDAO.getInstance().searchByKey(customers, searchKey);
+		}
+		request.setAttribute("customers", customers);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("tag", index);
+		request.setAttribute("txtSearch", searchKey);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/customer/customerList.jsp");
         dispatcher.forward(request, response);
     }
  

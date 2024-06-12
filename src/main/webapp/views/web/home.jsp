@@ -119,7 +119,7 @@
 										<div class="product-item-action">
 											<a href="chi-tiet-san-pham?proId=${p.getId() }"
 												class="product-item-buy__btn-link">
-												<div class="product-item-buy__btn">Mua ngay</div>
+												<div class="product-item-buy_btn">Mua ngay</div>
 											</a>
 
 											<div id="product-item-like-${p.getId() }" onclick="likeProduct(${p.getId()})"
@@ -238,12 +238,6 @@
 
 					noProduct.style.display = "none";
 				}
-				
-				
-				
-				
-				
-				
 			</script>
 		</div>
 	</div>

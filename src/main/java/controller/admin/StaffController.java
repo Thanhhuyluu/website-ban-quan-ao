@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import constant.SystemConstant;
+import dao.ProductDAO;
 import dao.UserDAO;
+import model.Product;
+import model.ProductItem;
 import model.User;
+import service.ProductManager;
 
 
 @WebServlet(urlPatterns = {"/admin-staff", "/admin-staff-edit", "/admin-staff-new", "/admin-staff-insert", "/admin-staff-delete", "/admin-staff-update", "/admin-staff-band" })
@@ -71,15 +75,27 @@ public class StaffController extends HttpServlet{
 	
 	private void listStaff(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<User> staffs = staffDAO.selecteByRole(SystemConstant.STAFF);
-        request.setAttribute("staffs", staffs);
-        
-        String message = (String)request.getAttribute("message");
-        if(message != "" || message != null) {
-        	request.setAttribute("message", message);
-        	System.out.println(message);
-        }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/staff/staffList.jsp");
+		String searchKey = request.getParameter("txtSearch");
+		String indexPage = request.getParameter("index");
+		if(indexPage == null) {
+			indexPage = "1";
+		}
+		int index = Integer.parseInt(indexPage);
+		int count = UserDAO.getInstance().getCountTotalStaff();
+		int endPage = count/5;
+		if(count % 5 != 0) {
+			endPage++;
+		}
+		
+		List<User> staffs = UserDAO.getInstance().pagingAcountStaff(index);
+		if(searchKey != null) {
+			staffs = UserDAO.getInstance().searchByKey(staffs, searchKey);
+		}
+		request.setAttribute("staffs", staffs);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("tag", index);
+		request.setAttribute("txtSearch", searchKey);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/staff/staffList.jsp");
         dispatcher.forward(request, response);
     }
  

@@ -108,7 +108,6 @@ public class ProductDetailDAO implements DAOInterface<ProductDetail> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return result;
 	}
 

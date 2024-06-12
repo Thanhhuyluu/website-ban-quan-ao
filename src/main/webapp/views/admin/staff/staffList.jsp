@@ -6,9 +6,18 @@
           <h6 class="classify__header-title">
               Danh sách nhân viên
           </h6>
+           <form id="searchForm" action="admin-staff" method="GET">
+		        <div class="header__search">
+		            <div class="header__search-icon">
+		            	<i class="fa-solid fa-magnifying-glass"></i>
+		            </div>
+		            <input type="text" name="txtSearch" class="header__search-input"
+		                placeholder="Tìm kiếm tên nhân viên  " value="${txtSearch}">
+		        </div>
+		    </form>
           <div class="btn-add">
               <a class="btn-add-link" href=" <c:url value = "admin-staff-new"/>" >
-                  <i class="fa-solid fa-plus"></i>
+                  <i class="fa-solid fa-plus" style="text-align: center;" title="Thêm nhân viên mới "></i>
               </a>
           </div>
       </div>
@@ -36,28 +45,44 @@
                    		<c:choose>
                             <c:when test="${staff.status == 0}">
                                  <a class="active-link" href="/Online_Shop/admin-staff-band?id=<c:out value='${staff.id}' />" >
-		                           	<i class="fa-solid fa-unlock" style="text-align: center;" title="Khoá tài khoản" ></i>
+		                           	<i class="fa-solid fa-unlock" style="text-align: center;" title="Tài khoản chưa bị khoá " ></i>
 		                        </a>
                             </c:when>    
                             <c:otherwise>
                                <a class="active-link" href="/Online_Shop/admin-staff-band?id=<c:out value='${staff.id}' />" >
-		                           	<i class="fa-solid fa-lock" style="text-align: center;" title="Mở khoá tài khoản" ></i>
+		                           	<i class="fa-solid fa-lock" style="text-align: center;" title="Tài khoản đã bị khoá" ></i>
 		                        </a>
                             </c:otherwise>    
                         </c:choose>  
                     </td>
                     <td>
                         <a class="active-link" href="/Online_Shop/admin-staff-edit?id=<c:out value='${staff.id}' />" >
-                            <i class="fa-solid fa-pen-to-square"></i>
+                            <i class="fa-solid fa-pen-to-square" style="text-align: center;" title="Cập nhật thông tin nhân viên  "></i>
                         </a>
                         <a class="active-link staff-delete-btn" id="open-modal-btn" data-bs-id="${staff.id}" >
-						    <i class="fa-solid fa-trash-can"></i> 
+						    <i class="fa-solid fa-trash-can" style="text-align: center;" title="Xoá nhân viên "></i> 
 						</a>
                     </td>
                   </tr>
                 </c:forEach>
               </tbody>
           </table>
+          <ul class="pagination home-product__pagination">
+			<li class="pagination-item "><a
+				href="admin-staff?txtSearch=${txtSearch==null? "": txtSearch}&index=${tag == 1?tag : (tag-1)}" class="pagination-item__link"> <i
+					class="pagination-item__icon fa-solid fa-chevron-left"></i>
+			</a></li>
+			<c:forEach begin="1" end="${endPage}" var="i">
+				<li class="pagination-item ${tag == i?"pagination-item--active":""}">
+
+					<a class="pagination-item__link" href="admin-staff?txtSearch=${txtSearch==null? "": txtSearch}&index=${i}" >${i}</a>
+				</li>
+			</c:forEach>
+			<li class="pagination-item"><a
+				href="admin-staff?txtSearch=${txtSearch==null? "": txtSearch}&index=${tag == endPage?tag : (tag+1)}" class="pagination-item__link"> <i
+					class="pagination-item__icon fa-solid fa-chevron-right"></i>
+			</a></li>
+		</ul>
       </div>
   </div>
 </div>   
@@ -80,53 +105,6 @@
 <form name="form-staff-delete" method="POST"></form>
  
 
+<script src="<c:url value='/template/admin/assets/scripts/search.js' />"></script>
+<script src="<c:url value='/template/admin/assets/scripts/staffList.js' />"></script>
 
-<script>
-	// Xử lí modal-delete
-   const open_modal = document.getElementById('open-modal-btn')
-   const modal_alert = document.querySelector('.modal-alert')
-   const icon_close = document.querySelector('.icon-close')
-   const btnDeleteStaffs = document.querySelectorAll('.staff-delete-btn')
-   // const alert_footer_btn = document.querySelectorAll('.alert__footer-btn')
-   const modal_alert_inner = document.querySelector('.modal-alert__inner')
-   const btnDeleteItem = document.getElementById('delete-item-modal');
-   const btnExitDelete = document.getElementById('exit-delete-modal');
-
-	// Xử lí xoá
-	var staffId;
-	const formDeleteStaff = document.forms['form-staff-delete'];
-
-	/* open_modal.onclick = function () {
-       
-   } */
-	
-   
-   function show(){
-       modal_alert.classList.toggle('show')
-   }
-  /*  icon_close.addEventListener('click',show) */
-
-    btnDeleteStaffs.forEach(element => {
-        element.addEventListener('click',() => {
-        show();
-        staffId = element.getAttribute("data-bs-id");
-        console.log(staffId);
-        });
-    });
-   
-   // btn_close.addEventListener('click', show)
-   // alert_footer_btn.forEach(element => {
-   //     element.addEventListener('click', show)
-   // });
-   btnDeleteItem.addEventListener('click', ()=>{
-	   formDeleteStaff.action = '/Online_Shop/admin-staff-delete?id=' + staffId ;
-       formDeleteStaff.submit();
-       console.log('xoa');
-   });
-   btnExitDelete.addEventListener('click', ()=>{
-       show();
-       console.log('exit');
-   });
-   icon_close.addEventListener('click', show);
-
-</script>

@@ -15,16 +15,16 @@
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/formadditem.css' />">
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/orderDetail.css' />">
 	<link rel="stylesheet" href="<c:url value='/template/admin/assets/css/addNewProduct.css' />">
-	
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="<c:url value="/template/web/assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css"/>" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
     <!-- icon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- chart -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- 	
+ 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    
 </head>
 <body>
@@ -43,7 +43,8 @@
     </div>
 	
     <script src="<c:url value='/template/admin/assets/scripts/index.js' />"></script>
-    <script src="<c:url value='/template/admin/assets/scripts/validateForm.js' />"></script>	
+    <script src="<c:url value='/template/admin/assets/scripts/validateForm.js' />"></script>
+    	
     
    <%--  <script src="<c:url value='/template/admin/assets/scripts/chart.js' />"></script>  --%>
  

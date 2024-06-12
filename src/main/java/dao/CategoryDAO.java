@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Category;
+import model.Product;
+import model.User;
 
 public class CategoryDAO implements DAOInterface<Category> {
 
@@ -143,7 +146,15 @@ public class CategoryDAO implements DAOInterface<Category> {
 		return result;
 	}
 	
-	
+	public List<Category> searchByKey(List<Category> li, String key){
+		List<Category> result = new ArrayList<Category>();
+		for(Category category : li) {
+			if(category.getName().toLowerCase().contains(key.toLowerCase())) {
+				result.add(category);
+			}
+		}
+		return result;
+	}
 
 	@Override
 	public ArrayList<Category> selectByCondition(String condition) {
@@ -151,4 +162,45 @@ public class CategoryDAO implements DAOInterface<Category> {
 		return null;
 	}
 
+	public int getCountTotal() {
+		int result = 0;
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select count(*) from category";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery(sql);
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public List<Category> pagingAcount(int index) {
+		List<Category> result = new ArrayList<Category>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			String sql = "select * from category limit ?, 5;";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1,(index-1)*5);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				int Id = rs.getInt("id");
+				String name = rs.getString("name");
+				int Type = rs.getInt("type");
+				Category ct = new Category(Id,name,Type);
+				result.add(ct);
+			}
+			JDBCUtil.closeConnection(c);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

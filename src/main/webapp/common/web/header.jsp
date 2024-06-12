@@ -152,7 +152,7 @@
                                         </div>
                                         <div class="grid__column-3">
                                             <ul class="header-cate-dropbox-list">
-                                                <h3 class="header-cate-dropbox-heading">Nửa trên</h3>
+                                                <h3 class="header-cate-dropbox-heading">Áo </h3>
                                                 
                                                 
                                                 <c:forEach items = "${requestScope.upperList }" var = "ct">
@@ -165,7 +165,7 @@
                                         </div>
                                         <div class="grid__column-3">
                                             <ul class="header-cate-dropbox-list">
-                                                <h3 class="header-cate-dropbox-heading">Nửa dưới</h3>
+                                                <h3 class="header-cate-dropbox-heading">Quần </h3>
                                                 
                                                 
                                                 <c:forEach items = "${requestScope.lowerList }" var = "ct">
@@ -242,9 +242,6 @@
                 <form action="trang-chu" method="get" id="header-seach" class="header-search">
                     <div class="header-search-input-wrap">
                         <input id="header-search-input" name="searchKey" type="text" class="header-search-input" placeholder="Tìm kiếm" value="${ requestScope.searchKey }">
-                        
-                            
-                        
                         
                     </div>
                    	<c:if test="${requestScope.gender !=null }">

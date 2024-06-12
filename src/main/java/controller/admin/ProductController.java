@@ -2,7 +2,6 @@ package controller.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,15 +22,11 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.ISelectionService;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 
 import dao.BrandDAO;
 import dao.CategoryDAO;
 import dao.ImageDAO;
+import dao.OrderDAO;
 import dao.ProductDAO;
 import dao.ProductDetailDAO;
 import dao.SupplierDAO;
@@ -45,7 +40,8 @@ import model.Supplier;
 import service.ProductManager;
 
 @WebServlet(urlPatterns = { "/admin-product", "/admin-product-new", "/admin-product-insert", "/admin-product-delete",
-		"/admin-product-edit", "/admin-product-update", "/admin-productDetail-add", "/admin-productDetail-insert", "/admin-productDetail-back" })
+		"/admin-product-edit", "/admin-product-update", "/admin-productDetail-add", "/admin-productDetail-insert", 
+		"/admin-productDetail-back" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50 // 50MB
@@ -59,9 +55,11 @@ public class ProductController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getServletPath();
+		resp.setContentType("text/html");
+		req.setCharacterEncoding("UTF-8");
+
 		System.out.println(action);
 		try {
 			switch (action) {
@@ -100,25 +98,32 @@ public class ProductController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		req.setCharacterEncoding("UTF-8");
-
 		doGet(req, resp);
 	}
 
 	private void listProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		request.setCharacterEncoding("UTF-8");
-
-		List<Product> productRaws = productDAO.selectAll();
-		List<Product> products = new ArrayList<Product>();
-		for (Product product : productRaws) {
-			if(!product.isDeleted()) {
-				products.add(product);
-			}
+		String searchKey = request.getParameter("txtSearch");
+		String indexPage = request.getParameter("index");
+		if(indexPage == null) {
+			indexPage = "1";
 		}
-		List<ProductItem> lProductItems = ProductManager.getInstance().products2ProductItems(products);
+		int index = Integer.parseInt(indexPage);
+		int count = ProductDAO.getInstance().getCountTotal();
+		int endPage = count/5;
+		if(count % 5 != 0) {
+			endPage++;
+		}
+		
+		List<Product> lProducts = ProductDAO.getInstance().pagingAcount(index);
+		if(searchKey != null) {
+			lProducts = ProductDAO.getInstance().searchByKey(lProducts, searchKey);
+		}
+		List<ProductItem> lProductItems = ProductManager.getInstance().products2ProductItems(lProducts);
 		request.setAttribute("lProductItems", lProductItems);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("tag", index);
+		request.setAttribute("txtSearch", searchKey);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/product/productList.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -440,7 +445,8 @@ public class ProductController extends HttpServlet {
 			int quantityValue = Integer.parseInt(quantity);
 			String colorValue = color;
 			Date createdAt = new Date(System.currentTimeMillis());
-			int rs1 = 0,rs2 = 0; 
+			int rs1 = 0; 
+			int rs2 = 0; 
 			ProductDetail productDetail = ProductDetailDAO.getInstance().selectByColorAndSize(colorValue, sizeValue, productIdValue);
 			
 			if(productDetail == null) {
@@ -496,4 +502,5 @@ public class ProductController extends HttpServlet {
 
 		response.sendRedirect("admin-product");
 	}
+
 }

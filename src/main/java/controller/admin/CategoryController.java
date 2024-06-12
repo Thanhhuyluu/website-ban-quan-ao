@@ -2,6 +2,7 @@ package controller.admin;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CategoryDAO;
+import dao.UserDAO;
 import model.Category;
+import model.User;
 
 
 @WebServlet(urlPatterns = {"/admin-category", "/admin-category-edit", "/admin-category-new", "/admin-category-insert", "/admin-category-delete", "/admin-category-update" })
@@ -62,10 +65,28 @@ public class CategoryController extends HttpServlet{
 	
 	private void listCategory(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Category> categories = categoryDAO.selectAll();
-        request.setAttribute("categories", categories);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/category/categoryList.jsp");
-        dispatcher.forward(request, response);
+		String searchKey = request.getParameter("txtSearch");
+		String indexPage = request.getParameter("index");
+		if(indexPage == null) {
+			indexPage = "1";
+		}
+		int index = Integer.parseInt(indexPage);
+		int count = CategoryDAO.getInstance().getCountTotal();
+		int endPage = count/5;
+		if(count % 5 != 0) {
+			endPage++;
+		}
+		
+		List<Category> categories = CategoryDAO.getInstance().pagingAcount(index);
+		if(searchKey != null) {
+			categories = CategoryDAO.getInstance().searchByKey(categories, searchKey);
+		}
+		request.setAttribute("categories", categories);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("tag", index);
+		request.setAttribute("txtSearch", searchKey);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/category/categoryList.jsp");
+	    dispatcher.forward(request, response);
     }
  
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)

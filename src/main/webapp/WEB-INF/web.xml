@@ -26,5 +26,14 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
+  <servlet>
+    <description></description>
+    <display-name>SearchController</display-name>
+    <servlet-name>SearchController</servlet-name>
+    <servlet-class>controller.admin.SearchController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchController</servlet-name>
+    <url-pattern>/SearchController</url-pattern>
+  </servlet-mapping>
 </web-app>
