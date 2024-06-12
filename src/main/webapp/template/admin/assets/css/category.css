@@ -261,7 +261,7 @@ body{
 }
 .table-classify{
 	min-height: 700px;
-    width: 80%;
+    width: 90%;
     margin: auto;
     
 }
@@ -270,35 +270,48 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding-bottom: 20px;
+	border-bottom: 4px solid var(--text-color);
+	text-transform: uppercase;
+	margin-bottom: 35px;
 }
 .classify__header-title{
-    font-size: 20px;
+    font-size: 2.4rem;
+    
+	
 }
 .table{
     width: 100%;   
-    background-color: #d9d9d9;
-	border-radius: 5px; 
+    background-color: #f5f2f4;
+	 
     overflow: hidden;
+    border-spacing: 0px;
 }
 
 .table th{
-    font-size: 18px;
+    font-size: 2.3rem;
     font-weight: bold;
+    margin: 0;
+    background-color:#e5e5e5;
+    border: 1px solid #ccc;
 }
-.table, th{
-    border-bottom: 1px solid black; 
-    border-collapse: collapse;
-}
+
 /* loi hien thị border của thead tr */
 /* thead > tr {
     border-bottom: 1px solid black;
 } */
 th, td{
-    padding: 12px 12px;
+    padding: 24px 12px;
+    
+    
 }
 .table td{
-    font-size: 16px;
+    font-size: 2rem;
+    font-weight: 500;
     color: black;
+    padding: 18px 15px;
+    border: 1px solid #ccc;
 }
 .table-id{
     font-weight: 500;
@@ -307,16 +320,18 @@ table th{
     text-align: left;
 }
 .btn-add-link i{
-    font-size: 16px;
+    font-size: 1.6rem;
     position: relative;
     top: 2px;
     text-decoration: none;
     color: black;
 }
 .btn-add-link{
+	
+    font-weight: bold;
     border: 1px solid #000;
     border-radius: 5px; 
-    padding: 4px;
+    padding: 10px;
 }
 .active-link{
     text-decoration: none;

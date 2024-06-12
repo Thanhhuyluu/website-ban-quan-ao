@@ -130,7 +130,7 @@
            
 								<div class="cart-nav-link-wrapper">
 									<div class="cart-nav-link">
-										<a href="yeu-thich?action=delete-all" class="return-to-shop-link">XÓA HẾT</a>
+										<a onclick="deleteAll()" class="return-to-shop-link">XÓA HẾT</a>
 									</div>
 									<div class="cart-nav-link">
 										<a href="trang-chu" class="return-to-shop-link">TIẾP TỤC MUA HÀNG</a>
@@ -184,6 +184,23 @@
 					});
 			
 			}
+			function deleteAll(){
+				
+				$.ajax({
+				    type: "GET",
+				    url: "/Online_Shop/yeu-thich?action=delete-all",
+				    data: {
+				    	
+				    	
+				    },
+				    
+				    success: function(result) {
+				        location.reload();
+				        
+				    }
+					});
+			
+			}
 			function deleteItem(id){
 				
 				$.ajax({
@@ -194,7 +211,7 @@
 				    },
 				    
 				    success: function(result) {
-				        location.reload();
+				    	location.reload();
 				        
 				    }
 					});

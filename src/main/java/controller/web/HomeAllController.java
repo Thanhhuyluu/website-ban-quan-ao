@@ -18,6 +18,7 @@ import constant.SystemConstant;
 import dao.CategoryDAO;
 import dao.ProductDAO;
 import dao.UserDAO;
+import model.Address;
 import model.Cart;
 import model.Category;
 import model.Product;
@@ -57,6 +58,8 @@ public class HomeAllController extends HttpServlet {
 		if(action != null &&action.equals("logout")) {
 			System.out.println("enter logout");
 			SessionUtil.getInstance().removeValue(request, "USER");
+
+			SessionUtil.getInstance().removeValue(request, "ADDRESS");
 			response.sendRedirect(request.getContextPath() + "/trang-chu");
 			
 		}else {
@@ -199,7 +202,9 @@ public class HomeAllController extends HttpServlet {
 				String remember= request.getParameter("remember");
 				User user = UserDAO.getInstance().seletUserByPasswordAndStatusAndPhoneNumberOrEmail(password, emailOrPhoneNumber, 0);
 				if(user!=  null) {
+					System.out.println("session");
 					SessionUtil.getInstance().putValue(request, "USER", user);
+					SessionUtil.getInstance().putValue(request, "ADDRESS", new Address(user.getAddress()));
 					Cookie passC = new Cookie("passC", password);
 					Cookie emailOrPhoneC = new Cookie("emailOrPhoneC",emailOrPhoneNumber);
 					if(remember != null) {
@@ -241,6 +246,7 @@ public class HomeAllController extends HttpServlet {
 							url = url.substring(0, url.length()-1);
 							response.sendRedirect(request.getContextPath() + url);
 						}else {
+							u.setAddress(" / / / /");
 							UserDAO.getInstance().insert(u);
 							SessionUtil.getInstance().putValue(request, "USER", u);
 							response.sendRedirect(request.getContextPath() + "/trang-chu");

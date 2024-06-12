@@ -22,6 +22,9 @@
                                 		<li class="header__user-option-item">
                                 			<a href="don-hang?action=xem-tat-ca" class="header__user-option-item-link">Đơn hàng</a>
                                 		</li>
+                                		<li class="header__user-option-item">
+                                			<a href="thong-tin-ca-nhan" class="header__user-option-item-link">Thông tin cá nhân</a>
+                                		</li>
                                 	</ul>
                                 </div>
                                 
