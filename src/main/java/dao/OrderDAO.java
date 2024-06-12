@@ -279,7 +279,7 @@ public class OrderDAO implements DAOInterface<Order>{
 	        // Thực thi truy vấn
 	        rs = preparedStatement.executeQuery();
 	        // Lấy kết quả
-	        if (rs.next()) {
+	        while(rs.next()) {
 	        	int id = rs.getInt("id");
 				int userId = rs.getInt("user_id");
 				String fullname = rs.getString("fullname");
