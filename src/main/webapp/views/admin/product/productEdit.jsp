@@ -4,7 +4,7 @@
 <div class="container-body">
     <div class="form">
         <h6 class="form-title">Chỉnh sửa sản phẩm</h6>
-        <form action="admin-product-update" method="POST">
+        <form action="admin-product-update" method="POST" enctype="multipart/form-data">
            		<input type="hidden" name="id" value="<c:out value='${product.id}' />" /> 
                 <input type="hidden" name="createdAt" value="<c:out value='${product.createdAt}' />" /> 
                 <input type="hidden" name="likes" value="<c:out value='${product.likes}' />" /> 

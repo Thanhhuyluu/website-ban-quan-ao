@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import constant.SystemConstant;
 import model.Order;
 import model.Product;
 import model.User;
@@ -273,7 +274,7 @@ public class OrderDAO implements DAOInterface<Order>{
 	    Connection c = JDBCUtil.getConnection();
 	    try {
 	        // Tạo truy vấn SQL
-	        String sql = "SELECT * FROM `order` WHERE `order_date` = ?";
+	        String sql = "SELECT * FROM `order` WHERE `order_date` = ? and status != "+ SystemConstant.CANCELED;
 	        preparedStatement = c.prepareStatement(sql);     
 	        preparedStatement.setDate(1, date);
 	        // Thực thi truy vấn

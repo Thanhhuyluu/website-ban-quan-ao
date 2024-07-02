@@ -160,7 +160,7 @@ public class ProductDAO implements DAOInterface<Product> {
 			Connection c = JDBCUtil.getConnection();
 			String sql = "select * from product where deleted = 0 limit ?, 8;";
 			PreparedStatement pst = c.prepareStatement(sql);
-			pst.setInt(1,(index-1)*5);
+			pst.setInt(1,(index-1)*8);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");

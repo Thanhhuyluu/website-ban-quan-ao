@@ -171,7 +171,7 @@
 							<i class="icon-heart-full fa-solid fa-heart"></i>
 						</div>
 					</form>
-					<div class="product__payment"><a href="thanh-toan?action=thanh-toan" class="product__payment-link" style="${productCurrentQuantity == 0 ? "pointer-events: none; background-color: #555050; color:#a1a1a1;cursor: not-allowed; ":""}">THANH TOÁN</a></div>
+					<div class="product__payment"><a href="#" onclick="addToCartAndPay()" class="product__payment-link" style="${productCurrentQuantity == 0 ? "pointer-events: none; background-color: #555050; color:#a1a1a1;cursor: not-allowed; ":""}">THANH TOÁN</a></div>
 					<div class="panel-group">
 						<div class="panel-item ">
 							<div class="panel-item__heading js-panel-item__heading-infor ">
@@ -364,7 +364,19 @@
     		addToCartForm.submit();
     	}
     	
-    	
+    	function addToCartAndPay(){
+    		var addToCartQuantityInput = document.getElementById('buy-quantity');
+    		addToCartQuantityInput.value= currentQuatityToBuy.value;
+    		addToCartForm.action = "gio-hang";
+    		
+    		 var inputElement = document.getElementById('add-cart-action');
+             // Đổi giá trị của thẻ input
+             inputElement.value = 'them-vao-gio-va-thanh-toan';
+    		console.log($('#add-cart-action').val());
+    		addToCartForm.submit();
+   
+    		
+    	}
     	function likeProduct(Id,flat){
 			$.ajax({
 			    type: "POST",

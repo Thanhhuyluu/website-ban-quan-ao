@@ -37,7 +37,7 @@
 												<h2 class="cart__item-product-title">${ product.getTitle() }</h2>
 												<c:if test="${product.getDiscount()!=0 }">
 													<span class="cart__item-product-old-price">${product.getPrice() }
-														vnđ</span>
+														VNĐ</span>
 												</c:if>
 												<c:if test="${product.getDiscount()==0 }">
 													<span class="cart__item-product-old-price"></span>
@@ -112,13 +112,10 @@
 											<c:set var="price" value="${product.getPrice()}" />
 											<c:set var="discount" value="${product.getDiscount()}" />
 											<h1 class="cart__item-product-main-price">${price - (price * discount / 100)}
-												vnđ</h1>
-											<span class="cart__item-product-quantity-status">Còn hàng</span>
+												VNĐ</h1>
+											<span class="cart__item-product-quantity-status" style="margin-bottom: 40px;">Còn hàng</span>
 
-											<div class="cart__item-product-like-btn liked">
-												<i class="filled-heart fa-solid fa-heart"></i> <i
-													class="empty-heart fa-regular fa-heart"></i>
-											</div>
+											
 											<a href="gio-hang?action=delete&deleteCartItemId=${productDetail.getId() }" class="cart__item-product-remove-btn">
 
 												<i class="fa-solid fa-trash"></i>
@@ -161,15 +158,15 @@
 								<h1 class="payment-heading">Đơn hàng</h1>
 								<div class="payment-item-infor-row">
 									<h3 class="payment-item-heading">Đơn hàng</h3>
-									<h3 class="payment-item-des">${cart.getTotalMoney() } vnđ</h3>
+									<h3 class="payment-item-des">${cart.getTotalMoney() } VNĐ</h3>
 								</div>
 								<div class="payment-item-infor-row">
 									<h3 class="payment-item-heading">Giảm</h3>
-									<h3 class="payment-item-des">${cart.getSaleoffMoney() } vnđ</h3>
+									<h3 class="payment-item-des">${cart.getSaleoffMoney() } VNĐ</h3>
 								</div>
 								<div class="payment-item-infor-row">
 									<h3 class="payment-item-heading">Tạm tính</h3>
-									<h3 class="payment-item-des">${cart.getAfterSaleoffMoney() } vnđ</h3>
+									<h3 class="payment-item-des">${cart.getAfterSaleoffMoney() } VNĐ</h3>
 								</div>
 								<a href="thanh-toan?action=thanh-toan" class="payment-submit-button">Tiếp tục thanh toán</a>
 							</div>

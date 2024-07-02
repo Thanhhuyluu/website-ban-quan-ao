@@ -78,7 +78,7 @@ public class OrderController extends HttpServlet{
 			}
 			
 			List<Order> orders = OrderDAO.getInstance().pagingAcount(index);
-			if(searchKey != null) {
+			if(searchKey != null && !searchKey.equals("")) {
 				orders = OrderDAO.getInstance().searchByKey(orders, searchKey);
 			}
 			List<OrderItem> lOrderItems = OrderManager.getInstance().oders2OrderItems(orders);

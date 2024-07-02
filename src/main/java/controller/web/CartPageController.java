@@ -76,6 +76,37 @@ public class CartPageController extends HttpServlet {
 			
 			request.setAttribute("proId", String.valueOf(productId));
 			request.getRequestDispatcher("/chi-tiet-san-pham").forward(request, response);
+		}else if(action.equals("them-vao-gio-va-thanh-toan")) {
+			Cookie[] cookies = request.getCookies();
+			String txt = "";
+			if (cookies != null) {
+				for (Cookie c : cookies) {
+					if (c.getName().equals("cart")) {
+						txt += c.getValue();
+						//c.setMaxAge(0);
+						response.addCookie(c);
+					}
+				}
+			}
+
+			String buyQuantity = request.getParameter("buyQuantity");
+			String productDetailId = request.getParameter("productDetailId");
+
+			int productId = ProductDetailDAO.getInstance().selectById(Integer.parseInt(productDetailId)).getProduct().getId();
+			if(txt.isEmpty() || txt.equals("")) {
+				txt = productDetailId+":"+buyQuantity;
+			}else {
+				txt = txt + "/" + productDetailId + ":" + buyQuantity;
+			}
+
+			Cookie c = new Cookie("cart", txt);
+			
+			c.setMaxAge(60 * 60 * 24 * 30 * 6);
+			response.addCookie(c);
+			//lấy cart để hiển thị số lượng trên header
+			Cart.setCartAttribute(request, response,c);
+			
+			response.sendRedirect("/Online_Shop/gio-hang?action=show");
 		}
 		//XỬ LÝ XEM GIỎ HÀNG
 		else if (action.equals("show")) {

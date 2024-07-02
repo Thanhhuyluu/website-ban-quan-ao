@@ -80,7 +80,7 @@
 											<div class="modal__header">
 												<i class="fa-solid fa-xmark icon-close"></i>
 												<div class="product-detail__img"
-													style="background-image: url(<c:url value='/imgs/${product.img}'/>);">
+													style="background-image: url('./imgs/${product.img}');">
 												</div>
 												<div class="product-detail__title">${product.title}</div>
 												<div class="product-detail__category">
@@ -116,7 +116,7 @@
 												<div class="detail-product-count-fav">
 													<div class="detail-product-status-count">Trong kho còn
 														${countProductDetail} sản phẩm</div>
-													<div class="detail-product-status-fav">Luợt thích:
+													<div class="detail-product-status-fav">Lượt thích:
 														${product.likes}</div>
 												</div>
 												<div class="detail-product-descript">

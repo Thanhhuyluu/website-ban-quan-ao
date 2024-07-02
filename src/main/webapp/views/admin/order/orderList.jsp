@@ -38,7 +38,7 @@
 							<td><c:out value="${order.orderDate}" /></td>
 							<c:choose>
 								<c:when test="${order.status == 0}">
-									<td>Đang chuẩn bị hàng</td>
+									<td>Đang chờ xác nhận</td>
 								</c:when>
 								<c:when test="${order.status == 1}">
 									<td>Đang giao hàng</td>
@@ -50,13 +50,26 @@
 									<td>Đã huỷ đơn hàng</td>
 								</c:otherwise>
 							</c:choose>
-							<td><a class="active-link"
-								href="/Online_Shop/admin-order-deleteSoft?id=<c:out value='${order.id}' />">
-									<i class="fa-regular fa-calendar-xmark"  style="text-align: center;" title="Xác nhận huỷ đơn hàng " ></i>
-							</a><a class="active-link"
-								href="/Online_Shop/admin-order-acceptOrder?id=<c:out value='${order.id}' />">
-									<i class="fa-solid fa-calendar-check" style="text-align: center;" title="Xác nhận đơn hàng " ></i>
-							</a> <a class="active-link btn-show-modal-order-detail"> <i
+							<td style="display: flex; justify-content: space-between;">
+							
+								<a style="${order.getStatus() != 3 ? "" : "color: #9e8d8d; pointer-events: none;"}" class="active-link"
+									href="/Online_Shop/admin-order-deleteSoft?id=<c:out value='${order.id}' />">
+										
+										<i class="fa-regular fa-calendar-xmark"  style="text-align: center; " title="Xác nhận huỷ đơn hàng " ></i>
+										
+								</a>
+							
+							
+							
+								<a style="${order.getStatus() == 0 ? "" : "color: #9e8d8d; pointer-events: none;"}" class="active-link"
+									href="/Online_Shop/admin-order-acceptOrder?id=<c:out value='${order.id}' />">
+										
+										<i class="fa-solid fa-calendar-check" style="text-align: center;" title="Xác nhận đơn hàng " ></i>
+										
+								</a> 
+							
+							
+							<a class="active-link btn-show-modal-order-detail"> <i
 									class="fa-solid fa-magnifying-glass" style="text-align: center;" title="Xem chi tiết đơn hàng "></i>
 							</a></td>
 							<td class="modal modal-detail-order"

@@ -83,7 +83,7 @@ public class CustomerController extends HttpServlet{
 		
 		List<User> customers = UserDAO.getInstance().pagingAcountCustomer(index);
 		
-		if(searchKey != null) {
+		if(searchKey != null  && !searchKey.equals("")) {
 			customers = UserDAO.getInstance().searchByKey(customers, searchKey);
 		}
 		request.setAttribute("customers", customers);

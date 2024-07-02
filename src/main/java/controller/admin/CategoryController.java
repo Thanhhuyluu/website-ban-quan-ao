@@ -78,7 +78,7 @@ public class CategoryController extends HttpServlet{
 		}
 		
 		List<Category> categories = CategoryDAO.getInstance().pagingAcount(index);
-		if(searchKey != null) {
+		if(searchKey != null && !searchKey.equals("")) {
 			categories = CategoryDAO.getInstance().searchByKey(categories, searchKey);
 		}
 		request.setAttribute("categories", categories);

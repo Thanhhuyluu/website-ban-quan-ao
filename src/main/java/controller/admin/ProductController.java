@@ -55,11 +55,10 @@ public class ProductController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		String action = req.getServletPath();
-		resp.setContentType("text/html");
 		req.setCharacterEncoding("UTF-8");
-
+		String action = req.getServletPath();
+		
+		
 		System.out.println(action);
 		try {
 			switch (action) {
@@ -116,7 +115,7 @@ public class ProductController extends HttpServlet {
 		}
 		
 		List<Product> lProducts = ProductDAO.getInstance().pagingAcount(index);
-		if(searchKey != null) {
+		if(searchKey != null && !searchKey.equals("")) {
 			lProducts = ProductDAO.getInstance().searchByKey(lProducts, searchKey);
 		}
 		List<ProductItem> lProductItems = ProductManager.getInstance().products2ProductItems(lProducts);
@@ -130,7 +129,6 @@ public class ProductController extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 
 		CategoryDAO categoryDAO = new CategoryDAO();
 		BrandDAO brandDAO = new BrandDAO();
@@ -147,7 +145,6 @@ public class ProductController extends HttpServlet {
 	
 	private void showNewProductDetail(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 
 		int productId = Integer.parseInt(request.getParameter("id"));
 		request.setAttribute("productId", productId);
@@ -178,8 +175,7 @@ public class ProductController extends HttpServlet {
 
 	private void insertProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		request.setCharacterEncoding("UTF-8");
-
+		
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			System.out.println("Form is not multipart, cannot upload file.");
 			return;
@@ -207,12 +203,13 @@ public class ProductController extends HttpServlet {
 					// Process regular form field (input type="text|radio|checkbox|etc", select,
 					// etc).
 					String fieldName = item.getFieldName();
-					String fieldValue = item.getString();
-
+					String fieldValue = item.getString("UTF-8");
+					
 					switch (fieldName) {
-					case "title":
-						title = fieldValue;
-						break;
+					
+					case "title": 
+						title = fieldValue; 
+					 	break;
 					case "category_id":
 						category_id = fieldValue;
 						break;
@@ -231,10 +228,11 @@ public class ProductController extends HttpServlet {
 					case "gender":
 						gender = fieldValue;
 						break;
-					case "description":
+					case "description": 
 						description = fieldValue;
-						break;
+					 	break;
 					}
+					
 				} else {
 					// Process form file field (input type="file").
 					if ("img".equals(item.getFieldName())) {
@@ -318,30 +316,172 @@ public class ProductController extends HttpServlet {
 	private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		CategoryDAO categoryDAO = new CategoryDAO();
-		BrandDAO brandDAO = new BrandDAO();
-		SupplierDAO supplierDAO = new SupplierDAO();
-		int id = Integer.parseInt(request.getParameter("id"));
-		String title = request.getParameter("title");
-		int category_id = Integer.parseInt(request.getParameter("category_id"));
-		int brand_id = Integer.parseInt(request.getParameter("brand_id"));
-		int supplier_id = Integer.parseInt(request.getParameter("supplier_id"));
-		int price = Integer.parseInt(request.getParameter("price"));
-		int discount = Integer.parseInt(request.getParameter("discount"));
-		String img = request.getParameter("img");
-		int gender = Integer.parseInt(request.getParameter("gender"));
-		String description = request.getParameter("description");
-		Date createdAt = Date.valueOf(request.getParameter("createdAt"));
-		Date updatedAt = new Date(System.currentTimeMillis());
-		int likes = Integer.parseInt(request.getParameter("likes"));
-		boolean deleted = false;
+//		CategoryDAO categoryDAO = new CategoryDAO();
+//		BrandDAO brandDAO = new BrandDAO();
+//		SupplierDAO supplierDAO = new SupplierDAO();
+//		int id = Integer.parseInt(request.getParameter("id"));
+//		String title = request.getParameter("title");
+//		int category_id = Integer.parseInt(request.getParameter("category_id"));
+//		int brand_id = Integer.parseInt(request.getParameter("brand_id"));
+//		int supplier_id = Integer.parseInt(request.getParameter("supplier_id"));
+//		int price = Integer.parseInt(request.getParameter("price"));
+//		int discount = Integer.parseInt(request.getParameter("discount"));
+//		String img = request.getParameter("img");
+//		int gender = Integer.parseInt(request.getParameter("gender"));
+//		String description = request.getParameter("description");
+//		Date createdAt = Date.valueOf(request.getParameter("createdAt"));
+//		Date updatedAt = new Date(System.currentTimeMillis());
+//		int likes = Integer.parseInt(request.getParameter("likes"));
+//		boolean deleted = false;
+//
+//		Product updatedProduct = new Product(id, categoryDAO.selectById(category_id), brandDAO.selectById(brand_id),
+//				supplierDAO.selectById(supplier_id), title, price, discount, img, description, createdAt, updatedAt,
+//				deleted, gender, likes);
+//		productDAO.update(updatedProduct);
+//		response.sendRedirect("admin-product");
+		
+			if (!ServletFileUpload.isMultipartContent(request)) {
+				System.out.println("Form is not multipart, cannot upload file.");
+				return;
+			}
 
-		Product updatedProduct = new Product(id, categoryDAO.selectById(category_id), brandDAO.selectById(brand_id),
-				supplierDAO.selectById(supplier_id), title, price, discount, img, description, createdAt, updatedAt,
-				deleted, gender, likes);
-		productDAO.update(updatedProduct);
-		response.sendRedirect("admin-product");
+			try {
+				DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+				File file1 = new File("C:\\Users\\ADMIN\\git\\new_repository\\Online_Shop\\src\\main\\webapp\\");
+				diskFileItemFactory.setRepository(file1);
+				ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
+				List<FileItem> fileItems = fileUpload.parseRequest(request);
 
+				String title = null;
+				String category_id = null;
+				String brand_id = null;
+				String supplier_id = null;
+				String price = null;
+				String discount = null;
+				String gender = null;
+				String description = null;
+				String img = null;
+				String id = null;
+				for (FileItem item : fileItems) {
+					if (item.isFormField()) {
+						System.out.println(item.getFieldName());
+						// Process regular form field (input type="text|radio|checkbox|etc", select,
+						// etc).
+						String fieldName = item.getFieldName();
+						String fieldValue = item.getString("UTF-8");
+						
+						switch (fieldName) {
+						
+						case "id":
+							id = fieldValue;
+							break;
+						case "title": 
+							title = fieldValue; 
+						 	break;
+						case "category_id":
+							category_id = fieldValue;
+							break;
+						case "brand_id":
+							brand_id = fieldValue;
+							break;
+						case "supplier_id":
+							supplier_id = fieldValue;
+							break;
+						case "price":
+							price = fieldValue;
+							break;
+						case "discount":
+							discount = fieldValue;
+							break;
+						case "gender":
+							gender = fieldValue;
+							break;
+						case "description": 
+							description = fieldValue;
+						 	break;
+						}
+						
+					} else {
+						// Process form file field (input type="file").
+						if ("img".equals(item.getFieldName())) {
+							img = item.getName();
+							System.out.println(img + "======");
+					
+							File file = new File(
+									"C:\\Users\\ADMIN\\git\\new_repository\\Online_Shop\\src\\main\\webapp\\imgs\\"
+											+ img);
+							item.write(file);
+
+							try {
+					            // Đặt tên project cần tìm
+					            String projectName = "Online_Shop";
+
+					            // Lấy tất cả các project trong workspace
+					            IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+
+					            // Tìm project theo tên
+					            IProject targetProject = null;
+					            for (IProject project : projects) {
+					                if (project.getName().equals(projectName)) {
+					                    targetProject = project;
+					                    break;
+					                }
+					            }
+
+					            // Kiểm tra và làm việc với project được tìm thấy
+					            if (targetProject != null) {
+					                System.out.println("Found project: " + targetProject.getName());
+
+					                // Ví dụ: Refresh project được tìm thấy
+					                targetProject.refreshLocal(IResource.DEPTH_INFINITE, null);
+					                System.out.println("Project " + targetProject.getName() + " refreshed successfully.");
+					            } else {
+					                System.out.println("Project with name '" + projectName + "' not found.");
+					            }
+					        } catch (Exception e) {
+					            e.printStackTrace();
+					        }
+						}
+					}
+				}
+				int categoryId = Integer.parseInt(category_id);
+
+				int brandId = Integer.parseInt(brand_id);
+				int supplierId = Integer.parseInt(supplier_id);
+				int priceValue = Integer.parseInt(price);
+				int discountValue = Integer.parseInt(discount);
+				int genderValue = Integer.parseInt(gender);
+				Date createdAt = new Date(System.currentTimeMillis());
+				Date updatedAt =  new Date(System.currentTimeMillis());
+				int likes = 0;
+				int Id = Integer.parseInt(id);
+				boolean deleted = false;
+				Product newProduct = new Product(Id,CategoryDAO.getInstance().selectById(categoryId),
+						BrandDAO.getInstance().selectById(brandId), SupplierDAO.getInstance().selectById(supplierId), title,
+						priceValue, discountValue, img, description, createdAt, updatedAt, deleted, genderValue, likes);
+
+				String message = null; 
+				if (ProductDAO.getInstance().update(newProduct) > 0){
+					message = "Thêm sản phẩm thành công!!"; 
+				}else {
+					message = "Thêm sản phẩm thất !!";
+				}
+				request.setAttribute("message", message);
+				response.sendRedirect("admin-product");
+
+			} catch (FileUploadException e) {
+				System.out.println("File upload error!");
+				e.printStackTrace();
+			} catch (NumberFormatException e) {
+				System.out.println("Number format error: " + e.getMessage());
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				System.out.println("Thiếu tham số: " + e.getMessage());
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Lỗi khác: " + e.getMessage());
+			}
 	}
 	private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
